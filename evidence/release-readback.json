@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-09T19:20:23.925Z",
+  "scope": "Public testnet, read-only finalized state. All built-in demo actors are team controlled; independent-user and buyer gates remain pending.",
+  "sourceBlock": {
+    "number": 11669888,
+    "hash": "0x2aada6fc390dbb4196c9b0403d93c678c08edd73d83740f64d7edfb377b899c0"
+  },
+  "targetBlock": {
+    "number": 5459393,
+    "hash": "0x337c45718e0a68694b3499a1ac75f480cb5d8ec6c1e69863d606ee30a23c8c6f"
+  },
+  "epochs": [
+    {
+      "journal": "public-demo.json",
+      "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+      "capCTC": "120.0",
+      "source": {
+        "availableCTC": "0.0",
+        "unresolvedCTC": "0.0",
+        "earnedCTC": "55.0",
+        "returnedCTC": "65.0",
+        "phase": 3,
+        "leafCount": 4,
+        "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+        "independentRebuildMatches": true
+      },
+      "target": {
+        "reserveCTC": "0.0",
+        "recognizedCTC": "120.0"
+      },
+      "claims": [
+        {
+          "allocationId": "1",
+          "kind": 1,
+          "amountCTC": "30.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "2",
+          "kind": 3,
+          "amountCTC": "50.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": null
+        },
+        {
+          "allocationId": "3",
+          "kind": 1,
+          "amountCTC": "25.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "4",
+          "kind": 3,
+          "amountCTC": "15.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": null
+        }
+      ],
+      "complete": true
+    },
+    {
+      "journal": "public-branches.json",
+      "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+      "capCTC": "20.0",
+      "source": {
+        "availableCTC": "0.0",
+        "unresolvedCTC": "0.0",
+        "earnedCTC": "9.0",
+        "returnedCTC": "11.0",
+        "phase": 3,
+        "leafCount": 7,
+        "root": "0xf0e92f446d47e2c794e730d700c778fd8b951cd7c35016c64f0105181355939c",
+        "independentRebuildMatches": true
+      },
+      "target": {
+        "reserveCTC": "0.0",
+        "recognizedCTC": "20.0"
+      },
+      "claims": [
+        {
+          "allocationId": "1",
+          "kind": 1,
+          "amountCTC": "2.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "2",
+          "kind": 1,
+          "amountCTC": "2.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "3",
+          "kind": 2,
+          "amountCTC": "1.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "4",
+          "kind": 1,
+          "amountCTC": "1.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "5",
+          "kind": 1,
+          "amountCTC": "1.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "6",
+          "kind": 1,
+          "amountCTC": "2.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "7",
+          "kind": 3,
+          "amountCTC": "11.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": null
+        }
+      ],
+      "complete": true
+    },
+    {
+      "journal": "public-branches.json",
+      "epochId": "0x4bfe922276f1df1b448bc3a4b75fcf1c3c9d1a6a7433f32ee9cfc3039e757f8c",
+      "capCTC": "1.0",
+      "source": {
+        "availableCTC": "0.0",
+        "unresolvedCTC": "0.0",
+        "earnedCTC": "0.0",
+        "returnedCTC": "1.0",
+        "phase": 3,
+        "leafCount": 1,
+        "root": "0x7a0b61bed8d10d4b2e039a1cf80240ec24b937467c9315e8d573226d20965978",
+        "independentRebuildMatches": true
+      },
+      "target": {
+        "reserveCTC": "0.0",
+        "recognizedCTC": "1.0"
+      },
+      "claims": [
+        {
+          "allocationId": "1",
+          "kind": 3,
+          "amountCTC": "1.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": null
+        }
+      ],
+      "complete": true
+    },
+    {
+      "journal": "public-safe-rotation.json",
+      "epochId": "0x40d67e1927cec5bc3a62635077e0ea577b146e40cc699b925a2dde1511156c06",
+      "capCTC": "3.0",
+      "source": {
+        "availableCTC": "0.0",
+        "unresolvedCTC": "0.0",
+        "earnedCTC": "2.0",
+        "returnedCTC": "1.0",
+        "phase": 3,
+        "leafCount": 3,
+        "root": "0x60e5afb8309d8db70db3254737daa3a0c2accbac47f553650b284fe12c8e7f71",
+        "independentRebuildMatches": true
+      },
+      "target": {
+        "reserveCTC": "0.0",
+        "recognizedCTC": "3.0"
+      },
+      "claims": [
+        {
+          "allocationId": "1",
+          "kind": 1,
+          "amountCTC": "1.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "2",
+          "kind": 1,
+          "amountCTC": "1.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": true
+        },
+        {
+          "allocationId": "3",
+          "kind": 3,
+          "amountCTC": "1.0",
+          "recognized": true,
+          "recognitionMatchesSource": true,
+          "withdrawn": null
+        }
+      ],
+      "complete": true
+    }
+  ],
+  "global": {
+    "creditedDepositsCTC": "143.0",
+    "freeLiabilityCTC": "0.0",
+    "reserveLiabilityCTC": "0.0",
+    "claimLiabilityCTC": "0.0",
+    "liveLiabilitiesCTC": "0.0",
+    "completedWithdrawalsCTC": "143.0",
+    "actualBalanceCTC": "0.0",
+    "conserved": true,
+    "solvent": true
+  },
+  "automatedJourneysComplete": true,
+  "independentSettlements": "pending real participants"
+}

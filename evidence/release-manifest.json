@@ -1,0 +1,3577 @@
+{
+  "schema": "proofkey.release-manifest.v1",
+  "generatedAt": "2026-09-09T19:21:02.928Z",
+  "releaseStatus": "pending",
+  "releaseBlockingReasons": [
+    "Two consented independent settlements and repeat independent operation are not recorded."
+  ],
+  "reportedLimitations": [
+    "The public traces are smaller than the local production-policy 113-leaf and production-tree 128-leaf tests.",
+    "The local 1/4/16/32 target gas matrix excludes native verification; public journals supply actual native costs only for the forms they executed.",
+    "The native recovery witness had unchanged continuity roots, so changed-witness or aged-proof recovery is not claimed."
+  ],
+  "architectureLock": {
+    "section": "§11 Implementation sequence and acceptance gates",
+    "path": "docs/ARCHITECTURE-LOCK.md",
+    "bytes": 35663,
+    "sha256": "0xcd5e130de8539193c065482916b1f304be005af9210a0e91c8466d5b0d0fd591",
+    "keccak256": "0x8e186dea4040cfd718ad92c932ba8b0de5d2dc74a1ced57d4e1466fec99cee24",
+    "validatedGateCount": 15
+  },
+  "repository": {
+    "revision": "a6d3588a40e7d9348f0209b5b6b08981c3a6d93e",
+    "dirty": true,
+    "dirtyEntries": [
+      "M docs/IMPLEMENTATION-STATUS.md",
+      " M docs/PUBLIC-EVIDENCE.md",
+      " M docs/RELEASE-GATES.md",
+      " M scripts/ui-completed-qa.mjs",
+      "?? evidence/native-bundle-075af1965c.json",
+      "?? evidence/public-ci.json",
+      "?? evidence/public-safe-rotation.json",
+      "?? evidence/release-manifest.json",
+      "?? evidence/release-readback.json",
+      "?? evidence/target-final-readback.json",
+      "?? evidence/ui-completed-hosted-qa/completed-budget.png",
+      "?? evidence/ui-completed-hosted-qa/completed-payment-claim-1.png",
+      "?? evidence/ui-completed-hosted-qa/imported-claim-1.png",
+      "?? evidence/ui-completed-hosted-qa/report.md"
+    ]
+  },
+  "validation": {
+    "testReferencesValidated": 42,
+    "artifactAndInputFilesValidated": 29,
+    "discoveredTests": {
+      "foundry": 40,
+      "nodeTest": 15
+    },
+    "mappedFiles": {
+      "foundry": [
+        "test/AllocationTree.t.sol",
+        "test/IdentityConformance.t.sol",
+        "test/SourceCoordinator.t.sol",
+        "test/AdversarialIntegration.t.sol",
+        "test/WorkTreasuryTarget.t.sol",
+        "test/EndToEnd.t.sol",
+        "test/Performance.t.sol"
+      ],
+      "nodeTest": [
+        "sdk/allocation.test.ts",
+        "sdk/identity.test.ts",
+        "sdk/conformance.test.ts",
+        "sdk/prover-client.test.ts",
+        "sdk/safe-events.test.ts"
+      ]
+    },
+    "executionStatus": "passed-current-revision-public-ci",
+    "note": "The optional public CI record reports a completed successful run whose headSha exactly matches this implementation revision."
+  },
+  "reproduction": {
+    "allContracts": "npm run test:contracts",
+    "allSdk": "npm run test:sdk",
+    "typecheck": "npm run typecheck",
+    "productionSizes": "bash scripts/forge.sh build --sizes",
+    "generateManifest": "node scripts/release-manifest.ts"
+  },
+  "productionSources": [
+    {
+      "path": "src/AllocationCodec.sol",
+      "bytes": 3417,
+      "sha256": "0xe2d715467bf86c8e5d2130f987138a9abdfd02088a49f72445054e8148b8733f",
+      "keccak256": "0x58bf516688f11ed767c1e10e604c2f505f4765432fb1806d591a79385da38afb"
+    },
+    {
+      "path": "src/AllocationTree.sol",
+      "bytes": 2574,
+      "sha256": "0xba166c51cd1b8e62c58f2833bbf052312748bcc18e96bf62c256a5ae9fa27901",
+      "keccak256": "0x74b20d470d7340deeb5b9b68ab0401cd5eb32ba6dd13de34136752e42aceffbc"
+    },
+    {
+      "path": "src/NativeReceiptAuth.sol",
+      "bytes": 7975,
+      "sha256": "0x84b143cdfea83319d92dc777ec7411a656b2f717a26e1ca05108f66687b6239a",
+      "keccak256": "0x8c1999001cd6278e6a6be74743fcbcb6cdbd1ee84e01b20fa7b88bbfe6337452"
+    },
+    {
+      "path": "src/PaidInvoiceBook.sol",
+      "bytes": 4185,
+      "sha256": "0x495df652b7ee8014863203bda5c5ed637a057f1393453b5077e14bef6707d7fb",
+      "keccak256": "0xa8afc25dec3b4d68118622d6e54af9088f8bad0b4804f2579725dcb18c036be3"
+    },
+    {
+      "path": "src/SourceAccountingLib.sol",
+      "bytes": 4845,
+      "sha256": "0x10bb541a7dfcfd48e345c7a80f705a8f6e5274cfd604f173912965ebfcd21b12",
+      "keccak256": "0x271ded8d47e3e6880a02d3ad4f51aa27b9bdaff1e337abb4e0717b3c8f43074d"
+    },
+    {
+      "path": "src/SourceCoordinator.sol",
+      "bytes": 33248,
+      "sha256": "0x92d057fa197f6fccbb5795ebbd09a55b236c1c4c1ef6855f1f4ccc0f9f927e48",
+      "keccak256": "0xe0f00b5660788309d6573dd2d22bf762d87c56abb77c40607d93723a6ed0e06a"
+    },
+    {
+      "path": "src/SourcePolicyV1Lib.sol",
+      "bytes": 2188,
+      "sha256": "0xf823433cd44aa2adeed29d2be8624728b068a55f9014c444d9ca50234befe2e2",
+      "keccak256": "0xc65ba52aa84d2fef67f02025eeefe79bcf91bacfea83809090089ba029b3d095"
+    },
+    {
+      "path": "src/SourceSignatureLib.sol",
+      "bytes": 4309,
+      "sha256": "0x46d11945e51d1126362667e51ab4361b8432f8d2b8c50ccd5c3090a0c8e82957",
+      "keccak256": "0x3a8facabae2cc1c361a397772536d3bd6a4aaaf37a9ebadc6a492d6fae4bc85f"
+    },
+    {
+      "path": "src/SourceStorage.sol",
+      "bytes": 1439,
+      "sha256": "0xd0d5e373012e711f3259270805a768b06f47bc0968c8c66510e631b71860790e",
+      "keccak256": "0xba747783e54e0bd87c8b9766a845cf57e512cdfb70bc866f67b67f430083149a"
+    },
+    {
+      "path": "src/WorkTreasury.sol",
+      "bytes": 21683,
+      "sha256": "0x0b087416e29c2d044f90699306cde93762899ae715d37dcc220a514f05b714fe",
+      "keccak256": "0xd05df15b94fe1097d0d9807966c33bc19f71b4cbf6b690397bd4c6fb27e0d127"
+    },
+    {
+      "path": "src/WorkTypes.sol",
+      "bytes": 5485,
+      "sha256": "0xc6cc349ea113e92e8d97f8371680bf093e686a12affedbba67fe8fc7475de4a0",
+      "keccak256": "0x3ad460de2f542c2647c83ec3826b9a4f4e624c9f456b6d01f646c39deb1a3b7f"
+    }
+  ],
+  "pinnedInputs": [
+    {
+      "path": "schema/schema-v1.json",
+      "bytes": 11408,
+      "sha256": "0xfce710bea4f16b6c449cd312177487a25416e82d03a4aae998d7f789ad7d48dc",
+      "keccak256": "0xa37b59e07b1ff2d1fa5e1ebd81dc8e9fef6e3a783a4dd84de8eda7fdaac92f2d"
+    },
+    {
+      "path": "schema/schema-v1-vectors.json",
+      "bytes": 16247,
+      "sha256": "0x3c5f22ba0340c8b08aee9baba17a2ca2a07879fcc562afe30f016d76dc6c0a93",
+      "keccak256": "0x21dfc5d626e5bbd831fca9bd241a68b8dbaa14d9a2cc45a94b22ebbe8a867552"
+    },
+    {
+      "path": "schema/identity-v1-vectors.json",
+      "bytes": 5710,
+      "sha256": "0x95925c9185a2aca9d3a4971d107073dc25055269e8e708e13bc2569f9b7445fe",
+      "keccak256": "0x44160db501b09ec68d3e5401aa3893bf55473449c68512118fab057055d3d031"
+    },
+    {
+      "path": "docs/compiler.json",
+      "bytes": 285,
+      "sha256": "0x5dde4a3fd625f8514f44325d1e08174945b5f8e0db2243d08289738c4b8ce65f",
+      "keccak256": "0x5d724c2684e6c7d80a5933f70298a8c525d6eb90d88d25de0c20e93cb8db4b28"
+    },
+    {
+      "path": "foundry.toml",
+      "bytes": 616,
+      "sha256": "0x6c859119a9551236dbf3dc6b36579b725e2f4f4dd13f423a80a3f589b84ae326",
+      "keccak256": "0x9183ebc4eaba6fd2b7c906f758334c6d60eefca609c69c889d8fb2d3ee52cf3a"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 19441,
+      "sha256": "0x701d437260d80da18eda3f4156f7fbcbee44f8da4a27a3ed55f24a01074ab7ce",
+      "keccak256": "0xc16c99821a355c2b371729ba039d281dd88461912ba2fa6cb44378d049153b29"
+    }
+  ],
+  "compiledArtifacts": [
+    {
+      "path": "out/AllocationCodec.sol/AllocationCodec.json",
+      "bytes": 3329,
+      "sha256": "0xd6559118766de2d00d91ed58571181da78322e85493299c60e73a353abd89fe2",
+      "keccak256": "0xd814ffa58ef7933598af07fe5587ed93486ec65247d46613edb63ee55c356d83"
+    },
+    {
+      "path": "out/AllocationTree.sol/AllocationTree.json",
+      "bytes": 24419,
+      "sha256": "0x87eea5f49cf962357e99c926b842ba3379248b4219913d3298c596870f8a47fa",
+      "keccak256": "0x9124ae0674926d20668443a59d648d9767ea0f4aeb6eb55217d20ff9e047db0c"
+    },
+    {
+      "path": "out/NativeReceiptAuth.sol/NativeReceiptAuth.json",
+      "bytes": 15949,
+      "sha256": "0xb2b15ff7d757ba002e20d848723ba143d002831ced1a780e97a8986b133f56e5",
+      "keccak256": "0x0cbc8a9edecddd808bb244f2fa0cc43b52eac4946cff5a848187fead769e20fb"
+    },
+    {
+      "path": "out/PaidInvoiceBook.sol/PaidInvoiceBook.json",
+      "bytes": 33015,
+      "sha256": "0x01499c65df0d16afdb946379843ad499772b20b7514deeb9b8199e578c6c1592",
+      "keccak256": "0x6dfa4c5f4d1b881bc358a740d7cbd1ca5639eef3ddb29024dfffe6d1fc041e81"
+    },
+    {
+      "path": "out/Performance.t.sol/PerformanceTest.json",
+      "bytes": 209190,
+      "sha256": "0x2bbd5d0d07983dda732406ba0ff5c08bc37b51011c6b412bbe7f2b1d91c7df4e",
+      "keccak256": "0x6f0ebf2b921a8f043b9ffe4e33b03e0542ff258c4358337c08d639719ece841d"
+    },
+    {
+      "path": "out/SourceAccountingLib.sol/SourceAccountingLib.json",
+      "bytes": 30394,
+      "sha256": "0x442201cc29d942312ef921756ede859ce71685ef80d7113c7d2b55f17fa07016",
+      "keccak256": "0x82df8ca245f7b1a9e3a149935a11c06a48eb7daad3e7416b9574df7710b89675"
+    },
+    {
+      "path": "out/SourceCoordinator.sol/SourceCoordinator.json",
+      "bytes": 244005,
+      "sha256": "0xccb05d0fc252286488ab020babebd1d3bf6f27582c85579d8839f9237f429683",
+      "keccak256": "0xac5a502f3af86ad0fc557e1d23c2e1e87e3a1f24f8f83071582d92e2f188aba7"
+    },
+    {
+      "path": "out/SourcePolicyV1Lib.sol/SourcePolicyV1Lib.json",
+      "bytes": 29630,
+      "sha256": "0x420c08f82c0984a4c3cf3fc7d9ec6cc4001f7b3a719f9b7d5c3a5b8ea54a1ffe",
+      "keccak256": "0x07ead89cce015458e8482b820ddd528529147e3197d9331cb4ad951c5e9286c3"
+    },
+    {
+      "path": "out/SourceSignatureLib.sol/SourceSignatureLib.json",
+      "bytes": 22661,
+      "sha256": "0xfb85e4813c971356053d56cada2d677afff575ad8aedf1cac53a68053c903c23",
+      "keccak256": "0x02f1203237c65501a923fc5ceba8bf82bcb68626a33b7a6d33e2fae70c87398d"
+    },
+    {
+      "path": "out/WorkTreasury.sol/WorkTreasury.json",
+      "bytes": 238643,
+      "sha256": "0x7276de928d9d1e1ad2feafb3960700b7b3df273f31467e6fb2e785ccda696c86",
+      "keccak256": "0x7c778679442a6789310b4ad04d35d3008595eed7385717cee8328e5f960928d3"
+    },
+    {
+      "path": "out/WorkTypes.sol/WorkTypes.json",
+      "bytes": 33866,
+      "sha256": "0xe43562ae112ac53702a9971aacf858433bb25112e5aec342c6babd77ec0a08a1",
+      "keccak256": "0xbe01c109beb8a9a1daa015a103b32ec555319aaa8b422da1e187f23fbfa7fe93"
+    }
+  ],
+  "deploymentManifest": {
+    "path": "deployments/testnet.json",
+    "compiler": "0.8.28+commit.7893614a",
+    "optimizerRuns": 200,
+    "viaIR": true,
+    "evmVersion": "cancun",
+    "source": {
+      "chainId": "11155111",
+      "chainKey": "1",
+      "rpcUrl": "https://ethereum-sepolia-rpc.publicnode.com",
+      "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+      "libraries": {
+        "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+        "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+        "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+        "SourcePolicyV1Lib": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+        "SourceAccountingLib": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612"
+      },
+      "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138"
+    },
+    "target": {
+      "chainId": "102031",
+      "rpcUrl": "https://rpc.cc3-testnet.creditcoin.network",
+      "libraries": {
+        "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+        "AllocationTree": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
+      },
+      "treasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA"
+    },
+    "immutableReadback": {
+      "sourceChainId": "11155111",
+      "sourceChainKey": "1",
+      "sourceCoordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+      "nativeVerifier": "0x0000000000000000000000000000000000000FD2",
+      "asset": "0x0000000000000000000000000000000000000000",
+      "checkedAt": "2026-09-09T18:22:17.716Z"
+    },
+    "deployedRuntimeRecords": [
+      {
+        "chain": "source",
+        "chainId": "11155111",
+        "name": "WorkTypes",
+        "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+        "deploymentTransactionHash": "0xf428a6ebecdf1307fc761bacfb15cb82089c39ac1bccb0e5d5f6c51151c6be7d",
+        "deploymentBlockNumber": 11669658,
+        "deploymentGasUsed": "676323",
+        "runtimeBytes": 2881,
+        "deployedCodeHash": "0x3230dc48110cf70fba253173a09a3aa80bb6a2598afa37d2aae2c6730106e56c",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {}
+      },
+      {
+        "chain": "source",
+        "chainId": "11155111",
+        "name": "AllocationTree",
+        "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+        "deploymentTransactionHash": "0x461899215d0c4a8afaacae6eefd359ec387ecb11074cd4a8519f156eeba86531",
+        "deploymentBlockNumber": 11669659,
+        "deploymentGasUsed": "665065",
+        "runtimeBytes": 2832,
+        "deployedCodeHash": "0xef81a712fbb8b2510aa74c6b399a706599be24b91966684de3f9106aac9adeaf",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {
+          "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+        }
+      },
+      {
+        "chain": "source",
+        "chainId": "11155111",
+        "name": "SourceSignatureLib",
+        "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+        "deploymentTransactionHash": "0x7f283ecf2c3ce28289fcbcbb9072787961adc8ebafdec55f18dc4cdf7363286a",
+        "deploymentBlockNumber": 11669660,
+        "deploymentGasUsed": "500093",
+        "runtimeBytes": 2066,
+        "deployedCodeHash": "0xa935987639430e8c1d30b95d78c17a0953259338fe8ee413e5b98fd00cf408ce",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {
+          "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+          "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43"
+        }
+      },
+      {
+        "chain": "source",
+        "chainId": "11155111",
+        "name": "SourcePolicyV1Lib",
+        "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+        "deploymentTransactionHash": "0x3e4984e239a567d8c0a9b278891dba897afef73fd095329dec1ea0ce9a46d9dd",
+        "deploymentBlockNumber": 11669661,
+        "deploymentGasUsed": "595165",
+        "runtimeBytes": 2507,
+        "deployedCodeHash": "0xabf92e884eb8a6d6184c2cab11386e46236878125027a621a33a907d0b3d05a9",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {
+          "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+          "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+          "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1"
+        }
+      },
+      {
+        "chain": "source",
+        "chainId": "11155111",
+        "name": "SourceAccountingLib",
+        "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+        "deploymentTransactionHash": "0xa45be513e6ce0aa03238a783c87489ac260eeaf1ec5cb03969355b6d4bf3b2db",
+        "deploymentBlockNumber": 11669662,
+        "deploymentGasUsed": "625115",
+        "runtimeBytes": 2646,
+        "deployedCodeHash": "0x19442f0e969a23438d20f158f5a4041f69116802c04c21159ed2ae2c99d51766",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {
+          "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+          "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+          "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+          "SourcePolicyV1Lib": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3"
+        }
+      },
+      {
+        "chain": "source",
+        "chainId": "11155111",
+        "name": "SourceCoordinator",
+        "address": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+        "deploymentTransactionHash": "0x3337f8315e172e76ab12a887ae09b784b93b23f62142b06dd5880ad1db9ec738",
+        "deploymentBlockNumber": 11669663,
+        "deploymentGasUsed": "4765255",
+        "runtimeBytes": 21789,
+        "deployedCodeHash": "0xa2b1bb0c4fa144c8791dd3e689726d27bb479c0314641320c557ae1cd8f63bef",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {
+          "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+          "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+          "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+          "SourcePolicyV1Lib": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+          "SourceAccountingLib": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612"
+        }
+      },
+      {
+        "chain": "target",
+        "chainId": "102031",
+        "name": "WorkTypes",
+        "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+        "deploymentTransactionHash": "0x6335fdc7b0968e9a745febc5a986d2cdde956b28b24828beddb4825e5eaff0e9",
+        "deploymentBlockNumber": 5459162,
+        "deploymentGasUsed": "676323",
+        "runtimeBytes": 2881,
+        "deployedCodeHash": "0x3230dc48110cf70fba253173a09a3aa80bb6a2598afa37d2aae2c6730106e56c",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {}
+      },
+      {
+        "chain": "target",
+        "chainId": "102031",
+        "name": "AllocationTree",
+        "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
+        "deploymentTransactionHash": "0xe90f671dc64f0e802a035a386e05be684247d97f567f6c08846ba7295d025637",
+        "deploymentBlockNumber": 5459163,
+        "deploymentGasUsed": "665065",
+        "runtimeBytes": 2832,
+        "deployedCodeHash": "0x92e6ae6318563f25a2d1d5a9e52e9edce7024eb2899b5da2be91c85fe6893ba0",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {
+          "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0"
+        }
+      },
+      {
+        "chain": "target",
+        "chainId": "102031",
+        "name": "WorkTreasury",
+        "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+        "deploymentTransactionHash": "0x9e7f33f820df25dd81bb320c6c1a6e97157bfbb637d83f265fb24bdb98054062",
+        "deploymentBlockNumber": 5459164,
+        "deploymentGasUsed": "4404171",
+        "runtimeBytes": 20019,
+        "deployedCodeHash": "0x79e706996c4c2bc24742b90a1d29a22a39afddcf30e1f408a31b7237c52b5689",
+        "matchesCompiledRuntimeOutsideImmutableSlots": true,
+        "libraries": {
+          "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+          "AllocationTree": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
+        }
+      }
+    ],
+    "provenance": "Hashes and runtime-match flags are copied from the checked-in deployment manifest; this generator performs no network readback."
+  },
+  "localExecutableEvidence": {
+    "verifierBoundary": "Performance and native adapter tests use a clearly labeled local VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address.",
+    "nativeCostIncluded": false,
+    "reportedRun": {
+      "foundryPassed": 40,
+      "nodeTestsPassed": 15,
+      "provenance": "Release-session operator report before final public CI; this generator does not independently execute it and does not use it to elevate gate status."
+    },
+    "performance": {
+      "schema": "proofkey-local-performance-v1",
+      "measuredAt": "2026-09-09",
+      "compiler": {
+        "solc": "0.8.28",
+        "evmVersion": "cancun",
+        "optimizer": true,
+        "optimizerRuns": 200,
+        "viaIR": true
+      },
+      "environment": {
+        "runner": "Foundry local EVM",
+        "nativeVerifier": "VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address",
+        "nativeVerificationGasIncluded": false,
+        "note": "Target values are cumulative gas across N separate recognition calls; the contracts expose no batch-recognition transaction. Measurements begin after authentication, and checkpoint import is also outside the measured interval. Receipt measurements include exact cached-receipt decoding on every selected log. Real native proof costs are pending an on-chain measurement."
+      },
+      "sourceGas": {
+        "createOffer32Milestones": 3525407,
+        "acceptOffer32Milestones": 224996,
+        "approveAllocation0FirstIncludingAllocationAndCheckpointEvents": 610239,
+        "approveAllocation1CarryIncludingAllocationAndCheckpointEvents": 436318,
+        "approveAllocation31LateIncludingAllocationAndCheckpointEvents": 419832,
+        "committeeWorkFeeAllocations31And32IncludingCheckpointEvent": 691956,
+        "maximumApproveIn32AllocationRun": {
+          "gas": 610239,
+          "treeIndex": 0
+        }
+      },
+      "sourceMarginalEventGas": {
+        "allocationCreatedCanonicalMemoryPayload": 4496,
+        "checkpointPublishedCanonicalMemoryPayload": 2491,
+        "method": "Exact frozen event declarations emitted by the test-only SourceEventGasHarness after ABI decoding and before return; excludes transaction dispatch and source state updates.",
+        "allocationTopics": 3,
+        "allocationDataBytes": 352,
+        "checkpointTopics": 2,
+        "checkpointDataBytes": 160,
+        "bounds": {
+          "allocationCreatedMaximum": 5000,
+          "checkpointPublishedMaximum": 3000,
+          "enforcedByTest": true
+        }
+      },
+      "targetRecognitionGas": {
+        "checkpoint": {
+          "1": 535538,
+          "4": 2068060,
+          "16": 8199047,
+          "32": 16379971
+        },
+        "cachedExactReceipt": {
+          "1": 530349,
+          "4": 2141850,
+          "16": 10029783,
+          "32": 24260991
+        }
+      },
+      "runtimeBytes": {
+        "SourceCoordinator": 21789,
+        "WorkTreasury": 20019,
+        "PaidInvoiceBook": 2777,
+        "AllocationTree": 2832,
+        "SourcePolicyV1Lib": 2507,
+        "SourceSignatureLib": 2066,
+        "WorkTypes": 2881
+      },
+      "limits": {
+        "runtimeBytes": 24576,
+        "allProductionRuntimeArtifactsWithinLimit": true,
+        "maximumMeasuredSourceCallGas": 3525407
+      },
+      "reproduction": {
+        "test": "test/Performance.t.sol:PerformanceTest",
+        "command": "bash scripts/forge.sh test --match-contract PerformanceTest -vv",
+        "sizeCommand": "bash scripts/forge.sh build --sizes"
+      }
+    },
+    "tests": [
+      {
+        "framework": "foundry",
+        "file": "test/AllocationTree.t.sol",
+        "contract": "AllocationTreeTest",
+        "name": "test_frozenGoldenEventsDecodeToExactHashesAndOrderedProofs",
+        "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_frozenGoldenEventsDecodeToExactHashesAndOrderedProofs -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/AllocationTree.t.sol",
+        "contract": "AllocationTreeTest",
+        "name": "test_codecRejectsTruncationExtraDataAndDirtyStaticPadding",
+        "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_codecRejectsTruncationExtraDataAndDirtyStaticPadding -vv"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/allocation.test.ts",
+        "name": "matches every frozen AllocationV1 encoding, event and hash",
+        "command": "node --test --test-name-pattern \"^matches every frozen AllocationV1 encoding, event and hash$\" sdk/allocation.test.ts"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/allocation.test.ts",
+        "name": "rebuilds the frozen ordered tree and all seven-level witnesses",
+        "command": "node --test --test-name-pattern \"^rebuilds the frozen ordered tree and all seven-level witnesses$\" sdk/allocation.test.ts"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/allocation.test.ts",
+        "name": "rejects reordered leaves, changed amounts and noncanonical events",
+        "command": "node --test --test-name-pattern \"^rejects reordered leaves, changed amounts and noncanonical events$\" sdk/allocation.test.ts"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/identity.test.ts",
+        "name": "domain constants are the literal WorkTypes domains",
+        "command": "node --test --test-name-pattern \"^domain constants are the literal WorkTypes domains$\" sdk/identity.test.ts"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/IdentityConformance.t.sol",
+        "contract": "IdentityConformanceTest",
+        "name": "testSdkEncodedEpochAndOrderedMilestonesMatchSolidity",
+        "command": "bash scripts/forge.sh test --match-contract IdentityConformanceTest --match-test testSdkEncodedEpochAndOrderedMilestonesMatchSolidity -vv"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/conformance.test.ts",
+        "name": "released SDK preserves the committed Solidity-conformance vectors",
+        "command": "node --test --test-name-pattern \"^released SDK preserves the committed Solidity-conformance vectors$\" sdk/conformance.test.ts"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testInitializationAndUninitializedExpiryAreExclusive",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testInitializationAndUninitializedExpiryAreExclusive -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testApprovalNoDeliveryAndMonitoringDefaultAtExactBoundaries",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testApprovalNoDeliveryAndMonitoringDefaultAtExactBoundaries -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testCommitteeVotesDoNotPoolAcrossProposalsAndDuplicateFails",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testCommitteeVotesDoNotPoolAcrossProposalsAndDuplicateFails -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testCommitteeTimeoutAndMutualDefaultFirstWriterWins",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testCommitteeTimeoutAndMutualDefaultFirstWriterWins -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testActiveReturnDrainSweepAndNoEmptyLeaf",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testActiveReturnDrainSweepAndNoEmptyLeaf -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/AdversarialIntegration.t.sol",
+        "contract": "AdversarialIntegrationTest",
+        "name": "test_exactDeadlinesSelectOnlyTheSpecifiedTerminalTransition",
+        "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_exactDeadlinesSelectOnlyTheSpecifiedTerminalTransition -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/AdversarialIntegration.t.sol",
+        "contract": "AdversarialIntegrationTest",
+        "name": "test_zeroSignerAndStaleMutualAuthorizationsAreRejected",
+        "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_zeroSignerAndStaleMutualAuthorizationsAreRejected -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testReachable113LeafTraceAndIndependentRootRebuild",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testReachable113LeafTraceAndIndependentRootRebuild -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/AllocationTree.t.sol",
+        "contract": "AllocationTreeTest",
+        "name": "test_productionTreeAll128AppendsMatchIndependentFullRebuild",
+        "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_productionTreeAll128AppendsMatchIndependentFullRebuild -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/AllocationTree.t.sol",
+        "contract": "AllocationTreeTest",
+        "name": "test_failedAppendAndInitializationCannotChangeTree",
+        "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_failedAppendAndInitializationCannotChangeTree -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceCoordinator.t.sol",
+        "contract": "SourceCoordinatorTest",
+        "name": "testAdmissionCutoffAllowsPermissionlessDrainAndRepublishDoesNotMutate",
+        "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testAdmissionCutoffAllowsPermissionlessDrainAndRepublishDoesNotMutate -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/AdversarialIntegration.t.sol",
+        "contract": "AdversarialIntegrationTest",
+        "name": "test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt",
+        "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/EndToEnd.t.sol",
+        "contract": "EndToEndTest",
+        "name": "test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails",
+        "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_rejectingFixedDestinationLeavesClaim_thenOwnerRedirects",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_rejectingFixedDestinationLeavesClaim_thenOwnerRedirects -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_unauthorizedClaimRedirectAndRejectingFreeWithdrawalPreserveBalances",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_unauthorizedClaimRedirectAndRejectingFreeWithdrawalPreserveBalances -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/EndToEnd.t.sol",
+        "contract": "EndToEndTest",
+        "name": "test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay",
+        "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay -vv"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/allocation.test.ts",
+        "name": "receipt package contains a directly usable SingleProof and exact transaction bytes",
+        "command": "node --test --test-name-pattern \"^receipt package contains a directly usable SingleProof and exact transaction bytes$\" sdk/allocation.test.ts"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/prover-client.test.ts",
+        "name": "proof client binds and validates the requested chain and transaction",
+        "command": "node --test --test-name-pattern \"^proof client binds and validates the requested chain and transaction$\" sdk/prover-client.test.ts"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/Performance.t.sol",
+        "contract": "PerformanceTest",
+        "name": "test_sourceMarginalCanonicalEventGas",
+        "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_sourceMarginalCanonicalEventGas -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/Performance.t.sol",
+        "contract": "PerformanceTest",
+        "name": "test_sourceLargestOrderAndAllocationGas",
+        "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_sourceLargestOrderAndAllocationGas -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/Performance.t.sol",
+        "contract": "PerformanceTest",
+        "name": "test_targetCheckpointAndReceiptClaimGas_localNativeStubExcluded",
+        "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_targetCheckpointAndReceiptClaimGas_localNativeStubExcluded -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/Performance.t.sol",
+        "contract": "PerformanceTest",
+        "name": "test_sourceLateCarryBoundaryWorkFeeGas",
+        "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_sourceLateCarryBoundaryWorkFeeGas -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_fundingUsesOwnDepositAndFree_andSuccessorUsesReturnedFree",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_fundingUsesOwnDepositAndFree_andSuccessorUsesReturnedFree -vv"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/prover-client.test.ts",
+        "name": "proof client uses the pinned endpoint and returns directly usable fields",
+        "command": "node --test --test-name-pattern \"^proof client uses the pinned endpoint and returns directly usable fields$\" sdk/prover-client.test.ts"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/safe-events.test.ts",
+        "name": "Safe helper ABI remains a canonical subset of the pinned Safe 1.4.1 artifact",
+        "command": "node --test --test-name-pattern \"^Safe helper ABI remains a canonical subset of the pinned Safe 1.4.1 artifact$\" sdk/safe-events.test.ts"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/safe-events.test.ts",
+        "name": "decodes pinned indexed Safe success and failure transaction hashes",
+        "command": "node --test --test-name-pattern \"^decodes pinned indexed Safe success and failure transaction hashes$\" sdk/safe-events.test.ts"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy -vv"
+      }
+    ]
+  },
+  "publicCi": {
+    "path": "evidence/public-ci.json",
+    "present": true,
+    "databaseId": 34393859504,
+    "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34393859504",
+    "headSha": "a6d3588a40e7d9348f0209b5b6b08981c3a6d93e",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "completedAt": "2026-09-09T19:15:23Z",
+        "conclusion": "success",
+        "databaseId": 102608581916,
+        "name": "verify",
+        "startedAt": "2026-09-09T19:14:23Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-09T19:14:26Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-09T19:14:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:14:27Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 2,
+            "startedAt": "2026-09-09T19:14:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:14:32Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@v4",
+            "number": 3,
+            "startedAt": "2026-09-09T19:14:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:14:36Z",
+            "conclusion": "success",
+            "name": "Run foundry-rs/foundry-toolchain@v1",
+            "number": 4,
+            "startedAt": "2026-09-09T19:14:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:14:38Z",
+            "conclusion": "success",
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "number": 5,
+            "startedAt": "2026-09-09T19:14:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:14:40Z",
+            "conclusion": "success",
+            "name": "Run npm run typecheck",
+            "number": 6,
+            "startedAt": "2026-09-09T19:14:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:14:41Z",
+            "conclusion": "success",
+            "name": "Run npm run test:sdk",
+            "number": 7,
+            "startedAt": "2026-09-09T19:14:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:16Z",
+            "conclusion": "success",
+            "name": "Run npm run test:contracts",
+            "number": 8,
+            "startedAt": "2026-09-09T19:14:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:16Z",
+            "conclusion": "success",
+            "name": "Run bash scripts/forge.sh build --sizes",
+            "number": 9,
+            "startedAt": "2026-09-09T19:15:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:17Z",
+            "conclusion": "success",
+            "name": "Run npm run ui:build",
+            "number": 10,
+            "startedAt": "2026-09-09T19:15:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:18Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@v4",
+            "number": 11,
+            "startedAt": "2026-09-09T19:15:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:19Z",
+            "conclusion": "success",
+            "name": "Post Run foundry-rs/foundry-toolchain@v1",
+            "number": 20,
+            "startedAt": "2026-09-09T19:15:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:20Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@v4",
+            "number": 21,
+            "startedAt": "2026-09-09T19:15:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:20Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 22,
+            "startedAt": "2026-09-09T19:15:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:20Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-09-09T19:15:20Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34393859504/job/102608581916"
+      },
+      {
+        "completedAt": "2026-09-09T19:15:38Z",
+        "conclusion": "success",
+        "databaseId": 102608935355,
+        "name": "publish-wallet-app",
+        "startedAt": "2026-09-09T19:15:27Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-09T19:15:29Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-09T19:15:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:30Z",
+            "conclusion": "success",
+            "name": "Run actions/configure-pages@v5",
+            "number": 2,
+            "startedAt": "2026-09-09T19:15:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:30Z",
+            "conclusion": "success",
+            "name": "Run actions/download-artifact@v4",
+            "number": 3,
+            "startedAt": "2026-09-09T19:15:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:31Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-pages-artifact@v3",
+            "number": 4,
+            "startedAt": "2026-09-09T19:15:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:36Z",
+            "conclusion": "success",
+            "name": "Publish verified wallet build",
+            "number": 5,
+            "startedAt": "2026-09-09T19:15:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T19:15:36Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 6,
+            "startedAt": "2026-09-09T19:15:36Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34393859504/job/102608935355"
+      }
+    ],
+    "currentRevisionMatch": true,
+    "acceptedAsCurrentRevisionPass": true
+  },
+  "realNativeEvidence": {
+    "path": "evidence/native-recovery-verification-33642ef4.json",
+    "present": true,
+    "readOnly": true,
+    "transaction": {
+      "label": "approve-A",
+      "transactionHash": "0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5",
+      "blockHeight": 11669711,
+      "transactionIndex": 57
+    },
+    "generator": "@gluwa/usc-sdk@0.18.0 RawProofBuilder",
+    "encodedTransaction": {
+      "priorHash": "0x93a1c3c431e290a1120ec71fc4d0e9edce7d0f770f2578b3c9c500a000837afe",
+      "refreshedHash": "0x93a1c3c431e290a1120ec71fc4d0e9edce7d0f770f2578b3c9c500a000837afe",
+      "exactBytesEqual": true
+    },
+    "continuity": {
+      "priorFingerprint": "0x685d4c9cc743afbf3b174532c88b72671ff8c5e0ef3a866ddc9e627913d7bfc4",
+      "refreshedFingerprint": "0x685d4c9cc743afbf3b174532c88b72671ff8c5e0ef3a866ddc9e627913d7bfc4",
+      "changed": false,
+      "priorRootCount": 10,
+      "refreshedRootCount": 10
+    },
+    "nativeSimulation": {
+      "callType": "eth_call",
+      "precompile": "0x0000000000000000000000000000000000000FD2",
+      "returned": true,
+      "calculatedTransactionIndex": 57
+    },
+    "conclusion": "Freshly regenerated approve-A evidence was accepted by the fixed Creditcoin native verifier in a read-only call.",
+    "limitation": "Continuity was unchanged, so this proves provider-independent regeneration and native acceptance, not an aged or changed-witness recovery."
+  },
+  "publicEvidence": {
+    "journals": [
+      {
+        "path": "evidence/source-demo.json",
+        "present": true,
+        "state": "source-complete-awaiting-final-target-recognition",
+        "scope": null,
+        "transactionJournalVersion": 1,
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "pendingTransaction": null,
+        "operations": [
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "initialize-epoch",
+            "transactionHash": "0x79edfd6ba13c07035e22b26b079f3f14c5b55b51b8c4c6c37b8ec4bd9343336f",
+            "blockNumber": 11669702,
+            "gasUsed": "466803",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": "0x84dcb8266c10a6122247175b4c7539e75bb33b957d7cf76cf7a31abcd7d0db93",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-offer-A",
+            "transactionHash": "0xbd7f7b78468d12e9660a821e295e7e76d33f4d8587561529ebf1520b5deced6c",
+            "blockNumber": 11669704,
+            "gasUsed": "549264",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x72d018ded61b7a1e6d1cc1365fef98c97b08230f892bb71c8d843c10a30553dc",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-offer-B",
+            "transactionHash": "0xa08ae5616842b4c698fc014b766535f0621ed1f12106e9cb3008078b29183105",
+            "blockNumber": 11669705,
+            "gasUsed": "532176",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x4c0e64b9374c3e41cf29cbd5304ea730fa38e2cf19d29d174b16db76e0a72ec4",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-offer-A",
+            "transactionHash": "0x16a8fccd6c2a970b241af3c137fa1eb08959b26914f8baed02d2a327a86f59f3",
+            "blockNumber": 11669707,
+            "gasUsed": "60152",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-offer-B",
+            "transactionHash": "0x1444b0ff0188a2496c985d718532bf10fe7f07d6ef8330f3f6e63b3904996e62",
+            "blockNumber": 11669708,
+            "gasUsed": "60178",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-A",
+            "transactionHash": "0x5ff2e3bd36c72872c9c263bbd2a9b816c272a2c5a3737f8374769682e51ffbe5",
+            "blockNumber": 11669710,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "approve-A",
+            "transactionHash": "0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5",
+            "blockNumber": 11669711,
+            "gasUsed": "625465",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": "0xa8f2ab7437b6b3578339fa77e5d4acf07769474d71df863252a38eeeb9f2bfee",
+              "safeExecutionSuccessOrdinal": 3
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "release-free-50",
+            "transactionHash": "0xab9be5910aeba1e2cecab1613b35c6709a467cea51f0e1dd2172af0be942c1e3",
+            "blockNumber": 11669713,
+            "gasUsed": "333624",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": "0xee89fe5fe9d2703702fcc364ab1d3073a6d069a5e20f9f95f4b467c3e47fef1e",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-B",
+            "transactionHash": "0x3fcde4661c5787dc88496a80e9f1c8559e11f9452090dab78a32e4eba7a8d444",
+            "blockNumber": 11669803,
+            "gasUsed": "61988",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "mutually-settle-B-25",
+            "transactionHash": "0x046b2a05edea39722100178c255c4a9356aa439f0744d118ff321b05075dede9",
+            "blockNumber": 11669804,
+            "gasUsed": "501690",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": "0x593c3268fd884e12fc8fc2fc2532cb34e3fca6a194a3af9e6392638d9ecdb3e2",
+              "safeExecutionSuccessOrdinal": 3
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-offer-C",
+            "transactionHash": "0x5638f8dc17ef1fee5edd61b673f2b85902cf5b288ad33ca0a03fc4db1f1a6e95",
+            "blockNumber": 11669805,
+            "gasUsed": "544464",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x638d908a458097e895e650b466e5de9b067229fc406cdf9e6b931572c1b8352a",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-offer-C",
+            "transactionHash": "0x9877d459c22a88f693123a7b8b946b4981adb746d5441ac8568aad698e984aec",
+            "blockNumber": 11669806,
+            "gasUsed": "60152",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "finalize-C-no-delivery",
+            "transactionHash": "0x49aa4996633ff6e59c6be9488dfeeafc28fcd35dd667d2d37f81a78514a84b93",
+            "blockNumber": 11669823,
+            "gasUsed": "145835",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "start-draining",
+            "transactionHash": "0x24dd3e723e6aef09d046a2c53916866109d38f57ab7ed8fb53ef4767a94ef661",
+            "blockNumber": 11669824,
+            "gasUsed": "82770",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": "0xd9dc0528cae8397bc009d436280dca276af535ea23b155526fe4ffbe14361c9c",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "sweep-final-15",
+            "transactionHash": "0xdabbf0d3a81dda2f21956222fac3071520fa33999c146c93c6b1cf1e69dc6077",
+            "blockNumber": 11669825,
+            "gasUsed": "269613",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "republish-checkpoint-1",
+            "transactionHash": "0xa1308da7f1d7b362bdb08b51c7e547084bc518d24f4db9122ccb34a1cda029c8",
+            "blockNumber": 11669826,
+            "gasUsed": "35304",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                0
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "republish-checkpoint-2",
+            "transactionHash": "0x0bc3d8a24eafd978946213f107c1ce78961da2f24cd24dcd85b05fe5b12249a2",
+            "blockNumber": 11669827,
+            "gasUsed": "35304",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                0
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          }
+        ],
+        "semanticRefusals": []
+      },
+      {
+        "path": "evidence/public-demo.json",
+        "present": true,
+        "state": "main-journey-complete",
+        "scope": "Public testnet; Safe, worker, sponsor and relayers are team controlled. No independent settlement is claimed.",
+        "transactionJournalVersion": null,
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "pendingTransaction": null,
+        "operations": [
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "fund-exact-120-epoch",
+            "transactionHash": "0x2d473ee9b60fbce59ccb95213bf2e135601e68ff74cdd322d0c44823b74bedc8",
+            "blockNumber": 5459166,
+            "gasUsed": "435727",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "native-batch-authenticate-A-and-return50",
+            "transactionHash": "0x803637ce8d1e691d826e64292366fa7e7de6f1d9f0676c82833c8d5a31562542",
+            "blockNumber": 5459242,
+            "gasUsed": "435498",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "receipt-recognize-return50-with-B-unresolved",
+            "transactionHash": "0x10a7d1c89661234ccd6f9291b21b0cff99abd359cc1d1a0b80a2c9dd53a36d03",
+            "blockNumber": 5459243,
+            "gasUsed": "374122",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "native-single-import-final-checkpoint",
+            "transactionHash": "0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae",
+            "blockNumber": 5459336,
+            "gasUsed": "395958",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "cached-root-recognize-4",
+            "transactionHash": "0x7cd579377a8de8a64e36c0f905b6f5760296512b9765b46b9dee1686fba9cda0",
+            "blockNumber": 5459337,
+            "gasUsed": "384230",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "cached-root-recognize-1",
+            "transactionHash": "0xe1403b1729049454dc9174050f20205f06c9d97cb471958f4bca58cccfaf9aae",
+            "blockNumber": 5459338,
+            "gasUsed": "526327",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "withdraw-work-1",
+            "transactionHash": "0x132f0ae39c2252f6b7ad13773ef191aedeafabee6d5e55e17b5b1491720a16f3",
+            "blockNumber": 5459339,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "cached-root-recognize-3",
+            "transactionHash": "0x723fd815d126fc47ae658eb4c08024e5a561a5c01296a5f108b8f1a0f3b669cc",
+            "blockNumber": 5459340,
+            "gasUsed": "521561",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "withdraw-work-3",
+            "transactionHash": "0xd7da3be6fea92054880b4914b3faa9b2603ac7b8c1b1119f62c701ff6193e2bd",
+            "blockNumber": 5459341,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "record-actually-paid-WORK-in-consumer",
+            "transactionHash": "0xb5a088f7d258d53a4518a2eaebabc062784face542d4f2deea784df69cb8d116",
+            "blockNumber": 5459344,
+            "gasUsed": "388752",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "withdraw-returned-65",
+            "transactionHash": "0x93833d3295860b753cc28a8dd66a3aa732ee44506ed25e3792e74006dce6e393",
+            "blockNumber": 5459345,
+            "gasUsed": "301966",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          }
+        ],
+        "semanticRefusals": [
+          {
+            "transactionHash": "0x0d077b52bb15edd32a8bbc3a2be0bd3420e7c657b43804b7128f8efb5785e079",
+            "blockNumber": 5459342,
+            "gasUsed": "326410",
+            "status": 0,
+            "expectedSelector": "0xad4d102a",
+            "description": "Persisted native authentication and correct source emitter; checkpoint event refused as an allocation payment fact",
+            "reconciledFromPendingJournal": false,
+            "observation": "Mined semantic refusal recorded separately from successful operations."
+          }
+        ]
+      },
+      {
+        "path": "evidence/source-branches.json",
+        "present": true,
+        "state": "source-branches-complete-awaiting-target-proofing",
+        "scope": null,
+        "transactionJournalVersion": 1,
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "pendingTransaction": null,
+        "operations": [
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "initialize-branch-epoch",
+            "transactionHash": "0x55e14fbfa0c623f48e58750d36472969422eaea1fd84008d4a147b927485997f",
+            "blockNumber": 11669719,
+            "gasUsed": "466815",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": "0x3ea1961b2f308f6a76a5361130f1b85d0d310f1e29fb4d9da3f03cf3c642509c",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-pending-decline",
+            "transactionHash": "0x81b92422eae707ebab551ed9790e447fbe5e68a347fc302114b5618044f434e1",
+            "blockNumber": 11669720,
+            "gasUsed": "549252",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x2a7ebcfbbac917765d368489b27e8a3ba7c4730a7f87e8247f58b6bcd49f1c64",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "worker-declines-pending",
+            "transactionHash": "0x506e56eb78e698e8b09aa7424ca9a1f7b30c6f0beac9075c8b3e3e31fa7742a5",
+            "blockNumber": 11669721,
+            "gasUsed": "75049",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-pending-expiry",
+            "transactionHash": "0xa62c5c864681d759ec2e9ac80af4cf967c7b5fb8e01cd5e2a2f72acc81cdf19d",
+            "blockNumber": 11669722,
+            "gasUsed": "549252",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x27749d394921718989de0a072c22971bb4044f80cfe8bff562af5ae0e7903ca7",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "permissionless-pending-expiry",
+            "transactionHash": "0xcc640c7fe799cc99daf3c9191ff1995817c7313adb50b8b1be3a60e670f146f0",
+            "blockNumber": 11669725,
+            "gasUsed": "72748",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-monitoring-default",
+            "transactionHash": "0x82fecd39d9a9a725b25866966c43fbeeb43faa804166e864da779d2d7c517f86",
+            "blockNumber": 11669726,
+            "gasUsed": "549264",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0xe3c922df5b97cc3b432134430eed9d316dc36e8a039024f4048161eb155af17c",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-monitoring-default",
+            "transactionHash": "0xb234739a0ead7898945db13b3d90454b3c87f72a6e16415753e0197e075b3743",
+            "blockNumber": 11669727,
+            "gasUsed": "60152",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-monitoring-default",
+            "transactionHash": "0x8f103b867b5333fc7826b0a7c942d3a7e4dac265a2e73b24e270f3a4dcb11445",
+            "blockNumber": 11669728,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "finalize-monitoring-default",
+            "transactionHash": "0xf9873918a2cc71369102dc8c41eed63e54c457c8157fa0e37d2b8d6f6989264e",
+            "blockNumber": 11669740,
+            "gasUsed": "579565",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-committee-quorum",
+            "transactionHash": "0x1be2eaafd84c0f7ef0cdeeb0112fbddafbe0be3f1bfe20da7e2ea8724d647a47",
+            "blockNumber": 11669741,
+            "gasUsed": "589184",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0xf7d43589f0f6bf6bcbe59abbc2813b85b8423a096680b16000bb751f74e33e0e",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-committee-quorum",
+            "transactionHash": "0x12cc0e509eebd560a33ccc2bd6505e1240f7130f509601b591453ce9be3ecc93",
+            "blockNumber": 11669742,
+            "gasUsed": "60178",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-committee-quorum",
+            "transactionHash": "0x06ed60c15618227920611a79a83e63d6fd967989e1224c2f46ed8965f81038db",
+            "blockNumber": 11669743,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "challenge-committee-quorum",
+            "transactionHash": "0x74a31a3544de53f9e6bac75004b6afa7be5f35bdc2db8b29f404f7b8621a3182",
+            "blockNumber": 11669744,
+            "gasUsed": "82552",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x3039c20c0d10f4bc3960bb0f0c8be0f5c6b16a3819ebd53a5ef46fce7a8395a5",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "committee-vote-exact-one",
+            "transactionHash": "0xad6b1e36788f38380db5f1642eb0552b1c4083d5c8ffa87800e836f32be0d0ab",
+            "blockNumber": 11669745,
+            "gasUsed": "82180",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "committee-vote-distinct-proposal",
+            "transactionHash": "0x4fe30c4ab693c43a8e16b5330c7f403dc11095db4d46001d7a1be8232c32f2de",
+            "blockNumber": 11669746,
+            "gasUsed": "84370",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "committee-vote-exact-two-finalizes-work-fee",
+            "transactionHash": "0xc6c911a23ea07e2b6c92a322f0506da128ee8d52dae9595b3fd24a608a14bab9",
+            "blockNumber": 11669747,
+            "gasUsed": "704113",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                1,
+                2
+              ],
+              "checkpointOrdinals": [
+                4
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-committee-timeout",
+            "transactionHash": "0x3184930109c1e6bee24bcaa8cc61fc2566068b2ee477f38e306d9c7469b75d1b",
+            "blockNumber": 11669748,
+            "gasUsed": "589208",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x96af08cf0929da2a53409bd6553b742efb72ee02255b2cab9d7bc817bd6ed16b",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-committee-timeout",
+            "transactionHash": "0x1faa80570d28d42603c8185a5137b0387a82751698420a0625add981422287a3",
+            "blockNumber": 11669749,
+            "gasUsed": "60178",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-committee-timeout",
+            "transactionHash": "0x3f8aa9344dc5bb17c8631f132e53ced0267dccdc5467ec5d6eee8bb9c30b2df6",
+            "blockNumber": 11669750,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "challenge-committee-timeout",
+            "transactionHash": "0xc98cef346aa5514056de5d0a4be47ba78f0b7d6314049a4fe3522c3c18dee157",
+            "blockNumber": 11669751,
+            "gasUsed": "82564",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x1fd059ba440e7441c67e43c0c7e65c4b18a730120ca82cc4ff0e7f46cf5f09e9",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "finalize-committee-timeout",
+            "transactionHash": "0x6d96aa8315356a23528f9eefcfe57a787bc5fd3e20fda4ad71ccdfc7f611c023",
+            "blockNumber": 11669768,
+            "gasUsed": "424007",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-mutual-before-default",
+            "transactionHash": "0x65b14f3840595fa8392b343f831420c28a1ed046fedbd468209bdc6d787da9ae",
+            "blockNumber": 11669769,
+            "gasUsed": "549264",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0xf8842bed470bf57cb0449cce4e26cd0a6aeb71b629eb9d6aa4992e6ad76a8882",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-mutual-before-default",
+            "transactionHash": "0xd6729169cab3f77b05758627a8fb5acf7c410f372205b141111b3a730e6d6d57",
+            "blockNumber": 11669770,
+            "gasUsed": "60152",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-mutual-before-default",
+            "transactionHash": "0x397976188ca9c023d246b84fed20ab5fea94aa0d0c4585e4e686380bf9c0e978",
+            "blockNumber": 11669771,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "mutual-wins-before-default",
+            "transactionHash": "0xec69771b3cd0bd707c8ea4e2f459833abf41ff175072ce68a7d327f24d89265c",
+            "blockNumber": 11669783,
+            "gasUsed": "484564",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": "0xb79391d16e2703a0c83eba8f3aba8e48766c1f52e06bb1dd9b10ae7163a04aad",
+              "safeExecutionSuccessOrdinal": 3
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-default-before-mutual",
+            "transactionHash": "0x44d5e4697dfcc299bb6827e9a2779fd88224e7db541e4de40e6e60705bd08c8c",
+            "blockNumber": 11669784,
+            "gasUsed": "549240",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0xc01adcddbc358b2fa73c09372b9915b607d629c4f0d593894e9706d51e164267",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-default-before-mutual",
+            "transactionHash": "0xbae164b7a65472b53a4da075526e234ac3729606ac12e0b7d6fcccd689407e0c",
+            "blockNumber": 11669785,
+            "gasUsed": "60178",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-default-before-mutual",
+            "transactionHash": "0x65f51e36d54e4b7ce44a0fe644484f4551610ea9b4918d801e6dee3daa6fd7b0",
+            "blockNumber": 11669786,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "default-wins-before-mutual",
+            "transactionHash": "0xa55d4c11cec44a3ad08fe843834d2c185b09280a96b4678aaf7004ed874e07c8",
+            "blockNumber": 11669798,
+            "gasUsed": "419823",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "start-branch-draining",
+            "transactionHash": "0x116477cae88ae7eaeb494ab3e5daba322d3457365e9c6a9b0c6a0338e5f43420",
+            "blockNumber": 11669799,
+            "gasUsed": "82770",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": "0x43c0e34a462fd4b04af6f74739115f8baf4e65b56f68b17406b2ad405faf40a9",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "sweep-branch-remainder-11",
+            "transactionHash": "0xf2ed8beb833fcd3fddab3308106e65bf4939ae13f5a670b259b5c2a1a1fa2e06",
+            "blockNumber": 11669800,
+            "gasUsed": "286713",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          }
+        ],
+        "semanticRefusals": [
+          {
+            "label": "stale-ruling-signature-after-challenge",
+            "atBlock": 11669744,
+            "error": "InvalidSignature",
+            "selector": "0x8baa579f",
+            "observation": "eth_call contract refusal; not a mined failed transaction"
+          },
+          {
+            "label": "duplicate-committee-vote",
+            "atBlock": 11669745,
+            "error": "DuplicateVote",
+            "selector": "0x0ebd16a4",
+            "observation": "eth_call contract refusal; not a mined failed transaction"
+          },
+          {
+            "label": "default-rejected-after-mutual",
+            "atBlock": 11669783,
+            "error": "InvalidState",
+            "selector": "0xbaf3f0f7",
+            "observation": "eth_call contract refusal; not a mined failed transaction"
+          },
+          {
+            "label": "mutual-rejected-after-default",
+            "atBlock": 11669798,
+            "error": "InvalidState",
+            "selector": "0xbaf3f0f7",
+            "observation": "eth_call contract refusal; not a mined failed transaction"
+          }
+        ]
+      },
+      {
+        "path": "evidence/public-branches.json",
+        "present": true,
+        "state": "public-branches-and-expiry-complete",
+        "scope": "All branch actors, committee and Safe are team controlled. Public native evidence; no independent user claimed.",
+        "transactionJournalVersion": null,
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "pendingTransaction": null,
+        "operations": [
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "fund-20-branch-epoch",
+            "transactionHash": "0x4c1659b776801d14b6e24f03e0579bde0c217af2117039f3dfe18bc4c1de94c2",
+            "blockNumber": 5459202,
+            "gasUsed": "401527",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "native-segmented-authenticate-quorum-and-final",
+            "transactionHash": "0xd65928d72975f15e99d108674b64628ead2f821d626e35322cdd3eb9e9348530",
+            "blockNumber": 5459301,
+            "gasUsed": "428008",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "receipt-only-recognize-WORK-without-root-or-siblings",
+            "transactionHash": "0x1bf2148dc8eb3bb6b592ed392f5c231ccc217f68530f6b40762c757e50c9af0d",
+            "blockNumber": 5459302,
+            "gasUsed": "572584",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "receipt-only-recognize-FEE-without-root-or-siblings",
+            "transactionHash": "0x02a0abe6d9f856c65d0f3b8a7bd0ed7b3156199b6a28e66210a7e3a3dc534e91",
+            "blockNumber": 5459303,
+            "gasUsed": "538422",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "import-cached-final-branch-checkpoint",
+            "transactionHash": "0xe0b70e72fb94af36848c805a24b3e22080951954a34bb30157a11495f1ed65ce",
+            "blockNumber": 5459304,
+            "gasUsed": "349762",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-root-recognize-1",
+            "transactionHash": "0x68557dc539cb4a1fdd6e3ac0f1e46035ae608b925fd44dfae7ead4b5a9b08bb2",
+            "blockNumber": 5459305,
+            "gasUsed": "509215",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-withdraw-1",
+            "transactionHash": "0x36ae96a9b8f63123c07f4d91b3a29aada913c1ce595e2579a0d671b3effb09a4",
+            "blockNumber": 5459306,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-withdraw-2",
+            "transactionHash": "0x2cb4e7ed0806b883437a829b5d37c74143e3f9f930f492bb7f7382617f26b328",
+            "blockNumber": 5459307,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-withdraw-3",
+            "transactionHash": "0xa87092208059b6b78a3310bcb2182385e57917ce9f150979c8cf7ef99f84b0ea",
+            "blockNumber": 5459308,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-root-recognize-4",
+            "transactionHash": "0x15e3997fa89e3a8ad3a7ac1aeaf95601816e31b78687d49a9f5286270ff13fe6",
+            "blockNumber": 5459309,
+            "gasUsed": "526347",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-withdraw-4",
+            "transactionHash": "0x5df22dd5571cfa9811683d29f8eebc9eb20477ba8e72ed6a157aef9431501d12",
+            "blockNumber": 5459310,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-root-recognize-5",
+            "transactionHash": "0x550a3d82eb71e7b4050ea8d5aafa636ce73353f29934368b2a4fbb05dd0ed1da",
+            "blockNumber": 5459311,
+            "gasUsed": "526337",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-withdraw-5",
+            "transactionHash": "0x2a0c1d39f6de5d6030fd7b0adab1882afe105f447cafc3d88c784c52c96dec47",
+            "blockNumber": 5459312,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-root-recognize-6",
+            "transactionHash": "0x1e690e49bd34abad42ae39e7ab87b8107c0554c71ae124334a2adbf4e747670d",
+            "blockNumber": 5459313,
+            "gasUsed": "526335",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-withdraw-6",
+            "transactionHash": "0x0f40a8447280b1a39d9a05ab9cd84af73a69394fe0fa27391dd93054b0700b30",
+            "blockNumber": 5459314,
+            "gasUsed": "310086",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "branch-root-recognize-7",
+            "transactionHash": "0x47066825b89ae8e81d3624646c9198370d0dc3e2b4bd6e29d8893ae3ee211409",
+            "blockNumber": 5459315,
+            "gasUsed": "384230",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "fund-successor-from-returned-free-balance",
+            "transactionHash": "0x884f68aa4fa3f51d6b065f4dfdc4e79e8b49882ab1666f1d4b932f62fbf8aa1c",
+            "blockNumber": 5459316,
+            "gasUsed": "399443",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "materialize-uninitialized-source-expiry",
+            "transactionHash": "0xa9bf2698a8482bbc783424bffe57e4cb8bb11ad62bb033dc7481b817743a1b6f",
+            "blockNumber": 11669862,
+            "gasUsed": "782832",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "native-single-recognize-proven-expiry-return",
+            "transactionHash": "0x94a01d978ce67739264978f700bd250fc836d4305660156669f33ac791c8193b",
+            "blockNumber": 5459363,
+            "gasUsed": "397292",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "withdraw-branch-and-successor-return-11",
+            "transactionHash": "0x0e58b7497e063af7404294d1dea72822796c8b74f3be565557592ea3bf7047ac",
+            "blockNumber": 5459364,
+            "gasUsed": "301966",
+            "receiptStatus": 1,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          }
+        ],
+        "semanticRefusals": []
+      },
+      {
+        "path": "evidence/public-safe-rotation.json",
+        "present": true,
+        "state": "disposable-safe-rotation-complete",
+        "scope": "Public testnet demonstration with a new disposable Safe. The existing SAFE_ADDRESS is never a transaction target.",
+        "transactionJournalVersion": null,
+        "epochId": "0x40d67e1927cec5bc3a62635077e0ea577b146e40cc699b925a2dde1511156c06",
+        "pendingTransaction": null,
+        "operations": [
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deploy-disposable-safe-factory",
+            "transactionHash": "0xd6ee557e8e10a3d6c31ad43508e56866768258df3cbc4518328ed28fc2daba74",
+            "blockNumber": 11669830,
+            "gasUsed": "711231",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-disposable-safe-proxy",
+            "transactionHash": "0x2e24e394e11b6aa2c8f09f75207f491cf0a3648f5756b1791c9bbb817370cb06",
+            "blockNumber": 11669831,
+            "gasUsed": "283476",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "fund-disposable-safe-epoch-3",
+            "transactionHash": "0x685c7f39c3900da22b4f27f9d51208fda4b594dd20d48847be10a2d5bc793137",
+            "blockNumber": 5459296,
+            "gasUsed": "401515",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "initialize-disposable-safe-epoch",
+            "transactionHash": "0x2433cd669fbf89484b67fc6e370b7633a82956f8277cee6a6cf3b3ab1d07a27c",
+            "blockNumber": 11669864,
+            "gasUsed": "483903",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": "0x24df26d4729599b1638d062ba727c175372efe0df7d861e2a4fce8d4d576de56",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-rotation-offer-A",
+            "transactionHash": "0x2d3f8d1ffe08e1a445f496621891b7a83517c9d7836ea6025711d4b421c00175",
+            "blockNumber": 11669865,
+            "gasUsed": "549252",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0xc36ddaf06901ddf9601dbf5a4f4dcb16ef960d6cd5be692cc547244bc982b4bf",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-rotation-A",
+            "transactionHash": "0xa5dd92e2baeb58147c0c3b0cee9380f510a4f28d25c0c0962f4b1515d985d3ab",
+            "blockNumber": 11669866,
+            "gasUsed": "60178",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-rotation-A",
+            "transactionHash": "0x8f6fcfc9ede147dd0791b1825ee20d838d9ac69c248fded8491e87008c09c494",
+            "blockNumber": 11669867,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "approve-pre-rotation-A",
+            "transactionHash": "0x8b65e753cd8b6ae72a554b8d03c0604de1845d04a5e1ea97d60f384c67041f4f",
+            "blockNumber": 11669868,
+            "gasUsed": "620665",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": "0xa71cfaa08f9855928d96eb94c5b8a8daa0bec38c172e83ba62b002383cd03de5",
+              "safeExecutionSuccessOrdinal": 3
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "create-rotation-offer-B",
+            "transactionHash": "0x35ccf2a4aaf3f074e0596ff1c5d8b1dc60cb71e903277a654a12c19058b51b78",
+            "blockNumber": 11669869,
+            "gasUsed": "549240",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0xd134a84cbbd0639d2fb5e8651b9601ee08fde2bb7fed02f727f40a74cd05da27",
+              "safeExecutionSuccessOrdinal": 1
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "accept-rotation-B",
+            "transactionHash": "0x9f912eee8dcdcff9b87db7f118fa8ffa84d8a6012c4c25e6a33c08ecf0a7a5ec",
+            "blockNumber": 11669870,
+            "gasUsed": "60166",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "deliver-rotation-B",
+            "transactionHash": "0x485e2a93c6c8758f9b3df2be60c1466e655f986eb60470cbc8d364b1f93b9b4c",
+            "blockNumber": 11669871,
+            "gasUsed": "62000",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "rotate-disposable-safe-Z-to-W",
+            "transactionHash": "0xc0ce7699356b8826bdb4c05ddc6092bed256c6731e6b1157b5449e6817cd7b82",
+            "blockNumber": 11669872,
+            "gasUsed": "87738",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": "0x9d29b437da443f16290fb2afa7f793ac5fd441a03f3f9c4b7d3db5aa9412008d",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "approve-queued-B-with-current-X-W",
+            "transactionHash": "0x02859087db32f5299c625adb4fde73e3e20446a48aed9bd13d6bf3d15a093eeb",
+            "blockNumber": 11669873,
+            "gasUsed": "463832",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                2
+              ],
+              "safeTransactionHash": "0x21d9246c4bad724ecde079776d851d0409bfa0a3f5b47c4c65353a08ce309ba9",
+              "safeExecutionSuccessOrdinal": 3
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "start-disposable-safe-draining",
+            "transactionHash": "0x939d35841f1b2e1a9e719acb258d3378ec508887a8b89831a30afb39e0d1ce1c",
+            "blockNumber": 11669874,
+            "gasUsed": "82770",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": "0x1aae5c7fd0bdf96d5d0f0964a52f199a1a4d26601481591762a8c5e4a1149786",
+              "safeExecutionSuccessOrdinal": 2
+            }
+          },
+          {
+            "chain": "source",
+            "chainId": "11155111",
+            "label": "return-disposable-safe-remainder-1",
+            "transactionHash": "0x075af1965ccb46846ef3254b27453eb8d25ecd221c2c80fcb93396be69560675",
+            "blockNumber": 11669875,
+            "gasUsed": "289634",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [
+                0
+              ],
+              "checkpointOrdinals": [
+                1
+              ],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "authenticate-disposable-safe-final-checkpoint",
+            "transactionHash": "0x9919d84a44839558c576e190da938b482acc8e0b22f0fae87c6ef259ec90c51c",
+            "blockNumber": 5459368,
+            "gasUsed": "396330",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "recognize-disposable-safe-return-receipt",
+            "transactionHash": "0xa464d9cea1653bf31ac4aebf1e5b78f15d42753bd70a344fa02b5498f88fbcd8",
+            "blockNumber": 5459369,
+            "gasUsed": "361130",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "recognize-rotation-work-1",
+            "transactionHash": "0xcd3d2d4052a2175a0725fa3c69c39aaef18fcab6a6373630319afc66bac1e830",
+            "blockNumber": 5459370,
+            "gasUsed": "526327",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "withdraw-rotation-work-1",
+            "transactionHash": "0x3535c763a4c44ed515371901107f578dc730a9085a84782503496a1752e8e126",
+            "blockNumber": 5459371,
+            "gasUsed": "310086",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "recognize-rotation-work-2",
+            "transactionHash": "0xbd1638877ff5c0ed2cd399725225a22eee731cada7ee0252ea784d40ed422c61",
+            "blockNumber": 5459372,
+            "gasUsed": "516749",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "withdraw-rotation-work-2",
+            "transactionHash": "0x86252a5b42cf9059af0893a078a676228e282d28a3167624f9a8665fa115c9c9",
+            "blockNumber": 5459373,
+            "gasUsed": "310086",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          },
+          {
+            "chain": "target",
+            "chainId": "102031",
+            "label": "withdraw-disposable-safe-return-1",
+            "transactionHash": "0x135851ba38fc40c2ece92e74d2697750766ba4a4b6cd8ea27ccefe35adb2bcd0",
+            "blockNumber": 5459374,
+            "gasUsed": "301966",
+            "receiptStatus": null,
+            "receiptIdentifiers": {
+              "allocationOrdinals": [],
+              "checkpointOrdinals": [],
+              "safeTransactionHash": null,
+              "safeExecutionSuccessOrdinal": null
+            }
+          }
+        ],
+        "semanticRefusals": []
+      }
+    ],
+    "releaseReadback": {
+      "path": "evidence/release-readback.json",
+      "present": true,
+      "checkedAt": "2026-09-09T19:20:23.925Z",
+      "automatedJourneysComplete": true,
+      "summary": null
+    },
+    "explorers": {
+      "source": "https://sepolia.etherscan.io/tx/",
+      "target": "https://creditcoin-testnet.blockscout.com/tx/"
+    },
+    "participantStatus": {
+      "status": "pending",
+      "independentSettlementsRecorded": 0,
+      "required": 2,
+      "disclosure": "All current public journals label Safe, worker, sponsor and relayers as team controlled. No independent settlement is claimed."
+    }
+  },
+  "gates": [
+    {
+      "id": 1,
+      "gate": "ABI/codec",
+      "requiredObservation": "Published full leaf/event vectors, canonical padding/length refusal, ordered-tree reconstruction, separate domains and ID=index+1 across both adapters",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/AllocationTree.t.sol",
+          "contract": "AllocationTreeTest",
+          "name": "test_frozenGoldenEventsDecodeToExactHashesAndOrderedProofs",
+          "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_frozenGoldenEventsDecodeToExactHashesAndOrderedProofs -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AllocationTree.t.sol",
+          "contract": "AllocationTreeTest",
+          "name": "test_codecRejectsTruncationExtraDataAndDirtyStaticPadding",
+          "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_codecRejectsTruncationExtraDataAndDirtyStaticPadding -vv"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/allocation.test.ts",
+          "name": "matches every frozen AllocationV1 encoding, event and hash",
+          "command": "node --test --test-name-pattern \"^matches every frozen AllocationV1 encoding, event and hash$\" sdk/allocation.test.ts"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/allocation.test.ts",
+          "name": "rebuilds the frozen ordered tree and all seven-level witnesses",
+          "command": "node --test --test-name-pattern \"^rebuilds the frozen ordered tree and all seven-level witnesses$\" sdk/allocation.test.ts"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/allocation.test.ts",
+          "name": "rejects reordered leaves, changed amounts and noncanonical events",
+          "command": "node --test --test-name-pattern \"^rejects reordered leaves, changed amounts and noncanonical events$\" sdk/allocation.test.ts"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/identity.test.ts",
+          "name": "domain constants are the literal WorkTypes domains",
+          "command": "node --test --test-name-pattern \"^domain constants are the literal WorkTypes domains$\" sdk/identity.test.ts"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/IdentityConformance.t.sol",
+          "contract": "IdentityConformanceTest",
+          "name": "testSdkEncodedEpochAndOrderedMilestonesMatchSolidity",
+          "command": "bash scripts/forge.sh test --match-contract IdentityConformanceTest --match-test testSdkEncodedEpochAndOrderedMilestonesMatchSolidity -vv"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/conformance.test.ts",
+          "name": "released SDK preserves the committed Solidity-conformance vectors",
+          "command": "node --test --test-name-pattern \"^released SDK preserves the committed Solidity-conformance vectors$\" sdk/conformance.test.ts"
+        }
+      ],
+      "artifacts": [
+        "out/WorkTypes.sol/WorkTypes.json",
+        "out/AllocationCodec.sol/AllocationCodec.json",
+        "out/AllocationTree.sol/AllocationTree.json"
+      ],
+      "evidence": [
+        {
+          "path": "schema/schema-v1.json",
+          "present": true
+        },
+        {
+          "path": "schema/schema-v1-vectors.json",
+          "present": true
+        },
+        {
+          "path": "schema/identity-v1-vectors.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "Exact test names, frozen vectors, schema and compiled artifacts are present and validated; this generator does not claim a current-revision test execution.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 2,
+      "gate": "Source policy",
+      "requiredObservation": "Every terminal conserves M; U is released once; pending expiry, no delivery, approval, monitoring default, quorum, committee timeout and mutual settlement all execute with boundary/stale/duplicate refusals; both mutual/default transaction orderings preserve the first valid terminal",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testInitializationAndUninitializedExpiryAreExclusive",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testInitializationAndUninitializedExpiryAreExclusive -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testApprovalNoDeliveryAndMonitoringDefaultAtExactBoundaries",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testApprovalNoDeliveryAndMonitoringDefaultAtExactBoundaries -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testCommitteeVotesDoNotPoolAcrossProposalsAndDuplicateFails",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testCommitteeVotesDoNotPoolAcrossProposalsAndDuplicateFails -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testCommitteeTimeoutAndMutualDefaultFirstWriterWins",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testCommitteeTimeoutAndMutualDefaultFirstWriterWins -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testActiveReturnDrainSweepAndNoEmptyLeaf",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testActiveReturnDrainSweepAndNoEmptyLeaf -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AdversarialIntegration.t.sol",
+          "contract": "AdversarialIntegrationTest",
+          "name": "test_exactDeadlinesSelectOnlyTheSpecifiedTerminalTransition",
+          "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_exactDeadlinesSelectOnlyTheSpecifiedTerminalTransition -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AdversarialIntegration.t.sol",
+          "contract": "AdversarialIntegrationTest",
+          "name": "test_zeroSignerAndStaleMutualAuthorizationsAreRejected",
+          "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_zeroSignerAndStaleMutualAuthorizationsAreRejected -vv"
+        }
+      ],
+      "artifacts": [
+        "out/SourceCoordinator.sol/SourceCoordinator.json",
+        "out/SourcePolicyV1Lib.sol/SourcePolicyV1Lib.json",
+        "out/SourceAccountingLib.sol/SourceAccountingLib.json",
+        "out/SourceSignatureLib.sol/SourceSignatureLib.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/source-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/source-branches.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The public source journals record the main policy path and branch terminals, including stale, duplicate and both first-writer refusal observations; target follow-through is reported by separate gates.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 3,
+      "gate": "Capacity",
+      "requiredObservation": "Reachable 113-leaf trace through actual policy/append; separate declined/unagreed, tiny early-return and late-draining traces; accepted obligations and protected returns remain appendable",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testReachable113LeafTraceAndIndependentRootRebuild",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testReachable113LeafTraceAndIndependentRootRebuild -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testActiveReturnDrainSweepAndNoEmptyLeaf",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testActiveReturnDrainSweepAndNoEmptyLeaf -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AllocationTree.t.sol",
+          "contract": "AllocationTreeTest",
+          "name": "test_productionTreeAll128AppendsMatchIndependentFullRebuild",
+          "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_productionTreeAll128AppendsMatchIndependentFullRebuild -vv"
+        }
+      ],
+      "artifacts": [
+        "out/SourceCoordinator.sol/SourceCoordinator.json",
+        "out/AllocationTree.sol/AllocationTree.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/source-branches.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The actual 113-leaf production-policy test and 128-leaf production-tree harness are reference-validated; the public branch journal separately records smaller live traces.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 4,
+      "gate": "Incremental tree/readback",
+      "requiredObservation": "Independent rebuild from same-block public full allocations equals real stored root after every operation; actual emitted-event roundtrip; production tree harness covers 114/128, carry boundaries and append-129 refusal; no hand-seeded substitute",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testReachable113LeafTraceAndIndependentRootRebuild",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testReachable113LeafTraceAndIndependentRootRebuild -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AllocationTree.t.sol",
+          "contract": "AllocationTreeTest",
+          "name": "test_productionTreeAll128AppendsMatchIndependentFullRebuild",
+          "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_productionTreeAll128AppendsMatchIndependentFullRebuild -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AllocationTree.t.sol",
+          "contract": "AllocationTreeTest",
+          "name": "test_failedAppendAndInitializationCannotChangeTree",
+          "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_failedAppendAndInitializationCannotChangeTree -vv"
+        }
+      ],
+      "artifacts": [
+        "out/SourceCoordinator.sol/SourceCoordinator.json",
+        "out/AllocationTree.sol/AllocationTree.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/source-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/source-branches.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "Independent rebuild and event-roundtrip test references are validated; the public journals contain allocation/checkpoint receipt ordinals but do not record a maximum-size same-block rebuild.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 5,
+      "gate": "Atomic publication",
+      "requiredObservation": "Multi-leaf calls publish their final consistent root; no later source transaction is needed to prove a new allocation; reverted calls leave no partial state/logs",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testReachable113LeafTraceAndIndependentRootRebuild",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testReachable113LeafTraceAndIndependentRootRebuild -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AllocationTree.t.sol",
+          "contract": "AllocationTreeTest",
+          "name": "test_failedAppendAndInitializationCannotChangeTree",
+          "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_failedAppendAndInitializationCannotChangeTree -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache -vv"
+        }
+      ],
+      "artifacts": [
+        "out/SourceCoordinator.sol/SourceCoordinator.json",
+        "out/WorkTreasury.sol/WorkTreasury.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/source-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/source-branches.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "Public source receipts retain allocation and checkpoint ordinals from the same operations; atomic rollback remains locally executable evidence.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 6,
+      "gate": "Republish",
+      "requiredObservation": "Same-state payload equality, changed/phase-only state correctness, no caller root or repair input, no financial/leaf mutation, and independent full-leaf rebuild matches storage",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testAdmissionCutoffAllowsPermissionlessDrainAndRepublishDoesNotMutate",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testAdmissionCutoffAllowsPermissionlessDrainAndRepublishDoesNotMutate -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testReachable113LeafTraceAndIndependentRootRebuild",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testReachable113LeafTraceAndIndependentRootRebuild -vv"
+        }
+      ],
+      "artifacts": [
+        "out/SourceCoordinator.sol/SourceCoordinator.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/source-demo.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The main source journal records its republish observation; exact equality, phase transition and no-mutation assertions remain mapped to the named tests.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 7,
+      "gate": "Native necessity",
+      "requiredObservation": "Without a valid native authentication or matching persisted record, plausible checkpoints/allocations cannot introduce claims; authentic evidence for the wrong application fact also fails",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AdversarialIntegration.t.sol",
+          "contract": "AdversarialIntegrationTest",
+          "name": "test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt",
+          "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt -vv"
+        }
+      ],
+      "artifacts": [
+        "out/WorkTreasury.sol/WorkTreasury.json",
+        "out/NativeReceiptAuth.sol/NativeReceiptAuth.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/native-recovery-verification-33642ef4.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "A real fixed-0xFD2 read-only verification returned true and a public batch authentication is mined; negative authentication cases are local executable tests.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 8,
+      "gate": "Persisted cache",
+      "requiredObservation": "Warm with epoch A; reject same-receipt foreign-emitter look-alike and B-as-A; accept genuine B correctly without another native call; receipt-local selection differs from block-global logIndex; test both parsers and preserve state after failures",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache -vv"
+        }
+      ],
+      "artifacts": [
+        "out/WorkTreasury.sol/WorkTreasury.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-branches.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The public main journal records an authenticated receipt cache and an exact receipt recognition; the two-epoch, parser, wrong-emitter and failure-preservation matrix remains local executable evidence.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 9,
+      "gate": "Evidence equivalence",
+      "requiredObservation": "Receipt→root and root→receipt/new-root replay cannot duplicate value; reject wrong first amount/kind/owner/domain/index and verify mixed WORK/FEE/RETURN",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/EndToEnd.t.sol",
+          "contract": "EndToEndTest",
+          "name": "test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails",
+          "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/AdversarialIntegration.t.sol",
+          "contract": "AdversarialIntegrationTest",
+          "name": "test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt",
+          "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt -vv"
+        }
+      ],
+      "artifacts": [
+        "out/WorkTreasury.sol/WorkTreasury.json",
+        "out/SourceCoordinator.sol/SourceCoordinator.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-branches.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The public journal states and receipt identifiers are captured below; both replay directions, mixed kinds and substitution refusals are mapped to exact executable tests.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 10,
+      "gate": "Accounting/recovery",
+      "requiredObservation": "RETURN-before-unseen-WORK preserves both claims; rejecting recipients do not block other payouts; target-owner redirection succeeds for claims and free balances; accepting-fixed-destination-first and owner-redirection-first each pay exactly once, and later attempts fail; a fixture that accepts and locks funds demonstrates the stated absence of post-payment recovery",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_rejectingFixedDestinationLeavesClaim_thenOwnerRedirects",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_rejectingFixedDestinationLeavesClaim_thenOwnerRedirects -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_unauthorizedClaimRedirectAndRejectingFreeWithdrawalPreserveBalances",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_unauthorizedClaimRedirectAndRejectingFreeWithdrawalPreserveBalances -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/EndToEnd.t.sol",
+          "contract": "EndToEndTest",
+          "name": "test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay",
+          "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay -vv"
+        }
+      ],
+      "artifacts": [
+        "out/WorkTreasury.sol/WorkTreasury.json",
+        "out/PaidInvoiceBook.sol/PaidInvoiceBook.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/source-demo.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The public main journal records RETURN 50 recognized before B settled; its current state below determines whether final worker collection, total RETURN recognition and withdrawal are complete.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 11,
+      "gate": "Combined operations",
+      "requiredObservation": "Successful combined/separate flows have identical financial results; their documented failure/cache atomicity differs correctly",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/EndToEnd.t.sol",
+          "contract": "EndToEndTest",
+          "name": "test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay",
+          "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay -vv"
+        }
+      ],
+      "artifacts": [
+        "out/SourceCoordinator.sol/SourceCoordinator.json",
+        "out/WorkTreasury.sol/WorkTreasury.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/source-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "Combined and separate operation behavior is mapped to exact executable tests; the public journals do not by themselves establish the full comparison.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 12,
+      "gate": "Availability",
+      "requiredObservation": "Show cached collection without new native proof and native-receipt collection without application siblings; show unavailable cases honestly",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/EndToEnd.t.sol",
+          "contract": "EndToEndTest",
+          "name": "test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay",
+          "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/EndToEnd.t.sol",
+          "contract": "EndToEndTest",
+          "name": "test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails",
+          "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails -vv"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/allocation.test.ts",
+          "name": "receipt package contains a directly usable SingleProof and exact transaction bytes",
+          "command": "node --test --test-name-pattern \"^receipt package contains a directly usable SingleProof and exact transaction bytes$\" sdk/allocation.test.ts"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/prover-client.test.ts",
+          "name": "proof client binds and validates the requested chain and transaction",
+          "command": "node --test --test-name-pattern \"^proof client binds and validates the requested chain and transaction$\" sdk/prover-client.test.ts"
+        }
+      ],
+      "artifacts": [
+        "out/WorkTreasury.sol/WorkTreasury.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/native-recovery-verification-33642ef4.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-branches.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "Provider-independent raw proof regeneration preserved exact transaction bytes and passed a real native eth_call; continuity did not change, so aged or changed-witness recovery is not claimed.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 13,
+      "gate": "Performance",
+      "requiredObservation": "Publish source allocation/tree cost, marginal allocation/checkpoint event cost, target costs and actions for 1/4/16/32 claims through both forms; include first writes, carry boundaries, late tree, WORK+FEE and largest supported source batch",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/Performance.t.sol",
+          "contract": "PerformanceTest",
+          "name": "test_sourceMarginalCanonicalEventGas",
+          "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_sourceMarginalCanonicalEventGas -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/Performance.t.sol",
+          "contract": "PerformanceTest",
+          "name": "test_sourceLargestOrderAndAllocationGas",
+          "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_sourceLargestOrderAndAllocationGas -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/Performance.t.sol",
+          "contract": "PerformanceTest",
+          "name": "test_targetCheckpointAndReceiptClaimGas_localNativeStubExcluded",
+          "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_targetCheckpointAndReceiptClaimGas_localNativeStubExcluded -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/Performance.t.sol",
+          "contract": "PerformanceTest",
+          "name": "test_sourceLateCarryBoundaryWorkFeeGas",
+          "command": "bash scripts/forge.sh test --match-contract PerformanceTest --match-test test_sourceLateCarryBoundaryWorkFeeGas -vv"
+        }
+      ],
+      "artifacts": [
+        "out/Performance.t.sol/PerformanceTest.json",
+        "out/SourceCoordinator.sol/SourceCoordinator.json",
+        "out/WorkTreasury.sol/WorkTreasury.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/local-performance.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The local performance matrix records all required sizes and source positions. Its target figures explicitly exclude native verification; the public journal records actual batch and receipt-recognition gas only.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 14,
+      "gate": "Product",
+      "requiredObservation": "Full 120-unit journey, capacity exhaustion/successor funding, wallet resume, proof-provider replacement and owner-change scenario are operable without private instructions",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/EndToEnd.t.sol",
+          "contract": "EndToEndTest",
+          "name": "test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay",
+          "command": "bash scripts/forge.sh test --match-contract EndToEndTest --match-test test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_fundingUsesOwnDepositAndFree_andSuccessorUsesReturnedFree",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_fundingUsesOwnDepositAndFree_andSuccessorUsesReturnedFree -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceCoordinator.t.sol",
+          "contract": "SourceCoordinatorTest",
+          "name": "testReachable113LeafTraceAndIndependentRootRebuild",
+          "command": "bash scripts/forge.sh test --match-contract SourceCoordinatorTest --match-test testReachable113LeafTraceAndIndependentRootRebuild -vv"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/prover-client.test.ts",
+          "name": "proof client uses the pinned endpoint and returns directly usable fields",
+          "command": "node --test --test-name-pattern \"^proof client uses the pinned endpoint and returns directly usable fields$\" sdk/prover-client.test.ts"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/safe-events.test.ts",
+          "name": "Safe helper ABI remains a canonical subset of the pinned Safe 1.4.1 artifact",
+          "command": "node --test --test-name-pattern \"^Safe helper ABI remains a canonical subset of the pinned Safe 1.4.1 artifact$\" sdk/safe-events.test.ts"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/safe-events.test.ts",
+          "name": "decodes pinned indexed Safe success and failure transaction hashes",
+          "command": "node --test --test-name-pattern \"^decodes pinned indexed Safe success and failure transaction hashes$\" sdk/safe-events.test.ts"
+        }
+      ],
+      "artifacts": [
+        "out/SourceCoordinator.sol/SourceCoordinator.json",
+        "out/WorkTreasury.sol/WorkTreasury.json",
+        "out/PaidInvoiceBook.sol/PaidInvoiceBook.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/source-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/source-branches.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-branches.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-safe-rotation.json",
+          "present": true
+        },
+        {
+          "path": "evidence/native-recovery-verification-33642ef4.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "The source main and branch journals and the real read-only proof replacement are recorded; the current target and Safe-rotation journal states below determine the remaining product evidence.",
+      "pending": [],
+      "releaseGateStatus": "observed"
+    },
+    {
+      "id": 15,
+      "gate": "Consumer/users",
+      "requiredObservation": "Separate consumer rejects nonpayments; two consented independent settlements and repeat operation disclose actual assistance and control",
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination -vv"
+        }
+      ],
+      "artifacts": [
+        "out/PaidInvoiceBook.sol/PaidInvoiceBook.json",
+        "out/WorkTreasury.sol/WorkTreasury.json"
+      ],
+      "evidence": [
+        {
+          "path": "evidence/public-demo.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-branches.json",
+          "present": true
+        },
+        {
+          "path": "evidence/public-safe-rotation.json",
+          "present": true
+        }
+      ],
+      "observedStatus": "Consumer rejection and completed-WORK behavior are executable local tests. All current public journals disclose team control and do not claim independent settlements.",
+      "pending": [
+        "Two consented independent settlements are not recorded.",
+        "Repeat independent operation without a target reservation operator is not recorded.",
+        "A real buyer reason is not recorded."
+      ],
+      "releaseGateStatus": "pending"
+    }
+  ]
+}

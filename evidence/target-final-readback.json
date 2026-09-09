@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-09-09T19:16:46.778Z",
+  "scope": "Read-only finalized Creditcoin global accounting; source finality is audited separately.",
+  "targetBlock": {
+    "number": 5459378,
+    "hash": "0x1013c065d0065c4e864708f26fb4a168c16083ccbeabd38b6a7f3a9abea30893"
+  },
+  "creditedDepositsCTC": "143.0",
+  "liveLiabilitiesCTC": "0.0",
+  "completedWithdrawalsCTC": "143.0",
+  "actualBalanceCTC": "0.0",
+  "conserved": true
+}

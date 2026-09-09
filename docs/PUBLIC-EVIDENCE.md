@@ -1,6 +1,6 @@
 # Public evidence
 
-Generated 2026-09-09T19:14:06.136Z from the checked-in public journals. This page reports the evidence currently present; missing or partial evidence remains pending.
+Generated 2026-09-09T19:21:02.621Z from the checked-in public journals. This page reports the evidence currently present; missing or partial evidence remains pending.
 
 ## Control and release scope
 
@@ -23,8 +23,8 @@ The Creditcoin testnet chain and explorer mapping is documented in the official 
 | Main journey — target | Complete — the built-in main journey reports its final target state | [repository file](../evidence/public-demo.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-demo.json) |
 | Policy branches — source | Source complete — target status is reported separately | [repository file](../evidence/source-branches.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/source-branches.json) |
 | Policy branches and successor — target | Complete — branch recognition, successor expiry, and recorded withdrawals report completion | [repository file](../evidence/public-branches.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-branches.json) |
-| Disposable Safe owner rotation | In progress — Awaiting Disposable Safe Native Attestation | [repository file](../evidence/public-safe-rotation.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-safe-rotation.json) |
-| Finalized release readback | Pending — finalized release readback has not been generated | [repository file](../evidence/release-readback.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/release-readback.json) |
+| Disposable Safe owner rotation | Complete — the disposable Safe rotation journey reports completion | [repository file](../evidence/public-safe-rotation.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-safe-rotation.json) |
+| Finalized release readback | Automated journeys report complete at finalized blocks | [repository file](../evidence/release-readback.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/release-readback.json) |
 
 ## Returned funds: recognition and withdrawal
 
@@ -34,7 +34,7 @@ A recognized RETURN moves value from an epoch reserve into the refund beneficiar
 |---|---|---|---|
 | Main | 65.0 CTC in the latest source readback | 65.0 CTC confirmed as target free-balance credit | 65.0 CTC withdrawal recorded |
 | Policy branches / successor | 11.0 CTC in the primary source epoch | 12.0 CTC confirmed as target free-balance credit; some may have funded the successor epoch | 11.0 CTC withdrawal recorded |
-| Disposable Safe rotation | 1.0 CTC in the source readback | 1.0 CTC confirmed as target free-balance credit | No returned-funds withdrawal recorded |
+| Disposable Safe rotation | 1.0 CTC in the source readback | 1.0 CTC confirmed as target free-balance credit | Withdrawal recorded by withdraw-disposable-safe-return-1 |
 
 ## Chain transaction journal
 
@@ -169,14 +169,14 @@ A recognized RETURN moves value from an epoch reserve into the refund beneficiar
 | Creditcoin testnet | authenticate-disposable-safe-final-checkpoint | [0x9919d84a44839558c576e190da938b482acc8e0b22f0fae87c6ef259ec90c51c](https://creditcoin-testnet.blockscout.com/tx/0x9919d84a44839558c576e190da938b482acc8e0b22f0fae87c6ef259ec90c51c) | 5459368 | 396,330 | Mined |
 | Creditcoin testnet | recognize-disposable-safe-return-receipt | [0xa464d9cea1653bf31ac4aebf1e5b78f15d42753bd70a344fa02b5498f88fbcd8](https://creditcoin-testnet.blockscout.com/tx/0xa464d9cea1653bf31ac4aebf1e5b78f15d42753bd70a344fa02b5498f88fbcd8) | 5459369 | 361,130 | Mined |
 | Creditcoin testnet | recognize-rotation-work-1 | [0xcd3d2d4052a2175a0725fa3c69c39aaef18fcab6a6373630319afc66bac1e830](https://creditcoin-testnet.blockscout.com/tx/0xcd3d2d4052a2175a0725fa3c69c39aaef18fcab6a6373630319afc66bac1e830) | 5459370 | 526,327 | Mined |
+| Creditcoin testnet | withdraw-rotation-work-1 | [0x3535c763a4c44ed515371901107f578dc730a9085a84782503496a1752e8e126](https://creditcoin-testnet.blockscout.com/tx/0x3535c763a4c44ed515371901107f578dc730a9085a84782503496a1752e8e126) | 5459371 | 310,086 | Mined |
+| Creditcoin testnet | recognize-rotation-work-2 | [0xbd1638877ff5c0ed2cd399725225a22eee731cada7ee0252ea784d40ed422c61](https://creditcoin-testnet.blockscout.com/tx/0xbd1638877ff5c0ed2cd399725225a22eee731cada7ee0252ea784d40ed422c61) | 5459372 | 516,749 | Mined |
+| Creditcoin testnet | withdraw-rotation-work-2 | [0x86252a5b42cf9059af0893a078a676228e282d28a3167624f9a8665fa115c9c9](https://creditcoin-testnet.blockscout.com/tx/0x86252a5b42cf9059af0893a078a676228e282d28a3167624f9a8665fa115c9c9) | 5459373 | 310,086 | Mined |
+| Creditcoin testnet | withdraw-disposable-safe-return-1 | [0x135851ba38fc40c2ece92e74d2697750766ba4a4b6cd8ea27ccefe35adb2bcd0](https://creditcoin-testnet.blockscout.com/tx/0x135851ba38fc40c2ece92e74d2697750766ba4a4b6cd8ea27ccefe35adb2bcd0) | 5459374 | 301,966 | Mined |
 
 ## Pending recorded submissions
 
-These hashes have a persisted submission marker but are not represented as completed operation receipts.
-
-| Chain | Operation | Transaction | Evidence |
-|---|---|---|---|
-| Creditcoin testnet | withdraw-rotation-work-1 | [0x3535c763a4c44ed515371901107f578dc730a9085a84782503496a1752e8e126](https://creditcoin-testnet.blockscout.com/tx/0x3535c763a4c44ed515371901107f578dc730a9085a84782503496a1752e8e126) | [repository file](../evidence/public-safe-rotation.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-safe-rotation.json) |
+None recorded.
 
 ## Other mined failures
 
@@ -217,7 +217,9 @@ This demonstrates provider-independent regeneration for the recorded proof. Beca
 
 [repository file](../evidence/release-readback.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/release-readback.json)
 
-Pending — no finalized cross-chain release readback is available yet.
+Finalized readback time: 2026-09-09T19:20:23.925Z. Automated journeys complete: **true**.
+
+Credited deposits: 143.0 CTC; live liabilities: 0.0 CTC; completed withdrawals: 143.0 CTC; recorded balance: 0.0 CTC. Conservation: **true**; solvency: **true**.
 
 ## Evidence limits
 

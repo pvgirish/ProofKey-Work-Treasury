@@ -4,6 +4,8 @@ Keep work approvals in an Ethereum Safe. Pay completed work from a finite Credit
 
 This is the separate Work Treasury implementation. The earlier ProofKey Review Settlement and frozen Review #41 are not migrated or modified.
 
+The implementation and team-controlled public demonstrations are complete: 40 contract tests and 15 SDK tests pass in public CI; all four testnet epochs closed with 143 CTC deposited, 143 CTC withdrawn and zero remaining liabilities. The main 120-CTC journey paid workers 55 CTC and refunded 65 CTC. See the [finalized cross-chain audit](evidence/release-readback.json), [published wallet check](evidence/ui-completed-hosted-qa/report.md), and [release gates](docs/RELEASE-GATES.md). Two consenting independent settlements, repeat independent use and a real buyer reason remain pending.
+
 ## Run the wallet app
 
 [Open the public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/). It loads the pinned public testnet addresses and funded demonstration epoch for read-only inspection. Check the Networks page before connecting a wallet; source finality can temporarily lag the latest demonstration transaction.

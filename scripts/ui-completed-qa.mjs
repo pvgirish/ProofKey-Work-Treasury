@@ -25,6 +25,7 @@ let requestId = 0;
 const pending = new Map();
 const browserErrors = [];
 const failedRequests = [];
+const badResponses = [];
 const rpcCalls = [];
 socket.addEventListener("message", event => {
   const message = JSON.parse(event.data);
@@ -35,6 +36,7 @@ socket.addEventListener("message", event => {
   if (message.method === "Runtime.exceptionThrown") browserErrors.push(message.params.exceptionDetails?.exception?.description ?? message.params.exceptionDetails?.text ?? "Runtime exception");
   if (message.method === "Log.entryAdded" && message.params.entry.level === "error") browserErrors.push(message.params.entry.text);
   if (message.method === "Network.loadingFailed") failedRequests.push(`${message.params.errorText} ${message.params.blockedReason ?? ""}`.trim());
+  if (message.method === "Network.responseReceived" && message.params.response.status >= 400) badResponses.push(`${message.params.response.status} ${message.params.response.url}`);
   if (message.method === "Network.requestWillBeSent" && message.params.request.postData) {
     try {
       const body = JSON.parse(message.params.request.postData);
@@ -164,8 +166,10 @@ check("Imported package prepares no broadcast", !(await evaluate("document.query
 await screenshot("imported-claim-1.png", ".evidence-cols");
 
 const forbidden = rpcCalls.filter(call => ["eth_sendTransaction", "eth_sendRawTransaction", "eth_sign", "personal_sign", "eth_requestAccounts"].includes(call.method));
+const criticalResponses = badResponses.filter(item => !item.endsWith("/favicon.ico"));
+const criticalBrowserErrors = browserErrors.filter(item => !item.startsWith("Failed to load resource: the server responded with a status of 404"));
 check("QA remained read only", forbidden.length === 0, "No account request, signing, or broadcast RPC method was observed");
-check("No browser runtime or request errors", browserErrors.length === 0 && failedRequests.length === 0, [...browserErrors, ...failedRequests].join("\n") || "none");
+check("No browser runtime or critical request errors", criticalBrowserErrors.length === 0 && failedRequests.length === 0 && criticalResponses.length === 0, [...criticalBrowserErrors, ...failedRequests, ...criticalResponses].join("\n") || "none");
 
 const report = [
   "# Completed public journey UI QA", "", `Run: ${new Date().toISOString()}`, "",
@@ -179,4 +183,4 @@ const report = [
 ].join("\n");
 await writeFile(join(outputDir, "report.md"), report);
 socket.close();
-console.log(JSON.stringify({ checks, finalized, targetMain, targetDetail, sourceMain, sourceDetail, payment1, payment3, imported, observedRpcCalls: rpcCalls.length, browserErrors, failedRequests }, null, 2));
+console.log(JSON.stringify({ checks, finalized, targetMain, targetDetail, sourceMain, sourceDetail, payment1, payment3, imported, observedRpcCalls: rpcCalls.length, browserErrors: criticalBrowserErrors, failedRequests, nonCriticalResponses: badResponses.filter(item => item.endsWith("/favicon.ico")) }, null, 2));
