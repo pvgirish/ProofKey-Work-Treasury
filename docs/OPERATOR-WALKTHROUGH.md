@@ -6,7 +6,7 @@ Use the [public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/
 
 ## 1. Verify the public setup
 
-Open **Networks** before connecting a wallet. A fresh browser loads these public defaults:
+A fresh browser automatically verifies the public setup and reads the built-in epoch from both chains without a wallet. Open **Networks** to inspect the pinned defaults and verification result. A saved workspace makes no automatic network request and is preserved; choose **Use public demo defaults** only if you want to replace it explicitly. The defaults are:
 
 | Field | Public default |
 |---|---|
@@ -27,13 +27,13 @@ Open **Networks** before connecting a wallet. A fresh browser loads these public
 
 The supplied **PaidInvoiceBook** is pinned to the main demonstration's buyer, order, asset and policy. Its completed claim 1 record can be inspected in **Payments**. For a different order, configure a separately deployed book with the intended expectations or leave the optional field empty.
 
-Select **Verify without saving**. A successful check confirms both RPC chain IDs, contract code, and the target treasury's immutable source chain ID, source key and coordinator. Target values are read together at one target block. The app prefers an RPC's `finalized` block tag; if an RPC does not expose it, the result explicitly says that it used a confirmation-depth fallback and that finality is not asserted. Do not relabel that fallback as finalized.
+To repeat verification, select **Verify without saving**. A successful check confirms both RPC chain IDs, contract code, and the target treasury's immutable source chain ID, source key and coordinator. Target values are read together at one target block. The app prefers an RPC's `finalized` block tag; if an RPC does not expose it, the result explicitly says that it used a confirmation-depth fallback and that finality is not asserted. Do not relabel that fallback as finalized.
 
 This check is read only. It does not request an account, sign, or broadcast.
 
 ## 2. Load the built-in epoch without a wallet
 
-Open **Budget**. The built-in epoch should already appear in **Epoch ID**. If the field is empty, paste the ID from the table and select **Load epoch**.
+Open **Budget**. In a fresh browser, the built-in epoch and both readback cards load automatically. The built-in epoch should already appear in **Epoch ID**. If the field is empty, paste the ID from the table and select **Load epoch**.
 
 Read the two cards independently:
 
@@ -44,6 +44,8 @@ Read the two cards independently:
 Select **Refresh both chains** after a public transaction or RPC delay. Source cutoffs in the app are Ethereum block heights, not dates or browser-clock times.
 
 The **120-unit planning walkthrough** at the top of the page is explicitly an illustration. It is not evidence of a transaction. The actual public stage, transaction hashes and amounts are in [`evidence/public-demo.json`](../evidence/public-demo.json).
+
+For an independent source-tree check, open **Evidence** and select **Run independent rebuild**. The app reads every public allocation and stored leaf at one stable source block, recomputes the root, and compares it with storage. The result labels the actual finality mode used. This checks the source tree; it does not by itself authenticate a target payment.
 
 ## 3. Keep the three settlement states separate
 
@@ -141,7 +143,7 @@ Use these records in this order:
 1. [`docs/RELEASE-GATES.md`](RELEASE-GATES.md) is the gate ledger. A pending public-observation cell is not a pass.
 2. [`evidence/public-demo.json`](../evidence/public-demo.json) is the resumable public team run and labels its actors and current stage.
 3. [`evidence/source-branches.json`](../evidence/source-branches.json) records the separate public branch run and may still be in progress.
-4. [`evidence/ui-live-qa/report.md`](../evidence/ui-live-qa/report.md), [`evidence/ui-proof-qa/report.md`](../evidence/ui-proof-qa/report.md) and [`evidence/ui-public-qa/report.md`](../evidence/ui-public-qa/report.md) record bounded browser observations.
+4. [`evidence/ui-firstload-qa/report.md`](../evidence/ui-firstload-qa/report.md), [`evidence/ui-live-qa/report.md`](../evidence/ui-live-qa/report.md), [`evidence/ui-proof-qa/report.md`](../evidence/ui-proof-qa/report.md) and [`evidence/ui-public-qa/report.md`](../evidence/ui-public-qa/report.md) record bounded browser observations.
 5. [`docs/INDEPENDENT-SETTLEMENT.md`](INDEPENDENT-SETTLEMENT.md) is the checklist and completion rule for an actual participant settlement.
 
 The reusable buyer/control disclosure is the **Control and assistance record** in [`docs/INDEPENDENT-SETTLEMENT.md`](INDEPENDENT-SETTLEMENT.md#control-and-assistance-record). Create one record per settlement. It must disclose the participant's real relationship to the project, role, who controlled each key or Safe approval, who funded work and fees, exact assistance, the participant's own reason for Ethereum authority, terms reviewed, consent evidence, source and target hashes, repeat use and publication permission. Keep private keys, seed phrases, contact details and unapproved names out of it.

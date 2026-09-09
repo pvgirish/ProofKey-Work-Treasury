@@ -28,7 +28,19 @@ const $ = <T extends HTMLElement = HTMLElement>(selector: string): T => {
   return found as T;
 };
 
-let workspace: any = loadJson(STORAGE_KEY, {});
+function loadWorkspaceState() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw === null) return { present: false, value: {} as any, error: "" };
+  try {
+    const value = JSON.parse(raw);
+    if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Saved setup is not an object");
+    return { present: true, value, error: "" };
+  } catch (error) {
+    return { present: true, value: {} as any, error: `Saved setup could not be read: ${(error as Error).message}` };
+  }
+}
+const initialWorkspaceState = loadWorkspaceState();
+let workspace: any = initialWorkspaceState.value;
 let connected: { provider: any; signer: any; account: string; chainId: bigint } | null = null;
 let currentDraft: any = loadJson(DRAFT_KEY, null);
 let currentClaimPackage: any = null;
@@ -181,12 +193,14 @@ function populateActions() {
 function updateActionHelp(area: "source" | "target") { const select = $<HTMLSelectElement>(`#${area}-function`); const fn = select.options[select.selectedIndex]?.textContent ?? ""; const help = area === "source" ? SOURCE_HELP[fn] : TARGET_HELP[fn]; if (area === "source") { $("#source-actor").textContent = help?.[0] ?? "Contract-defined actor"; $("#source-help").textContent = help?.[1] ?? "This function comes from the compiled SourceCoordinator interface."; } else { $("#target-actor").textContent = help?.[0] ?? "Contract-defined actor"; $("#target-help").textContent = help?.[1] ?? "This function comes from the compiled WorkTreasury interface."; } }
 
 function fillSettings() {
-  const form = $<HTMLFormElement>("#settings-form"); const values: Record<string, any> = { sourceLabel: workspace.source?.label, sourceChainId: workspace.source?.chainId, sourceConfirmations: workspace.source?.confirmations, sourceRpc: workspace.source?.rpcUrl, coordinator: workspace.source?.coordinator, safe: workspace.source?.safe, sourceChainKey: workspace.source?.chainKey, targetLabel: workspace.target?.label, targetChainId: workspace.target?.chainId, targetConfirmations: workspace.target?.confirmations, targetRpc: workspace.target?.rpcUrl, treasury: workspace.target?.treasury, invoiceBook: workspace.target?.invoiceBook, proofService: workspace.proofServiceUrl };
+  const form = $<HTMLFormElement>("#settings-form"); form.reset(); const values: Record<string, any> = { sourceLabel: workspace.source?.label, sourceChainId: workspace.source?.chainId, sourceConfirmations: workspace.source?.confirmations, sourceRpc: workspace.source?.rpcUrl, coordinator: workspace.source?.coordinator, safe: workspace.source?.safe, sourceChainKey: workspace.source?.chainKey, targetLabel: workspace.target?.label, targetChainId: workspace.target?.chainId, targetConfirmations: workspace.target?.confirmations, targetRpc: workspace.target?.rpcUrl, treasury: workspace.target?.treasury, invoiceBook: workspace.target?.invoiceBook, proofService: workspace.proofServiceUrl };
   for (const [name, value] of Object.entries(values)) if (value !== undefined) (form.elements.namedItem(name) as HTMLInputElement).value = String(value);
-  if (workspace.lastEpochId) { $<HTMLInputElement>("#active-epoch").value = workspace.lastEpochId; $<HTMLInputElement>("#payment-epoch").value = workspace.lastEpochId; $<HTMLInputElement>("#invoice-epoch").value = workspace.lastEpochId; }
-  if (workspace.proofServiceUrl) $<HTMLInputElement>("#proof-url").value = workspace.proofServiceUrl;
-  if (workspace.source?.chainKey) $<HTMLInputElement>("#proof-chain-key").value = String(workspace.source.chainKey);
+  const epoch = String(workspace.lastEpochId ?? ""); $<HTMLInputElement>("#active-epoch").value = epoch; $<HTMLInputElement>("#payment-epoch").value = epoch; $<HTMLInputElement>("#invoice-epoch").value = epoch;
+  $<HTMLInputElement>("#proof-url").value = String(workspace.proofServiceUrl ?? "");
+  $<HTMLInputElement>("#proof-chain-key").value = String(workspace.source?.chainKey ?? "");
   const hasDemo = Boolean(window.PROOFKEY_DEMO_CONFIG?.source && window.PROOFKEY_DEMO_CONFIG?.target); $<HTMLElement>("#load-local-demo").hidden = !hasDemo;
+  const hasPublicDemo = Boolean(window.PROOFKEY_DEFAULT_CONFIG?.source && window.PROOFKEY_DEFAULT_CONFIG?.target); $<HTMLElement>("#load-public-demo").hidden = !hasPublicDemo;
+  const stored = loadWorkspaceState(); $("#settings-storage-tag").textContent = stored.error ? "Saved setup unreadable" : stored.present ? "Saved on this device" : "Temporary public demo";
   const configured = Boolean(workspace.source?.rpcUrl && workspace.target?.rpcUrl); $("#rail-status").textContent = configured ? `${workspace.source.label} ↔ ${workspace.target.label}` : "No networks configured"; signal("rail-signal", configured ? "good" : "neutral"); $("#environment-tag").textContent = configured ? "Configured readback · verify before action" : "Configuration required";
 }
 function readSettingsForm() { const form = new FormData($<HTMLFormElement>("#settings-form")); const positive = (name: string) => { const n = Number(form.get(name)); if (!Number.isSafeInteger(n) || n < 0) throw new Error(`${name} must be a nonnegative integer`); return n; }; return { source: { label: String(form.get("sourceLabel") || "Ethereum source"), chainId: positive("sourceChainId"), confirmations: positive("sourceConfirmations"), rpcUrl: String(form.get("sourceRpc") || "").trim(), coordinator: requireAddress(form.get("coordinator"), "SourceCoordinator"), safe: requireAddress(form.get("safe"), "Safe"), chainKey: BigInt(String(form.get("sourceChainKey"))) }, target: { label: String(form.get("targetLabel") || "Creditcoin target"), chainId: positive("targetChainId"), confirmations: positive("targetConfirmations"), rpcUrl: String(form.get("targetRpc") || "").trim(), treasury: requireAddress(form.get("treasury"), "WorkTreasury"), invoiceBook: String(form.get("invoiceBook") || "").trim() ? requireAddress(form.get("invoiceBook"), "PaidInvoiceBook") : "", }, proofServiceUrl: String(form.get("proofService") || "").trim() }; }
@@ -231,14 +245,14 @@ async function verifySettings(candidate: any) {
     if (targetNetwork.chainId !== BigInt(candidate.target.chainId)) throw new Error(`${candidate.target.label} RPC reports chain ${targetNetwork.chainId}, not ${candidate.target.chainId}`);
     const treasury = new ethers.Contract(candidate.target.treasury, artifact("WorkTreasury").abi, targetProvider);
     const [sourceCode, targetCode, pinnedChainId, pinnedChainKey, pinnedCoordinator] = await Promise.all([
-      sourceProvider.getCode(candidate.source.coordinator), targetProvider.getCode(candidate.target.treasury, targetStable.blockTag),
+      sourceProvider.getCode(candidate.source.coordinator, sourceStable.blockTag), targetProvider.getCode(candidate.target.treasury, targetStable.blockTag),
       treasury.SOURCE_CHAIN_ID.staticCall({ blockTag: targetStable.blockTag }), treasury.SOURCE_CHAIN_KEY.staticCall({ blockTag: targetStable.blockTag }), treasury.SOURCE_COORDINATOR.staticCall({ blockTag: targetStable.blockTag }),
     ]);
-    if (sourceCode === "0x") throw new Error("No SourceCoordinator code exists at the current source head");
+    if (sourceCode === "0x") throw new Error("No SourceCoordinator code exists at the selected stable source block");
     if (targetCode === "0x") throw new Error("No WorkTreasury code exists at the selected stable target block");
     if (BigInt(pinnedChainId) !== BigInt(candidate.source.chainId) || BigInt(pinnedChainKey) !== BigInt(candidate.source.chainKey) || String(pinnedCoordinator).toLowerCase() !== candidate.source.coordinator.toLowerCase()) throw new Error("WorkTreasury immutable source domain does not match this workspace");
     signal("source-config-signal", "good"); signal("target-config-signal", "good");
-    toast(`Verified chain ${sourceNetwork.chainId} and chain ${targetNetwork.chainId}; target immutables match at ${targetStable.label}.`);
+    return `Verified source chain ${sourceNetwork.chainId} and target chain ${targetNetwork.chainId}. WorkTreasury's immutable source domain matches at target ${targetStable.label}; source code was present at ${sourceStable.label}.`;
   } catch (error) {
     signal("source-config-signal", "bad"); signal("target-config-signal", "bad"); throw error;
   } finally {
@@ -246,11 +260,24 @@ async function verifySettings(candidate: any) {
   }
 }
 
+async function verifySettingsWithStatus(candidate: any, prefix: string) {
+  showResult("settings-result", `${prefix}\nChecking both RPC chain IDs, deployed code and the target's immutable source domain…`, "empty");
+  try {
+    const detail = await verifySettings(candidate);
+    $("#startup-status").hidden = true;
+    showResult("settings-result", `${prefix}\n${detail}\nNo wallet account, signature or transaction was requested.`, "success");
+    return detail;
+  } catch (error) {
+    showResult("settings-result", `${prefix}\nVerification failed: ${(error as Error).message}\nThese settings were not treated as verified. Choose Use public demo defaults to recover without connecting a wallet.`, "error");
+    throw error;
+  }
+}
+
 async function connectWallet() { if (!window.ethereum) throw new Error("No browser wallet was found. Read-only RPC access remains available."); const provider = new ethers.BrowserProvider(window.ethereum); await provider.send("eth_requestAccounts", []); const signer = await provider.getSigner(); const network = await provider.getNetwork(); connected = { provider, signer, account: ethers.getAddress(await signer.getAddress()), chainId: network.chainId }; $("#connect-wallet span:last-child").textContent = short(connected.account); $("#network-context").textContent = `Wallet on chain ${connected.chainId}`; $(".wallet-dot").classList.add("good"); toast("Wallet connected. Contract state will still be read from the configured RPCs."); }
 
 function setMetrics(id: string, entries: [string, unknown][]) { $(id).innerHTML = entries.map(([label, value]) => `<div><dt>${label}</dt><dd>${format(value as any)}</dd></div>`).join(""); }
-async function refreshReadback() {
-  const epoch = activeEpoch(); workspace.lastEpochId = epoch; saveJson(STORAGE_KEY, workspace); $<HTMLInputElement>("#payment-epoch").value = epoch; $<HTMLInputElement>("#invoice-epoch").value = epoch;
+async function refreshReadback(options: { persistEpoch?: boolean } = {}) {
+  const epoch = activeEpoch(); workspace.lastEpochId = epoch; if (options.persistEpoch !== false) saveJson(STORAGE_KEY, workspace); $<HTMLInputElement>("#payment-epoch").value = epoch; $<HTMLInputElement>("#invoice-epoch").value = epoch;
   let sourceState: any = null, targetState: any = null;
   try { signal("source-signal", "wait"); const c = sourceConfig(); const provider = new ethers.JsonRpcProvider(c.rpcUrl); const stable = await stableBlock(provider, Number(c.confirmations ?? 12)); const contract = new ethers.Contract(c.coordinator, artifact("SourceCoordinator").abi, provider); sourceState = await contract.epochState.staticCall(epoch, { blockTag: stable.blockTag }); signal("source-signal", "good"); $("#source-main").textContent = sourceState.initialized ? ["Unknown", "Active", "Draining", "Closed"][Number(sourceState.phase)] ?? `Phase ${sourceState.phase}` : sourceState.expiredUninitialized ? "Expired before initialization" : "Not initialized"; $("#source-detail").textContent = `Read at source ${stable.label}. Root ${short(sourceState.root)}.`; setMetrics("#source-metrics", [["Available", formatNative(sourceState.available)], ["Unresolved", formatNative(sourceState.unresolved)], ["Leaves", sourceState.leafCount]]); } catch (error) { signal("source-signal", "bad"); $("#source-main").textContent = "Source unavailable"; $("#source-detail").textContent = (error as Error).message; }
   try {
@@ -267,6 +294,7 @@ async function refreshReadback() {
     targetState = account; signal("target-signal", account.funded ? "good" : "wait"); $("#target-main").textContent = account.funded ? "Exact epoch funded" : "Epoch not funded"; $("#target-detail").textContent = `Epoch account, configuration and source-domain immutables read together at target ${stable.label}.`; setMetrics("#target-metrics", [["Reserve", formatNative(account.reserve)], ["Recognized", formatNative(account.recognized)], ["Funded", account.funded ? "Yes" : "No"]]); provider.destroy?.();
   } catch (error) { signal("target-signal", "bad"); $("#target-main").textContent = "Target unavailable"; $("#target-detail").textContent = (error as Error).message; }
   signal("action-signal", sourceState && targetState ? "good" : sourceState || targetState ? "wait" : "neutral"); if (!sourceState || !targetState) { $("#action-main").textContent = "Wait for complete readback"; $("#action-detail").textContent = targetState?.funded ? "Target funding is finalized, but the stable source state is unavailable or still lagging. Refresh before treating any source action as authorized." : "Both stable chain reads must succeed before this app identifies an authorized next action."; } else if (!targetState.funded) { $("#action-main").textContent = "Sponsor funds exact epoch"; $("#action-detail").textContent = "Funding must be observed on Creditcoin before requesting binding worker consent."; } else if (!sourceState.initialized) { $("#action-main").textContent = "Safe initializes source"; $("#action-detail").textContent = "The target cap is funded. The source Safe may initialize the matching configuration before its cutoff."; } else if (Number(sourceState.phase) === 1) { $("#action-main").textContent = "Review orders and cutoffs"; $("#action-detail").textContent = "The epoch is active. Read each order and milestone to identify the current authorized actor."; } else if (Number(sourceState.phase) === 2) { $("#action-main").textContent = "Resolve and sweep"; $("#action-detail").textContent = "Admissions are closed. Existing obligations remain; anyone may sweep positive available capacity."; } else { $("#action-main").textContent = "Collect remaining claims"; $("#action-detail").textContent = "The source is closed. Old earned allocations remain collectible on Creditcoin."; }
+  return { sourceRead: Boolean(sourceState), targetRead: Boolean(targetState) };
 }
 
 function milestoneHash(m: any) { return ethers.keccak256(abi.encode(["bytes32", "uint256", "uint256", "uint256", "uint64", "uint64", "uint64"], [MILESTONE_TYPEHASH, m.work, m.fee, m.timeoutWork, m.deliverBefore, m.reviewBefore, m.ruleBefore])); }
@@ -336,7 +364,25 @@ function targetRequiredAccount(signature: string) {
   return undefined;
 }
 
-async function inspectTree() { const c = sourceConfig(), epoch = activeEpoch(); showResult("tree-result", "Reading one stable source block…", "empty"); const provider = new ethers.JsonRpcProvider(c.rpcUrl); const stable = await stableBlock(provider, Number(c.confirmations ?? 12)); const block = stable.blockTag; const contract = new ethers.Contract(c.coordinator, artifact("SourceCoordinator").abi, provider); const state = await contract.epochState.staticCall(epoch, { blockTag: block }); const count = Number(state.leafCount); if (count < 0 || count > 128) throw new Error("Source returned an impossible leaf count"); const allocations: any[] = [], storedLeaves: string[] = []; for (let i = 0; i < count; i++) { const item = await contract.allocationAt.staticCall(epoch, i, { blockTag: block }); const normalized = normalizeAllocation(item); if (normalized.treeIndex !== i) throw new Error(`Allocation ${i} declares index ${normalized.treeIndex}`); allocations.push(normalized); storedLeaves.push(await contract.leafHashAt.staticCall(epoch, i, { blockTag: block })); } const leaves = allocations.map(hashAllocation); const rebuilt = buildRoot(leaves); const leafMatch = leaves.every((leaf, i) => leaf.toLowerCase() === storedLeaves[i].toLowerCase()); const rootMatch = rebuilt.toLowerCase() === state.root.toLowerCase(); showResult("tree-result", `${stable.label}\nLeaves ${count} / 128\nRebuilt root ${rebuilt}\nStored root  ${state.root}\n${rootMatch ? "✓ Roots match" : "✕ ROOT MISMATCH"}\n${leafMatch ? "✓ Every public allocation hashes to its stored leaf" : "✕ STORED LEAF MISMATCH"}`, rootMatch && leafMatch ? "success" : "error"); }
+async function inspectTree() {
+  const c = sourceConfig(), epoch = activeEpoch(); showResult("tree-result", "Reading one stable source block…", "empty");
+  const provider = new ethers.JsonRpcProvider(c.rpcUrl);
+  try {
+    const stable = await stableBlock(provider, Number(c.confirmations ?? 12)), block = stable.blockTag;
+    const contract = new ethers.Contract(c.coordinator, artifact("SourceCoordinator").abi, provider);
+    const state = await contract.epochState.staticCall(epoch, { blockTag: block }), count = Number(state.leafCount);
+    if (count < 0 || count > 128) throw new Error("Source returned an impossible leaf count");
+    const allocations: any[] = [], storedLeaves: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const item = await contract.allocationAt.staticCall(epoch, i, { blockTag: block }), normalized = normalizeAllocation(item);
+      if (normalized.treeIndex !== i) throw new Error(`Allocation ${i} declares index ${normalized.treeIndex}`);
+      allocations.push(normalized); storedLeaves.push(await contract.leafHashAt.staticCall(epoch, i, { blockTag: block }));
+    }
+    const leaves = allocations.map(hashAllocation), rebuilt = buildRoot(leaves);
+    const leafMatch = leaves.every((leaf, i) => leaf.toLowerCase() === storedLeaves[i].toLowerCase()), rootMatch = rebuilt.toLowerCase() === state.root.toLowerCase();
+    showResult("tree-result", `${stable.label}\nLeaves ${count} / 128\nRebuilt root ${rebuilt}\nStored root  ${state.root}\n${rootMatch ? "✓ Roots match" : "✕ ROOT MISMATCH"}\n${leafMatch ? "✓ Every public allocation hashes to its stored leaf" : "✕ STORED LEAF MISMATCH"}`, rootMatch && leafMatch ? "success" : "error");
+  } finally { provider.destroy?.(); }
+}
 
 async function readAllocationPrefix(count: number) {
   const c = sourceConfig(), epoch = activeEpoch(), provider = new ethers.JsonRpcProvider(c.rpcUrl), stable = await stableBlock(provider, Number(c.confirmations ?? 12));
@@ -444,19 +490,38 @@ function sourceActionNeedsSafe(signature: string) {
 
 function registerWebMcp() { const context = document.modelContext; if (!context?.registerTool) return; const lifecycle = new AbortController(); const safe = (promise: any) => Promise.resolve(promise).catch(() => undefined); safe(context.registerTool({ name: "inspect_claim_package", title: "Inspect claim package", description: "Validate a ProofKey Work Treasury claim package and show its route and allocation leaf without submitting a transaction.", inputSchema: { type: "object", properties: { package: { type: "object" } }, required: ["package"], additionalProperties: false }, annotations: { readOnlyHint: true, untrustedContentHint: true }, execute(input: any) { const parsed = parseClaimPackage(input.package); currentClaimPackage = parsed; $<HTMLTextAreaElement>("#claim-package").value = JSON.stringify(parsed, (_, item) => typeof item === "bigint" ? item.toString() : item, 2); showResult("package-result", `Valid ${parsed.route} package\nAllocation ${parsed.allocation.allocationId}\nLeaf ${parsed.leaf}`, "success"); navigate("evidence"); return { route: parsed.route, allocationId: parsed.allocation.allocationId, leaf: parsed.leaf }; } }, { signal: lifecycle.signal })); safe(context.registerTool({ name: "load_epoch", title: "Load epoch", description: "Set the visible epoch and refresh its finalized source and target readback.", inputSchema: { type: "object", properties: { epochId: { type: "string", pattern: "^0x[0-9a-fA-F]{64}$" } }, required: ["epochId"], additionalProperties: false }, annotations: { readOnlyHint: true, untrustedContentHint: false }, async execute(input: any) { requireHex(input.epochId, 32, "Epoch ID"); $<HTMLInputElement>("#active-epoch").value = input.epochId; await refreshReadback(); navigate("overview"); return { epochId: input.epochId, refreshed: true }; } }, { signal: lifecycle.signal })); }
 
+async function activatePublicDemo(persist: boolean) {
+  const defaults = window.PROOFKEY_DEFAULT_CONFIG;
+  if (!defaults?.source || !defaults?.target) throw new Error("This build has no public demo configuration");
+  workspace = structuredClone(defaults);
+  if (persist) saveJson(STORAGE_KEY, workspace);
+  fillSettings(); populateActions();
+  const detail = await verifySettingsWithStatus(workspace, persist ? "Public demo defaults selected." : "Fresh browser: checking the built-in public demo.");
+  const reads = await refreshReadback({ persistEpoch: persist });
+  const complete = reads.sourceRead && reads.targetRead;
+  showResult("settings-result", `${persist ? "Public demo defaults selected." : "Fresh browser: built-in public demo loaded automatically."}\n${detail}\n${complete ? "The Budget page now shows read-only state from both chains." : "At least one Budget read is unavailable. Its card shows the exact error; retry when the RPC or finality view recovers."}\nNo wallet account, signature or transaction was requested.`, complete ? "success" : "error");
+  if (persist) toast("Public demo defaults verified and saved on this device.");
+}
+
+function showPublicDemoStartupFailure(error: unknown) {
+  $("#startup-status-detail").textContent = `${(error as Error).message} The app did not request a wallet or infer live state.`;
+  $("#startup-status").hidden = false;
+}
+
 function bindEvents() {
   document.querySelectorAll("[data-view]").forEach(node => node.addEventListener("click", () => navigate((node as HTMLElement).dataset.view!))); document.querySelectorAll("[data-go]").forEach(node => node.addEventListener("click", () => navigate((node as HTMLElement).dataset.go!)));
   $("#menu-button").addEventListener("click", () => { const rail = $(".rail"); rail.classList.toggle("open"); $("#menu-button").setAttribute("aria-expanded", String(rail.classList.contains("open"))); });
   $("#connect-wallet").addEventListener("click", () => connectWallet().catch(error => toast(error.message, true)));
   $("#load-epoch").addEventListener("click", () => refreshReadback().catch(error => toast(error.message, true))); $("#refresh-readback").addEventListener("click", () => refreshReadback().catch(error => toast(error.message, true)));
-  $("#settings-form").addEventListener("submit", event => { event.preventDefault(); (async () => { const candidate = readSettingsForm(); await verifySettings(candidate); workspace = { ...workspace, ...candidate }; saveJson(STORAGE_KEY, workspace); fillSettings(); populateActions(); toast("Network setup verified and saved on this device."); })().catch(error => toast(error.message, true)); });
+  $("#settings-form").addEventListener("submit", event => { event.preventDefault(); (async () => { const candidate = readSettingsForm(); await verifySettingsWithStatus(candidate, "Checking the setup entered in this form."); workspace = { ...workspace, ...candidate }; saveJson(STORAGE_KEY, workspace); fillSettings(); populateActions(); toast("Network setup verified and saved on this device."); })().catch(error => toast(error.message, true)); });
   $("#epoch-form").addEventListener("submit", event => { event.preventDefault(); try { const built = buildEpochConfiguration(event.currentTarget as HTMLFormElement); workspace.epochConfig = built; workspace.lastEpochId = built.epochId; saveJson(STORAGE_KEY, workspace); fillSettings(); $<HTMLInputElement>("#active-epoch").value = built.epochId; $<HTMLButtonElement>("#prepare-initialize").disabled = false; $<HTMLButtonElement>("#fund-built-epoch").disabled = false; showResult("epoch-result", `Exact epoch ID ${built.epochId}\nCap ${formatNative(built.config.cap)} · canonical ${built.config.cap} base units\nNo source initialization or target funding has occurred.`, "success"); } catch (error) { showResult("epoch-result", (error as Error).message, "error"); } });
   $("#prepare-initialize").addEventListener("click", () => { try { prepareEpochInitialization(); } catch (error) { toast((error as Error).message, true); } });
   $("#fund-built-epoch").addEventListener("click", () => fundBuiltEpoch().catch(error => toast(error.message, true)));
   $("#fund-exact-epoch").addEventListener("click", () => fundBuiltEpoch().catch(error => toast(error.message, true)));
-  $("#verify-settings").addEventListener("click", () => { try { verifySettings(readSettingsForm()).catch(error => toast(error.message, true)); } catch (error) { toast((error as Error).message, true); } });
-  $("#clear-settings").addEventListener("click", () => { localStorage.removeItem(STORAGE_KEY); workspace = {}; $<HTMLFormElement>("#settings-form").reset(); fillSettings(); toast("Saved workspace setup cleared."); });
-  $("#load-local-demo").addEventListener("click", () => { workspace = structuredClone(window.PROOFKEY_DEMO_CONFIG); saveJson(STORAGE_KEY, workspace); fillSettings(); $("#environment-tag").textContent = "Local fixture · real chain reads"; toast("Loaded the real local-chain fixture configuration."); });
+  $("#verify-settings").addEventListener("click", () => { try { verifySettingsWithStatus(readSettingsForm(), "Checking without changing saved settings.").catch(error => toast(error.message, true)); } catch (error) { showResult("settings-result", `Verification could not start: ${(error as Error).message}\nSaved settings were not changed.`, "error"); toast((error as Error).message, true); } });
+  $("#load-public-demo").addEventListener("click", () => activatePublicDemo(true).catch(error => toast(error.message, true)));
+  $("#clear-settings").addEventListener("click", () => { localStorage.removeItem(STORAGE_KEY); workspace = {}; fillSettings(); showResult("settings-result", "Saved setup cleared. Choose Use public demo defaults or enter another setup; no network request was made.", "empty"); toast("Saved workspace setup cleared."); });
+  $("#load-local-demo").addEventListener("click", () => { workspace = structuredClone(window.PROOFKEY_DEMO_CONFIG); saveJson(STORAGE_KEY, workspace); fillSettings(); $("#environment-tag").textContent = "Local fixture · real chain reads"; showResult("settings-result", "Real local fixture settings loaded and saved. Verify them while the local chains are running.", "empty"); toast("Loaded the real local-chain fixture configuration."); });
   $("#draft-form").addEventListener("submit", event => { event.preventDefault(); try { currentDraft = createDraft(event.currentTarget as HTMLFormElement); saveJson(DRAFT_KEY, currentDraft); const milestone = currentDraft.terms.milestones[0]; showResult("draft-result", `Nonbinding draft saved on this device.\nOrder ${currentDraft.orderId}\nTerms ${currentDraft.terms.termsHash}\nWorker maximum ${formatNative(milestone.work)} · fee ${formatNative(milestone.fee)} · timeout ${formatNative(milestone.timeoutWork)}\nCanonical signed values remain ${milestone.work}, ${milestone.fee}, ${milestone.timeoutWork} base units.\nNo money or admission slot is reserved.`, "success"); $<HTMLButtonElement>("#sign-quote").disabled = false; $<HTMLButtonElement>("#export-draft").disabled = false; } catch (error) { showResult("draft-result", (error as Error).message, "error"); } });
   $("#sign-quote").addEventListener("click", () => signQuote().catch(error => showResult("draft-result", error.message, "error"))); $("#export-draft").addEventListener("click", () => currentDraft && download(`proofkey-draft-${currentDraft.orderId.slice(2, 10)}.json`, currentDraft));
   $("#prepare-quote").addEventListener("click", () => { try { prepareSignedQuote(); } catch (error) { toast((error as Error).message, true); } });
@@ -485,12 +550,16 @@ function bindEvents() {
 }
 
 function boot() {
-  if (!Object.keys(workspace).length && window.PROOFKEY_DEFAULT_CONFIG) workspace = structuredClone(window.PROOFKEY_DEFAULT_CONFIG);
+  const useFreshPublicDemo = !initialWorkspaceState.present && !Object.keys(workspace).length && Boolean(window.PROOFKEY_DEFAULT_CONFIG);
+  if (useFreshPublicDemo) workspace = structuredClone(window.PROOFKEY_DEFAULT_CONFIG);
   populatePolicy(); fillSettings(); bindEvents();
   const contracts = Object.keys(window.PROOFKEY_ABI_MANIFEST?.contracts ?? {}); if (contracts.length) { $("#abi-status").textContent = `${contracts.length} compiled contract interfaces loaded`; $("#abi-contracts").textContent = contracts.join(" · "); populateActions(); } else { $("#abi-status").textContent = "No compiled contract interfaces in this build"; }
   if (currentDraft) { const milestone = currentDraft.terms?.milestones?.[0]; const amount = milestone ? `\nStored canonical worker maximum ${formatNative(milestone.work)} (${milestone.work} base units).` : ""; showResult("draft-result", `${currentDraft.authority === "worker-signature" ? "Binding worker quote" : "Nonbinding draft"} restored from this device.\nOrder ${currentDraft.orderId}${amount}`, "success"); $<HTMLButtonElement>("#sign-quote").disabled = currentDraft.authority === "worker-signature"; $<HTMLElement>("#prepare-quote").hidden = currentDraft.authority !== "worker-signature"; $<HTMLButtonElement>("#export-draft").disabled = false; }
   if (workspace.epochConfig) { $<HTMLButtonElement>("#prepare-initialize").disabled = false; $<HTMLButtonElement>("#fund-built-epoch").disabled = false; $<HTMLElement>("#fund-exact-epoch").hidden = false; showResult("epoch-result", `Exact epoch restored.\n${workspace.epochConfig.epochId}\nNo funding or initialization is inferred from device storage.`, "success"); }
   registerWebMcp();
+  if (initialWorkspaceState.error) showResult("settings-result", `${initialWorkspaceState.error}\nThe unreadable value was not replaced. Choose Use public demo defaults or clear the saved setup.`, "error");
+  else if (useFreshPublicDemo) void activatePublicDemo(false).catch(error => { showPublicDemoStartupFailure(error); toast(`Automatic public-demo check failed: ${error.message}`, true); });
+  else if (initialWorkspaceState.present) showResult("settings-result", "Saved setup restored without making a network request. Verify it, or choose Use public demo defaults to replace it explicitly.", "empty");
 }
 
 boot();

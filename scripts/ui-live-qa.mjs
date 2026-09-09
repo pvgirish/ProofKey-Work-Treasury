@@ -82,9 +82,9 @@ check("Safe export is the documented default", (await text("#download-safe")).in
 
 await click('[data-view="settings"]');
 await click("#verify-settings");
-await waitFor("document.querySelector('#source-config-signal').classList.contains('good') && document.querySelector('#target-config-signal').classList.contains('good')");
-const setupMessage = await text("#toast");
-check("Setup verification checks pinned domain", setupMessage.includes("target immutables match"), setupMessage);
+await waitFor("document.querySelector('#settings-result').classList.contains('success')");
+const setupMessage = await text("#settings-result");
+check("Setup verification checks pinned domain", setupMessage.includes("immutable source domain matches"), setupMessage);
 await screenshot("live-settings-verified.png");
 
 await click('[data-view="overview"]');

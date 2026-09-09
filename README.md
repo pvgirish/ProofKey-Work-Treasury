@@ -1,14 +1,24 @@
 # ProofKey Work Treasury
 
-Keep work approvals in an Ethereum Safe. Pay completed work from a finite Creditcoin budget. Reuse released capacity, return unused funds, and collect a payment through either a saved checkpoint or an authenticated allocation receipt.
+One funded Creditcoin budget can commission many Ethereum Safe work orders. Reuse the unearned part of finished or cancelled reservations while earlier workers still collect, without paying an allocation twice. Return unused funds and collect through either a saved checkpoint or an authenticated allocation receipt.
 
 This is the separate Work Treasury implementation. The earlier ProofKey Review Settlement and frozen Review #41 are not migrated or modified.
 
-The implementation and team-controlled public demonstrations are complete: 40 contract tests and 15 SDK tests pass in public CI; all four testnet epochs closed with 143 CTC deposited, 143 CTC withdrawn and zero remaining liabilities. The main 120-CTC journey paid workers 55 CTC and refunded 65 CTC. See the [finalized cross-chain audit](evidence/release-readback.json), [published wallet check](evidence/ui-completed-hosted-qa/report.md), and [release gates](docs/RELEASE-GATES.md). Two consenting independent settlements, repeat independent use and a real buyer reason remain pending.
+The implementation and team-controlled public demonstrations are complete: all four testnet epochs closed with 143 CTC deposited, 143 CTC withdrawn and zero remaining liabilities. The main 120-CTC journey paid workers 55 CTC and refunded 65 CTC. The expanded suite passes 46 Foundry results (including one campaign checking four stateful invariants) and 15 SDK tests; see [public CI](https://github.com/pvgirish/ProofKey-Work-Treasury/actions/workflows/ci.yml), the [finalized cross-chain audit](evidence/release-readback.json), and [release gates](docs/RELEASE-GATES.md). Two consenting independent settlements, repeat independent use and a real buyer reason remain pending.
+
+## Inspect the result in one minute
+
+Open the [public app](https://pvgirish.github.io/ProofKey-Work-Treasury/) in a fresh browser: it automatically verifies the public configuration and reads the completed budget without a wallet. For an existing saved setup, **Networks → Use public demo defaults** explicitly restores the demo. Then select **Evidence → Run independent rebuild** to reconstruct the four source allocations at one stable block and compare their root with storage. **Payments → Read** for allocation 1 shows 30 CTC withdrawn and its recorded invoice.
+
+The [conservation argument](docs/CONSERVATION-AND-REUSE.md) explains why an early refund preserves unseen earned work. The [refusal ledger](docs/REFUSAL-LEDGER.md) separates public native rejection, semantic rejection, economic replay and local rollback tests. Removing native authentication prevents a new source fact from unlocking payment; knowing a transaction hash or controlling its submitter is insufficient.
+
+## Buyer workflow to validate
+
+The initial buyer hypothesis is an ecosystem grants or procurement team whose approvals already live in an Ethereum Safe and which wants to run a finite CTC work budget. One program epoch covers several consenting contractors; partial or cancelled work releases capacity for later awards, and final refunds and completed work payments form an inspectable closeout. No new loan, credit score or off-chain work-quality oracle is implied. CEIP is a possible audience for this proposal, not a claimed customer, milestone-grant program or endorsement. Actual buyer validation remains required.
 
 ## Run the wallet app
 
-[Open the public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/). It loads the pinned public testnet addresses and funded demonstration epoch for read-only inspection. Check the Networks page before connecting a wallet; source finality can temporarily lag the latest demonstration transaction.
+[Open the public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/). Fresh sessions automatically verify and read the pinned public testnet demonstration. Saved setups are preserved until explicitly replaced, and verification errors remain visible in Networks. Check that page before connecting a wallet; source finality can temporarily lag the latest demonstration transaction.
 
 Requires Node 24 and Foundry. Solidity is pinned to 0.8.28; dependencies are pinned in `package-lock.json`.
 

@@ -17,6 +17,7 @@ type EvidenceName=
   |"source-demo.json"
   |"source-branches.json"
   |"native-recovery-verification-33642ef4.json"
+  |"public-refusal-checks.json"
   |"release-readback.json";
 
 type Operation={
@@ -36,6 +37,7 @@ const names:EvidenceName[]=[
   "source-demo.json",
   "source-branches.json",
   "native-recovery-verification-33642ef4.json",
+  "public-refusal-checks.json",
   "release-readback.json",
 ];
 
@@ -188,6 +190,7 @@ async function main(){
   const branchesPublic=evidence["public-branches.json"],branchesSource=evidence["source-branches.json"];
   const rotation=evidence["public-safe-rotation.json"];
   const recovery=evidence["native-recovery-verification-33642ef4.json"];
+  const refusalChecks=evidence["public-refusal-checks.json"];
   const readback=evidence["release-readback.json"];
   const rows=[
     ["Main journey — source",mainSource?describeState(mainSource.status):"Pending — source evidence file is missing",evidenceLinks("source-demo.json")],
@@ -284,6 +287,14 @@ async function main(){
   if(recovery){
     text.push(`The raw SDK regenerated transaction ${txLink("source",recovery.transaction?.transactionHash,"native-recovery-verification-33642ef4.json")} at source position ${escapeCell(recovery.transaction?.blockHeight)}:${escapeCell(recovery.transaction?.transactionIndex)}. Exact encoded bytes matched prior evidence: **${recovery.encodedTransaction?.exactBytesEqual===true?"yes":"no"}**. The fixed native verifier read-only call returned **${recovery.nativeSimulation?.returned===true?"true":"false"}**.`,"",`- Prior continuity fingerprint: \`${escapeCell(recovery.continuity?.priorFingerprint)}\``,`- Regenerated continuity fingerprint: \`${escapeCell(recovery.continuity?.refreshedFingerprint)}\``,`- Continuity changed: **${escapeCell(recovery.continuity?.changed)}** (${escapeCell(recovery.continuity?.refreshedRootCount)} roots).`,"","This demonstrates provider-independent regeneration for the recorded proof. Because the continuity fingerprint did not change, it does not by itself demonstrate recovery from an aged or changed continuity witness.","");
   }else{text.push("Pending — the native proof regeneration report is missing.","");}
+  text.push("## Public refusal controls and replacement of an older proof","",evidenceLinks("public-refusal-checks.json"),"");
+  if(refusalChecks){
+    const replacement=refusalChecks.proofReplacement;
+    text.push(`These are read-only calls at explicit target block ${escapeCell(refusalChecks.targetBlock?.number)}, not mined transactions.`,"","| Control | Outcome | Error |","|---|---|---|");
+    for(const observation of refusalChecks.observations??[])text.push(`| ${escapeCell(observation.name)} | ${escapeCell(observation.outcome)} | ${escapeCell(observation.errorName??"—")} |`);
+    text.push("");
+    if(replacement)text.push(`The older proof was **${escapeCell(replacement.priorProofOutcome?.outcome)}** and the replacement was **${escapeCell(replacement.replacementProofOutcome)}** at the same target block. Continuity changed: **${escapeCell(replacement.comparison?.continuity?.changed)}**; roots: ${escapeCell(replacement.priorRootCount)} → ${escapeCell(replacement.replacementRootCount)}. The report records exact source-byte comparison, both continuity fingerprints, the older proof's result and the accepted replacement proof. This is a recorded read-only recovery observation; it does not promise perpetual proof availability.`,"");
+  }else{text.push("Pending — no public read-only refusal/replacement report is present.","");}
   text.push("## Finalized conservation readback","",evidenceLinks("release-readback.json"),"");
   if(readback){
     text.push(`Finalized readback time: ${escapeCell(readback.checkedAt)}. Automated journeys complete: **${escapeCell(readback.automatedJourneysComplete)}**.`,"");

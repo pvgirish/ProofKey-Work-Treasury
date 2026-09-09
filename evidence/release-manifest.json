@@ -1,15 +1,16 @@
 {
   "schema": "proofkey.release-manifest.v1",
-  "generatedAt": "2026-09-09T19:23:57.053Z",
+  "generatedAt": "2026-09-09T20:50:18.112Z",
   "releaseStatus": "pending",
   "releaseBlockingReasons": [
     "Two consented independent settlements and repeat independent operation are not recorded.",
-    "A real buyer reason is not recorded."
+    "A real buyer reason is not recorded.",
+    "No successful public CI evidence matches the current implementation revision."
   ],
   "reportedLimitations": [
     "The public traces are smaller than the local production-policy 113-leaf and production-tree 128-leaf tests.",
     "The local 1/4/16/32 target gas matrix excludes native verification; public journals supply actual native costs only for the forms they executed.",
-    "The native recovery witness had unchanged continuity roots, so changed-witness or aged-proof recovery is not claimed."
+    "The original standalone recovery report had unchanged continuity. The newer refusal/replacement report records a same-block older-proof refusal and changed-witness acceptance; this read-only observation does not guarantee future availability."
   ],
   "architectureLock": {
     "section": "§11 Implementation sequence and acceptance gates",
@@ -20,22 +21,43 @@
     "validatedGateCount": 15
   },
   "repository": {
-    "revision": "9096bf8fcb4c2a28b38bfb863c11454af301c5e6",
+    "revision": "38e09ca5e36a275fd51a2739f54c5865d8f2bdc8",
     "dirty": true,
     "dirtyEntries": [
-      "M docs/INDEPENDENT-SETTLEMENT.md",
-      " M docs/OPERATOR-WALKTHROUGH.md",
-      " M docs/RELEASE-GATES.md",
-      " M evidence/public-ci.json",
-      " M scripts/release-manifest.ts"
+      "M README.md",
+      " M docs/PUBLIC-EVIDENCE.md",
+      " M package.json",
+      " M scripts/release-manifest.ts",
+      " M scripts/summarize-public-evidence.ts",
+      " M scripts/ui-completed-qa.mjs",
+      " M scripts/ui-live-qa.mjs",
+      " M test/WorkTreasuryTarget.t.sol",
+      " M ui/app.ts",
+      " M ui/index.html",
+      "?? docs/CONSERVATION-AND-REUSE.md",
+      "?? docs/REFUSAL-LEDGER.md",
+      "?? evidence/public-refusal-checks.json",
+      "?? evidence/ui-completed-upgrade-qa/completed-budget.png",
+      "?? evidence/ui-completed-upgrade-qa/completed-payment-claim-1.png",
+      "?? evidence/ui-completed-upgrade-qa/imported-claim-1.png",
+      "?? evidence/ui-completed-upgrade-qa/report.md",
+      "?? evidence/ui-firstload-qa/fresh-public-demo.png",
+      "?? evidence/ui-firstload-qa/independent-tree-rebuild.png",
+      "?? evidence/ui-firstload-qa/public-demo-recovered.png",
+      "?? evidence/ui-firstload-qa/report.md",
+      "?? evidence/ui-firstload-qa/stale-settings-error.png",
+      "?? scripts/ui-firstload-qa.mjs",
+      "?? scripts/verify-refusals.ts",
+      "?? test/SourceAccountingInvariant.t.sol"
     ]
   },
   "validation": {
-    "testReferencesValidated": 42,
-    "artifactAndInputFilesValidated": 29,
+    "testReferencesValidated": 51,
+    "artifactAndInputFilesValidated": 30,
     "discoveredTests": {
-      "foundry": 40,
-      "nodeTest": 15
+      "foundry": 49,
+      "nodeTest": 15,
+      "counting": "Named test and invariant assertion functions; Foundry groups the four source invariants into one campaign in its execution total."
     },
     "mappedFiles": {
       "foundry": [
@@ -43,6 +65,7 @@
         "test/IdentityConformance.t.sol",
         "test/SourceCoordinator.t.sol",
         "test/AdversarialIntegration.t.sol",
+        "test/SourceAccountingInvariant.t.sol",
         "test/WorkTreasuryTarget.t.sol",
         "test/EndToEnd.t.sol",
         "test/Performance.t.sol"
@@ -55,8 +78,8 @@
         "sdk/safe-events.test.ts"
       ]
     },
-    "executionStatus": "passed-current-revision-public-ci",
-    "note": "The optional public CI record reports a completed successful run whose headSha exactly matches this implementation revision."
+    "executionStatus": "not-verified-for-current-revision",
+    "note": "Presence and exact-name validation is not a passing test result. Use the recorded commands or attach evidence/public-ci.json for this revision."
   },
   "reproduction": {
     "allContracts": "npm run test:contracts",
@@ -426,8 +449,16 @@
     "verifierBoundary": "Performance and native adapter tests use a clearly labeled local VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address.",
     "nativeCostIncluded": false,
     "reportedRun": {
-      "foundryPassed": 40,
+      "foundryPassed": 46,
       "nodeTestsPassed": 15,
+      "invariantCampaign": {
+        "runs": 128,
+        "depth": 64,
+        "handlerCalls": 8192,
+        "assertionFunctions": 4,
+        "reverts": 0,
+        "note": "Handler calls can be guarded no-ops; these are not 8,192 distinct financial state changes."
+      },
       "provenance": "Release-session operator report before final public CI; this generator does not independently execute it and does not use it to elevate gate status."
     },
     "performance": {
@@ -616,6 +647,41 @@
       },
       {
         "framework": "foundry",
+        "file": "test/SourceAccountingInvariant.t.sol",
+        "contract": "SourceAccountingInvariantTest",
+        "name": "invariant_sourceAccountingMatchesIndependentGhostModel",
+        "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_sourceAccountingMatchesIndependentGhostModel -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceAccountingInvariant.t.sol",
+        "contract": "SourceAccountingInvariantTest",
+        "name": "invariant_irreversibleTotalsEqualCanonicalAllocations",
+        "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_irreversibleTotalsEqualCanonicalAllocations -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceAccountingInvariant.t.sol",
+        "contract": "SourceAccountingInvariantTest",
+        "name": "invariant_closedEpochHasNoReusableCapacityOrCommitment",
+        "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_closedEpochHasNoReusableCapacityOrCommitment -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceAccountingInvariant.t.sol",
+        "contract": "SourceCapacityReuseFuzzTest",
+        "name": "testFuzz_declineExpiryAndNoDeliveryRestoreCapacityForNewReservations",
+        "command": "bash scripts/forge.sh test --match-contract SourceCapacityReuseFuzzTest --match-test testFuzz_declineExpiryAndNoDeliveryRestoreCapacityForNewReservations -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceAccountingInvariant.t.sol",
+        "contract": "SourceCapacityReuseFuzzTest",
+        "name": "testFuzz_returnDoesNotBecomeReusableCapacityInTheSameEpoch",
+        "command": "bash scripts/forge.sh test --match-contract SourceCapacityReuseFuzzTest --match-test testFuzz_returnDoesNotBecomeReusableCapacityInTheSameEpoch -vv"
+      },
+      {
+        "framework": "foundry",
         "file": "test/SourceCoordinator.t.sol",
         "contract": "SourceCoordinatorTest",
         "name": "testReachable113LeafTraceAndIndependentRootRebuild",
@@ -627,6 +693,13 @@
         "contract": "AllocationTreeTest",
         "name": "test_productionTreeAll128AppendsMatchIndependentFullRebuild",
         "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_productionTreeAll128AppendsMatchIndependentFullRebuild -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/SourceAccountingInvariant.t.sol",
+        "contract": "SourceAccountingInvariantTest",
+        "name": "invariant_reservationPartitionAndCapacityRemainBounded",
+        "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_reservationPartitionAndCapacityRemainBounded -vv"
       },
       {
         "framework": "foundry",
@@ -669,6 +742,27 @@
         "contract": "AdversarialIntegrationTest",
         "name": "test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt",
         "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkTreasuryTarget.t.sol",
+        "contract": "WorkTreasuryTargetTest",
+        "name": "test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication",
+        "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication -vv"
       },
       {
         "framework": "foundry",
@@ -993,8 +1087,8 @@
         "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34394616462/job/102611498602"
       }
     ],
-    "currentRevisionMatch": true,
-    "acceptedAsCurrentRevisionPass": true
+    "currentRevisionMatch": false,
+    "acceptedAsCurrentRevisionPass": false
   },
   "realNativeEvidence": {
     "path": "evidence/native-recovery-verification-33642ef4.json",
@@ -2715,6 +2809,79 @@
         "semanticRefusals": []
       }
     ],
+    "refusalAndProofReplacement": {
+      "path": "evidence/public-refusal-checks.json",
+      "readOnly": true,
+      "targetBlock": {
+        "number": 5459734,
+        "hash": "0xb36674f9cebb739f98375bb12c9d7451141b88385d5791a08519a6b7f53d02aa"
+      },
+      "observations": [
+        {
+          "name": "authentic-proof-and-repeat-authentication",
+          "outcome": "accepted",
+          "meaning": "A valid proof passes the current native verifier. Repeating authentication is intentionally idempotent.",
+          "authenticationId": "0x3867b2ed40365acd834049b198c0d211809bc70fd37f911f05e4583df8b584b9"
+        },
+        {
+          "name": "tampered-source-bytes-before-recognition",
+          "outcome": "refused",
+          "errorName": "Error",
+          "selector": "0x08c379a0",
+          "revertData": "0x08c379a00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001e4d65726b6c652070726f6f662076616c69646174696f6e206661696c65640000",
+          "expectedName": "native verification rejection"
+        },
+        {
+          "name": "receipt-local-ordinal-out-of-range",
+          "outcome": "refused",
+          "errorName": "LogOrdinalOutOfRange",
+          "selector": "0x1e5cee26",
+          "revertData": "0x1e5cee26000000000000000000000000000000000000000000000000000000000000ffff0000000000000000000000000000000000000000000000000000000000000004",
+          "expectedName": "LogOrdinalOutOfRange"
+        },
+        {
+          "name": "authenticated-checkpoint-is-not-an-allocation",
+          "outcome": "refused",
+          "errorName": "InvalidEncoding",
+          "selector": "0xad4d102a",
+          "revertData": "0xad4d102a",
+          "expectedName": "InvalidEncoding"
+        },
+        {
+          "name": "already-recognized-worker-allocation",
+          "outcome": "refused",
+          "errorName": "EconomicRightAlreadyRecognized",
+          "selector": "0xd26177ac",
+          "revertData": "0xd26177ac64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751",
+          "expectedName": "EconomicRightAlreadyRecognized"
+        }
+      ],
+      "proofReplacement": {
+        "comparison": {
+          "encodedTransactions": [
+            {
+              "transactionHash": "0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5",
+              "refreshedHash": "0x93a1c3c431e290a1120ec71fc4d0e9edce7d0f770f2578b3c9c500a000837afe",
+              "priorHash": "0x93a1c3c431e290a1120ec71fc4d0e9edce7d0f770f2578b3c9c500a000837afe",
+              "matchesPrior": true
+            }
+          ],
+          "continuity": {
+            "priorFingerprint": "0x685d4c9cc743afbf3b174532c88b72671ff8c5e0ef3a866ddc9e627913d7bfc4",
+            "refreshedFingerprint": "0xad6e494ff5948fa4278bc80db652151b8c8ee17ee4226d6a509ef8e510cfe2ab",
+            "changed": true
+          }
+        },
+        "priorRootCount": 10,
+        "replacementRootCount": 90,
+        "priorProofOutcome": {
+          "outcome": "refused",
+          "selector": "0x08c379a0",
+          "revertData": "0x08c379a000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000039436f6e74696e756974792070726f6f6620646f6573206e6f74206d61746368206174746573746174696f6e206f7220636865636b706f696e7400000000000000"
+        },
+        "replacementProofOutcome": "accepted"
+      }
+    },
     "releaseReadback": {
       "path": "evidence/release-readback.json",
       "present": true,
@@ -2811,8 +2978,10 @@
         }
       ],
       "observedStatus": "Exact test names, frozen vectors, schema and compiled artifacts are present and validated; this generator does not claim a current-revision test execution.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision CI or local execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 2,
@@ -2874,6 +3043,41 @@
           "contract": "AdversarialIntegrationTest",
           "name": "test_zeroSignerAndStaleMutualAuthorizationsAreRejected",
           "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_zeroSignerAndStaleMutualAuthorizationsAreRejected -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceAccountingInvariant.t.sol",
+          "contract": "SourceAccountingInvariantTest",
+          "name": "invariant_sourceAccountingMatchesIndependentGhostModel",
+          "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_sourceAccountingMatchesIndependentGhostModel -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceAccountingInvariant.t.sol",
+          "contract": "SourceAccountingInvariantTest",
+          "name": "invariant_irreversibleTotalsEqualCanonicalAllocations",
+          "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_irreversibleTotalsEqualCanonicalAllocations -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceAccountingInvariant.t.sol",
+          "contract": "SourceAccountingInvariantTest",
+          "name": "invariant_closedEpochHasNoReusableCapacityOrCommitment",
+          "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_closedEpochHasNoReusableCapacityOrCommitment -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceAccountingInvariant.t.sol",
+          "contract": "SourceCapacityReuseFuzzTest",
+          "name": "testFuzz_declineExpiryAndNoDeliveryRestoreCapacityForNewReservations",
+          "command": "bash scripts/forge.sh test --match-contract SourceCapacityReuseFuzzTest --match-test testFuzz_declineExpiryAndNoDeliveryRestoreCapacityForNewReservations -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceAccountingInvariant.t.sol",
+          "contract": "SourceCapacityReuseFuzzTest",
+          "name": "testFuzz_returnDoesNotBecomeReusableCapacityInTheSameEpoch",
+          "command": "bash scripts/forge.sh test --match-contract SourceCapacityReuseFuzzTest --match-test testFuzz_returnDoesNotBecomeReusableCapacityInTheSameEpoch -vv"
         }
       ],
       "artifacts": [
@@ -2893,8 +3097,10 @@
         }
       ],
       "observedStatus": "The public source journals record the main policy path and branch terminals, including stale, duplicate and both first-writer refusal observations; target follow-through is reported by separate gates.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 3,
@@ -2928,6 +3134,13 @@
           "contract": "AllocationTreeTest",
           "name": "test_productionTreeAll128AppendsMatchIndependentFullRebuild",
           "command": "bash scripts/forge.sh test --match-contract AllocationTreeTest --match-test test_productionTreeAll128AppendsMatchIndependentFullRebuild -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/SourceAccountingInvariant.t.sol",
+          "contract": "SourceAccountingInvariantTest",
+          "name": "invariant_reservationPartitionAndCapacityRemainBounded",
+          "command": "bash scripts/forge.sh test --match-contract SourceAccountingInvariantTest --match-test invariant_reservationPartitionAndCapacityRemainBounded -vv"
         }
       ],
       "artifacts": [
@@ -2941,8 +3154,10 @@
         }
       ],
       "observedStatus": "The actual 113-leaf production-policy test and 128-leaf production-tree harness are reference-validated; the public branch journal separately records smaller live traces.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 4,
@@ -2993,8 +3208,10 @@
         }
       ],
       "observedStatus": "Independent rebuild and event-roundtrip test references are validated; the public journals contain allocation/checkpoint receipt ordinals but do not record a maximum-size same-block rebuild.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 5,
@@ -3045,8 +3262,10 @@
         }
       ],
       "observedStatus": "Public source receipts retain allocation and checkpoint ordinals from the same operations; atomic rollback remains locally executable evidence.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 6,
@@ -3078,8 +3297,10 @@
         }
       ],
       "observedStatus": "The main source journal records its republish observation; exact equality, phase transition and no-mutation assertions remain mapped to the named tests.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 7,
@@ -3106,6 +3327,27 @@
           "contract": "AdversarialIntegrationTest",
           "name": "test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt",
           "command": "bash scripts/forge.sh test --match-contract AdversarialIntegrationTest --match-test test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication -vv"
+        },
+        {
+          "framework": "foundry",
+          "file": "test/WorkTreasuryTarget.t.sol",
+          "contract": "WorkTreasuryTargetTest",
+          "name": "test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication",
+          "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication -vv"
         }
       ],
       "artifacts": [
@@ -3123,8 +3365,10 @@
         }
       ],
       "observedStatus": "A real fixed-0xFD2 read-only verification returned true and a public batch authentication is mined; negative authentication cases are local executable tests.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision negative-path test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 8,
@@ -3167,8 +3411,10 @@
         }
       ],
       "observedStatus": "The public main journal records an authenticated receipt cache and an exact receipt recognition; the two-epoch, parser, wrong-emitter and failure-preservation matrix remains local executable evidence.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 9,
@@ -3219,8 +3465,10 @@
         }
       ],
       "observedStatus": "The public journal states and receipt identifiers are captured below; both replay directions, mixed kinds and substitution refusals are mapped to exact executable tests.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 10,
@@ -3278,8 +3526,10 @@
         }
       ],
       "observedStatus": "The public main journal records RETURN 50 recognized before B settled; its current state below determines whether final worker collection, total RETURN recognition and withdrawal are complete.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 11,
@@ -3323,8 +3573,10 @@
         }
       ],
       "observedStatus": "Combined and separate operation behavior is mapped to exact executable tests; the public journals do not by themselves establish the full comparison.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 12,
@@ -3374,6 +3626,10 @@
           "present": true
         },
         {
+          "path": "evidence/public-refusal-checks.json",
+          "present": true
+        },
+        {
           "path": "evidence/public-demo.json",
           "present": true
         },
@@ -3382,9 +3638,11 @@
           "present": true
         }
       ],
-      "observedStatus": "Provider-independent raw proof regeneration preserved exact transaction bytes and passed a real native eth_call; continuity did not change, so aged or changed-witness recovery is not claimed.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "observedStatus": "The first raw recovery report used unchanged continuity. The later public refusal/replacement report separately records older and regenerated witness outcomes at one target block; only its observed result supports changed-witness recovery.",
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 13,
@@ -3436,8 +3694,10 @@
         }
       ],
       "observedStatus": "The local performance matrix records all required sizes and source positions. Its target figures explicitly exclude native verification; the public journal records actual batch and receipt-recognition gas only.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision performance test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 14,
@@ -3516,8 +3776,10 @@
         }
       ],
       "observedStatus": "The source main and branch journals and the real read-only proof replacement are recorded; the current target and Safe-rotation journal states below determine the remaining product evidence.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 15,
@@ -3561,7 +3823,8 @@
       "pending": [
         "Two consented independent settlements are not recorded.",
         "Repeat independent operation without a target reservation operator is not recorded.",
-        "A real buyer reason is not recorded."
+        "A real buyer reason is not recorded.",
+        "Attach the current-revision test execution result."
       ],
       "releaseGateStatus": "pending"
     }

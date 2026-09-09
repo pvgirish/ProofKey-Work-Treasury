@@ -44,6 +44,7 @@
             <div><p class="kicker">Budget epoch</p><h1 id="overview-title">One funded budget, paid by verified outcomes.</h1></div>
             <span class="environment-tag" id="environment-tag">Configuration required</span>
           </div>
+          <div class="notice" id="startup-status" role="alert" hidden><b>Public demo could not be verified.</b> <span id="startup-status-detail"></span> <button class="text-link" data-go="settings">Review network setup →</button></div>
 
           <div class="journey card">
             <div class="card-head"><div><p class="kicker">120-unit planning walkthrough</p><h2>Capacity returns before delayed work is collected</h2></div><span class="honesty">Illustration · no chain activity</span></div>
@@ -161,8 +162,8 @@
             </article>
           </div>
           <article class="card inspector-card">
-            <div class="card-head"><div><p class="kicker">Same finalized block</p><h2>Rebuild the complete ordered tree</h2></div><button class="button primary" id="rebuild-tree">Run independent rebuild</button></div>
-            <p>Reads every full allocation and every stored leaf at one finalized source block, rebuilds the depth-7 ordered tree independently, then compares both results with source storage.</p>
+            <div class="card-head"><div><p class="kicker">One stable source block</p><h2>Rebuild the complete ordered tree</h2></div><button class="button primary" id="rebuild-tree">Run independent rebuild</button></div>
+            <p>Reads every full allocation and every stored leaf at one source block, rebuilds the depth-7 ordered tree independently, then compares both results with source storage. The result names a finalized block when the RPC supports it; otherwise it labels the confirmation-depth fallback without asserting finality.</p>
             <div class="result empty" id="tree-result">No reconstruction performed.</div>
             <div class="form-grid three package-export">
               <label><span>Allocation tree index</span><input id="export-tree-index" inputmode="numeric" value="0"></label>
@@ -205,14 +206,15 @@
         </section>
 
         <section class="view" id="view-settings" aria-labelledby="settings-title">
-          <div class="page-head"><div><p class="kicker">Workspace setup</p><h1 id="settings-title">Pin the two networks and contracts.</h1></div><span class="environment-tag">Saved on this device</span></div>
+          <div class="page-head"><div><p class="kicker">Workspace setup</p><h1 id="settings-title">Pin the two networks and contracts.</h1></div><span class="environment-tag" id="settings-storage-tag">Storage status</span></div>
           <div class="notice"><b>No secrets are stored.</b> This workspace saves public RPC URLs, chain IDs, addresses and your last epoch in browser storage. Wallet keys remain in your wallet.</div>
           <form id="settings-form">
             <div class="two-col">
               <article class="card"><div class="card-head"><div><p class="kicker">Source</p><h2>Ethereum network</h2></div><span class="signal neutral" id="source-config-signal"></span></div><div class="form-grid"><label class="wide"><span>Label</span><input name="sourceLabel" value="Ethereum source"></label><label><span>Chain ID</span><input name="sourceChainId" inputmode="numeric"></label><label><span>Finality confirmations</span><input name="sourceConfirmations" inputmode="numeric" value="12"></label><label class="wide"><span>RPC URL</span><input name="sourceRpc" type="url" placeholder="https://…"></label><label class="wide"><span>SourceCoordinator</span><input name="coordinator" placeholder="0x…"></label><label class="wide"><span>Existing Safe</span><input name="safe" placeholder="0x…"></label><label class="wide"><span>Native source chain key</span><input name="sourceChainKey" inputmode="numeric"></label></div></article>
               <article class="card"><div class="card-head"><div><p class="kicker">Target</p><h2>Creditcoin network</h2></div><span class="signal neutral" id="target-config-signal"></span></div><div class="form-grid"><label class="wide"><span>Label</span><input name="targetLabel" value="Creditcoin target"></label><label><span>Chain ID</span><input name="targetChainId" inputmode="numeric"></label><label><span>Finality confirmations</span><input name="targetConfirmations" inputmode="numeric" value="12"></label><label class="wide"><span>RPC URL</span><input name="targetRpc" type="url" placeholder="https://…"></label><label class="wide"><span>WorkTreasury</span><input name="treasury" placeholder="0x…"></label><label class="wide"><span>PaidInvoiceBook (optional)</span><input name="invoiceBook" placeholder="0x…"></label><label class="wide"><span>Proof service (replaceable)</span><input name="proofService" type="url" placeholder="https://…"></label></div></article>
             </div>
-            <div class="settings-actions"><button class="button primary" type="submit">Save and verify</button><button class="button" type="button" id="verify-settings">Verify without saving</button><button class="button ghost" type="button" id="load-local-demo" hidden>Use real local fixture</button><button class="button ghost danger" type="button" id="clear-settings">Clear saved setup</button></div>
+            <div class="settings-actions"><button class="button primary" type="submit">Save and verify</button><button class="button" type="button" id="verify-settings">Verify without saving</button><button class="button" type="button" id="load-public-demo" hidden>Use public demo defaults</button><button class="button ghost" type="button" id="load-local-demo" hidden>Use real local fixture</button><button class="button ghost danger" type="button" id="clear-settings">Clear saved setup</button></div>
+            <div class="result empty" id="settings-result" role="status" aria-live="polite">Network setup has not been verified in this browser.</div>
           </form>
           <article class="card epoch-builder">
             <div class="card-head"><div><p class="kicker">Exact configuration</p><h2>Create a fresh budget epoch</h2></div><span class="step-chip">Native CTC · fixed V1 limits</span></div>

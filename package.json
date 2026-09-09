@@ -20,6 +20,7 @@
     "demo:safe-rotation": "node scripts/public-safe-rotation.ts",
     "proof:refresh": "node scripts/refresh-native-proof.ts",
     "proof:verify-recovery": "node scripts/verify-native-recovery.ts",
+    "proof:verify-refusals": "node scripts/verify-refusals.ts",
     "release:readback": "node scripts/release-readback.ts",
     "evidence:summarize": "node scripts/summarize-public-evidence.ts",
     "release:manifest": "node scripts/release-manifest.ts"

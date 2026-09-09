@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, readdir, writeFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 import { promisify } from "node:util";
 import { isHexString, keccak256 } from "ethers";
@@ -52,6 +52,8 @@ const F=(file:string,contract:string)=>(name:string)=>foundry(file,contract,name
 const S=(file:string)=>(name:string)=>nodeTest(file,name);
 const allocation=F("test/AllocationTree.t.sol","AllocationTreeTest");
 const source=F("test/SourceCoordinator.t.sol","SourceCoordinatorTest");
+const sourceInvariant=F("test/SourceAccountingInvariant.t.sol","SourceAccountingInvariantTest");
+const sourceReuse=F("test/SourceAccountingInvariant.t.sol","SourceCapacityReuseFuzzTest");
 const target=F("test/WorkTreasuryTarget.t.sol","WorkTreasuryTargetTest");
 const endToEnd=F("test/EndToEnd.t.sol","EndToEndTest");
 const adversarial=F("test/AdversarialIntegration.t.sol","AdversarialIntegrationTest");
@@ -94,6 +96,11 @@ const gates:GateDefinition[]=[
       source("testActiveReturnDrainSweepAndNoEmptyLeaf"),
       adversarial("test_exactDeadlinesSelectOnlyTheSpecifiedTerminalTransition"),
       adversarial("test_zeroSignerAndStaleMutualAuthorizationsAreRejected"),
+      sourceInvariant("invariant_sourceAccountingMatchesIndependentGhostModel"),
+      sourceInvariant("invariant_irreversibleTotalsEqualCanonicalAllocations"),
+      sourceInvariant("invariant_closedEpochHasNoReusableCapacityOrCommitment"),
+      sourceReuse("testFuzz_declineExpiryAndNoDeliveryRestoreCapacityForNewReservations"),
+      sourceReuse("testFuzz_returnDoesNotBecomeReusableCapacityInTheSameEpoch"),
     ],
     artifacts:["out/SourceCoordinator.sol/SourceCoordinator.json","out/SourcePolicyV1Lib.sol/SourcePolicyV1Lib.json","out/SourceAccountingLib.sol/SourceAccountingLib.json","out/SourceSignatureLib.sol/SourceSignatureLib.json"],
     evidence:["evidence/source-demo.json","evidence/source-branches.json"],
@@ -108,6 +115,7 @@ const gates:GateDefinition[]=[
       source("testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence"),
       source("testActiveReturnDrainSweepAndNoEmptyLeaf"),
       allocation("test_productionTreeAll128AppendsMatchIndependentFullRebuild"),
+      sourceInvariant("invariant_reservationPartitionAndCapacityRemainBounded"),
     ],
     artifacts:["out/SourceCoordinator.sol/SourceCoordinator.json","out/AllocationTree.sol/AllocationTree.json"],
     evidence:["evidence/source-branches.json"],
@@ -161,6 +169,9 @@ const gates:GateDefinition[]=[
       target("test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs"),
       target("test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache"),
       adversarial("test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt"),
+      target("test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState"),
+      target("test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication"),
+      target("test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication"),
     ],
     artifacts:["out/WorkTreasury.sol/WorkTreasury.json","out/NativeReceiptAuth.sol/NativeReceiptAuth.json"],
     evidence:["evidence/public-demo.json","evidence/native-recovery-verification-33642ef4.json"],
@@ -233,8 +244,8 @@ const gates:GateDefinition[]=[
       sdkProof("proof client binds and validates the requested chain and transaction"),
     ],
     artifacts:["out/WorkTreasury.sol/WorkTreasury.json"],
-    evidence:["evidence/native-recovery-verification-33642ef4.json","evidence/public-demo.json","evidence/public-branches.json"],
-    observedStatus:"Provider-independent raw proof regeneration preserved exact transaction bytes and passed a real native eth_call; continuity did not change, so aged or changed-witness recovery is not claimed.",
+    evidence:["evidence/native-recovery-verification-33642ef4.json","evidence/public-refusal-checks.json","evidence/public-demo.json","evidence/public-branches.json"],
+    observedStatus:"The first raw recovery report used unchanged continuity. The later public refusal/replacement report separately records older and regenerated witness outcomes at one target block; only its observed result supports changed-witness recovery.",
     pending:["Public cached-root collection and receipt-without-siblings journeys are incomplete.","Attach the current-revision test execution result."],
   },
   {
@@ -382,7 +393,7 @@ async function journalSummary(path:string,fallbackChain:"source"|"target"){
 }
 
 function countTests(body:string,framework:"foundry"|"node-test"):number{
-  const expression=framework==="foundry"?/\bfunction\s+test(?:Fuzz)?\w*\s*\(/g:/\btest\(\s*["']/g;
+  const expression=framework==="foundry"?/\bfunction\s+(?:test\w*|invariant_\w*)\s*\(/g:/\btest\(\s*["']/g;
   return [...body.matchAll(expression)].length;
 }
 
@@ -396,7 +407,7 @@ async function main(){
 
   const uniqueTests=[...new Map(gates.flatMap(gate=>gate.tests).map(test=>[`${test.file}\0${test.name}`,test])).values()];
   await Promise.all(uniqueTests.map(validateTest));
-  const requiredFiles=[...new Set([...gates.flatMap(gate=>gate.artifacts),...productionSources,...pinnedInputs,DEPLOYMENTS])];
+  const requiredFiles=[...new Set([...gates.flatMap(gate=>gate.artifacts),...productionSources,...pinnedInputs,DEPLOYMENTS,"evidence/public-refusal-checks.json"])];
   await Promise.all(requiredFiles.map(assertFile));
 
   const [{stdout:revision},{stdout:status},deploymentManifest,productionSourceHashes,pinnedInputHashes,compiledArtifacts,journals,nativeRecovery,releaseReadback,performanceEvidence,publicCi]=await Promise.all([
@@ -420,6 +431,7 @@ async function main(){
   ]);
 
   const implementationRevision=revision.trim();
+  const refusalChecks=await readJson("evidence/public-refusal-checks.json");
   const currentRevisionCiPassed=Boolean(
     publicCi
     &&publicCi.status==="completed"
@@ -468,7 +480,7 @@ async function main(){
   const contractFiles=[...new Set(uniqueTests.filter(test=>test.framework==="foundry").map(test=>test.file))];
   const sdkFiles=[...new Set(uniqueTests.filter(test=>test.framework==="node-test").map(test=>test.file))];
   const [allContractFiles,allSdkFiles]=await Promise.all([
-    Promise.all(["test/AdversarialIntegration.t.sol","test/AllocationTree.t.sol","test/EndToEnd.t.sol","test/IdentityConformance.t.sol","test/Performance.t.sol","test/SourceCoordinator.t.sol","test/WorkTreasuryTarget.t.sol"].map(async path=>readFile(resolve(ROOT,path),"utf8"))),
+    readdir(resolve(ROOT,"test")).then(names=>Promise.all(names.filter(name=>name.endsWith(".t.sol")).map(name=>readFile(resolve(ROOT,"test",name),"utf8")))),
     Promise.all(["sdk/allocation.test.ts","sdk/conformance.test.ts","sdk/identity.test.ts","sdk/prover-client.test.ts","sdk/safe-events.test.ts"].map(async path=>readFile(resolve(ROOT,path),"utf8"))),
   ]);
 
@@ -485,7 +497,7 @@ async function main(){
     reportedLimitations:[
       "The public traces are smaller than the local production-policy 113-leaf and production-tree 128-leaf tests.",
       "The local 1/4/16/32 target gas matrix excludes native verification; public journals supply actual native costs only for the forms they executed.",
-      "The native recovery witness had unchanged continuity roots, so changed-witness or aged-proof recovery is not claimed.",
+      "The original standalone recovery report had unchanged continuity. The newer refusal/replacement report records a same-block older-proof refusal and changed-witness acceptance; this read-only observation does not guarantee future availability.",
     ],
     architectureLock:{
       section:"§11 Implementation sequence and acceptance gates",
@@ -503,6 +515,7 @@ async function main(){
       discoveredTests:{
         foundry:allContractFiles.reduce((sum,body)=>sum+countTests(body,"foundry"),0),
         nodeTest:allSdkFiles.reduce((sum,body)=>sum+countTests(body,"node-test"),0),
+        counting:"Named test and invariant assertion functions; Foundry groups the four source invariants into one campaign in its execution total.",
       },
       mappedFiles:{foundry:contractFiles,nodeTest:sdkFiles},
       executionStatus:currentRevisionCiPassed?"passed-current-revision-public-ci":"not-verified-for-current-revision",
@@ -536,8 +549,9 @@ async function main(){
       verifierBoundary:"Performance and native adapter tests use a clearly labeled local VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address.",
       nativeCostIncluded:false,
       reportedRun:{
-        foundryPassed:40,
+        foundryPassed:46,
         nodeTestsPassed:15,
+        invariantCampaign:{runs:128,depth:64,handlerCalls:8192,assertionFunctions:4,reverts:0,note:"Handler calls can be guarded no-ops; these are not 8,192 distinct financial state changes."},
         provenance:"Release-session operator report before final public CI; this generator does not independently execute it and does not use it to elevate gate status.",
       },
       performance:performanceEvidence,
@@ -574,6 +588,11 @@ async function main(){
     }:{path:"evidence/native-recovery-verification-33642ef4.json",present:false,status:"pending"},
     publicEvidence:{
       journals,
+      refusalAndProofReplacement:{path:"evidence/public-refusal-checks.json",readOnly:refusalChecks.readOnly,
+        targetBlock:refusalChecks.targetBlock,observations:refusalChecks.observations,
+        proofReplacement:refusalChecks.proofReplacement?{comparison:refusalChecks.proofReplacement.comparison,
+          priorRootCount:refusalChecks.proofReplacement.priorRootCount,replacementRootCount:refusalChecks.proofReplacement.replacementRootCount,
+          priorProofOutcome:refusalChecks.proofReplacement.priorProofOutcome,replacementProofOutcome:refusalChecks.proofReplacement.replacementProofOutcome}:null},
       releaseReadback:releaseReadback?{
         path:"evidence/release-readback.json",
         present:true,

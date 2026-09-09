@@ -26,6 +26,8 @@ contract WorkTreasuryTargetTest is Test {
     address constant DESTINATION = address(0x8000);
     address constant FOREIGN = address(0xBAD);
     bytes32 constant ORDER = keccak256("order");
+    bytes4 constant VERIFY_SINGLE_SELECTOR = 0x02f4d167;
+    bytes4 constant VERIFY_BATCH_SELECTOR = 0x4da3b895;
 
     WorkTreasury treasury;
 
@@ -99,6 +101,86 @@ contract WorkTreasuryTargetTest is Test {
         assertEq(treasury.epochAccount(epochB).recognized, 20 ether);
     }
 
+    function test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState() public {
+        bytes32 epochId = _fund(_config(12, 10 ether, SPONSOR, REFUND, SAFE));
+        WorkTypes.Allocation memory allocation =
+            _allocation(epochId, 1, WorkTypes.WORK, 10 ether, WORKER, DESTINATION);
+        bytes memory matchingBytes = _encoded(1, _logs(_allocationLog(SOURCE, allocation)));
+        NativeReceiptAuth.SingleProof memory forgedProof = _proof(22, matchingBytes);
+        NativeReceiptAuth.SourcePosition memory wouldBePosition =
+            NativeReceiptAuth.SourcePosition({blockHeight: 22, transactionIndex: 1});
+
+        vm.clearMockedCalls();
+        vm.mockCall(
+            address(NativeQueryVerifierLib.getVerifier()), _verifySingleCall(forgedProof), abi.encode(false)
+        );
+        vm.expectRevert(NativeReceiptAuth.ProofVerificationFailed.selector);
+        treasury.authenticateAndRecognizeReceipt(forgedProof, 0);
+
+        assertFalse(treasury.isAuthenticated(wouldBePosition, matchingBytes));
+        assertFalse(treasury.recognizedEconomicId(treasury.economicId(epochId, 1)));
+        WorkTreasury.EpochAccount memory account = treasury.epochAccount(epochId);
+        assertEq(account.reserve, 10 ether);
+        assertEq(account.recognized, 0);
+        assertEq(treasury.totalReserveLiability(), 10 ether);
+        assertEq(treasury.totalClaimLiability(), 0);
+        assertEq(treasury.liveLiabilities(), 10 ether);
+    }
+
+    function test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication() public {
+        bytes memory encodedTransaction = _encoded(1, _logs(_unrelated(SOURCE)));
+        uint64[] memory heights = new uint64[](1);
+        heights[0] = 23;
+        bytes[] memory transactions = new bytes[](1);
+        transactions[0] = encodedTransaction;
+        INativeQueryVerifier.MerkleProof[] memory merkleProofs = new INativeQueryVerifier.MerkleProof[](1);
+        merkleProofs[0].root = keccak256("forged batch root");
+        INativeQueryVerifier.ContinuityProof memory continuityProof = _continuity();
+
+        vm.clearMockedCalls();
+        vm.mockCall(
+            address(NativeQueryVerifierLib.getVerifier()),
+            _verifyBatchCall(heights, transactions, merkleProofs, continuityProof),
+            abi.encode(false)
+        );
+        vm.expectRevert(NativeReceiptAuth.ProofVerificationFailed.selector);
+        treasury.authenticateBatch(heights, transactions, merkleProofs, continuityProof);
+
+        assertFalse(
+            treasury.isAuthenticated(
+                NativeReceiptAuth.SourcePosition({blockHeight: 23, transactionIndex: 1}), encodedTransaction
+            )
+        );
+    }
+
+    function test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication() public {
+        bytes memory firstBytes = _encoded(1, _logs(_unrelated(SOURCE)));
+        bytes memory secondBytes = _encoded(1, _logs(_unrelated(SOURCE)));
+        NativeReceiptAuth.SingleProof[] memory proofs = new NativeReceiptAuth.SingleProof[](2);
+        proofs[0] = _proof(24, firstBytes);
+        proofs[1] = _proof(25, secondBytes);
+        bytes memory verifierRevert = abi.encodeWithSignature("NativeVerifierRejected()");
+
+        vm.clearMockedCalls();
+        vm.mockCall(address(NativeQueryVerifierLib.getVerifier()), bytes(""), abi.encode(uint256(1)));
+        vm.mockCallRevert(
+            address(NativeQueryVerifierLib.getVerifier()), _verifySingleCall(proofs[1]), verifierRevert
+        );
+        vm.expectRevert(verifierRevert);
+        treasury.authenticateSegmented(proofs);
+
+        assertFalse(
+            treasury.isAuthenticated(
+                NativeReceiptAuth.SourcePosition({blockHeight: 24, transactionIndex: 1}), firstBytes
+            )
+        );
+        assertFalse(
+            treasury.isAuthenticated(
+                NativeReceiptAuth.SourcePosition({blockHeight: 25, transactionIndex: 1}), secondBytes
+            )
+        );
+    }
+
     function test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails() public {
         bytes32 epochId = _fund(_config(20, 100 ether, SPONSOR, REFUND, SAFE));
         WorkTypes.Allocation memory work = _allocation(epochId, 1, WorkTypes.WORK, 60 ether, WORKER, DESTINATION);
@@ -142,10 +224,20 @@ contract WorkTreasuryTargetTest is Test {
             NativeReceiptAuth.SourcePosition({blockHeight: 99, transactionIndex: 1});
         WorkTypes.Allocation memory altered = work;
         altered.amount = 51 ether;
+        bytes32 freshAuthenticationId = treasury.authenticationId(expected, keccak256(freshBytes));
+        bytes32 freshCheckpointId = treasury.selectedLogId(freshAuthenticationId, 0);
         vm.expectRevert();
         treasury.authenticateAndRecognizeCheckpoint(fresh, 0, altered, siblings);
         assertFalse(treasury.isAuthenticated(expected, freshBytes));
+        assertFalse(treasury.checkpoint(freshCheckpointId).exists);
         assertTrue(treasury.checkpoint(checkpointId).exists);
+        assertEq(treasury.latestCheckpointId(epochId), checkpointId);
+        WorkTreasury.EpochAccount memory account = treasury.epochAccount(epochId);
+        assertEq(account.reserve, 50 ether);
+        assertEq(account.recognized, 50 ether);
+        assertEq(treasury.totalReserveLiability(), 50 ether);
+        assertEq(treasury.totalClaimLiability(), 50 ether);
+        assertEq(treasury.liveLiabilities(), 100 ether);
     }
 
     function test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier() public {
@@ -466,6 +558,28 @@ contract WorkTreasuryTargetTest is Test {
 
     function _continuity() internal pure returns (INativeQueryVerifier.ContinuityProof memory c) {
         c.lowerEndpointDigest = keccak256("lower");
+    }
+
+    function _verifySingleCall(NativeReceiptAuth.SingleProof memory proof) internal pure returns (bytes memory) {
+        return abi.encodeWithSelector(
+            VERIFY_SINGLE_SELECTOR,
+            SOURCE_CHAIN_KEY,
+            proof.blockHeight,
+            proof.encodedTransaction,
+            proof.merkleProof,
+            proof.continuityProof
+        );
+    }
+
+    function _verifyBatchCall(
+        uint64[] memory heights,
+        bytes[] memory encodedTransactions,
+        INativeQueryVerifier.MerkleProof[] memory merkleProofs,
+        INativeQueryVerifier.ContinuityProof memory continuityProof
+    ) internal pure returns (bytes memory) {
+        return abi.encodeWithSelector(
+            VERIFY_BATCH_SELECTOR, SOURCE_CHAIN_KEY, heights, encodedTransactions, merkleProofs, continuityProof
+        );
     }
 
     function _singleLeafRoot(WorkTypes.Allocation memory a)

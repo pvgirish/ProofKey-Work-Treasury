@@ -1,6 +1,6 @@
 # Public evidence
 
-Generated 2026-09-09T19:21:02.621Z from the checked-in public journals. This page reports the evidence currently present; missing or partial evidence remains pending.
+Generated 2026-09-09T20:50:17.790Z from the checked-in public journals. This page reports the evidence currently present; missing or partial evidence remains pending.
 
 ## Control and release scope
 
@@ -212,6 +212,22 @@ The raw SDK regenerated transaction [0x33642ef4a994dd63b5426a3835051f314cf422761
 - Continuity changed: **false** (10 roots).
 
 This demonstrates provider-independent regeneration for the recorded proof. Because the continuity fingerprint did not change, it does not by itself demonstrate recovery from an aged or changed continuity witness.
+
+## Public refusal controls and replacement of an older proof
+
+[repository file](../evidence/public-refusal-checks.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-refusal-checks.json)
+
+These are read-only calls at explicit target block 5459734, not mined transactions.
+
+| Control | Outcome | Error |
+|---|---|---|
+| authentic-proof-and-repeat-authentication | accepted | — |
+| tampered-source-bytes-before-recognition | refused | Error |
+| receipt-local-ordinal-out-of-range | refused | LogOrdinalOutOfRange |
+| authenticated-checkpoint-is-not-an-allocation | refused | InvalidEncoding |
+| already-recognized-worker-allocation | refused | EconomicRightAlreadyRecognized |
+
+The older proof was **refused** and the replacement was **accepted** at the same target block. Continuity changed: **true**; roots: 10 → 90. The report records exact source-byte comparison, both continuity fingerprints, the older proof's result and the accepted replacement proof. This is a recorded read-only recovery observation; it does not promise perpetual proof availability.
 
 ## Finalized conservation readback
 

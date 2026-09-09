@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 const cdpPort = Number(process.env.CDP_PORT ?? 9234);
 const appUrl = process.env.UI_URL ?? "http://127.0.0.1:4173/";
-const outputDir = new URL("../evidence/ui-completed-qa/", import.meta.url).pathname;
+const outputDir = process.env.UI_QA_OUTPUT ?? new URL("../evidence/ui-completed-qa/", import.meta.url).pathname;
 const deployment = JSON.parse(await readFile(new URL("../deployments/ui-testnet.json", import.meta.url), "utf8"));
 const publicDemo = JSON.parse(await readFile(new URL("../evidence/public-demo.json", import.meta.url), "utf8"));
 const claim1 = JSON.parse(await readFile(new URL("../evidence/claim-1.json", import.meta.url), "utf8"));
@@ -91,8 +91,8 @@ check("No injected wallet", !(await evaluate("Boolean(window.ethereum)")), "wind
 
 await click('[data-view="settings"]');
 await click("#verify-settings");
-await waitFor("document.querySelector('#source-config-signal').classList.contains('good') && document.querySelector('#target-config-signal').classList.contains('good')");
-check("Configured domains verify", (await text("#toast")).includes("target immutables match"), await text("#toast"));
+await waitFor("document.querySelector('#settings-result').classList.contains('success')");
+check("Configured domains verify", (await text("#settings-result")).includes("immutable source domain matches"), await text("#settings-result"));
 
 const finalized = await evaluate(`(async () => {
   const provider = new ethers.JsonRpcProvider(${JSON.stringify(deployment.target.rpcUrl)});
