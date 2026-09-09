@@ -18,7 +18,7 @@ import {
 import { CLAIM_PACKAGE_VERSION } from "./types.ts";
 import { createReceiptClaimPackage, parseClaimPackage, stringifyClaimPackage } from "./claim-package.ts";
 
-const vectorUrl = new URL("../../architecture-lock/schema-v1-vectors.json", import.meta.url);
+const vectorUrl = new URL("../schema/schema-v1-vectors.json", import.meta.url);
 const vectors = JSON.parse(await readFile(vectorUrl, "utf8"));
 
 function fromVector(value: any): AllocationV1 {

@@ -16,8 +16,8 @@ const SAFE_ABI = [
   "function nonce() view returns(uint256)",
   "function getTransactionHash(address to,uint256 value,bytes data,uint8 operation,uint256 safeTxGas,uint256 baseGas,uint256 gasPrice,address gasToken,address refundReceiver,uint256 nonce) view returns(bytes32)",
   "function execTransaction(address to,uint256 value,bytes data,uint8 operation,uint256 safeTxGas,uint256 baseGas,uint256 gasPrice,address gasToken,address refundReceiver,bytes signatures) payable returns(bool)",
-  "event ExecutionSuccess(bytes32 txHash,uint256 payment)",
-  "event ExecutionFailure(bytes32 txHash,uint256 payment)",
+  "event ExecutionSuccess(bytes32 indexed txHash,uint256 payment)",
+  "event ExecutionFailure(bytes32 indexed txHash,uint256 payment)",
 ];
 
 const ZERO = "0x0000000000000000000000000000000000000000";

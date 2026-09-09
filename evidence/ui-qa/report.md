@@ -1,6 +1,6 @@
 # Operator UI headless QA
 
-Run: 2026-09-09T18:26:21.232Z
+Run: 2026-09-09T18:27:19.277Z
 
 Chrome ran headlessly with an isolated temporary profile. No existing browser profile, injected wallet, or live RPC transaction was used.
 
@@ -8,6 +8,7 @@ Chrome ran headlessly with an isolated temporary profile. No existing browser pr
 
 - PASS — Overview opens: Budget view is active
 - PASS — No fake live state: Not read yet
+- PASS — Funding action stays hidden before preparation: Fund exact source configuration is not disclosed before an exact epoch exists
 - PASS — Missing wallet is explained: No browser wallet was found. Read-only RPC access remains available.
 - PASS — Exact epoch builder: Exact epoch ID 0x3052eb58b5cfa793279b96548a82b07330a93d2a5b939456c81ab6390173b0e0
 Cap 120 native base units
@@ -18,6 +19,7 @@ Order 0x3602225032ba21e4a64ac77d876573285b182eb7b988692dac558a273f0408a6
 Terms 0x5c3f25835621103671a624f7dd291a5fc217c626a9a1c1f6b0143e52107067df
 No money or admission slot is reserved.
 - PASS — Funding check is the signing action: The enabled action is labelled Check funding & sign quote
+- PASS — Safe acceptance stays hidden before worker consent: Prepare Safe acceptance remains hidden before a worker signature
 - PASS — Malformed package rejected: Unsupported or malformed claim package
 - PASS — Recognition remains disabled: Recognition is disabled after rejection
 - PASS — Mobile overview fits the viewport: No horizontal page overflow

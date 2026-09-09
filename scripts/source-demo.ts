@@ -38,6 +38,7 @@ export type PendingSourceTransaction = {
   kind: "safe" | "direct";
   label: string;
   transactionHash: string;
+  chainId: string;
   submittedAt: string;
   safe?: SafeSubmission;
 };
@@ -257,6 +258,11 @@ export async function runSourceDemo(args: SourceDemoArgs): Promise<any> {
   if (report.transactionJournalVersion !== SOURCE_TRANSACTION_JOURNAL_VERSION) {
     throw new Error("Unsupported source transaction journal version");
   }
+  if (String(report.epochId).toLowerCase() !== args.epochId.toLowerCase()
+    || String(report.coordinator).toLowerCase() !== coordinatorAddress.toLowerCase()
+    || String(report.safe).toLowerCase() !== safeAddress.toLowerCase()) {
+    throw new Error("Existing source report belongs to another epoch or deployment");
+  }
 
   const persist = async () => {
     report.updatedAt = new Date().toISOString();
@@ -276,6 +282,7 @@ export async function runSourceDemo(args: SourceDemoArgs): Promise<any> {
       kind: "direct",
       label,
       transactionHash,
+      chainId: SOURCE_CHAIN_ID.toString(),
       submittedAt: new Date().toISOString(),
     } satisfies PendingSourceTransaction;
     await persist();
@@ -318,6 +325,7 @@ export async function runSourceDemo(args: SourceDemoArgs): Promise<any> {
           kind: "safe",
           label,
           transactionHash: submission.outerTransactionHash,
+          chainId: SOURCE_CHAIN_ID.toString(),
           submittedAt: new Date().toISOString(),
           safe: submission,
         } satisfies PendingSourceTransaction;
@@ -334,6 +342,9 @@ export async function runSourceDemo(args: SourceDemoArgs): Promise<any> {
 
   if (report.pendingSourceTransaction) {
     const pending = report.pendingSourceTransaction as PendingSourceTransaction;
+    if (pending.chainId !== SOURCE_CHAIN_ID.toString()) {
+      throw new Error(`Journaled source transaction belongs to chain ${pending.chainId}`);
+    }
     try {
       let summary: SourceReceipt | undefined;
       if (pending.kind === "safe") {
@@ -351,12 +362,16 @@ export async function runSourceDemo(args: SourceDemoArgs): Promise<any> {
       }
       await pushOperation(summary);
     } catch (error) {
-      if (String((error as Error).message).startsWith("Source transaction is still pending:")) throw error;
+      const message = String((error as Error).message);
+      if (message.startsWith("Source transaction is still pending:")) throw error;
       report.failedSourceTransactions ??= [];
-      report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: String((error as Error).message) });
+      report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: message });
       delete report.pendingSourceTransaction;
       await persist();
-      throw error;
+      // A mined failed acceptance leaves the offer pending. Continue so the normal deadline-aware
+      // path can retry it or explicitly expire and replace it without another manual restart.
+      if (!(pending.kind === "direct" && pending.label.startsWith("accept-offer-")
+        && message.includes(" transaction failed:"))) throw error;
     }
   }
 

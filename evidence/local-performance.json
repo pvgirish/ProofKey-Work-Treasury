@@ -12,7 +12,7 @@
     "runner": "Foundry local EVM",
     "nativeVerifier": "VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address",
     "nativeVerificationGasIncluded": false,
-    "note": "Target recognition measurements begin after authentication; checkpoint import is also outside the measured recognition interval. Receipt measurements include exact cached-receipt decoding on every selected log. Real native proof costs are pending an on-chain measurement."
+    "note": "Target values are cumulative gas across N separate recognition calls; the contracts expose no batch-recognition transaction. Measurements begin after authentication, and checkpoint import is also outside the measured interval. Receipt measurements include exact cached-receipt decoding on every selected log. Real native proof costs are pending an on-chain measurement."
   },
   "sourceGas": {
     "createOffer32Milestones": 3525401,

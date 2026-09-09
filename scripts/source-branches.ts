@@ -97,6 +97,11 @@ export async function runSourceBranches(args: SourceBranchArgs): Promise<any> {
   if (report.transactionJournalVersion !== SOURCE_TRANSACTION_JOURNAL_VERSION) {
     throw new Error("Unsupported source transaction journal version");
   }
+  if (String(report.epochId).toLowerCase() !== args.epochId.toLowerCase()
+    || String(report.coordinator).toLowerCase() !== coordinatorAddress.toLowerCase()
+    || String(report.safe).toLowerCase() !== safeAddress.toLowerCase()) {
+    throw new Error("Existing source branch report belongs to another epoch or deployment");
+  }
   const persist = async () => {
     report.updatedAt = new Date().toISOString();
     await saveReport("source-branches.json", report);
@@ -115,6 +120,7 @@ export async function runSourceBranches(args: SourceBranchArgs): Promise<any> {
       kind: "direct",
       label,
       transactionHash,
+      chainId: SOURCE_CHAIN_ID.toString(),
       submittedAt: new Date().toISOString(),
     } satisfies PendingSourceTransaction;
     await persist();
@@ -142,6 +148,7 @@ export async function runSourceBranches(args: SourceBranchArgs): Promise<any> {
           kind: "safe",
           label,
           transactionHash: submission.outerTransactionHash,
+          chainId: SOURCE_CHAIN_ID.toString(),
           submittedAt: new Date().toISOString(),
           safe: submission,
         } satisfies PendingSourceTransaction;
@@ -283,6 +290,9 @@ export async function runSourceBranches(args: SourceBranchArgs): Promise<any> {
 
   if (report.pendingSourceTransaction) {
     const pending = report.pendingSourceTransaction as PendingSourceTransaction;
+    if (pending.chainId !== SOURCE_CHAIN_ID.toString()) {
+      throw new Error(`Journaled source transaction belongs to chain ${pending.chainId}`);
+    }
     try {
       let summary: SourceReceipt | undefined;
       if (pending.kind === "safe") {

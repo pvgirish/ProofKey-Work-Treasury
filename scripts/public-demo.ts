@@ -87,7 +87,7 @@ async function main() {
     const finalizedAccount=await treasury.epochAccount.staticCall(report.epochId,{blockTag:block.number});
     if(!finalizedAccount.funded) {report.stage="awaiting-finalized-target-funding";await persist();console.log(report.stage);return;}
     const fundedConfig=await treasury.epochConfig.staticCall(report.epochId,{blockTag:block.number});
-    if(await coordinator.computeEpochId(fundedConfig)!==report.epochId) throw new Error("Finalized target funding does not match source agreement");
+    if(await coordinator.computeEpochId(fundedConfig.toObject())!==report.epochId) throw new Error("Finalized target funding does not match source agreement");
     report.fundingFinalized={blockNumber:block.number,blockHash:block.hash,observedAt:new Date().toISOString(),reserve:String(finalizedAccount.reserve)}; await persist();
   }
   let sourceReport=await readOptional("evidence/source-demo.json");

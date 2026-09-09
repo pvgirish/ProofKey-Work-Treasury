@@ -56,5 +56,11 @@
       ]
     }
   ],
-  "stage": "awaiting-finalized-target-funding"
+  "stage": "awaiting-finalized-target-funding",
+  "fundingFinalized": {
+    "blockNumber": 5459190,
+    "blockHash": "0x46018052143326b8adaaaba10e724ae22f7f370ba36a10bddffdfc7630b60ae4",
+    "observedAt": "2026-09-09T18:29:20.378Z",
+    "reserve": "120000000000000000000"
+  }
 }

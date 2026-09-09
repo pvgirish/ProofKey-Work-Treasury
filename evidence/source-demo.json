@@ -1,0 +1,45 @@
+{
+  "schema": "ProofKeySourceDemoV1",
+  "startedAt": "2026-09-09T18:29:20.644Z",
+  "status": "starting",
+  "sourceOnly": true,
+  "transactionJournalVersion": 1,
+  "nativeAuthenticationClaim": false,
+  "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+  "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+  "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+  "cap": "120000000000000000000",
+  "roles": {
+    "buyerSafe": "Existing team-controlled 2-of-3 Safe; not represented as an independent buyer",
+    "worker": "Configured source worker signer; control relationship must be disclosed separately",
+    "relayer": "Configured Sepolia transaction relayer"
+  },
+  "safeOwners": [
+    "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+    "0x247a5839c7F79115f473856EC8a6495e439096D6",
+    "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+  ],
+  "safeThreshold": 2,
+  "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+  "operations": [],
+  "stages": {},
+  "orders": {},
+  "pendingSourceTransaction": {
+    "kind": "safe",
+    "label": "initialize-epoch",
+    "transactionHash": "0x79edfd6ba13c07035e22b26b079f3f14c5b55b51b8c4c6c37b8ec4bd9343336f",
+    "chainId": "11155111",
+    "submittedAt": "2026-09-09T18:29:22.318Z",
+    "safe": {
+      "outerTransactionHash": "0x79edfd6ba13c07035e22b26b079f3f14c5b55b51b8c4c6c37b8ec4bd9343336f",
+      "safeTransactionHash": "0x84dcb8266c10a6122247175b4c7539e75bb33b957d7cf76cf7a31abcd7d0db93",
+      "nonce": "6",
+      "threshold": 2,
+      "signingOwners": [
+        "0x247a5839c7F79115f473856EC8a6495e439096D6",
+        "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+      ]
+    }
+  },
+  "updatedAt": "2026-09-09T18:29:22.318Z"
+}
