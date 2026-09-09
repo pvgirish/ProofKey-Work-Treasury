@@ -54,7 +54,17 @@ let defaultConfig = null;
 const testnetConfigPath = join(root, "deployments", "ui-testnet.json");
 if (existsSync(testnetConfigPath)) {
   const parsed = JSON.parse(await readFile(testnetConfigPath, "utf8"));
-  if (parsed?.source?.rpcUrl && parsed?.target?.rpcUrl) defaultConfig = parsed;
+  if (parsed?.source?.rpcUrl && parsed?.target?.rpcUrl) {
+    let publicEpochId = parsed.lastEpochId;
+    const publicEvidencePath = join(root, "evidence", "public-demo.json");
+    if (!publicEpochId && existsSync(publicEvidencePath)) publicEpochId = JSON.parse(await readFile(publicEvidencePath, "utf8")).epochId;
+    defaultConfig = {
+      ...parsed,
+      source: { label: "Ethereum Sepolia", confirmations: 12, ...parsed.source },
+      target: { label: "Creditcoin Testnet", confirmations: 12, ...parsed.target },
+      ...(publicEpochId ? { lastEpochId: publicEpochId } : {}),
+    };
+  }
 }
 await writeFile(join(dist, "demo-config.js"), `globalThis.PROOFKEY_DEMO_CONFIG = ${JSON.stringify(demoConfig)};\nglobalThis.PROOFKEY_DEFAULT_CONFIG = ${JSON.stringify(defaultConfig)};\n`);
 console.log(`Built operator UI with ${Object.keys(contracts).length} compiled interfaces.`);

@@ -9,7 +9,7 @@ import {
   type JsonRpcProvider,
 } from "ethers";
 import { SOURCE_CHAIN_ID, artifact, loadEnvironment, saveReport, signingWallet } from "./runtime.ts";
-import { executeSafeCall, matchedSafeOwnerKeys, recoverSafeExecution } from "./safe.ts";
+import { executeSafeCall, matchedSafeOwnerKeys, MinedSafeExecutionFailure, recoverSafeExecution } from "./safe.ts";
 import {
   SOURCE_TRANSACTION_JOURNAL_VERSION,
   buildSourceReadback,
@@ -201,6 +201,8 @@ export async function runSourceBranches(args: SourceBranchArgs): Promise<any> {
       if (String(error?.message ?? error).includes("unexpectedly succeeded")) throw error;
       let decoded: string | undefined;
       const data = error?.data ?? error?.info?.error?.data ?? error?.revert?.data;
+      // RPC outages and client errors are not evidence of a contract refusal.
+      if (error?.code !== "CALL_EXCEPTION" || typeof data !== "string" || !/^0x[0-9a-fA-F]{8}/.test(data)) throw error;
       if (typeof data === "string") {
         try { decoded = iface.parseError(data)?.name; } catch { /* preserve shortMessage */ }
       }
@@ -208,6 +210,8 @@ export async function runSourceBranches(args: SourceBranchArgs): Promise<any> {
         label,
         atBlock: await args.source.getBlockNumber(),
         error: decoded ?? error?.revert?.name ?? error?.shortMessage ?? "reverted",
+        selector: data.slice(0, 10),
+        observation: "eth_call contract refusal; not a mined failed transaction",
       });
       await persist();
     }
@@ -290,32 +294,40 @@ export async function runSourceBranches(args: SourceBranchArgs): Promise<any> {
 
   if (report.pendingSourceTransaction) {
     const pending = report.pendingSourceTransaction as PendingSourceTransaction;
-    if (pending.chainId !== SOURCE_CHAIN_ID.toString()) {
-      throw new Error(`Journaled source transaction belongs to chain ${pending.chainId}`);
-    }
-    try {
-      let summary: SourceReceipt | undefined;
-      if (pending.kind === "safe") {
-        if (!pending.safe) throw new Error("Journaled Safe transaction is missing Safe metadata");
+    if (pending.chainId !== SOURCE_CHAIN_ID.toString()) throw new Error(`Journaled source transaction belongs to chain ${pending.chainId}`);
+    let summary: SourceReceipt | undefined;
+    if (pending.kind === "safe") {
+      if (!pending.safe) throw new Error("Journaled Safe transaction is missing Safe metadata");
+      try {
         const recovered = await recoverSafeExecution(args.source, safeAddress, pending.safe);
         if (recovered) summary = await safeReceiptSummary(args.source, coordinatorAddress, pending.label, recovered);
-      } else {
-        const receipt = await args.source.getTransactionReceipt(pending.transactionHash);
-        if (receipt) summary = await receiptSummary(args.source, coordinatorAddress, pending.label, receipt);
-      }
-      if (!summary) {
-        report.status = `source-transaction-pending:${pending.label}`;
+      } catch (error) {
+        if (!(error instanceof MinedSafeExecutionFailure)) throw error;
+        report.failedSourceTransactions ??= [];
+        report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: error.message, failureKind: error.kind,
+          blockNumber: error.receipt.blockNumber });
+        delete report.pendingSourceTransaction;
         await persist();
-        throw new Error(`Source transaction is still pending: ${pending.transactionHash}`);
+        throw error;
       }
-      await push(summary);
-    } catch (error) {
-      if (String((error as Error).message).startsWith("Source transaction is still pending:")) throw error;
-      report.failedSourceTransactions ??= [];
-      report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: String((error as Error).message) });
-      delete report.pendingSourceTransaction;
+    } else {
+      const mined = await args.source.getTransactionReceipt(pending.transactionHash);
+      if (mined?.status === 0) {
+        report.failedSourceTransactions ??= [];
+        report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: "Mined with status 0",
+          blockNumber: mined.blockNumber });
+        delete report.pendingSourceTransaction;
+        await persist();
+        throw new Error(`${pending.label} transaction mined with status 0`);
+      }
+      if (mined?.status === 1) summary = await receiptSummary(args.source, coordinatorAddress, pending.label, mined);
+      else if (mined) throw new Error(`Source receipt has uncertain status: ${pending.transactionHash}`);
+    }
+    if (summary) await push(summary);
+    else {
+      report.status = `source-transaction-pending:${pending.label}`;
       await persist();
-      throw error;
+      throw new Error(`Source transaction is still pending: ${pending.transactionHash}`);
     }
   }
 

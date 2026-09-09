@@ -45,12 +45,36 @@ export type SafeSubmission = Pick<SafeExecutionRecord,
   "outerTransactionHash" | "safeTransactionHash" | "nonce" | "threshold" | "signingOwners"
 >;
 
+/** A conclusive mined failure. Other recovery errors are uncertain and must retain the journal. */
+export class MinedSafeExecutionFailure extends Error {
+  readonly kind: "outer-status-zero" | "inner-execution-failure";
+  readonly receipt: TransactionReceipt;
+
+  constructor(
+    message: string,
+    kind: "outer-status-zero" | "inner-execution-failure",
+    receipt: TransactionReceipt,
+  ) {
+    super(message);
+    this.name = "MinedSafeExecutionFailure";
+    this.kind = kind;
+    this.receipt = receipt;
+  }
+}
+
 function executionRecordFromReceipt(
   safeAddress: string,
   submission: SafeSubmission,
   receipt: TransactionReceipt,
 ): SafeExecutionRecord {
-  if (receipt.status !== 1) throw new Error(`Safe outer transaction failed: ${submission.outerTransactionHash}`);
+  if (receipt.status === 0) {
+    throw new MinedSafeExecutionFailure(
+      `Safe outer transaction failed: ${submission.outerTransactionHash}`,
+      "outer-status-zero",
+      receipt,
+    );
+  }
+  if (receipt.status !== 1) throw new Error(`Safe receipt has uncertain status: ${submission.outerTransactionHash}`);
   const successOrdinal = receipt.logs.findIndex((log) =>
     log.address.toLowerCase() === safeAddress.toLowerCase() && (() => {
       try {
@@ -61,6 +85,22 @@ function executionRecordFromReceipt(
     })()
   );
   if (successOrdinal < 0) {
+    const failureOrdinal = receipt.logs.findIndex((log) =>
+      log.address.toLowerCase() === safeAddress.toLowerCase() && (() => {
+        try {
+          const parsed = safeInterface.parseLog(log);
+          return parsed?.name === "ExecutionFailure"
+            && String(parsed.args.txHash).toLowerCase() === submission.safeTransactionHash.toLowerCase();
+        } catch { return false; }
+      })()
+    );
+    if (failureOrdinal >= 0) {
+      throw new MinedSafeExecutionFailure(
+        `Safe inner transaction failed: ${submission.outerTransactionHash}`,
+        "inner-execution-failure",
+        receipt,
+      );
+    }
     throw new Error(`Safe transaction ${submission.outerTransactionHash} mined without matching ExecutionSuccess`);
   }
   return {
@@ -128,15 +168,26 @@ export async function executeSafeCall(args: {
   data: string;
   relayer: Signer;
   value?: bigint;
+  /** Optional exact current owner subset; useful when demonstrating a specific rotation path. */
+  ownerAddresses?: string[];
   onSubmitted?: (submission: SafeSubmission) => Promise<void>;
 }): Promise<SafeExecutionRecord> {
   const safeAddress = getAddress(args.safe);
   const target = getAddress(args.to);
   const value = args.value ?? 0n;
   const { threshold, matched } = await matchedSafeOwnerKeys(safeAddress, args.provider);
-  const selected = [...matched]
-    .sort((a, b) => a.address.toLowerCase().localeCompare(b.address.toLowerCase()))
-    .slice(0, threshold);
+  const requested = args.ownerAddresses?.map((address) => getAddress(address).toLowerCase());
+  if (requested && (requested.length !== threshold || new Set(requested).size !== threshold)) {
+    throw new Error(`Safe call requires exactly ${threshold} distinct requested owners`);
+  }
+  const selected = (requested
+    ? requested.map((address) => {
+      const match = matched.find((entry) => entry.address.toLowerCase() === address);
+      if (!match) throw new Error(`Requested Safe owner is not current or has no configured key: ${address}`);
+      return match;
+    })
+    : [...matched].sort((a, b) => a.address.toLowerCase().localeCompare(b.address.toLowerCase())).slice(0, threshold))
+    .sort((a, b) => a.address.toLowerCase().localeCompare(b.address.toLowerCase()));
   const readSafe = new Contract(safeAddress, SAFE_ABI, args.provider);
   const nonce: bigint = await readSafe.nonce();
   const safeTransactionHash: string = await readSafe.getTransactionHash(

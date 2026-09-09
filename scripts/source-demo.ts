@@ -23,6 +23,7 @@ import {
 import {
   executeSafeCall,
   matchedSafeOwnerKeys,
+  MinedSafeExecutionFailure,
   recoverSafeExecution,
   type SafeExecutionRecord,
   type SafeSubmission,
@@ -342,36 +343,44 @@ export async function runSourceDemo(args: SourceDemoArgs): Promise<any> {
 
   if (report.pendingSourceTransaction) {
     const pending = report.pendingSourceTransaction as PendingSourceTransaction;
-    if (pending.chainId !== SOURCE_CHAIN_ID.toString()) {
-      throw new Error(`Journaled source transaction belongs to chain ${pending.chainId}`);
-    }
-    try {
-      let summary: SourceReceipt | undefined;
-      if (pending.kind === "safe") {
-        if (!pending.safe) throw new Error("Journaled Safe transaction is missing Safe metadata");
+    if (pending.chainId !== SOURCE_CHAIN_ID.toString()) throw new Error(`Journaled source transaction belongs to chain ${pending.chainId}`);
+    let summary: SourceReceipt | undefined;
+    if (pending.kind === "safe") {
+      if (!pending.safe) throw new Error("Journaled Safe transaction is missing Safe metadata");
+      try {
         const recovered = await recoverSafeExecution(args.source, safeAddress, pending.safe);
         if (recovered) summary = await safeReceiptSummary(args.source, coordinatorAddress, pending.label, recovered);
-      } else {
-        const receipt = await args.source.getTransactionReceipt(pending.transactionHash);
-        if (receipt) summary = await receiptSummary(args.source, coordinatorAddress, pending.label, receipt);
-      }
-      if (!summary) {
-        report.status = `source-transaction-pending:${pending.label}`;
+      } catch (error) {
+        if (!(error instanceof MinedSafeExecutionFailure)) throw error;
+        report.failedSourceTransactions ??= [];
+        report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: error.message, failureKind: error.kind,
+          blockNumber: error.receipt.blockNumber });
+        delete report.pendingSourceTransaction;
         await persist();
-        throw new Error(`Source transaction is still pending: ${pending.transactionHash}`);
+        throw error;
       }
-      await pushOperation(summary);
-    } catch (error) {
-      const message = String((error as Error).message);
-      if (message.startsWith("Source transaction is still pending:")) throw error;
-      report.failedSourceTransactions ??= [];
-      report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: message });
-      delete report.pendingSourceTransaction;
+    } else {
+      const mined = await args.source.getTransactionReceipt(pending.transactionHash);
+      if (mined?.status === 0) {
+        report.failedSourceTransactions ??= [];
+        report.failedSourceTransactions.push({ ...pending, failedAt: new Date().toISOString(), error: "Mined with status 0",
+          blockNumber: mined.blockNumber });
+        delete report.pendingSourceTransaction;
+        await persist();
+        // A conclusively failed acceptance leaves the offer pending. Continue so the deadline-aware
+        // path can retry it or explicitly expire and replace it in this invocation.
+        if (!pending.label.startsWith("accept-offer-")) throw new Error(`${pending.label} transaction mined with status 0`);
+      } else if (mined?.status === 1) {
+        summary = await receiptSummary(args.source, coordinatorAddress, pending.label, mined);
+      } else if (mined) {
+        throw new Error(`Source receipt has uncertain status: ${pending.transactionHash}`);
+      }
+    }
+    if (summary) await pushOperation(summary);
+    else if (report.pendingSourceTransaction) {
+      report.status = `source-transaction-pending:${pending.label}`;
       await persist();
-      // A mined failed acceptance leaves the offer pending. Continue so the normal deadline-aware
-      // path can retry it or explicitly expire and replace it without another manual restart.
-      if (!(pending.kind === "direct" && pending.label.startsWith("accept-offer-")
-        && message.includes(" transaction failed:"))) throw error;
+      throw new Error(`Source transaction is still pending: ${pending.transactionHash}`);
     }
   }
 

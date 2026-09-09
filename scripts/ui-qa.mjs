@@ -72,6 +72,8 @@ await send("Log.enable");
 await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 1100, deviceScaleFactor: 1, mobile: false });
 await send("Page.navigate", { url: "http://127.0.0.1:4173/" });
 await waitFor("document.readyState === 'complete' && document.querySelector('#view-overview')");
+await evaluate("localStorage.removeItem('proofkey-work-treasury.workspace.v1'); localStorage.removeItem('proofkey-work-treasury.draft.v1'); location.reload()");
+await waitFor("document.readyState === 'complete' && document.querySelector('#view-overview')");
 
 const checks = [];
 function check(name, condition, detail) { checks.push({ name, passed: Boolean(condition), detail }); if (!condition) throw new Error(`${name}: ${detail}`); }
@@ -103,6 +105,7 @@ const epochResult = await text("#epoch-result");
 check("Exact epoch builder", epochResult.includes("No source initialization or target funding has occurred"), epochResult);
 const epochId = await evaluate("JSON.parse(localStorage.getItem('proofkey-work-treasury.workspace.v1')).epochConfig.epochId");
 check("Epoch ID is bytes32", /^0x[0-9a-f]{64}$/i.test(epochId), epochId);
+check("Epoch CTC becomes canonical base units", await evaluate("JSON.parse(localStorage.getItem('proofkey-work-treasury.workspace.v1')).epochConfig.config.cap === '120000000000000000000'"), "120 CTC stored as 120000000000000000000 base units");
 await screenshot("desktop-networks-epoch.png");
 
 await view("orders");
@@ -120,9 +123,17 @@ await value("#draft-form [name=ruleBefore]", "12000040");
 await value("#draft-form [name=committee0]", "0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa");
 await value("#draft-form [name=committee1]", "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB");
 await value("#draft-form [name=committee2]", "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC");
+await value("#draft-form [name=work]", "0.0000000000000000001");
+await click("#draft-form button[type=submit]");
+check("CTC precision over 18 decimals is rejected", (await text("#draft-result")).includes("up to 18 decimal places"), await text("#draft-result"));
+await value("#draft-form [name=work]", "10000000000000000000000000000000000000000000000000000000000000000000000");
+await click("#draft-form button[type=submit]");
+check("CTC uint256 overflow is rejected", (await text("#draft-result")).includes("uint256 CTC limit"), await text("#draft-result"));
+await value("#draft-form [name=work]", "30.5");
 await click("#draft-form button[type=submit]");
 await waitFor("document.querySelector('#draft-result').textContent.includes('Nonbinding draft saved')");
 check("Draft remains nonbinding", (await text("#draft-result")).includes("No money or admission slot is reserved"), await text("#draft-result"));
+check("Decimal CTC becomes canonical quote value", await evaluate("JSON.parse(localStorage.getItem('proofkey-work-treasury.draft.v1')).terms.milestones[0].work === '30500000000000000000'"), "30.5 CTC stored as 30500000000000000000 base units");
 check("Funding check is the signing action", !(await evaluate("document.querySelector('#sign-quote').disabled")), "The enabled action is labelled Check funding & sign quote");
 check("Safe acceptance stays hidden before worker consent", await evaluate("document.querySelector('#prepare-quote').hidden && getComputedStyle(document.querySelector('#prepare-quote')).display === 'none'"), "Prepare Safe acceptance remains hidden before a worker signature");
 await screenshot("desktop-orders-draft.png");

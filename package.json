@@ -15,7 +15,8 @@
     "ui:serve": "node scripts/serve-ui.mjs",
     "preflight": "node scripts/preflight.ts",
     "deploy:testnet": "node scripts/deploy.ts",
-    "demo:public": "node scripts/public-demo.ts"
+    "demo:public": "node scripts/public-demo.ts",
+    "proof:refresh": "node scripts/refresh-native-proof.ts"
   },
   "dependencies": {
     "@gluwa/asc-contracts": "0.2.1",

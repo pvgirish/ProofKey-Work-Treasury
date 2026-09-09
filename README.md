@@ -50,6 +50,16 @@ The deployment manifest records immutable library links, transaction hashes, run
 
 The demonstration persists progress under `evidence/`. Run it again when its stage reports waiting for finalized funding or native attestation. It deliberately stops source settlement B until RETURN 50 has been recognized on Creditcoin. Its final target phase collects from the cached root without requesting another proof. Public actors in this built-in run are team controlled and are labeled as such.
 
+If saved native evidence has aged, rebuild it from the configured source RPC and the current Creditcoin attestation frontier. This command is read only: it does not submit a target transaction. The optional prior file makes recovery fail if the exact encoded source transaction bytes have changed; the output records the old and new continuity fingerprints without treating a changed continuity path as a failure by itself.
+
+```sh
+npm run proof:refresh -- 0xSOURCE_TRANSACTION_HASH \
+  --prior evidence/native-bundle-EXISTING.json \
+  --output refreshed-native-proof.json
+```
+
+The result is written under `evidence/` and contains no RPC URL or proof-service credential. It is proof material, not a claim that Creditcoin has accepted it. To make the public runners bypass an available hosted proof response for one recovery run, set `PROOFKEY_REFRESH_NATIVE_PROOF=1`; otherwise they use the raw SDK builder only when the hosted service is unavailable or returns malformed or substituted data. Raw generation requires a source RPC that supports `eth_getBlockReceipts`.
+
 ## Scope and trust
 
 The Safe authorizes work on the source chain; the worker consents to the full terms and payout destinations. The source contract decides final amounts. Creditcoin authenticates the source fact through its fixed native verifier before the treasury recognizes that fact. Neither a proof service nor the transaction submitter chooses the payment amount.

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Operate a ProofKey Work Treasury across Ethereum and Creditcoin.">
   <title>ProofKey Work Treasury</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <div class="shell">
@@ -88,9 +88,9 @@
                 <label><span>Worker</span><input name="worker" required placeholder="0x…"></label>
                 <label><span>Claim owner</span><input name="claimOwner" required placeholder="0x…"></label>
                 <label><span>Fixed destination</span><input name="destination" required placeholder="0x…"></label>
-                <label><span>Worker maximum</span><input name="work" inputmode="numeric" required value="30"></label>
-                <label><span>Committee fee</span><input name="fee" inputmode="numeric" required value="0"></label>
-                <label><span>Timeout worker amount</span><input name="timeoutWork" inputmode="numeric" required value="0"></label>
+                <label><span>Worker maximum (CTC)</span><input name="work" inputmode="decimal" required value="30"></label>
+                <label><span>Committee fee (CTC)</span><input name="fee" inputmode="decimal" required value="0"></label>
+                <label><span>Timeout worker amount (CTC)</span><input name="timeoutWork" inputmode="decimal" required value="0"></label>
                 <label><span>Fee owner</span><input name="feeOwner" required placeholder="0x…"></label>
                 <label><span>Fee destination</span><input name="feeDestination" required placeholder="0x…"></label>
                 <label><span>Accept before block</span><input name="acceptBefore" inputmode="numeric" required></label>
@@ -130,9 +130,9 @@
           </article>
           <article class="card action-builder">
             <div class="card-head"><div><p class="kicker">Safe transaction</p><h2>Prepare a source action</h2></div><span class="actor-chip" id="source-actor">Choose an action</span></div>
-            <div class="action-row"><label><span>Contract action</span><select id="source-function"></select></label><label class="grow"><span>Arguments as JSON array</span><input id="source-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-source">Prepare</button></div>
+            <div class="action-row"><label><span>Contract action</span><select id="source-function"></select></label><label class="grow"><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="source-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-source">Prepare</button></div>
             <p class="help" id="source-help">Only write functions from the compiled SourceCoordinator ABI appear here.</p>
-            <div class="prepared" id="source-prepared" hidden><code id="source-calldata"></code><div class="actions"><button class="button" id="download-safe">Download Safe transaction</button><button class="button primary" id="execute-source">Send from connected actor</button></div></div>
+            <div class="prepared" id="source-prepared" hidden><code id="source-calldata"></code><div class="actions"><button class="button" id="download-safe">Download Safe Transaction Builder JSON</button><button class="button primary" id="execute-source">Send with injected wallet</button></div><p class="help">The downloadable Transaction Builder JSON is the default Safe route. Direct sending requires an injected Safe-compatible wallet whose active account is the configured Safe; this app does not bundle the Safe Apps SDK.</p></div>
           </article>
         </section>
 
@@ -172,7 +172,7 @@
           </article>
           <article class="card action-builder">
             <div class="card-head"><div><p class="kicker">Creditcoin transaction</p><h2>Authenticate or recognize evidence</h2></div><span class="actor-chip">Anyone can submit · economic result is fixed</span></div>
-            <div class="action-row"><label><span>Treasury action</span><select id="evidence-function"></select></label><label class="grow"><span>Arguments as JSON array</span><input id="evidence-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-evidence">Prepare</button></div>
+            <div class="action-row"><label><span>Treasury action</span><select id="evidence-function"></select></label><label class="grow"><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="evidence-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-evidence">Prepare</button></div>
             <p class="help" id="evidence-help">Combined authentication saves a new cache fact only if recognition also succeeds. A previously stored authentication survives a later failed separate recognition.</p>
           </article>
         </section>
@@ -193,7 +193,7 @@
           <div class="two-col">
             <article class="card action-builder">
               <div class="card-head"><div><p class="kicker">Treasury action</p><h2>Withdraw or fund</h2></div><span class="actor-chip" id="target-actor">Choose an action</span></div>
-              <div class="stack"><label><span>Contract action</span><select id="target-function"></select></label><label><span>Arguments as JSON array</span><input id="target-args" value="[]" spellcheck="false"></label><label><span>Native value in base units</span><input id="target-value" value="0" inputmode="numeric"></label><button class="button primary" id="execute-target">Review & send from wallet</button></div>
+              <div class="stack"><label><span>Contract action</span><select id="target-function"></select></label><label><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="target-args" value="[]" spellcheck="false"></label><label><span>Raw native value in base units</span><input id="target-value" value="0" inputmode="numeric"></label><button class="button primary" id="execute-target">Review & send from wallet</button></div>
               <p class="help" id="target-help"></p>
             </article>
             <article class="card action-builder">
@@ -220,7 +220,7 @@
             <form id="epoch-form" class="form-grid three">
               <label><span>Target sponsor</span><input name="sponsor" placeholder="0x…" required></label>
               <label><span>Refund beneficiary</span><input name="refundBeneficiary" placeholder="0x…" required></label>
-              <label><span>Cap in base units</span><input name="cap" inputmode="numeric" value="120" required></label>
+              <label><span>Budget cap (CTC)</span><input name="cap" inputmode="decimal" value="120" required></label>
               <label><span>Initialization cutoff block</span><input name="initializationCutoff" inputmode="numeric" required></label>
               <label><span>Admission cutoff block</span><input name="admissionCutoff" inputmode="numeric" required></label>
               <label><span>Sponsor epoch nonce</span><input name="nonce" inputmode="numeric" value="0" required></label>
@@ -234,9 +234,9 @@
     </div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/vendor/ethers.umd.min.js"></script>
-  <script src="/abi-manifest.js"></script>
-  <script src="/demo-config.js"></script>
-  <script src="/app.js"></script>
+  <script src="./vendor/ethers.umd.min.js"></script>
+  <script src="./abi-manifest.js"></script>
+  <script src="./demo-config.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>

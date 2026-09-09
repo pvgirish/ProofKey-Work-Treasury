@@ -116,6 +116,10 @@ async function main() {
     const precondition={sourceBlockNumber:sourceBlock.number,sourceBlockHash:sourceBlock.hash,sourceUnresolved:String(before.unresolved),sourceEarned:String(before.earned),observedAt:new Date().toISOString()};
     await send("receipt-recognize-return50-with-B-unresolved",treasury.recognizeFromReceipt(position(report.firstPositions[1]),first.proofs[1].encodedTransaction,release50.allocationOrdinals[0]),precondition);
   }
+  if(process.argv.includes("--stop-after-return50")) {
+    report.stage="first-native-return-complete-awaiting-source-resume";await persist();
+    console.log("Native batch authentication and RETURN50 recognition complete; source B remains unresolved.");return;
+  }
   if(!sourceReport.stages.sourceComplete) sourceReport=await runSourceDemo({source,coordinator:deployment.source.coordinator,safe:deployment.source.safe,epochConfig:report.config,epochId:report.epochId,workerKey,existing:sourceReport,resumeAfterReturn50:true});
   const finalOperation=sourceOperation("sweep-final-15");
   if(!report.finalNativeBundle) {
@@ -168,6 +172,9 @@ async function main() {
   }
   const book=new Contract(report.invoiceBook.address,(await artifact("PaidInvoiceBook")).abi,signer);
   if(!(await book.invoice(report.epochId,1)).recorded) await send("record-actually-paid-WORK-in-consumer",book.recordPaidWork(report.epochId,1));
+  if(!report.freeWithdrawn && report.operations.some((op:any)=>op.label==="withdraw-returned-65")) {
+    report.freeWithdrawn=true;await persist();
+  }
   if(!report.freeWithdrawn) {
     const free=await treasury.freeBalance(report.config.refundBeneficiary);
     if(free<parseEther("65")) throw new Error("Expected at least 65 CTC returned free balance");
