@@ -1,11 +1,10 @@
 {
   "schema": "proofkey.release-manifest.v1",
-  "generatedAt": "2026-09-09T20:50:18.112Z",
+  "generatedAt": "2026-09-09T20:55:58.983Z",
   "releaseStatus": "pending",
   "releaseBlockingReasons": [
     "Two consented independent settlements and repeat independent operation are not recorded.",
-    "A real buyer reason is not recorded.",
-    "No successful public CI evidence matches the current implementation revision."
+    "A real buyer reason is not recorded."
   ],
   "reportedLimitations": [
     "The public traces are smaller than the local production-policy 113-leaf and production-tree 128-leaf tests.",
@@ -21,34 +20,25 @@
     "validatedGateCount": 15
   },
   "repository": {
-    "revision": "38e09ca5e36a275fd51a2739f54c5865d8f2bdc8",
+    "revision": "bab340e7344a148230bef4a9d1e05dcad32c1111",
     "dirty": true,
     "dirtyEntries": [
       "M README.md",
-      " M docs/PUBLIC-EVIDENCE.md",
-      " M package.json",
-      " M scripts/release-manifest.ts",
-      " M scripts/summarize-public-evidence.ts",
-      " M scripts/ui-completed-qa.mjs",
-      " M scripts/ui-live-qa.mjs",
-      " M test/WorkTreasuryTarget.t.sol",
-      " M ui/app.ts",
-      " M ui/index.html",
-      "?? docs/CONSERVATION-AND-REUSE.md",
-      "?? docs/REFUSAL-LEDGER.md",
-      "?? evidence/public-refusal-checks.json",
-      "?? evidence/ui-completed-upgrade-qa/completed-budget.png",
-      "?? evidence/ui-completed-upgrade-qa/completed-payment-claim-1.png",
-      "?? evidence/ui-completed-upgrade-qa/imported-claim-1.png",
-      "?? evidence/ui-completed-upgrade-qa/report.md",
-      "?? evidence/ui-firstload-qa/fresh-public-demo.png",
-      "?? evidence/ui-firstload-qa/independent-tree-rebuild.png",
-      "?? evidence/ui-firstload-qa/public-demo-recovered.png",
-      "?? evidence/ui-firstload-qa/report.md",
-      "?? evidence/ui-firstload-qa/stale-settings-error.png",
-      "?? scripts/ui-firstload-qa.mjs",
-      "?? scripts/verify-refusals.ts",
-      "?? test/SourceAccountingInvariant.t.sol"
+      " M docs/IMPLEMENTATION-STATUS.md",
+      " M docs/RELEASE-GATES.md",
+      " M evidence/public-ci.json",
+      " M evidence/ui-firstload-qa/fresh-default-failure.png",
+      " M evidence/ui-firstload-qa/fresh-public-demo.png",
+      " M evidence/ui-firstload-qa/report.md",
+      " M scripts/ui-firstload-qa.mjs",
+      "?? evidence/ui-firstload-hosted-qa/fresh-default-failure.png",
+      "?? evidence/ui-firstload-hosted-qa/fresh-default-retry.png",
+      "?? evidence/ui-firstload-hosted-qa/fresh-public-demo.png",
+      "?? evidence/ui-firstload-hosted-qa/independent-tree-rebuild.png",
+      "?? evidence/ui-firstload-hosted-qa/public-demo-recovered.png",
+      "?? evidence/ui-firstload-hosted-qa/report.md",
+      "?? evidence/ui-firstload-hosted-qa/stale-settings-error.png",
+      "?? evidence/ui-firstload-qa/fresh-default-retry.png"
     ]
   },
   "validation": {
@@ -78,8 +68,8 @@
         "sdk/safe-events.test.ts"
       ]
     },
-    "executionStatus": "not-verified-for-current-revision",
-    "note": "Presence and exact-name validation is not a passing test result. Use the recorded commands or attach evidence/public-ci.json for this revision."
+    "executionStatus": "passed-current-revision-public-ci",
+    "note": "The optional public CI record reports a completed successful run whose headSha exactly matches this implementation revision."
   },
   "reproduction": {
     "allContracts": "npm run test:contracts",
@@ -890,205 +880,205 @@
   "publicCi": {
     "path": "evidence/public-ci.json",
     "present": true,
-    "databaseId": 34394616462,
-    "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34394616462",
-    "headSha": "9096bf8fcb4c2a28b38bfb863c11454af301c5e6",
+    "databaseId": 34403677380,
+    "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34403677380",
+    "headSha": "bab340e7344a148230bef4a9d1e05dcad32c1111",
     "status": "completed",
     "conclusion": "success",
     "jobs": [
       {
-        "completedAt": "2026-09-09T19:23:07Z",
+        "completedAt": "2026-09-09T20:53:45Z",
         "conclusion": "success",
-        "databaseId": 102611112637,
+        "databaseId": 102641386401,
         "name": "verify",
-        "startedAt": "2026-09-09T19:22:05Z",
+        "startedAt": "2026-09-09T20:52:50Z",
         "status": "completed",
         "steps": [
           {
-            "completedAt": "2026-09-09T19:22:07Z",
+            "completedAt": "2026-09-09T20:52:52Z",
             "conclusion": "success",
             "name": "Set up job",
             "number": 1,
-            "startedAt": "2026-09-09T19:22:06Z",
+            "startedAt": "2026-09-09T20:52:51Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:22:08Z",
+            "completedAt": "2026-09-09T20:52:53Z",
             "conclusion": "success",
             "name": "Run actions/checkout@v4",
             "number": 2,
-            "startedAt": "2026-09-09T19:22:07Z",
+            "startedAt": "2026-09-09T20:52:52Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:22:11Z",
+            "completedAt": "2026-09-09T20:52:54Z",
             "conclusion": "success",
             "name": "Run actions/setup-node@v4",
             "number": 3,
-            "startedAt": "2026-09-09T19:22:08Z",
+            "startedAt": "2026-09-09T20:52:53Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:22:16Z",
+            "completedAt": "2026-09-09T20:52:57Z",
             "conclusion": "success",
             "name": "Run foundry-rs/foundry-toolchain@v1",
             "number": 4,
-            "startedAt": "2026-09-09T19:22:11Z",
+            "startedAt": "2026-09-09T20:52:54Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:22:18Z",
+            "completedAt": "2026-09-09T20:52:59Z",
             "conclusion": "success",
             "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
             "number": 5,
-            "startedAt": "2026-09-09T19:22:16Z",
+            "startedAt": "2026-09-09T20:52:57Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:22:20Z",
+            "completedAt": "2026-09-09T20:53:01Z",
             "conclusion": "success",
             "name": "Run npm run typecheck",
             "number": 6,
-            "startedAt": "2026-09-09T19:22:18Z",
+            "startedAt": "2026-09-09T20:52:59Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:22:21Z",
+            "completedAt": "2026-09-09T20:53:02Z",
             "conclusion": "success",
             "name": "Run npm run test:sdk",
             "number": 7,
-            "startedAt": "2026-09-09T19:22:20Z",
+            "startedAt": "2026-09-09T20:53:01Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:00Z",
+            "completedAt": "2026-09-09T20:53:41Z",
             "conclusion": "success",
             "name": "Run npm run test:contracts",
             "number": 8,
-            "startedAt": "2026-09-09T19:22:21Z",
+            "startedAt": "2026-09-09T20:53:02Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:00Z",
+            "completedAt": "2026-09-09T20:53:42Z",
             "conclusion": "success",
             "name": "Run bash scripts/forge.sh build --sizes",
             "number": 9,
-            "startedAt": "2026-09-09T19:23:00Z",
+            "startedAt": "2026-09-09T20:53:41Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:01Z",
+            "completedAt": "2026-09-09T20:53:42Z",
             "conclusion": "success",
             "name": "Run npm run ui:build",
             "number": 10,
-            "startedAt": "2026-09-09T19:23:00Z",
+            "startedAt": "2026-09-09T20:53:42Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:02Z",
+            "completedAt": "2026-09-09T20:53:43Z",
             "conclusion": "success",
             "name": "Run actions/upload-artifact@v4",
             "number": 11,
-            "startedAt": "2026-09-09T19:23:01Z",
+            "startedAt": "2026-09-09T20:53:42Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:03Z",
+            "completedAt": "2026-09-09T20:53:43Z",
             "conclusion": "success",
             "name": "Post Run foundry-rs/foundry-toolchain@v1",
             "number": 20,
-            "startedAt": "2026-09-09T19:23:02Z",
+            "startedAt": "2026-09-09T20:53:43Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:03Z",
+            "completedAt": "2026-09-09T20:53:44Z",
             "conclusion": "success",
             "name": "Post Run actions/setup-node@v4",
             "number": 21,
-            "startedAt": "2026-09-09T19:23:03Z",
+            "startedAt": "2026-09-09T20:53:43Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:04Z",
+            "completedAt": "2026-09-09T20:53:44Z",
             "conclusion": "success",
             "name": "Post Run actions/checkout@v4",
             "number": 22,
-            "startedAt": "2026-09-09T19:23:03Z",
+            "startedAt": "2026-09-09T20:53:44Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:04Z",
+            "completedAt": "2026-09-09T20:53:44Z",
             "conclusion": "success",
             "name": "Complete job",
             "number": 23,
-            "startedAt": "2026-09-09T19:23:04Z",
+            "startedAt": "2026-09-09T20:53:44Z",
             "status": "completed"
           }
         ],
-        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34394616462/job/102611112637"
+        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34403677380/job/102641386401"
       },
       {
-        "completedAt": "2026-09-09T19:23:24Z",
+        "completedAt": "2026-09-09T20:53:59Z",
         "conclusion": "success",
-        "databaseId": 102611498602,
+        "databaseId": 102641694665,
         "name": "publish-wallet-app",
-        "startedAt": "2026-09-09T19:23:10Z",
+        "startedAt": "2026-09-09T20:53:49Z",
         "status": "completed",
         "steps": [
           {
-            "completedAt": "2026-09-09T19:23:14Z",
+            "completedAt": "2026-09-09T20:53:51Z",
             "conclusion": "success",
             "name": "Set up job",
             "number": 1,
-            "startedAt": "2026-09-09T19:23:11Z",
+            "startedAt": "2026-09-09T20:53:50Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:15Z",
+            "completedAt": "2026-09-09T20:53:51Z",
             "conclusion": "success",
             "name": "Run actions/configure-pages@v5",
             "number": 2,
-            "startedAt": "2026-09-09T19:23:14Z",
+            "startedAt": "2026-09-09T20:53:51Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:16Z",
+            "completedAt": "2026-09-09T20:53:52Z",
             "conclusion": "success",
             "name": "Run actions/download-artifact@v4",
             "number": 3,
-            "startedAt": "2026-09-09T19:23:15Z",
+            "startedAt": "2026-09-09T20:53:51Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:17Z",
+            "completedAt": "2026-09-09T20:53:53Z",
             "conclusion": "success",
             "name": "Run actions/upload-pages-artifact@v3",
             "number": 4,
-            "startedAt": "2026-09-09T19:23:16Z",
+            "startedAt": "2026-09-09T20:53:52Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:23Z",
+            "completedAt": "2026-09-09T20:53:58Z",
             "conclusion": "success",
             "name": "Publish verified wallet build",
             "number": 5,
-            "startedAt": "2026-09-09T19:23:17Z",
+            "startedAt": "2026-09-09T20:53:53Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T19:23:23Z",
+            "completedAt": "2026-09-09T20:53:58Z",
             "conclusion": "success",
             "name": "Complete job",
             "number": 6,
-            "startedAt": "2026-09-09T19:23:23Z",
+            "startedAt": "2026-09-09T20:53:58Z",
             "status": "completed"
           }
         ],
-        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34394616462/job/102611498602"
+        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34403677380/job/102641694665"
       }
     ],
-    "currentRevisionMatch": false,
-    "acceptedAsCurrentRevisionPass": false
+    "currentRevisionMatch": true,
+    "acceptedAsCurrentRevisionPass": true
   },
   "realNativeEvidence": {
     "path": "evidence/native-recovery-verification-33642ef4.json",
@@ -2978,10 +2968,8 @@
         }
       ],
       "observedStatus": "Exact test names, frozen vectors, schema and compiled artifacts are present and validated; this generator does not claim a current-revision test execution.",
-      "pending": [
-        "Attach the current-revision CI or local execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 2,
@@ -3097,10 +3085,8 @@
         }
       ],
       "observedStatus": "The public source journals record the main policy path and branch terminals, including stale, duplicate and both first-writer refusal observations; target follow-through is reported by separate gates.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 3,
@@ -3154,10 +3140,8 @@
         }
       ],
       "observedStatus": "The actual 113-leaf production-policy test and 128-leaf production-tree harness are reference-validated; the public branch journal separately records smaller live traces.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 4,
@@ -3208,10 +3192,8 @@
         }
       ],
       "observedStatus": "Independent rebuild and event-roundtrip test references are validated; the public journals contain allocation/checkpoint receipt ordinals but do not record a maximum-size same-block rebuild.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 5,
@@ -3262,10 +3244,8 @@
         }
       ],
       "observedStatus": "Public source receipts retain allocation and checkpoint ordinals from the same operations; atomic rollback remains locally executable evidence.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 6,
@@ -3297,10 +3277,8 @@
         }
       ],
       "observedStatus": "The main source journal records its republish observation; exact equality, phase transition and no-mutation assertions remain mapped to the named tests.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 7,
@@ -3365,10 +3343,8 @@
         }
       ],
       "observedStatus": "A real fixed-0xFD2 read-only verification returned true and a public batch authentication is mined; negative authentication cases are local executable tests.",
-      "pending": [
-        "Attach the current-revision negative-path test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 8,
@@ -3411,10 +3387,8 @@
         }
       ],
       "observedStatus": "The public main journal records an authenticated receipt cache and an exact receipt recognition; the two-epoch, parser, wrong-emitter and failure-preservation matrix remains local executable evidence.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 9,
@@ -3465,10 +3439,8 @@
         }
       ],
       "observedStatus": "The public journal states and receipt identifiers are captured below; both replay directions, mixed kinds and substitution refusals are mapped to exact executable tests.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 10,
@@ -3526,10 +3498,8 @@
         }
       ],
       "observedStatus": "The public main journal records RETURN 50 recognized before B settled; its current state below determines whether final worker collection, total RETURN recognition and withdrawal are complete.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 11,
@@ -3573,10 +3543,8 @@
         }
       ],
       "observedStatus": "Combined and separate operation behavior is mapped to exact executable tests; the public journals do not by themselves establish the full comparison.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 12,
@@ -3639,10 +3607,8 @@
         }
       ],
       "observedStatus": "The first raw recovery report used unchanged continuity. The later public refusal/replacement report separately records older and regenerated witness outcomes at one target block; only its observed result supports changed-witness recovery.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 13,
@@ -3694,10 +3660,8 @@
         }
       ],
       "observedStatus": "The local performance matrix records all required sizes and source positions. Its target figures explicitly exclude native verification; the public journal records actual batch and receipt-recognition gas only.",
-      "pending": [
-        "Attach the current-revision performance test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 14,
@@ -3776,10 +3740,8 @@
         }
       ],
       "observedStatus": "The source main and branch journals and the real read-only proof replacement are recorded; the current target and Safe-rotation journal states below determine the remaining product evidence.",
-      "pending": [
-        "Attach the current-revision test execution result."
-      ],
-      "releaseGateStatus": "pending"
+      "pending": [],
+      "releaseGateStatus": "observed"
     },
     {
       "id": 15,
@@ -3823,8 +3785,7 @@
       "pending": [
         "Two consented independent settlements are not recorded.",
         "Repeat independent operation without a target reservation operator is not recorded.",
-        "A real buyer reason is not recorded.",
-        "Attach the current-revision test execution result."
+        "A real buyer reason is not recorded."
       ],
       "releaseGateStatus": "pending"
     }

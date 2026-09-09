@@ -126,18 +126,35 @@ check("Explicit public demo is labeled saved", (await text("#settings-storage-ta
 check("Public defaults replace settings only after the click", String(recovered.source.chainId) === String(deployment.source.chainId) && recovered.source.coordinator.toLowerCase() === deployment.source.coordinator.toLowerCase() && recovered.target.treasury.toLowerCase() === deployment.target.treasury.toLowerCase(), JSON.stringify(recovered));
 await screenshot("public-demo-recovered.png");
 
-await click('[data-view="overview"]');
-await evaluate(`(async () => {
-  const original = structuredClone(window.PROOFKEY_DEFAULT_CONFIG);
-  window.PROOFKEY_DEFAULT_CONFIG = {...original, source:{...original.source, label:'Forced fresh failure', chainId:'1'}};
-  try { await activatePublicDemo(false); } catch (error) { showPublicDemoStartupFailure(error); }
-  finally { window.PROOFKEY_DEFAULT_CONFIG = original; }
-})()`);
+const injection = await send("Page.addScriptToEvaluateOnNewDocument", { source: `(() => {
+  let current;
+  Object.defineProperty(window, 'PROOFKEY_DEFAULT_CONFIG', {
+    configurable: true,
+    get() { return current; },
+    set(value) {
+      if (!window.__PROOFKEY_ORIGINAL_DEFAULT_CONFIG) {
+        window.__PROOFKEY_ORIGINAL_DEFAULT_CONFIG = structuredClone(value);
+        current = {...value, source:{...value.source, label:'Injected fresh-boot test', chainId:'1'}};
+      } else current = value;
+    }
+  });
+})()` });
+await evaluate("localStorage.removeItem('proofkey-work-treasury.workspace.v1'); localStorage.removeItem('proofkey-work-treasury.draft.v1'); location.reload()");
+await waitFor("document.readyState === 'complete' && !document.querySelector('#startup-status')?.hidden");
 const startupFailure = await text("#startup-status");
-check("Fresh automatic failure stays visible on Budget", !(await evaluate("document.querySelector('#startup-status').hidden")) && startupFailure.includes("Public demo could not be verified") && startupFailure.includes("reports chain 11155111, not 1") && startupFailure.includes("did not request a wallet"), startupFailure);
+const failedFreshCards = `${await text("#source-main")} / ${await text("#target-main")} / ${await text("#action-main")}`;
+check("Injected configuration changed only the fresh-boot source domain", await evaluate("window.PROOFKEY_DEFAULT_CONFIG.source.label === 'Injected fresh-boot test' && String(window.PROOFKEY_DEFAULT_CONFIG.source.chainId) === '1' && String(window.__PROOFKEY_ORIGINAL_DEFAULT_CONFIG.source.chainId) === '11155111'"), await evaluate("JSON.stringify(window.PROOFKEY_DEFAULT_CONFIG.source)"));
+check("Actual fresh-boot failure stays visible on Budget", !(await evaluate("document.querySelector('#startup-status').hidden")) && startupFailure.includes("Public demo could not be verified") && startupFailure.includes("reports chain 11155111, not 1") && startupFailure.includes("did not request a wallet"), startupFailure);
+check("Failed fresh boot shows no stale chain state", failedFreshCards === "Not read yet / Not read yet / Connect the workspace" && await evaluate("document.querySelector('#source-metrics').textContent === '' && document.querySelector('#target-metrics').textContent === ''"), failedFreshCards);
+check("Failed fresh boot does not save the injected default", await evaluate("localStorage.getItem('proofkey-work-treasury.workspace.v1') === null"), "workspace localStorage remains absent");
 await screenshot("fresh-default-failure.png");
-await evaluate("activatePublicDemo(false)");
-check("Successful read-only retry clears the Budget failure", await evaluate("document.querySelector('#startup-status').hidden"), await text("#startup-status"));
+await evaluate("window.PROOFKEY_DEFAULT_CONFIG = window.__PROOFKEY_ORIGINAL_DEFAULT_CONFIG");
+await click('[data-view="settings"]');
+await click("#load-public-demo");
+await waitFor("document.querySelector('#settings-result')?.classList.contains('success') && document.querySelector('#target-main')?.textContent === 'Exact epoch funded'");
+check("Actual UI retry clears the Budget failure", await evaluate("document.querySelector('#startup-status').hidden") && (await text("#settings-result")).includes("Public demo defaults selected"), await text("#settings-result"));
+await screenshot("fresh-default-retry.png");
+await send("Page.removeScriptToEvaluateOnNewDocument", { identifier: injection.identifier });
 
 const forbidden = rpcCalls.filter(call => ["eth_sendTransaction", "eth_sendRawTransaction", "eth_sign", "personal_sign", "eth_requestAccounts"].includes(call.method));
 const criticalResponses = badResponses.filter(item => !item.endsWith("/favicon.ico"));
@@ -147,11 +164,11 @@ check("No browser runtime or critical request errors", criticalBrowserErrors.len
 
 const report = [
   "# Public-demo first-load and stale-settings UI QA", "", `Run: ${new Date().toISOString()}`, `URL: ${appUrl}`, "",
-  "Chrome used a new isolated profile. The run exercised the normal app UI with public read-only RPCs and no injected wallet.", "",
+  "Chrome used a new isolated profile. The run exercised the normal app UI with public read-only RPCs and no injected wallet. For the negative fresh-boot case, a CDP document-start setter changed the built-in source chain ID from 11155111 to 1 and added a test-only source label before demo-config.js completed; contract addresses, RPC URLs, target configuration and published files were not changed.", "",
   "## Result", "", ...checks.map(item => `- ${item.passed ? "PASS" : "FAIL"} — ${item.name}: ${String(item.detail).replaceAll("\n", " · ")}`), "",
   "## Fresh readback", "", `- Source: ${freshSource.replaceAll("\n", " · ")}`, `- Target: ${freshTarget.replaceAll("\n", " · ")}`, `- Setup status: ${freshStatus.replaceAll("\n", " · ")}`, `- Independent tree: ${treeResult.replaceAll("\n", " · ")}`, "",
   "## Stale and recovery behavior", "", `- Restored: ${restoredStatus.replaceAll("\n", " · ")}`, `- Visible error: ${staleError.replaceAll("\n", " · ")}`, `- Recovery: ${recoveredStatus.replaceAll("\n", " · ")}`, `- Forced fresh-load failure: ${startupFailure.replaceAll("\n", " · ")}`, "",
-  "## Screenshots", "", "- fresh-public-demo.png", "- independent-tree-rebuild.png", "- stale-settings-error.png", "- public-demo-recovered.png", "- fresh-default-failure.png", "",
+  "## Screenshots", "", "- fresh-public-demo.png", "- independent-tree-rebuild.png", "- stale-settings-error.png", "- public-demo-recovered.png", "- fresh-default-failure.png", "- fresh-default-retry.png", "",
   "No account request, signing method or transaction broadcast was observed. The public demo remains team controlled; this QA does not claim independent settlement.", "",
 ].join("\n");
 await writeFile(join(outputDir, "report.md"), report);

@@ -18,7 +18,7 @@ The initial buyer hypothesis is an ecosystem grants or procurement team whose ap
 
 ## Run the wallet app
 
-[Open the public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/). Fresh sessions automatically verify and read the pinned public testnet demonstration. Saved setups are preserved until explicitly replaced, and verification errors remain visible in Networks. Check that page before connecting a wallet; source finality can temporarily lag the latest demonstration transaction.
+[Open the public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/). Fresh sessions automatically verify and read the pinned public testnet demonstration. Saved setups are preserved until explicitly replaced, and verification errors remain visible. [Hosted browser checks](evidence/ui-firstload-hosted-qa/report.md) cover fresh loading, saved settings and failure recovery. Check that page before connecting a wallet; source finality can temporarily lag the latest demonstration transaction.
 
 Requires Node 24 and Foundry. Solidity is pinned to 0.8.28; dependencies are pinned in `package-lock.json`.
 
