@@ -44,11 +44,11 @@ Keep private keys, seed phrases, personal contact details and unapproved names o
 
 ## Run an actual settlement in the app
 
-1. Build and open the wallet app with `npm run build`, `npm run ui:build` and `npm run ui:serve`.
-2. In **Setup**, load `deployments/ui-testnet.json` or enter the verified Sepolia SourceCoordinator, Ethereum Safe and Creditcoin WorkTreasury addresses. Confirm source chain key `1`, Sepolia chain ID `11155111` and Creditcoin testnet chain ID `102031`.
-3. In **Epoch**, create a new exact configuration. Have the named sponsor fund its full cap on Creditcoin. Wait for the app to confirm that exact epoch from a finalized target block.
+1. Open the [public wallet app](https://pvgirish.github.io/ProofKey-Work-Treasury/), or build and serve it locally with `npm run build`, `npm run ui:build` and `npm run ui:serve`.
+2. In **Networks**, compare the public defaults with `deployments/ui-testnet.json`, or enter the verified Sepolia SourceCoordinator, participant's Ethereum Safe and Creditcoin WorkTreasury addresses. Confirm source chain key `1`, Sepolia chain ID `11155111` and Creditcoin testnet chain ID `102031`, then select **Save and verify**.
+3. In **Networks → Create a fresh budget epoch**, create a new exact configuration. Have the named sponsor use **Fund on Creditcoin** to fund its full cap. Wait for the app to confirm that exact epoch from a finalized target block.
 4. Initialize the same configuration through the Ethereum Safe. The app prepares an ordinary Safe transaction; it does not install a module or bypass the Safe's current owner policy.
-5. In **Orders**, enter the complete work terms with the participant present. Review the worker, claim owner, destination, fee owner, committee, amounts and all three milestone cutoffs.
+5. In **Work orders**, enter the complete work terms with the participant present. Review the worker, claim owner, destination, fee owner, committee, amounts and all three milestone cutoffs.
 6. Let the worker accept the exact Safe offer or sign an exact quote only after the finalized funding check succeeds. Record who controlled the signature and what assistance was given.
 7. Submit delivery from the worker account. Finalize through approval, mutual settlement, monitoring default, committee ruling, committee timeout or no delivery as the real facts require. Do not choose an outcome only to improve the demonstration.
 8. In **Evidence**, fetch or import native proof material for the actual source transaction. Authenticate it on Creditcoin, then recognize the exact allocation through its receipt or a checkpoint package.

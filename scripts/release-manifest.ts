@@ -478,6 +478,7 @@ async function main(){
     releaseStatus:"pending",
     releaseBlockingReasons:[
       "Two consented independent settlements and repeat independent operation are not recorded.",
+      "A real buyer reason is not recorded.",
       ...(!mainTargetComplete||!branchTargetComplete||!safeRotationComplete?["One or more public target or Safe-rotation journals are incomplete."]:[]),
       ...(!currentRevisionCiPassed?["No successful public CI evidence matches the current implementation revision."]:[]),
     ],
@@ -605,7 +606,7 @@ async function main(){
 
   await writeFile(OUTPUT,`${JSON.stringify(manifest,null,2)}\n`);
   console.log(`Wrote ${relative(ROOT,OUTPUT)} for ${gates.length} locked gates at ${manifest.repository.revision}${manifest.repository.dirty?" (dirty)":""}.`);
-  console.log("Release remains pending; external participants and incomplete public target journeys are not marked complete.");
+  console.log(`Release remains pending: ${manifest.releaseBlockingReasons.join(" ")}`);
 }
 
 await main();

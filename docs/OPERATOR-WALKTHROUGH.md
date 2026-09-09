@@ -21,10 +21,11 @@ Open **Networks** before connecting a wallet. A fresh browser loads these public
 | Target chain ID | `102031` |
 | Target RPC | `https://rpc.cc3-testnet.creditcoin.network` |
 | WorkTreasury | `0x06c76dFF132e64453cc0eD04a4464648db4322DA` |
+| PaidInvoiceBook | `0xb93d065d7995884ceb8dad26d09B3a1efD9787cf` |
 | Proof service | `https://prover.cc3-testnet.creditcoin.network` |
 | Built-in epoch | `0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7` |
 
-Leave **PaidInvoiceBook** empty unless an evidence record identifies an exact deployed book and its pinned buyer, order, asset and policy.
+The supplied **PaidInvoiceBook** is pinned to the main demonstration's buyer, order, asset and policy. Its completed claim 1 record can be inspected in **Payments**. For a different order, configure a separately deployed book with the intended expectations or leave the optional field empty.
 
 Select **Verify without saving**. A successful check confirms both RPC chain IDs, contract code, and the target treasury's immutable source chain ID, source key and coordinator. Target values are read together at one target block. The app prefers an RPC's `finalized` block tag; if an RPC does not expose it, the result explicitly says that it used a confirmation-depth fallback and that finality is not asserted. Do not relabel that fallback as finalized.
 
