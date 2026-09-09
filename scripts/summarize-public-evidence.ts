@@ -92,6 +92,7 @@ function describeState(value:unknown):string{
     "public-branches-and-expiry-complete":"Complete — branch recognition, successor expiry, and recorded withdrawals report completion",
     "source-branches-complete-awaiting-target-proofing":"Source complete — target status is reported separately",
     "public-safe-rotation-complete":"Complete — the disposable Safe rotation journey reports completion",
+    "disposable-safe-rotation-complete":"Complete — the disposable Safe rotation journey reports completion",
   };
   if(exact[value])return exact[value];
   const lower=value.toLowerCase();
