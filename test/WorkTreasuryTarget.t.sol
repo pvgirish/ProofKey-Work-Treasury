@@ -50,11 +50,17 @@ contract WorkTreasuryTargetTest is Test {
         assertEq(treasury.freeBalance(REFUND), 40 ether);
 
         WorkTypes.EpochConfig memory successor = _config(2, 40 ether, REFUND, REFUND, SAFE);
+        vm.prank(SPONSOR);
+        vm.expectRevert(abi.encodeWithSelector(WorkTreasury.NotSponsor.selector, SPONSOR, REFUND));
+        treasury.fundEpochFromFree(successor);
+        assertEq(treasury.freeBalance(REFUND), 40 ether);
         vm.prank(REFUND);
         bytes32 secondId = treasury.fundEpochFromFree(successor);
+        assertNotEq(secondId, firstId);
         account = treasury.epochAccount(secondId);
         assertEq(account.reserve, 40 ether);
         assertTrue(account.funded);
+        assertEq(treasury.epochAccount(firstId).reserve, 60 ether);
         assertEq(treasury.freeBalance(REFUND), 0);
         assertEq(treasury.liveLiabilities(), 130 ether);
         assertEq(treasury.totalCreditedDeposits(), 130 ether);
@@ -210,6 +216,33 @@ contract WorkTreasuryTargetTest is Test {
         treasury.ownerWithdrawFreeTo(10 ether, payable(REFUND));
         assertEq(treasury.freeBalance(address(rejecter)), 0);
         assertEq(REFUND.balance, 10 ether);
+
+        bytes32 fixedFirstEpoch = _fund(_config(56, 10 ether, SPONSOR, REFUND, SAFE));
+        WorkTypes.Allocation memory fixedFirst =
+            _allocation(fixedFirstEpoch, 1, WorkTypes.RETURN, 10 ether, REFUND, REFUND);
+        treasury.authenticateAndRecognizeReceipt(
+            _proof(67, _encoded(1, _logs(_allocationLog(SOURCE, fixedFirst)))), 0
+        );
+        uint256 refundBefore = REFUND.balance;
+        treasury.withdrawFreeFor(payable(REFUND), 10 ether);
+        assertEq(REFUND.balance, refundBefore + 10 ether);
+        vm.prank(REFUND);
+        vm.expectRevert();
+        treasury.ownerWithdrawFreeTo(10 ether, payable(FOREIGN));
+
+        bytes32 ownerFirstEpoch = _fund(_config(57, 10 ether, SPONSOR, REFUND, SAFE));
+        WorkTypes.Allocation memory ownerFirst =
+            _allocation(ownerFirstEpoch, 1, WorkTypes.RETURN, 10 ether, REFUND, REFUND);
+        treasury.authenticateAndRecognizeReceipt(
+            _proof(68, _encoded(1, _logs(_allocationLog(SOURCE, ownerFirst)))), 0
+        );
+        uint256 foreignBefore = FOREIGN.balance;
+        vm.prank(REFUND);
+        treasury.ownerWithdrawFreeTo(10 ether, payable(FOREIGN));
+        assertEq(FOREIGN.balance, foreignBefore + 10 ether);
+        vm.expectRevert();
+        treasury.withdrawFreeFor(payable(REFUND), 10 ether);
+        assertEq(treasury.freeBalance(REFUND), 0);
     }
 
     function test_oldCheckpointImportedLaterDoesNotRewindLatest() public {

@@ -4,20 +4,20 @@ This ledger separates implemented behavior, local verification and public observ
 
 | Gate | Implemented / local evidence | Public observation |
 |---|---|---|
-| Frozen allocation/checkpoint ABI, epoch/order domains | `schema/`, SDK conformance and `IdentityConformance.t.sol` | Pending deployment run |
-| Conserved source policy and all terminal outcomes | `SourceCoordinator.t.sol`, `AdversarialIntegration.t.sol` | Pending branch runner |
-| Capacity, actual 113-leaf policy, actual 128-leaf tree | `SourceCoordinator.t.sol`, `AllocationTree.t.sol` | Public getters implemented; measured run pending |
-| Atomic publication and independent rebuild | Real source event roundtrip, full bottom-up test reconstruction | Public same-block rebuild pending |
-| Republish and immutable source authority | Source tests and Safe integration tests | Public republish/owner-change observation pending |
-| Native necessity, single/batch/segmented paths | `WorkTreasuryTarget.t.sol`; local native boundary stub disclosed | Pending actual native proofs |
+| Frozen allocation/checkpoint ABI, epoch/order domains | `schema/`, SDK conformance and `IdentityConformance.t.sol` | Deployed runtime correspondence and public domain readback pass |
+| Conserved source policy and all terminal outcomes | `SourceCoordinator.t.sol`, `AdversarialIntegration.t.sol` | Main journey is partial; public branch runner is underway |
+| Capacity, actual 113-leaf policy, actual 128-leaf tree | `SourceCoordinator.t.sol` reaches the 32-reservation cap with money remaining, rejects reservation 33 without mutation, then completes protected returns and all obligations through the 113-leaf trace; `AllocationTree.t.sol` reaches 128 and rejects append 129 | Public getters are live; maximum-size public run pending |
+| Atomic publication and independent rebuild | The 113-leaf policy trace checks unchanged tree state after every nonallocation transition, independently rebuilds after every allocation-producing call, and checks every final checkpoint payload; the separate 128-leaf harness rebuilds after every append | Public same-block rebuild pending |
+| Republish and immutable source authority | Source tests verify permissionless exact same-state and phase-only checkpoint payloads with full state/config immutability; Safe integration tests pass | Public republish and disposable owner-rotation observations pending |
+| Native necessity, single/batch/segmented paths | `WorkTreasuryTarget.t.sol`; local native boundary stub disclosed | Actual batch authentication mined; single and segmented public paths pending |
 | Persisted cache, wrong event/emitter/domain rejection | Target and adversarial tests | Pending cached public claims and mined refusal |
-| Receipt/checkpoint economic equivalence and replay | Both directions in `EndToEnd.t.sol` | Pending native run |
-| Refund before unseen WORK; payout ordering and recovery | Target tests and locked 120-unit E2E | Pending public 120-unit journey |
+| Receipt/checkpoint economic equivalence and replay | Both directions in `EndToEnd.t.sol` | RETURN50 exact-receipt recognition mined; checkpoint equivalence and replay observations pending |
+| Refund before unseen WORK; payout ordering and recovery | Target tests and locked 120-unit E2E cover rejecting recipients, accepting-lock finality, and both successful fixed/owner orderings for claims and free balances. Successor funding uses only the refund owner's returned free balance under a fresh epoch ID while the old reserve remains isolated | RETURN50 recognized while B remained unresolved at 40 CTC; public journey remainder pending |
 | Receipt-only and cached-root collection | Target and E2E tests | Pending both public recovery demonstrations |
-| Measured costs and transaction bounds | Performance measurements in progress | Native costs pending |
-| Wallet app, portable evidence, proof replacement | Guided app and SDK implemented; browser review in progress | Public hosting pending |
+| Measured costs and transaction bounds | Local matrix in `evidence/local-performance.json`; isolated canonical AllocationCreated event: 4,496 gas; CheckpointPublished event: 2,491 gas | Native batch: 435,498 gas; RETURN50 receipt recognition: 374,122 gas. Remaining path costs pending |
+| Wallet app, portable evidence, proof replacement | Guided app, 15 SDK tests and browser review pass | [Public app](https://pvgirish.github.io/ProofKey-Work-Treasury/) returns HTTP 200; live-readback and browser-proof reports pass. Regenerated hosted proof preserves exact transaction bytes and ten continuity roots, and the fixed native verifier returns true in a read-only call |
 | Completed-WORK consumer | Target tests reject nonpayments and wrong expectations | Pending public completed payment |
-| Public CI | `.github/workflows/ci.yml` ready | Pending public run |
+| Public CI | `.github/workflows/ci.yml` | [Run 34390602894](https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34390602894) passes with 39 contract tests and 15 SDK tests |
 | Two consenting independent settlements, repeat use, buyer reason | Participant request sent to project owner | **Pending real participants; cannot be replaced by team fixtures** |
 
-The runtime sizes before deployment are SourceCoordinator 21,789 bytes and WorkTreasury 20,019 bytes, below the 24,576-byte EIP-170 limit. Compiler settings are Solidity 0.8.28, Cancun, optimizer 200, via IR. The deployment runner independently compares deployed bytes to the linked compiled runtime outside declared immutable slots, then checks the public target immutables.
+The runtime sizes before deployment are SourceCoordinator 21,789 bytes and WorkTreasury 20,019 bytes, below the 24,576-byte EIP-170 limit. Compiler settings are Solidity 0.8.28, Cancun, optimizer 200, via IR. The deployment runner independently compares deployed bytes to the linked compiled runtime outside declared immutable slots, then checks the public target immutables. `evidence/native-recovery-verification-33642ef4.json` records the read-only hosted-provider replacement and fixed-native-verifier result. `evidence/public-demo.json` is currently paused after RETURN50 recognition so the later source settlement and final native checkpoint remain observable in chronological order. `evidence/source-branches.json` is an in-progress public run and does not yet pass the branch gate.

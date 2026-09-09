@@ -1,0 +1,33 @@
+{
+  "schema": "proofkey.native-recovery-verification.v1",
+  "checkedAt": "2026-09-09T18:48:00.038Z",
+  "readOnly": true,
+  "transaction": {
+    "label": "approve-A",
+    "transactionHash": "0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5",
+    "blockHeight": 11669711,
+    "transactionIndex": 57
+  },
+  "generator": "@gluwa/usc-sdk@0.18.0 RawProofBuilder",
+  "targetAttestedHeight": 11669750,
+  "targetAttestedHash": "0xf99d4aba41c50e880f69a2ba19ca29cba7bbdf926843bc29d0de1aad7e81d081",
+  "encodedTransaction": {
+    "priorHash": "0x93a1c3c431e290a1120ec71fc4d0e9edce7d0f770f2578b3c9c500a000837afe",
+    "refreshedHash": "0x93a1c3c431e290a1120ec71fc4d0e9edce7d0f770f2578b3c9c500a000837afe",
+    "exactBytesEqual": true
+  },
+  "continuity": {
+    "priorFingerprint": "0x685d4c9cc743afbf3b174532c88b72671ff8c5e0ef3a866ddc9e627913d7bfc4",
+    "refreshedFingerprint": "0x685d4c9cc743afbf3b174532c88b72671ff8c5e0ef3a866ddc9e627913d7bfc4",
+    "changed": false,
+    "priorRootCount": 10,
+    "refreshedRootCount": 10
+  },
+  "nativeSimulation": {
+    "callType": "eth_call",
+    "precompile": "0x0000000000000000000000000000000000000FD2",
+    "returned": true,
+    "calculatedTransactionIndex": 57
+  },
+  "conclusion": "Freshly regenerated approve-A evidence was accepted by the fixed Creditcoin native verifier in a read-only call."
+}

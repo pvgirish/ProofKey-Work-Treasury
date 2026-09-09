@@ -62,6 +62,7 @@ if (existsSync(testnetConfigPath)) {
       ...parsed,
       source: { label: "Ethereum Sepolia", confirmations: 12, ...parsed.source },
       target: { label: "Creditcoin Testnet", confirmations: 12, ...parsed.target },
+      proofServiceUrl: parsed.proofServiceUrl ?? "https://prover.cc3-testnet.creditcoin.network",
       ...(publicEpochId ? { lastEpochId: publicEpochId } : {}),
     };
   }

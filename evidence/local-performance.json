@@ -15,29 +15,43 @@
     "note": "Target values are cumulative gas across N separate recognition calls; the contracts expose no batch-recognition transaction. Measurements begin after authentication, and checkpoint import is also outside the measured interval. Receipt measurements include exact cached-receipt decoding on every selected log. Real native proof costs are pending an on-chain measurement."
   },
   "sourceGas": {
-    "createOffer32Milestones": 3525401,
-    "acceptOffer32Milestones": 224994,
-    "approveAllocation0FirstIncludingAllocationAndCheckpointEvents": 610225,
-    "approveAllocation1CarryIncludingAllocationAndCheckpointEvents": 436304,
-    "approveAllocation31LateIncludingAllocationAndCheckpointEvents": 419818,
-    "committeeWorkFeeAllocations31And32IncludingCheckpointEvent": 691937,
+    "createOffer32Milestones": 3525407,
+    "acceptOffer32Milestones": 224996,
+    "approveAllocation0FirstIncludingAllocationAndCheckpointEvents": 610239,
+    "approveAllocation1CarryIncludingAllocationAndCheckpointEvents": 436318,
+    "approveAllocation31LateIncludingAllocationAndCheckpointEvents": 419832,
+    "committeeWorkFeeAllocations31And32IncludingCheckpointEvent": 691956,
     "maximumApproveIn32AllocationRun": {
-      "gas": 610225,
+      "gas": 610239,
       "treeIndex": 0
+    }
+  },
+  "sourceMarginalEventGas": {
+    "allocationCreatedCanonicalMemoryPayload": 4496,
+    "checkpointPublishedCanonicalMemoryPayload": 2491,
+    "method": "Exact frozen event declarations emitted by the test-only SourceEventGasHarness after ABI decoding and before return; excludes transaction dispatch and source state updates.",
+    "allocationTopics": 3,
+    "allocationDataBytes": 352,
+    "checkpointTopics": 2,
+    "checkpointDataBytes": 160,
+    "bounds": {
+      "allocationCreatedMaximum": 5000,
+      "checkpointPublishedMaximum": 3000,
+      "enforcedByTest": true
     }
   },
   "targetRecognitionGas": {
     "checkpoint": {
-      "1": 535506,
-      "4": 2067961,
-      "16": 8198684,
-      "32": 16379256
+      "1": 535538,
+      "4": 2068060,
+      "16": 8199047,
+      "32": 16379971
     },
     "cachedExactReceipt": {
-      "1": 530354,
-      "4": 2141900,
-      "16": 10030013,
-      "32": 24261460
+      "1": 530349,
+      "4": 2141850,
+      "16": 10029783,
+      "32": 24260991
     }
   },
   "runtimeBytes": {
@@ -52,7 +66,7 @@
   "limits": {
     "runtimeBytes": 24576,
     "allProductionRuntimeArtifactsWithinLimit": true,
-    "maximumMeasuredSourceCallGas": 3525401
+    "maximumMeasuredSourceCallGas": 3525407
   },
   "reproduction": {
     "test": "test/Performance.t.sol:PerformanceTest",

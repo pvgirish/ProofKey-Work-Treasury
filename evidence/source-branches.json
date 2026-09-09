@@ -1,0 +1,880 @@
+{
+  "schema": "ProofKeySourceBranchesV1",
+  "startedAt": "2026-09-09T18:32:20.447Z",
+  "status": "source-branches-complete-awaiting-target-proofing",
+  "sourceOnly": true,
+  "transactionJournalVersion": 1,
+  "nativeAuthenticationClaim": false,
+  "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+  "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+  "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+  "cap": "20000000000000000000",
+  "committee": [
+    "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+    "0x247a5839c7F79115f473856EC8a6495e439096D6",
+    "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+  ],
+  "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+  "operations": [
+    {
+      "label": "initialize-branch-epoch",
+      "transactionHash": "0x55e14fbfa0c623f48e58750d36472969422eaea1fd84008d4a147b927485997f",
+      "blockNumber": 11669719,
+      "blockTimestamp": 1788978768,
+      "gasUsed": "466815",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [
+        1
+      ],
+      "safe": {
+        "outerTransactionHash": "0x55e14fbfa0c623f48e58750d36472969422eaea1fd84008d4a147b927485997f",
+        "safeTransactionHash": "0x3ea1961b2f308f6a76a5361130f1b85d0d310f1e29fb4d9da3f03cf3c642509c",
+        "blockNumber": 11669719,
+        "gasUsed": "466815",
+        "nonce": "11",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 2
+      }
+    },
+    {
+      "label": "create-pending-decline",
+      "transactionHash": "0x81b92422eae707ebab551ed9790e447fbe5e68a347fc302114b5618044f434e1",
+      "blockNumber": 11669720,
+      "blockTimestamp": 1788978780,
+      "gasUsed": "549252",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x81b92422eae707ebab551ed9790e447fbe5e68a347fc302114b5618044f434e1",
+        "safeTransactionHash": "0x2a7ebcfbbac917765d368489b27e8a3ba7c4730a7f87e8247f58b6bcd49f1c64",
+        "blockNumber": 11669720,
+        "gasUsed": "549252",
+        "nonce": "12",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "worker-declines-pending",
+      "transactionHash": "0x506e56eb78e698e8b09aa7424ca9a1f7b30c6f0beac9075c8b3e3e31fa7742a5",
+      "blockNumber": 11669721,
+      "blockTimestamp": 1788978792,
+      "gasUsed": "75049",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "create-pending-expiry",
+      "transactionHash": "0xa62c5c864681d759ec2e9ac80af4cf967c7b5fb8e01cd5e2a2f72acc81cdf19d",
+      "blockNumber": 11669722,
+      "blockTimestamp": 1788978804,
+      "gasUsed": "549252",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0xa62c5c864681d759ec2e9ac80af4cf967c7b5fb8e01cd5e2a2f72acc81cdf19d",
+        "safeTransactionHash": "0x27749d394921718989de0a072c22971bb4044f80cfe8bff562af5ae0e7903ca7",
+        "blockNumber": 11669722,
+        "gasUsed": "549252",
+        "nonce": "13",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "permissionless-pending-expiry",
+      "transactionHash": "0xcc640c7fe799cc99daf3c9191ff1995817c7313adb50b8b1be3a60e670f146f0",
+      "blockNumber": 11669725,
+      "blockTimestamp": 1788978840,
+      "gasUsed": "72748",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "create-monitoring-default",
+      "transactionHash": "0x82fecd39d9a9a725b25866966c43fbeeb43faa804166e864da779d2d7c517f86",
+      "blockNumber": 11669726,
+      "blockTimestamp": 1788978852,
+      "gasUsed": "549264",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x82fecd39d9a9a725b25866966c43fbeeb43faa804166e864da779d2d7c517f86",
+        "safeTransactionHash": "0xe3c922df5b97cc3b432134430eed9d316dc36e8a039024f4048161eb155af17c",
+        "blockNumber": 11669726,
+        "gasUsed": "549264",
+        "nonce": "14",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "accept-monitoring-default",
+      "transactionHash": "0xb234739a0ead7898945db13b3d90454b3c87f72a6e16415753e0197e075b3743",
+      "blockNumber": 11669727,
+      "blockTimestamp": 1788978864,
+      "gasUsed": "60152",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "deliver-monitoring-default",
+      "transactionHash": "0x8f103b867b5333fc7826b0a7c942d3a7e4dac265a2e73b24e270f3a4dcb11445",
+      "blockNumber": 11669728,
+      "blockTimestamp": 1788978876,
+      "gasUsed": "62000",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "finalize-monitoring-default",
+      "transactionHash": "0xf9873918a2cc71369102dc8c41eed63e54c457c8157fa0e37d2b8d6f6989264e",
+      "blockNumber": 11669740,
+      "blockTimestamp": 1788979020,
+      "gasUsed": "579565",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        2
+      ]
+    },
+    {
+      "label": "create-committee-quorum",
+      "transactionHash": "0x1be2eaafd84c0f7ef0cdeeb0112fbddafbe0be3f1bfe20da7e2ea8724d647a47",
+      "blockNumber": 11669741,
+      "blockTimestamp": 1788979044,
+      "gasUsed": "589184",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x1be2eaafd84c0f7ef0cdeeb0112fbddafbe0be3f1bfe20da7e2ea8724d647a47",
+        "safeTransactionHash": "0xf7d43589f0f6bf6bcbe59abbc2813b85b8423a096680b16000bb751f74e33e0e",
+        "blockNumber": 11669741,
+        "gasUsed": "589184",
+        "nonce": "15",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "accept-committee-quorum",
+      "transactionHash": "0x12cc0e509eebd560a33ccc2bd6505e1240f7130f509601b591453ce9be3ecc93",
+      "blockNumber": 11669742,
+      "blockTimestamp": 1788979056,
+      "gasUsed": "60178",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "deliver-committee-quorum",
+      "transactionHash": "0x06ed60c15618227920611a79a83e63d6fd967989e1224c2f46ed8965f81038db",
+      "blockNumber": 11669743,
+      "blockTimestamp": 1788979068,
+      "gasUsed": "62000",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "challenge-committee-quorum",
+      "transactionHash": "0x74a31a3544de53f9e6bac75004b6afa7be5f35bdc2db8b29f404f7b8621a3182",
+      "blockNumber": 11669744,
+      "blockTimestamp": 1788979080,
+      "gasUsed": "82552",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x74a31a3544de53f9e6bac75004b6afa7be5f35bdc2db8b29f404f7b8621a3182",
+        "safeTransactionHash": "0x3039c20c0d10f4bc3960bb0f0c8be0f5c6b16a3819ebd53a5ef46fce7a8395a5",
+        "blockNumber": 11669744,
+        "gasUsed": "82552",
+        "nonce": "16",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "committee-vote-exact-one",
+      "transactionHash": "0xad6b1e36788f38380db5f1642eb0552b1c4083d5c8ffa87800e836f32be0d0ab",
+      "blockNumber": 11669745,
+      "blockTimestamp": 1788979092,
+      "gasUsed": "82180",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "committee-vote-distinct-proposal",
+      "transactionHash": "0x4fe30c4ab693c43a8e16b5330c7f403dc11095db4d46001d7a1be8232c32f2de",
+      "blockNumber": 11669746,
+      "blockTimestamp": 1788979104,
+      "gasUsed": "84370",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "committee-vote-exact-two-finalizes-work-fee",
+      "transactionHash": "0xc6c911a23ea07e2b6c92a322f0506da128ee8d52dae9595b3fd24a608a14bab9",
+      "blockNumber": 11669747,
+      "blockTimestamp": 1788979116,
+      "gasUsed": "704113",
+      "allocationOrdinals": [
+        1,
+        2
+      ],
+      "checkpointOrdinals": [
+        4
+      ]
+    },
+    {
+      "label": "create-committee-timeout",
+      "transactionHash": "0x3184930109c1e6bee24bcaa8cc61fc2566068b2ee477f38e306d9c7469b75d1b",
+      "blockNumber": 11669748,
+      "blockTimestamp": 1788979128,
+      "gasUsed": "589208",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x3184930109c1e6bee24bcaa8cc61fc2566068b2ee477f38e306d9c7469b75d1b",
+        "safeTransactionHash": "0x96af08cf0929da2a53409bd6553b742efb72ee02255b2cab9d7bc817bd6ed16b",
+        "blockNumber": 11669748,
+        "gasUsed": "589208",
+        "nonce": "17",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "accept-committee-timeout",
+      "transactionHash": "0x1faa80570d28d42603c8185a5137b0387a82751698420a0625add981422287a3",
+      "blockNumber": 11669749,
+      "blockTimestamp": 1788979140,
+      "gasUsed": "60178",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "deliver-committee-timeout",
+      "transactionHash": "0x3f8aa9344dc5bb17c8631f132e53ced0267dccdc5467ec5d6eee8bb9c30b2df6",
+      "blockNumber": 11669750,
+      "blockTimestamp": 1788979152,
+      "gasUsed": "62000",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "challenge-committee-timeout",
+      "transactionHash": "0xc98cef346aa5514056de5d0a4be47ba78f0b7d6314049a4fe3522c3c18dee157",
+      "blockNumber": 11669751,
+      "blockTimestamp": 1788979164,
+      "gasUsed": "82564",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0xc98cef346aa5514056de5d0a4be47ba78f0b7d6314049a4fe3522c3c18dee157",
+        "safeTransactionHash": "0x1fd059ba440e7441c67e43c0c7e65c4b18a730120ca82cc4ff0e7f46cf5f09e9",
+        "blockNumber": 11669751,
+        "gasUsed": "82564",
+        "nonce": "18",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "finalize-committee-timeout",
+      "transactionHash": "0x6d96aa8315356a23528f9eefcfe57a787bc5fd3e20fda4ad71ccdfc7f611c023",
+      "blockNumber": 11669768,
+      "blockTimestamp": 1788979368,
+      "gasUsed": "424007",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        2
+      ]
+    },
+    {
+      "label": "create-mutual-before-default",
+      "transactionHash": "0x65b14f3840595fa8392b343f831420c28a1ed046fedbd468209bdc6d787da9ae",
+      "blockNumber": 11669769,
+      "blockTimestamp": 1788979380,
+      "gasUsed": "549264",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x65b14f3840595fa8392b343f831420c28a1ed046fedbd468209bdc6d787da9ae",
+        "safeTransactionHash": "0xf8842bed470bf57cb0449cce4e26cd0a6aeb71b629eb9d6aa4992e6ad76a8882",
+        "blockNumber": 11669769,
+        "gasUsed": "549264",
+        "nonce": "19",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "accept-mutual-before-default",
+      "transactionHash": "0xd6729169cab3f77b05758627a8fb5acf7c410f372205b141111b3a730e6d6d57",
+      "blockNumber": 11669770,
+      "blockTimestamp": 1788979392,
+      "gasUsed": "60152",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "deliver-mutual-before-default",
+      "transactionHash": "0x397976188ca9c023d246b84fed20ab5fea94aa0d0c4585e4e686380bf9c0e978",
+      "blockNumber": 11669771,
+      "blockTimestamp": 1788979404,
+      "gasUsed": "62000",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "mutual-wins-before-default",
+      "transactionHash": "0xec69771b3cd0bd707c8ea4e2f459833abf41ff175072ce68a7d327f24d89265c",
+      "blockNumber": 11669783,
+      "blockTimestamp": 1788979548,
+      "gasUsed": "484564",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        2
+      ],
+      "safe": {
+        "outerTransactionHash": "0xec69771b3cd0bd707c8ea4e2f459833abf41ff175072ce68a7d327f24d89265c",
+        "safeTransactionHash": "0xb79391d16e2703a0c83eba8f3aba8e48766c1f52e06bb1dd9b10ae7163a04aad",
+        "blockNumber": 11669783,
+        "gasUsed": "484564",
+        "nonce": "20",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 3
+      }
+    },
+    {
+      "label": "create-default-before-mutual",
+      "transactionHash": "0x44d5e4697dfcc299bb6827e9a2779fd88224e7db541e4de40e6e60705bd08c8c",
+      "blockNumber": 11669784,
+      "blockTimestamp": 1788979560,
+      "gasUsed": "549240",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x44d5e4697dfcc299bb6827e9a2779fd88224e7db541e4de40e6e60705bd08c8c",
+        "safeTransactionHash": "0xc01adcddbc358b2fa73c09372b9915b607d629c4f0d593894e9706d51e164267",
+        "blockNumber": 11669784,
+        "gasUsed": "549240",
+        "nonce": "21",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "accept-default-before-mutual",
+      "transactionHash": "0xbae164b7a65472b53a4da075526e234ac3729606ac12e0b7d6fcccd689407e0c",
+      "blockNumber": 11669785,
+      "blockTimestamp": 1788979572,
+      "gasUsed": "60178",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "deliver-default-before-mutual",
+      "transactionHash": "0x65f51e36d54e4b7ce44a0fe644484f4551610ea9b4918d801e6dee3daa6fd7b0",
+      "blockNumber": 11669786,
+      "blockTimestamp": 1788979584,
+      "gasUsed": "62000",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "default-wins-before-mutual",
+      "transactionHash": "0xa55d4c11cec44a3ad08fe843834d2c185b09280a96b4678aaf7004ed874e07c8",
+      "blockNumber": 11669798,
+      "blockTimestamp": 1788979728,
+      "gasUsed": "419823",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        2
+      ]
+    },
+    {
+      "label": "start-branch-draining",
+      "transactionHash": "0x116477cae88ae7eaeb494ab3e5daba322d3457365e9c6a9b0c6a0338e5f43420",
+      "blockNumber": 11669799,
+      "blockTimestamp": 1788979740,
+      "gasUsed": "82770",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [
+        1
+      ],
+      "safe": {
+        "outerTransactionHash": "0x116477cae88ae7eaeb494ab3e5daba322d3457365e9c6a9b0c6a0338e5f43420",
+        "safeTransactionHash": "0x43c0e34a462fd4b04af6f74739115f8baf4e65b56f68b17406b2ad405faf40a9",
+        "blockNumber": 11669799,
+        "gasUsed": "82770",
+        "nonce": "22",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 2
+      }
+    },
+    {
+      "label": "sweep-branch-remainder-11",
+      "transactionHash": "0xf2ed8beb833fcd3fddab3308106e65bf4939ae13f5a670b259b5c2a1a1fa2e06",
+      "blockNumber": 11669800,
+      "blockTimestamp": 1788979752,
+      "gasUsed": "286713",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        1
+      ]
+    }
+  ],
+  "refusals": [
+    {
+      "label": "stale-ruling-signature-after-challenge",
+      "atBlock": 11669744,
+      "error": "InvalidSignature",
+      "selector": "0x8baa579f",
+      "observation": "eth_call contract refusal; not a mined failed transaction"
+    },
+    {
+      "label": "duplicate-committee-vote",
+      "atBlock": 11669745,
+      "error": "DuplicateVote",
+      "selector": "0x0ebd16a4",
+      "observation": "eth_call contract refusal; not a mined failed transaction"
+    },
+    {
+      "label": "default-rejected-after-mutual",
+      "atBlock": 11669783,
+      "error": "InvalidState",
+      "selector": "0xbaf3f0f7",
+      "observation": "eth_call contract refusal; not a mined failed transaction"
+    },
+    {
+      "label": "mutual-rejected-after-default",
+      "atBlock": 11669798,
+      "error": "InvalidState",
+      "selector": "0xbaf3f0f7",
+      "observation": "eth_call contract refusal; not a mined failed transaction"
+    }
+  ],
+  "orders": {
+    "pending-decline": {
+      "terms": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "termsHash": "0x20233fad2c930adef55a0bcc9ab9c4f54060743eb1c7df53e3f19d71641c82fc",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669726",
+        "nonce": "2001",
+        "milestones": [
+          {
+            "work": "1000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11669729",
+            "reviewBefore": "11669733",
+            "ruleBefore": "11669739"
+          }
+        ]
+      },
+      "orderId": "0x57b15642c47d712c8705bce7cce9e21799a933bc1e7931fa544e3b7ddd6659b0"
+    },
+    "pending-expiry": {
+      "terms": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "termsHash": "0xb9ec9e5ac408f44ea62eeffbe9d0b1d0344946aa3766a8503226fb79e6307541",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669724",
+        "nonce": "2002",
+        "milestones": [
+          {
+            "work": "1000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11669729",
+            "reviewBefore": "11669733",
+            "ruleBefore": "11669737"
+          }
+        ]
+      },
+      "orderId": "0x7dfc7706947c3d5ff95c8e95dffa343601b5e986b4934dc56503d2cececc9075"
+    },
+    "monitoring-default": {
+      "terms": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "termsHash": "0xd44bdbc12ad21d657b9441c1e4b228f420539a7d193c2d65e2cd7c0a423d56b7",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669732",
+        "nonce": "2003",
+        "milestones": [
+          {
+            "work": "2000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11669735",
+            "reviewBefore": "11669739",
+            "ruleBefore": "11669745"
+          }
+        ]
+      },
+      "orderId": "0x508fe3b64161400318abbe967f2ef2fffcfacd75fa292849d20a04d322a08d07",
+      "deliveryHash": "0x10ee675fff1fa9485eb21df6e95effa83712e52abf39fc56380e68f5bc5c88cd"
+    },
+    "committee-quorum": {
+      "terms": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "termsHash": "0x72cbba2a0425695d3fd1740feb6c6843dc54b89b249cbf5dbb4677dd032c70fb",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669747",
+        "nonce": "2004",
+        "milestones": [
+          {
+            "work": "3000000000000000000",
+            "fee": "1000000000000000000",
+            "timeoutWork": "1000000000000000000",
+            "deliverBefore": "11669750",
+            "reviewBefore": "11669754",
+            "ruleBefore": "11669760"
+          }
+        ]
+      },
+      "orderId": "0xaffea1311fb051838aab54c2f507195a45f22ab691d1ec780b833b79b17b0346",
+      "deliveryHash": "0xb9dc6bb52e66ae9267a7c3a54292967b9b04e33c5a61d8b614a7e74f2f39314f",
+      "staleSignature": "0xfbc88749388225e4cdd78ea73018b501bf2b6beb9fa29754d0dc7a91e60aca1663a7241c0359723f8fc71b7bcad822c47687404fbae2799c3d4644b0a138e1801c",
+      "receiptOnlyFixture": {
+        "description": "Both payment facts are noninitial canonical leaves from one exact source receipt; target proofing may retain one receipt while withholding all tree siblings.",
+        "transactionHash": "0xc6c911a23ea07e2b6c92a322f0506da128ee8d52dae9595b3fd24a608a14bab9",
+        "work": {
+          "treeIndex": 1,
+          "receiptLogOrdinal": 1
+        },
+        "fee": {
+          "treeIndex": 2,
+          "receiptLogOrdinal": 2
+        },
+        "checkpointLogOrdinal": 4
+      }
+    },
+    "committee-timeout": {
+      "terms": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "termsHash": "0x0eecc95ae88fa530841bd94b42d9bc731654c9410dc124352e0d910bbd8e8c22",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669754",
+        "nonce": "2005",
+        "milestones": [
+          {
+            "work": "2000000000000000000",
+            "fee": "1000000000000000000",
+            "timeoutWork": "1000000000000000000",
+            "deliverBefore": "11669757",
+            "reviewBefore": "11669761",
+            "ruleBefore": "11669767"
+          }
+        ]
+      },
+      "orderId": "0x8b5050f2dce4c3094837f52a6a3c6d2d2bff971897cb1e54c6cfe28173903f35",
+      "deliveryHash": "0x5de6db34b1c320e60cf2b2469d9361025b38ac9b0fe109eb1e332ed081758d50"
+    },
+    "mutual-before-default": {
+      "terms": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "termsHash": "0x2892cc181d8c7a60ee417b4ca794afb550748e762a7bcfae3771a134d2e5c6b1",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669775",
+        "nonce": "2006",
+        "milestones": [
+          {
+            "work": "2000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11669778",
+            "reviewBefore": "11669782",
+            "ruleBefore": "11669788"
+          }
+        ]
+      },
+      "orderId": "0x68bb75ccb245838126b8223e48796ead8a5fbc5ea40c6331f4bf1aa3816b5563",
+      "deliveryHash": "0x816b098dd60a3bae5653051a03550c5623f6e38ff2affe8b65b29b4b1fb5a5f2"
+    },
+    "default-before-mutual": {
+      "terms": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "termsHash": "0x4b41c1496aa081fd06165785a5ade63fa99098230e8f8f2f37cc1a55010ebc04",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669790",
+        "nonce": "2007",
+        "milestones": [
+          {
+            "work": "2000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11669793",
+            "reviewBefore": "11669797",
+            "ruleBefore": "11669803"
+          }
+        ]
+      },
+      "orderId": "0x3cc69cd71597b08f771b71676cbdbfbee6d373dba66e4e827383c280dff2c47e",
+      "deliveryHash": "0xe44788a978cd6fc5bd5f4dc18ffda5c63215a25c38d6b734405c80b0915fc852",
+      "mutualNonce": "1",
+      "mutualWorkerSignature": "0x515582f0465547e21cf552e4771221a1eaa75964c5cce375a1550e8e9f73515c554ec890c45da81499a5fc3dfefc65760f039188b18885dede153aee8a4d0a9e1c"
+    }
+  },
+  "stages": {
+    "initialized": true,
+    "pendingDeclined": true,
+    "pendingExpired": true,
+    "monitoringDefault": true,
+    "staleRulingRejected": true,
+    "duplicateVoteRejected": true,
+    "committeeQuorum": true,
+    "committeeTimeout": true,
+    "mutualBeforeDefault": true,
+    "defaultBeforeMutual": true,
+    "complete": true
+  },
+  "updatedAt": "2026-09-09T18:49:16.758Z",
+  "readback": {
+    "blockNumber": 11669800,
+    "blockHash": "0xdeba646ab38f0f16ef2ce0ab129b3148fb99c5dd026f290c63d87cc00ead6b15",
+    "root": "0xf0e92f446d47e2c794e730d700c778fd8b951cd7c35016c64f0105181355939c",
+    "leafCount": 7,
+    "available": "0",
+    "unresolved": "0",
+    "earned": "9000000000000000000",
+    "returned": "11000000000000000000",
+    "phase": 3,
+    "allocations": [
+      {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "allocationId": "1",
+        "treeIndex": 0,
+        "kind": 1,
+        "orderId": "0x508fe3b64161400318abbe967f2ef2fffcfacd75fa292849d20a04d322a08d07",
+        "milestoneId": 0,
+        "role": 1,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "2000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x60de39642ef95775fdd7c3406742cd19101cb9026f13cf6ca366a75aa90db2f5",
+        "leafHash": "0x8b2e0a17228981263fefb8ef33646363cdcc04eaf8e71ed372cb302aa0ad2c1b"
+      },
+      {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "allocationId": "2",
+        "treeIndex": 1,
+        "kind": 1,
+        "orderId": "0xaffea1311fb051838aab54c2f507195a45f22ab691d1ec780b833b79b17b0346",
+        "milestoneId": 0,
+        "role": 1,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "2000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x8305260f5bc09d20b171ba9f59976b044457ff47c9976a9069883b6b9f7d7d90",
+        "leafHash": "0x29c3b948a37ad774d6a26cecdb62938e538689f32c6a739bee3be55f1b39978b"
+      },
+      {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "allocationId": "3",
+        "treeIndex": 2,
+        "kind": 2,
+        "orderId": "0xaffea1311fb051838aab54c2f507195a45f22ab691d1ec780b833b79b17b0346",
+        "milestoneId": 0,
+        "role": 2,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "1000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x8305260f5bc09d20b171ba9f59976b044457ff47c9976a9069883b6b9f7d7d90",
+        "leafHash": "0x915b36628ef0b39801033d16c7b4f02ec6be639fff0dc42ca83b57163ccd78af"
+      },
+      {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "allocationId": "4",
+        "treeIndex": 3,
+        "kind": 1,
+        "orderId": "0x8b5050f2dce4c3094837f52a6a3c6d2d2bff971897cb1e54c6cfe28173903f35",
+        "milestoneId": 0,
+        "role": 1,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "1000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x799b59f55190e6b769e94044297838d6c6ab8d35ec36a63840f6461f94b9654e",
+        "leafHash": "0x94081d47ae128c3316e1d76ad6fb0765f1b2b604ac1a0f692bcc7321cd59132c"
+      },
+      {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "allocationId": "5",
+        "treeIndex": 4,
+        "kind": 1,
+        "orderId": "0x68bb75ccb245838126b8223e48796ead8a5fbc5ea40c6331f4bf1aa3816b5563",
+        "milestoneId": 0,
+        "role": 1,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "1000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x9f9ee96765e46fcc6a40c6bffa6d9f1d710d7f8aa6d528ec15f5bc02032db144",
+        "leafHash": "0x36e717b20fe4527e1a653153770d36c0299909adfe49aeece38bedd1ee849f1d"
+      },
+      {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "allocationId": "6",
+        "treeIndex": 5,
+        "kind": 1,
+        "orderId": "0x3cc69cd71597b08f771b71676cbdbfbee6d373dba66e4e827383c280dff2c47e",
+        "milestoneId": 0,
+        "role": 1,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "2000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0xd3194135b2ef7190f827520f195206d0d700bffb5a848e85f453d8e9d8153ca4",
+        "leafHash": "0xb0baf635603a0d84b6264ee4a942325e114945d2894fd690e97f768409c8d75f"
+      },
+      {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "allocationId": "7",
+        "treeIndex": 6,
+        "kind": 3,
+        "orderId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "milestoneId": 0,
+        "role": 0,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "11000000000000000000",
+        "claimOwner": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "destination": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0xae93404426ebfc66f201725a0886295cd1a6a3917ef5cbc3af8c8c5764f0f616",
+        "leafHash": "0xc265bd7bbbffaa811dfd5a8e9333471d014ceb7cb61fad53b8061284a61b94e6"
+      }
+    ]
+  },
+  "completedAt": "2026-09-09T18:49:16.758Z"
+}

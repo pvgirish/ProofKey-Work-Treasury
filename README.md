@@ -6,6 +6,8 @@ This is the separate Work Treasury implementation. The earlier ProofKey Review S
 
 ## Run the wallet app
 
+[Open the public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/). It loads the pinned public testnet addresses and funded demonstration epoch for read-only inspection. Check the Networks page before connecting a wallet; source finality can temporarily lag the latest demonstration transaction.
+
 Requires Node 24 and Foundry. Solidity is pinned to 0.8.28; dependencies are pinned in `package-lock.json`.
 
 ```sh
@@ -15,7 +17,7 @@ npm run ui:build
 npm run ui:serve
 ```
 
-Open the local URL printed by the server. In Setup, load the supplied testnet deployment or enter verified source and target addresses. Connect the wallet only when you want to sign or send an action. The browser stores workspace settings and drafts on this device; it never asks for private keys.
+Open the local URL printed by the server. In Networks, confirm the supplied testnet deployment or enter verified source and target addresses. Connect the wallet only when you want to sign or send an action. The browser stores workspace settings and drafts on this device; it never asks for private keys. Follow the [operator walkthrough](docs/OPERATOR-WALKTHROUGH.md) for the exact public setup and recovery steps.
 
 1. Build an exact epoch, fund its cap on Creditcoin, and initialize it through the source Safe.
 2. Draft the work terms. The worker signs only after the app reads finalized funding for that exact epoch.
@@ -24,6 +26,8 @@ Open the local URL printed by the server. In Setup, load the supplied testnet de
 5. Withdraw the recognized payment. Record the completed WORK payment in the separate invoice consumer.
 
 The app prepares ordinary Safe transaction files. Import them in the Safe transaction builder for owner approval, or execute through a connected Safe wallet. It installs no Safe module or guard. Advanced contract actions expose all policy and recovery branches.
+
+The downloadable Safe Transaction Builder JSON is the default Safe route. Direct browser execution requires an already injected Safe-compatible wallet whose active account is the configured Safe; the app does not bundle the Safe Apps SDK.
 
 ## Verify the implementation
 
@@ -36,6 +40,8 @@ bash scripts/forge.sh build --sizes --skip test
 
 The committed CI workflow runs these checks and builds the wallet app. Tests cover actual source policy, real Safe v1.4.1 execution, ordered-tree reconstruction through 128 leaves, the reachable 113-leaf policy trace, both target evidence routes, withdrawal ordering, and consumer refusals. Tests stub the fixed native precompile at the VM boundary; they do not establish public native authentication. Public evidence is tracked separately in [the release ledger](docs/RELEASE-GATES.md).
 
+The [frozen specification](docs/ARCHITECTURE-LOCK.md) defines the implementation gates. [Public transaction evidence](docs/PUBLIC-EVIDENCE.md) records the live journeys, and [explorer verification](docs/TARGET-SOURCE-VERIFICATION.md) ties the target contracts to their published source.
+
 ## Public testnet run
 
 Copy `.env.example` to `.env`, or set `PROOFKEY_ENV_FILE` to an existing local configuration. Never commit it. The runner requires the configured Sepolia relayer, Creditcoin sponsor, current Safe owner keys, and a distinct funded worker key. The source/target chain IDs are checked before any transaction: Ethereum Sepolia 11155111 and Creditcoin testnet 102031, with native source key 1.
@@ -44,6 +50,8 @@ Copy `.env.example` to `.env`, or set `PROOFKEY_ENV_FILE` to an existing local c
 npm run preflight
 npm run deploy:testnet
 npm run demo:public
+npm run demo:branches
+npm run demo:safe-rotation
 ```
 
 The deployment manifest records immutable library links, transaction hashes, runtime byte counts, deployed code hashes and correspondence to compiled artifacts. A resumed deployment verifies existing code before continuing. Stop on any uncertain transaction error and inspect the recorded hash before retrying.
@@ -68,7 +76,7 @@ There is no reverse proof of Creditcoin funding on Ethereum. The official app ch
 
 The finite epoch supports at most 32 admitted milestones, 16 active returns, 33 draining returns and a depth-seven allocation tree. Refunds do not reset the milestone admission count. The source policy has explicit approval, monitoring default, no-delivery, committee quorum, committee timeout and mutual-settlement outcomes. See [the policy and security notes](docs/POLICY-AND-SECURITY.md).
 
-Two consenting independent settlements and a buyer reference require real participants. A passing test or the built-in team demonstration cannot satisfy that release gate.
+Two consenting independent settlements and a buyer reference require real participants. A passing test or the built-in team demonstration cannot satisfy that release gate. Those independent settlements remain pending.
 
 ## Dependencies and licenses
 

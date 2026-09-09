@@ -1,7 +1,7 @@
 {
   "schema": "ProofKeySourceDemoV1",
   "startedAt": "2026-09-09T18:29:20.644Z",
-  "status": "starting",
+  "status": "source-complete-awaiting-final-target-recognition",
   "sourceOnly": true,
   "transactionJournalVersion": 1,
   "nativeAuthenticationClaim": false,
@@ -21,25 +21,605 @@
   ],
   "safeThreshold": 2,
   "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
-  "operations": [],
-  "stages": {},
-  "orders": {},
-  "pendingSourceTransaction": {
-    "kind": "safe",
-    "label": "initialize-epoch",
-    "transactionHash": "0x79edfd6ba13c07035e22b26b079f3f14c5b55b51b8c4c6c37b8ec4bd9343336f",
-    "chainId": "11155111",
-    "submittedAt": "2026-09-09T18:29:22.318Z",
-    "safe": {
-      "outerTransactionHash": "0x79edfd6ba13c07035e22b26b079f3f14c5b55b51b8c4c6c37b8ec4bd9343336f",
-      "safeTransactionHash": "0x84dcb8266c10a6122247175b4c7539e75bb33b957d7cf76cf7a31abcd7d0db93",
-      "nonce": "6",
-      "threshold": 2,
-      "signingOwners": [
-        "0x247a5839c7F79115f473856EC8a6495e439096D6",
-        "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+  "operations": [
+    {
+      "label": "initialize-epoch",
+      "transactionHash": "0x79edfd6ba13c07035e22b26b079f3f14c5b55b51b8c4c6c37b8ec4bd9343336f",
+      "blockNumber": 11669702,
+      "blockTimestamp": 1788978564,
+      "gasUsed": "466803",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [
+        1
+      ],
+      "safe": {
+        "outerTransactionHash": "0x79edfd6ba13c07035e22b26b079f3f14c5b55b51b8c4c6c37b8ec4bd9343336f",
+        "safeTransactionHash": "0x84dcb8266c10a6122247175b4c7539e75bb33b957d7cf76cf7a31abcd7d0db93",
+        "blockNumber": 11669702,
+        "gasUsed": "466803",
+        "nonce": "6",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 2
+      }
+    },
+    {
+      "label": "create-offer-A",
+      "transactionHash": "0xbd7f7b78468d12e9660a821e295e7e76d33f4d8587561529ebf1520b5deced6c",
+      "blockNumber": 11669704,
+      "blockTimestamp": 1788978588,
+      "gasUsed": "549264",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0xbd7f7b78468d12e9660a821e295e7e76d33f4d8587561529ebf1520b5deced6c",
+        "safeTransactionHash": "0x72d018ded61b7a1e6d1cc1365fef98c97b08230f892bb71c8d843c10a30553dc",
+        "blockNumber": 11669704,
+        "gasUsed": "549264",
+        "nonce": "7",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "create-offer-B",
+      "transactionHash": "0xa08ae5616842b4c698fc014b766535f0621ed1f12106e9cb3008078b29183105",
+      "blockNumber": 11669705,
+      "blockTimestamp": 1788978600,
+      "gasUsed": "532176",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0xa08ae5616842b4c698fc014b766535f0621ed1f12106e9cb3008078b29183105",
+        "safeTransactionHash": "0x4c0e64b9374c3e41cf29cbd5304ea730fa38e2cf19d29d174b16db76e0a72ec4",
+        "blockNumber": 11669705,
+        "gasUsed": "532176",
+        "nonce": "8",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "accept-offer-A",
+      "transactionHash": "0x16a8fccd6c2a970b241af3c137fa1eb08959b26914f8baed02d2a327a86f59f3",
+      "blockNumber": 11669707,
+      "blockTimestamp": 1788978624,
+      "gasUsed": "60152",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "accept-offer-B",
+      "transactionHash": "0x1444b0ff0188a2496c985d718532bf10fe7f07d6ef8330f3f6e63b3904996e62",
+      "blockNumber": 11669708,
+      "blockTimestamp": 1788978636,
+      "gasUsed": "60178",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "deliver-A",
+      "transactionHash": "0x5ff2e3bd36c72872c9c263bbd2a9b816c272a2c5a3737f8374769682e51ffbe5",
+      "blockNumber": 11669710,
+      "blockTimestamp": 1788978660,
+      "gasUsed": "62000",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "approve-A",
+      "transactionHash": "0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5",
+      "blockNumber": 11669711,
+      "blockTimestamp": 1788978672,
+      "gasUsed": "625465",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        2
+      ],
+      "safe": {
+        "outerTransactionHash": "0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5",
+        "safeTransactionHash": "0xa8f2ab7437b6b3578339fa77e5d4acf07769474d71df863252a38eeeb9f2bfee",
+        "blockNumber": 11669711,
+        "gasUsed": "625465",
+        "nonce": "9",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 3
+      }
+    },
+    {
+      "label": "release-free-50",
+      "transactionHash": "0xab9be5910aeba1e2cecab1613b35c6709a467cea51f0e1dd2172af0be942c1e3",
+      "blockNumber": 11669713,
+      "blockTimestamp": 1788978696,
+      "gasUsed": "333624",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        1
+      ],
+      "safe": {
+        "outerTransactionHash": "0xab9be5910aeba1e2cecab1613b35c6709a467cea51f0e1dd2172af0be942c1e3",
+        "safeTransactionHash": "0xee89fe5fe9d2703702fcc364ab1d3073a6d069a5e20f9f95f4b467c3e47fef1e",
+        "blockNumber": 11669713,
+        "gasUsed": "333624",
+        "nonce": "10",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 2
+      }
+    },
+    {
+      "label": "deliver-B",
+      "transactionHash": "0x3fcde4661c5787dc88496a80e9f1c8559e11f9452090dab78a32e4eba7a8d444",
+      "blockNumber": 11669803,
+      "blockTimestamp": 1788979788,
+      "gasUsed": "61988",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "mutually-settle-B-25",
+      "transactionHash": "0x046b2a05edea39722100178c255c4a9356aa439f0744d118ff321b05075dede9",
+      "blockNumber": 11669804,
+      "blockTimestamp": 1788979800,
+      "gasUsed": "501690",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        2
+      ],
+      "safe": {
+        "outerTransactionHash": "0x046b2a05edea39722100178c255c4a9356aa439f0744d118ff321b05075dede9",
+        "safeTransactionHash": "0x593c3268fd884e12fc8fc2fc2532cb34e3fca6a194a3af9e6392638d9ecdb3e2",
+        "blockNumber": 11669804,
+        "gasUsed": "501690",
+        "nonce": "23",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 3
+      }
+    },
+    {
+      "label": "create-offer-C",
+      "transactionHash": "0x5638f8dc17ef1fee5edd61b673f2b85902cf5b288ad33ca0a03fc4db1f1a6e95",
+      "blockNumber": 11669805,
+      "blockTimestamp": 1788979812,
+      "gasUsed": "544464",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [],
+      "safe": {
+        "outerTransactionHash": "0x5638f8dc17ef1fee5edd61b673f2b85902cf5b288ad33ca0a03fc4db1f1a6e95",
+        "safeTransactionHash": "0x638d908a458097e895e650b466e5de9b067229fc406cdf9e6b931572c1b8352a",
+        "blockNumber": 11669805,
+        "gasUsed": "544464",
+        "nonce": "24",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 1
+      }
+    },
+    {
+      "label": "accept-offer-C",
+      "transactionHash": "0x9877d459c22a88f693123a7b8b946b4981adb746d5441ac8568aad698e984aec",
+      "blockNumber": 11669806,
+      "blockTimestamp": 1788979824,
+      "gasUsed": "60152",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "finalize-C-no-delivery",
+      "transactionHash": "0x49aa4996633ff6e59c6be9488dfeeafc28fcd35dd667d2d37f81a78514a84b93",
+      "blockNumber": 11669823,
+      "blockTimestamp": 1788980028,
+      "gasUsed": "145835",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": []
+    },
+    {
+      "label": "start-draining",
+      "transactionHash": "0x24dd3e723e6aef09d046a2c53916866109d38f57ab7ed8fb53ef4767a94ef661",
+      "blockNumber": 11669824,
+      "blockTimestamp": 1788980040,
+      "gasUsed": "82770",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [
+        1
+      ],
+      "safe": {
+        "outerTransactionHash": "0x24dd3e723e6aef09d046a2c53916866109d38f57ab7ed8fb53ef4767a94ef661",
+        "safeTransactionHash": "0xd9dc0528cae8397bc009d436280dca276af535ea23b155526fe4ffbe14361c9c",
+        "blockNumber": 11669824,
+        "gasUsed": "82770",
+        "nonce": "25",
+        "threshold": 2,
+        "signingOwners": [
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "executionSuccessOrdinal": 2
+      }
+    },
+    {
+      "label": "sweep-final-15",
+      "transactionHash": "0xdabbf0d3a81dda2f21956222fac3071520fa33999c146c93c6b1cf1e69dc6077",
+      "blockNumber": 11669825,
+      "blockTimestamp": 1788980052,
+      "gasUsed": "269613",
+      "allocationOrdinals": [
+        0
+      ],
+      "checkpointOrdinals": [
+        1
+      ]
+    },
+    {
+      "label": "republish-checkpoint-1",
+      "transactionHash": "0xa1308da7f1d7b362bdb08b51c7e547084bc518d24f4db9122ccb34a1cda029c8",
+      "blockNumber": 11669826,
+      "blockTimestamp": 1788980064,
+      "gasUsed": "35304",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [
+        0
+      ]
+    },
+    {
+      "label": "republish-checkpoint-2",
+      "transactionHash": "0x0bc3d8a24eafd978946213f107c1ce78961da2f24cd24dcd85b05fe5b12249a2",
+      "blockNumber": 11669827,
+      "blockTimestamp": 1788980076,
+      "gasUsed": "35304",
+      "allocationOrdinals": [],
+      "checkpointOrdinals": [
+        0
       ]
     }
+  ],
+  "stages": {
+    "epochInitialized": true,
+    "ordersABReserved": true,
+    "ordersABAgreed": true,
+    "orderAApproved": true,
+    "awaitingReturn50Recognition": true,
+    "orderBMutuallySettled": true,
+    "orderCAgreed": true,
+    "orderCNoDelivery": true,
+    "checkpointRepublished": true,
+    "sourceComplete": true
   },
-  "updatedAt": "2026-09-09T18:29:22.318Z"
+  "orders": {
+    "a": {
+      "terms": {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "termsHash": "0x7f1df97533984be33bff1579bdfa951f8ff8b7bc489b641cdfa5556eac1dd321",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669762",
+        "nonce": "1001",
+        "milestones": [
+          {
+            "work": "30000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11671502",
+            "reviewBefore": "11672102",
+            "ruleBefore": "11672702"
+          }
+        ]
+      },
+      "orderId": "0x0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d",
+      "deliveryHash": "0x4d52ed9f36f06883c1c1ec71cc6f4a0a2df5a7477608a9cce6b7e986a313f5a8"
+    },
+    "b": {
+      "terms": {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "termsHash": "0x0cfb9a62affdc3878f03294145c764b67650652587c7cebe746bb15828dc691b",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669762",
+        "nonce": "1002",
+        "milestones": [
+          {
+            "work": "40000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11671502",
+            "reviewBefore": "11672102",
+            "ruleBefore": "11672702"
+          }
+        ]
+      },
+      "orderId": "0x24adf815e4e6ad485d79895088d71af4488209e2c387c77e6976023997c8fb8f",
+      "deliveryHash": "0xcb3f97e6b9378ee1b29e9dc51b0e3414f6e5ad00e5f2191e6a06c1c85721f1bb"
+    },
+    "c": {
+      "terms": {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "termsHash": "0x86b10143e6958249d08c6f3c43e2d15fbaea0e0af845ce9cd87c61d8cf70be7b",
+        "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "feeDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "committee": [
+          "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+          "0x247a5839c7F79115f473856EC8a6495e439096D6",
+          "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+        ],
+        "acceptBefore": "11669816",
+        "nonce": "1003",
+        "milestones": [
+          {
+            "work": "15000000000000000000",
+            "fee": "0",
+            "timeoutWork": "0",
+            "deliverBefore": "11669822",
+            "reviewBefore": "11669836",
+            "ruleBefore": "11669852"
+          }
+        ]
+      },
+      "orderId": "0x748d32cd93b475cfc1b95df8f85df92a954a9b82e4a509996cdb4de279bf5ffb"
+    }
+  },
+  "updatedAt": "2026-09-09T18:54:42.899Z",
+  "return50RecognitionInstruction": "Authenticate and recognize the recorded release-free-50 RETURN on Creditcoin while order B remains unresolved; then resume with resumeAfterReturn50=true.",
+  "readback": {
+    "blockNumber": 11669827,
+    "blockHash": "0x52c3d169fabd1cf80378a250f10fea06c6bc0507de075a5d6d0e98708f519cfe",
+    "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+    "leafCount": 4,
+    "available": "0",
+    "unresolved": "0",
+    "earned": "55000000000000000000",
+    "returned": "65000000000000000000",
+    "phase": 3,
+    "allocations": [
+      {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "allocationId": "1",
+        "treeIndex": 0,
+        "kind": 1,
+        "orderId": "0x0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d",
+        "milestoneId": 0,
+        "role": 1,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "30000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x891b0f77c67d8e54335509fe304ed9900dec100114c62a73dbec895c821f436a",
+        "leafHash": "0x487250c4f3016cdc10cae1e8f11cde2a3daedd3a23d248e2b3319f5ac2bef281"
+      },
+      {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "allocationId": "2",
+        "treeIndex": 1,
+        "kind": 3,
+        "orderId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "milestoneId": 0,
+        "role": 0,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "50000000000000000000",
+        "claimOwner": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "destination": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0xffe0900e7531229274b88eddee3b42f42976ba357a35dcf0eb1505b6e58ae6aa",
+        "leafHash": "0x8b1bfc5a5e0f55abf200945380d50128120e9f02b83241b41334410267d631c3"
+      },
+      {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "allocationId": "3",
+        "treeIndex": 2,
+        "kind": 1,
+        "orderId": "0x24adf815e4e6ad485d79895088d71af4488209e2c387c77e6976023997c8fb8f",
+        "milestoneId": 0,
+        "role": 1,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "25000000000000000000",
+        "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x6856efcfc70f3fc4d109522e624cd5335fcc70225a64f66251bebadee84a542c",
+        "leafHash": "0x2c35aecd91709a7fd5b1eda929e1b2d14635008363e9f4d7c54ea75e27cd710b"
+      },
+      {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "allocationId": "4",
+        "treeIndex": 3,
+        "kind": 3,
+        "orderId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "milestoneId": 0,
+        "role": 0,
+        "asset": "0x0000000000000000000000000000000000000000",
+        "amount": "15000000000000000000",
+        "claimOwner": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "destination": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "evidenceHash": "0x8e467436fea121edb20e3e79181a059b906767c463c696b9d31be24139800825",
+        "leafHash": "0x7d2834768df6fd7d8a26bd36bb518f5372166bbb51e940e81a96e293701e7a0a"
+      }
+    ]
+  },
+  "resumeAfterReturn50RequestedAt": "2026-09-09T18:49:37.913Z",
+  "currentSourceBlock": "11669821",
+  "checkpointRepublishObservation": {
+    "sweepOperation": {
+      "label": "sweep-final-15",
+      "transactionHash": "0xdabbf0d3a81dda2f21956222fac3071520fa33999c146c93c6b1cf1e69dc6077",
+      "blockNumber": 11669825,
+      "checkpointOrdinal": 1
+    },
+    "payload": {
+      "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+      "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+      "leafCount": 4,
+      "earned": "55000000000000000000",
+      "returned": "65000000000000000000",
+      "phase": 3
+    },
+    "preRepublish": {
+      "blockNumber": 11669825,
+      "blockHash": "0xfbae93e843820040e92a0f4b7f9d3340bec7e335f5207640eae5a8756664000a",
+      "state": {
+        "initialized": true,
+        "expiredUninitialized": false,
+        "leafCount": 4,
+        "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+        "available": "0",
+        "unresolved": "0",
+        "earned": "55000000000000000000",
+        "returned": "65000000000000000000",
+        "phase": 3,
+        "reservations": 3,
+        "unresolvedMilestones": 0,
+        "activeReturns": 1,
+        "drainingReturns": 1
+      },
+      "config": {
+        "sourceChainId": "11155111",
+        "sourceChainKey": "1",
+        "sourceCoordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+        "sourceVersion": "0x4469ea6d813ccd3e1310aa0bdefec73ae002c799871091802b32c16fd408821b",
+        "targetChainId": "102031",
+        "targetTreasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+        "schemaVersion": "0x0c5ce31b6a370ceca484aae15e44ef3236d44f1e5b8ead1692036cacc10329ef",
+        "sourceSafe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+        "sponsor": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "refundBeneficiary": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "asset": "0x0000000000000000000000000000000000000000",
+        "cap": "120000000000000000000",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "initializationCutoff": "11670388",
+        "admissionCutoff": "11676868",
+        "maxMilestones": 32,
+        "maxActiveReturns": 16,
+        "maxDrainingReturns": 33,
+        "treeDepth": 7,
+        "nonce": "1788978160715"
+      }
+    },
+    "republishes": [
+      {
+        "label": "republish-checkpoint-1",
+        "transactionHash": "0xa1308da7f1d7b362bdb08b51c7e547084bc518d24f4db9122ccb34a1cda029c8",
+        "blockNumber": 11669826,
+        "checkpointOrdinal": 0,
+        "payload": {
+          "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+          "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+          "leafCount": 4,
+          "earned": "55000000000000000000",
+          "returned": "65000000000000000000",
+          "phase": 3
+        }
+      },
+      {
+        "label": "republish-checkpoint-2",
+        "transactionHash": "0x0bc3d8a24eafd978946213f107c1ce78961da2f24cd24dcd85b05fe5b12249a2",
+        "blockNumber": 11669827,
+        "checkpointOrdinal": 0,
+        "payload": {
+          "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+          "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+          "leafCount": 4,
+          "earned": "55000000000000000000",
+          "returned": "65000000000000000000",
+          "phase": 3
+        }
+      }
+    ],
+    "postRepublish": {
+      "blockNumber": 11669827,
+      "blockHash": "0x52c3d169fabd1cf80378a250f10fea06c6bc0507de075a5d6d0e98708f519cfe",
+      "state": {
+        "initialized": true,
+        "expiredUninitialized": false,
+        "leafCount": 4,
+        "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+        "available": "0",
+        "unresolved": "0",
+        "earned": "55000000000000000000",
+        "returned": "65000000000000000000",
+        "phase": 3,
+        "reservations": 3,
+        "unresolvedMilestones": 0,
+        "activeReturns": 1,
+        "drainingReturns": 1
+      },
+      "config": {
+        "sourceChainId": "11155111",
+        "sourceChainKey": "1",
+        "sourceCoordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+        "sourceVersion": "0x4469ea6d813ccd3e1310aa0bdefec73ae002c799871091802b32c16fd408821b",
+        "targetChainId": "102031",
+        "targetTreasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+        "schemaVersion": "0x0c5ce31b6a370ceca484aae15e44ef3236d44f1e5b8ead1692036cacc10329ef",
+        "sourceSafe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+        "sponsor": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "refundBeneficiary": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+        "asset": "0x0000000000000000000000000000000000000000",
+        "cap": "120000000000000000000",
+        "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+        "initializationCutoff": "11670388",
+        "admissionCutoff": "11676868",
+        "maxMilestones": 32,
+        "maxActiveReturns": 16,
+        "maxDrainingReturns": 33,
+        "treeDepth": 7,
+        "nonce": "1788978160715"
+      }
+    },
+    "sweepPayloadMatchesState": true,
+    "samePayload": true,
+    "financialStateUnchanged": true,
+    "leafStateUnchanged": true,
+    "configUnchanged": true
+  },
+  "completedAt": "2026-09-09T18:54:41.526Z"
 }

@@ -67,6 +67,15 @@ export type SourceReceipt = {
   safe?: Omit<SafeExecutionRecord, "logs">;
 };
 
+type CheckpointPayload = {
+  epochId: string;
+  root: string;
+  leafCount: number;
+  earned: string;
+  returned: string;
+  phase: number;
+};
+
 export function jsonTerms(value: any): any {
   return JSON.parse(JSON.stringify(value, (_key, item) => typeof item === "bigint" ? item.toString() : item));
 }
@@ -184,6 +193,100 @@ export async function directReceiptSummary(
   const receipt: TransactionReceipt | null = await transaction.wait();
   if (!receipt || receipt.status !== 1) throw new Error(`${label} transaction failed: ${transaction.hash}`);
   return receiptSummary(provider, coordinator, label, receipt);
+}
+
+function epochStateSnapshot(value: any): any {
+  return {
+    initialized: Boolean(value.initialized),
+    expiredUninitialized: Boolean(value.expiredUninitialized),
+    leafCount: Number(value.leafCount),
+    root: String(value.root),
+    available: value.available.toString(),
+    unresolved: value.unresolved.toString(),
+    earned: value.earned.toString(),
+    returned: value.returned.toString(),
+    phase: Number(value.phase),
+    reservations: Number(value.reservations),
+    unresolvedMilestones: Number(value.unresolvedMilestones),
+    activeReturns: Number(value.activeReturns),
+    drainingReturns: Number(value.drainingReturns),
+  };
+}
+
+function epochConfigSnapshot(value: any): any {
+  return {
+    sourceChainId: value.sourceChainId.toString(),
+    sourceChainKey: value.sourceChainKey.toString(),
+    sourceCoordinator: String(value.sourceCoordinator),
+    sourceVersion: String(value.sourceVersion),
+    targetChainId: value.targetChainId.toString(),
+    targetTreasury: String(value.targetTreasury),
+    schemaVersion: String(value.schemaVersion),
+    sourceSafe: String(value.sourceSafe),
+    sponsor: String(value.sponsor),
+    refundBeneficiary: String(value.refundBeneficiary),
+    asset: String(value.asset),
+    cap: value.cap.toString(),
+    policyHash: String(value.policyHash),
+    initializationCutoff: value.initializationCutoff.toString(),
+    admissionCutoff: value.admissionCutoff.toString(),
+    maxMilestones: Number(value.maxMilestones),
+    maxActiveReturns: Number(value.maxActiveReturns),
+    maxDrainingReturns: Number(value.maxDrainingReturns),
+    treeDepth: Number(value.treeDepth),
+    nonce: value.nonce.toString(),
+  };
+}
+
+async function pinnedEpochSnapshot(
+  provider: JsonRpcProvider,
+  coordinator: Contract,
+  epochId: string,
+  requestedBlock?: number,
+): Promise<any> {
+  const blockNumber = requestedBlock ?? await provider.getBlockNumber();
+  const block = await provider.getBlock(blockNumber);
+  if (!block) throw new Error(`Missing pinned source block ${blockNumber}`);
+  const [state, config] = await Promise.all([
+    coordinator.epochState.staticCall(epochId, { blockTag: blockNumber }),
+    coordinator.epochConfig.staticCall(epochId, { blockTag: blockNumber }),
+  ]);
+  return {
+    blockNumber,
+    blockHash: block.hash,
+    state: epochStateSnapshot(state),
+    config: epochConfigSnapshot(config),
+  };
+}
+
+async function checkpointPayloadForOperation(
+  provider: JsonRpcProvider,
+  coordinatorAddress: string,
+  coordinatorInterface: Interface,
+  operation: SourceReceipt,
+): Promise<CheckpointPayload> {
+  if (operation.allocationOrdinals.length !== 0 && operation.label.startsWith("republish-checkpoint-")) {
+    throw new Error(`${operation.label} unexpectedly emitted an allocation`);
+  }
+  if (operation.checkpointOrdinals.length !== 1) {
+    throw new Error(`${operation.label} must contain exactly one coordinator checkpoint`);
+  }
+  const receipt = await provider.getTransactionReceipt(operation.transactionHash);
+  if (!receipt || receipt.status !== 1) throw new Error(`Missing successful receipt for ${operation.label}`);
+  const log = receipt.logs[operation.checkpointOrdinals[0]];
+  if (!log || log.address.toLowerCase() !== coordinatorAddress.toLowerCase()
+    || log.topics[0]?.toLowerCase() !== CHECKPOINT_TOPIC.toLowerCase()) {
+    throw new Error(`Recorded checkpoint ordinal is invalid for ${operation.label}`);
+  }
+  const decoded = coordinatorInterface.decodeEventLog("CheckpointPublished", log.data, log.topics);
+  return {
+    epochId: String(decoded.epochId),
+    root: String(decoded.root),
+    leafCount: Number(decoded.leafCount),
+    earned: decoded.earned.toString(),
+    returned: decoded.returned.toString(),
+    phase: Number(decoded.phase),
+  };
 }
 
 export async function waitForBlock(provider: JsonRpcProvider, target: bigint, onProgress: (height: bigint) => Promise<void>) {
@@ -662,6 +765,83 @@ export async function runSourceDemo(args: SourceDemoArgs): Promise<any> {
   await assertAccounting({ a: 0n, u: 0n, e: 55n * WAD, r: 65n * WAD });
   finalState = await state();
   if (Number(finalState.phase) !== 3) throw new Error("Final source epoch did not close");
+
+  if (!report.stages.checkpointRepublished) {
+    const sweepOperation = report.operations.find((entry: SourceReceipt) => entry.label === "sweep-final-15") as SourceReceipt | undefined;
+    if (!sweepOperation) throw new Error("Missing sweep-final-15 receipt for checkpoint republish comparison");
+    const sweepPayload = await checkpointPayloadForOperation(
+      args.source,
+      coordinatorAddress,
+      coordinatorInterface,
+      sweepOperation,
+    );
+    const sweepSnapshot = await pinnedEpochSnapshot(
+      args.source,
+      readCoordinator,
+      args.epochId,
+      sweepOperation.blockNumber,
+    );
+    const preRepublish = await pinnedEpochSnapshot(args.source, readCoordinator, args.epochId);
+    for (const label of ["republish-checkpoint-1", "republish-checkpoint-2"]) {
+      if (!report.operations.some((entry: SourceReceipt) => entry.label === label)) {
+        await directCall(label, relayerCoordinator.republishCheckpoint(args.epochId));
+      }
+    }
+    const republishOperations = ["republish-checkpoint-1", "republish-checkpoint-2"].map((label) => {
+      const operation = report.operations.find((entry: SourceReceipt) => entry.label === label) as SourceReceipt | undefined;
+      if (!operation) throw new Error(`Missing completed ${label} operation`);
+      return operation;
+    });
+    const republishPayloads = await Promise.all(republishOperations.map((operation) =>
+      checkpointPayloadForOperation(args.source, coordinatorAddress, coordinatorInterface, operation)));
+    const postRepublish = await pinnedEpochSnapshot(args.source, readCoordinator, args.epochId);
+    const sweepPayloadMatchesState = sweepPayload.epochId.toLowerCase() === args.epochId.toLowerCase()
+      && sweepPayload.root.toLowerCase() === sweepSnapshot.state.root.toLowerCase()
+      && sweepPayload.leafCount === sweepSnapshot.state.leafCount
+      && sweepPayload.earned === sweepSnapshot.state.earned
+      && sweepPayload.returned === sweepSnapshot.state.returned
+      && sweepPayload.phase === sweepSnapshot.state.phase;
+    const samePayload = republishPayloads.every((payload) => JSON.stringify(payload) === JSON.stringify(sweepPayload));
+    const sameFinancialState = [preRepublish, postRepublish].every((snapshot) =>
+      snapshot.state.available === sweepSnapshot.state.available
+      && snapshot.state.unresolved === sweepSnapshot.state.unresolved
+      && snapshot.state.earned === sweepSnapshot.state.earned
+      && snapshot.state.returned === sweepSnapshot.state.returned
+      && snapshot.state.phase === sweepSnapshot.state.phase);
+    const sameLeafState = [preRepublish, postRepublish].every((snapshot) =>
+      snapshot.state.leafCount === sweepSnapshot.state.leafCount
+      && snapshot.state.root.toLowerCase() === sweepSnapshot.state.root.toLowerCase());
+    const sameConfig = [preRepublish, postRepublish].every((snapshot) =>
+      JSON.stringify(snapshot.config).toLowerCase() === JSON.stringify(sweepSnapshot.config).toLowerCase());
+    if (!sweepPayloadMatchesState || !samePayload || !sameFinancialState || !sameLeafState || !sameConfig) {
+      throw new Error("Checkpoint republish changed or misreported frozen epoch state");
+    }
+    report.checkpointRepublishObservation = {
+      sweepOperation: {
+        label: sweepOperation.label,
+        transactionHash: sweepOperation.transactionHash,
+        blockNumber: sweepOperation.blockNumber,
+        checkpointOrdinal: sweepOperation.checkpointOrdinals[0],
+      },
+      payload: sweepPayload,
+      preRepublish,
+      republishes: republishOperations.map((operation, index) => ({
+        label: operation.label,
+        transactionHash: operation.transactionHash,
+        blockNumber: operation.blockNumber,
+        checkpointOrdinal: operation.checkpointOrdinals[0],
+        payload: republishPayloads[index],
+      })),
+      postRepublish,
+      sweepPayloadMatchesState,
+      samePayload,
+      financialStateUnchanged: sameFinancialState,
+      leafStateUnchanged: sameLeafState,
+      configUnchanged: sameConfig,
+    };
+    report.stages.checkpointRepublished = true;
+    await persist();
+  }
   report.status = "source-complete-awaiting-final-target-recognition";
   report.completedAt = new Date().toISOString();
   report.stages.sourceComplete = true;

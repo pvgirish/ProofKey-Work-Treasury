@@ -141,10 +141,20 @@ async function main() {
   report.independentRebuild={root:rebuilt.root,leafCount:allocations.length,sourceReadBlock:sourceReport.readback.blockNumber,matchesAuthenticatedCheckpoint:true};
   // The remaining collection phase makes no proof service request and needs no new native authentication.
   report.cachedCollectionStartedAt??=new Date().toISOString();await persist();
-  for(const allocation of allocations) {
+  // Final RETURN is recognized before collecting either delayed WORK claim, as
+  // required by the locked journey. Canonical indices still select each proof.
+  const collectionOrder=[...allocations.filter((allocation:any)=>allocation.kind===3),...allocations.filter((allocation:any)=>allocation.kind!==3)];
+  for(const allocation of collectionOrder) {
     const pkg:any={version:CLAIM_PACKAGE_VERSION,route:"checkpoint",createdAt:new Date().toISOString(),allocation:serializeAllocation(allocation),siblings:orderedProof(rebuilt.leaves,allocation.treeIndex),checkpoint:{checkpointId:report.checkpointId,root:rebuilt.root,leafCount:allocations.length}};
     await writeFile(resolve(ROOT,`evidence/claim-${allocation.allocationId}.json`),stringifyClaimPackage(pkg)+"\n");
-    if(!await treasury.recognizedEconomicId(await treasury.economicId(report.epochId,allocation.allocationId))) await send(`cached-root-recognize-${allocation.allocationId}`,treasury.recognizeFromCheckpoint(report.checkpointId,allocation,pkg.siblings));
+    if(!await treasury.recognizedEconomicId(await treasury.economicId(report.epochId,allocation.allocationId))) {
+      if(allocation.kind===3) {
+        for(const delayedWork of allocations.filter((item:any)=>item.kind===1)) {
+          if(await treasury.recognizedEconomicId(await treasury.economicId(report.epochId,delayedWork.allocationId))) throw new Error("Final RETURN must precede delayed WORK recognition");
+        }
+      }
+      await send(`cached-root-recognize-${allocation.allocationId}`,treasury.recognizeFromCheckpoint(report.checkpointId,allocation,pkg.siblings));
+    }
     if(allocation.kind===1 && !(await treasury.claim(report.epochId,allocation.allocationId)).withdrawn) await send(`withdraw-work-${allocation.allocationId}`,treasury.withdrawFor(report.epochId,allocation.allocationId));
   }
   if(!report.replayChecks) {

@@ -327,22 +327,57 @@ contract SourceCoordinatorTest is Test {
     }
 
     function testAdmissionCutoffAllowsPermissionlessDrainAndRepublishDoesNotMutate() public {
+        vm.recordLogs();
+        vm.prank(buyer);
+        source.releaseFree(epochId, 100, keccak256("republish changed state"));
+        Vm.Log[] memory changedStateLogs = vm.getRecordedLogs();
+        assertEq(changedStateLogs.length, 2);
+        assertEq(changedStateLogs[1].topics[0], AllocationCodec.CHECKPOINT_EVENT);
         SourceCoordinator.EpochStateView memory beforeState = source.epochState(epochId);
+        bytes32 beforeConfig = keccak256(abi.encode(source.epochConfig(epochId)));
         vm.recordLogs();
         source.republishCheckpoint(epochId);
         Vm.Log[] memory logs = vm.getRecordedLogs();
         assertEq(logs.length, 1);
         assertEq(logs[0].topics[0], AllocationCodec.CHECKPOINT_EVENT);
+        assertEq(
+            keccak256(abi.encode(logs[0].topics, logs[0].data)),
+            keccak256(abi.encode(changedStateLogs[1].topics, changedStateLogs[1].data))
+        );
         SourceCoordinator.EpochStateView memory afterRepublish = source.epochState(epochId);
-        assertEq(afterRepublish.root, beforeState.root);
-        assertEq(afterRepublish.leafCount, beforeState.leafCount);
-        assertEq(afterRepublish.available, beforeState.available);
-        assertEq(afterRepublish.returned, beforeState.returned);
+        assertEq(keccak256(abi.encode(afterRepublish)), keccak256(abi.encode(beforeState)));
+        assertEq(keccak256(abi.encode(source.epochConfig(epochId))), beforeConfig);
 
         vm.roll(config.admissionCutoff);
         vm.prank(address(0x1234));
+        vm.recordLogs();
         source.startDraining(epochId);
-        assertEq(source.epochState(epochId).phase, 2);
+        Vm.Log[] memory phaseLogs = vm.getRecordedLogs();
+        assertEq(phaseLogs.length, 2);
+        assertEq(phaseLogs[1].topics[0], AllocationCodec.CHECKPOINT_EVENT);
+        WorkTypes.Checkpoint memory phaseCheckpoint = AllocationCodec.decodeCheckpoint(
+            phaseLogs[1].topics, phaseLogs[1].data
+        );
+        SourceCoordinator.EpochStateView memory phaseState = source.epochState(epochId);
+        assertEq(phaseState.phase, 2);
+        assertEq(phaseCheckpoint.epochId, epochId);
+        assertEq(phaseCheckpoint.root, phaseState.root);
+        assertEq(phaseCheckpoint.leafCount, phaseState.leafCount);
+        assertEq(phaseCheckpoint.earned, phaseState.earned);
+        assertEq(phaseCheckpoint.returned, phaseState.returned);
+        assertEq(phaseCheckpoint.phase, phaseState.phase);
+
+        vm.recordLogs();
+        vm.prank(address(0x4567));
+        source.republishCheckpoint(epochId);
+        Vm.Log[] memory phaseRepublishLogs = vm.getRecordedLogs();
+        assertEq(phaseRepublishLogs.length, 1);
+        assertEq(
+            keccak256(abi.encode(phaseRepublishLogs[0].topics, phaseRepublishLogs[0].data)),
+            keccak256(abi.encode(phaseLogs[1].topics, phaseLogs[1].data))
+        );
+        assertEq(keccak256(abi.encode(source.epochState(epochId))), keccak256(abi.encode(phaseState)));
+        assertEq(keccak256(abi.encode(source.epochConfig(epochId))), beforeConfig);
         vm.expectRevert(SourceCoordinator.InvalidState.selector);
         vm.prank(buyer);
         source.createOffer(_terms(epochId, 24, 1, 0, 0));
@@ -386,30 +421,71 @@ contract SourceCoordinatorTest is Test {
         bytes32 traceEpoch = traceSource.computeEpochId(traceConfig);
         vm.prank(buyer);
         traceSource.initializeEpoch(traceConfig);
+        SourceCoordinator.EpochStateView memory traceState = traceSource.epochState(traceEpoch);
+        bytes32 observedRoot = traceState.root;
+        uint32 observedCount = traceState.leafCount;
+        assertEq(_rebuild(traceSource, traceEpoch), observedRoot);
 
         WorkTypes.OrderTerms memory terms = _manyTerms(traceEpoch, 32, 2, 1, 1);
         vm.prank(buyer);
         bytes32 orderId = traceSource.createOffer(terms);
+        _assertTreeUnchanged(traceSource, traceEpoch, observedRoot, observedCount);
+        SourceCoordinator.EpochStateView memory atCapacity = traceSource.epochState(traceEpoch);
+        assertEq(atCapacity.reservations, 32);
+        assertEq(atCapacity.available, 24);
+        assertEq(atCapacity.unresolved, 96);
+        WorkTypes.OrderTerms memory overflow = _terms(traceEpoch, 100, 1, 0, 0);
+        vm.recordLogs();
+        vm.expectRevert(SourceCoordinator.CapacityExceeded.selector);
+        vm.prank(buyer);
+        traceSource.createOffer(overflow);
+        assertEq(vm.getRecordedLogs().length, 0);
+        assertEq(
+            keccak256(abi.encode(traceSource.epochState(traceEpoch))),
+            keccak256(abi.encode(atCapacity))
+        );
+        assertEq(traceSource.quoteNonceState(traceEpoch, worker, overflow.nonce), 0);
         vm.prank(worker);
         traceSource.acceptOffer(orderId, "");
+        _assertTreeUnchanged(traceSource, traceEpoch, observedRoot, observedCount);
         for (uint32 i; i < 32; ++i) {
             vm.prank(worker);
             traceSource.deliver(orderId, i, keccak256(abi.encode("delivery", i)));
+            _assertTreeUnchanged(traceSource, traceEpoch, observedRoot, observedCount);
             _challengeCurrent(traceSource, orderId, i, buyer);
+            _assertTreeUnchanged(traceSource, traceEpoch, observedRoot, observedCount);
         }
         for (uint256 i; i < 16; ++i) {
+            vm.recordLogs();
             vm.prank(buyer);
             traceSource.releaseFree(traceEpoch, 1, keccak256(abi.encode("return", i)));
+            (observedRoot, observedCount) = _assertAllocationCall(
+                traceSource, traceEpoch, vm.getRecordedLogs(), 1
+            );
         }
         vm.prank(buyer);
         traceSource.startDraining(traceEpoch);
+        _assertTreeUnchanged(traceSource, traceEpoch, observedRoot, observedCount);
+        vm.recordLogs();
         assertEq(traceSource.sweepAvailable(traceEpoch), 8);
+        (observedRoot, observedCount) = _assertAllocationCall(
+            traceSource, traceEpoch, vm.getRecordedLogs(), 1
+        );
         for (uint32 i; i < 32; ++i) {
             vm.prank(committee1);
             traceSource.submitRulingVote(orderId, i, 1, 1, committee1, "");
+            _assertTreeUnchanged(traceSource, traceEpoch, observedRoot, observedCount);
+            vm.recordLogs();
             vm.prank(committee2);
             traceSource.submitRulingVote(orderId, i, 1, 1, committee2, "");
+            (observedRoot, observedCount) = _assertAllocationCall(
+                traceSource, traceEpoch, vm.getRecordedLogs(), 2
+            );
+            vm.recordLogs();
             assertEq(traceSource.sweepAvailable(traceEpoch), 1);
+            (observedRoot, observedCount) = _assertAllocationCall(
+                traceSource, traceEpoch, vm.getRecordedLogs(), 1
+            );
         }
         SourceCoordinator.EpochStateView memory state = traceSource.epochState(traceEpoch);
         assertEq(state.leafCount, 113);
@@ -546,5 +622,56 @@ contract SourceCoordinatorTest is Test {
             width /= 2;
         }
         return nodes[0];
+    }
+
+    function _assertTreeUnchanged(
+        SourceCoordinator coordinator,
+        bytes32 id,
+        bytes32 expectedRoot,
+        uint32 expectedCount
+    ) internal view {
+        SourceCoordinator.EpochStateView memory state = coordinator.epochState(id);
+        assertEq(state.root, expectedRoot);
+        assertEq(state.leafCount, expectedCount);
+    }
+
+    function _assertAllocationCall(
+        SourceCoordinator coordinator,
+        bytes32 id,
+        Vm.Log[] memory logs,
+        uint32 expectedAllocations
+    ) internal view returns (bytes32 root, uint32 count) {
+        SourceCoordinator.EpochStateView memory state = coordinator.epochState(id);
+        uint32 allocations;
+        uint32 checkpoints;
+        for (uint256 i; i < logs.length; ++i) {
+            if (logs[i].emitter != address(coordinator) || logs[i].topics.length == 0) continue;
+            if (logs[i].topics[0] == AllocationCodec.ALLOCATION_EVENT) {
+                WorkTypes.Allocation memory decoded = AllocationCodec.decodeAllocation(logs[i].topics, logs[i].data);
+                assertEq(decoded.epochId, id);
+                assertEq(decoded.treeIndex, state.leafCount - expectedAllocations + allocations);
+                assertEq(decoded.allocationId, uint64(decoded.treeIndex) + 1);
+                assertEq(
+                    keccak256(abi.encode(decoded)),
+                    keccak256(abi.encode(coordinator.allocationAt(id, decoded.treeIndex)))
+                );
+                assertEq(AllocationCodec.leafHash(decoded), coordinator.leafHashAt(id, decoded.treeIndex));
+                ++allocations;
+            } else if (logs[i].topics[0] == AllocationCodec.CHECKPOINT_EVENT) {
+                WorkTypes.Checkpoint memory checkpoint = AllocationCodec.decodeCheckpoint(logs[i].topics, logs[i].data);
+                assertEq(checkpoint.epochId, id);
+                assertEq(checkpoint.root, state.root);
+                assertEq(checkpoint.leafCount, state.leafCount);
+                assertEq(checkpoint.earned, state.earned);
+                assertEq(checkpoint.returned, state.returned);
+                assertEq(checkpoint.phase, state.phase);
+                ++checkpoints;
+            }
+        }
+        assertEq(allocations, expectedAllocations);
+        assertEq(checkpoints, 1);
+        assertEq(logs[logs.length - 1].topics[0], AllocationCodec.CHECKPOINT_EVENT);
+        assertEq(_rebuild(coordinator, id), state.root);
+        return (state.root, state.leafCount);
     }
 }

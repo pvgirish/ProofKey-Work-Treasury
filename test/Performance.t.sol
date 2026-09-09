@@ -2,6 +2,7 @@
 pragma solidity ^0.8.28;
 
 import {Test} from "forge-std/Test.sol";
+import {Vm} from "forge-std/Vm.sol";
 import {console2} from "forge-std/console2.sol";
 import {NativeQueryVerifierLib} from "@gluwa/asc-contracts/contracts/write-ability/common/INativeQueryVerifier.sol";
 import {EvmV1Decoder} from "@gluwa/asc-contracts/contracts/common/EvmV1Decoder.sol";
@@ -10,6 +11,28 @@ import {AllocationCodec} from "../src/AllocationCodec.sol";
 import {SourceCoordinator} from "../src/SourceCoordinator.sol";
 import {NativeReceiptAuth} from "../src/NativeReceiptAuth.sol";
 import {WorkTreasury} from "../src/WorkTreasury.sol";
+
+/// @dev Measures the canonical event statements in isolation from transaction dispatch and source state updates.
+contract SourceEventGasHarness {
+    event AllocationCreated(bytes32 indexed epochId, uint64 indexed allocationId, uint32 treeIndex, uint8 kind,
+        bytes32 orderId, uint32 milestoneId, uint8 role, address asset, uint256 amount,
+        address claimOwner, address destination, bytes32 policyHash, bytes32 evidenceHash);
+    event CheckpointPublished(bytes32 indexed epochId, bytes32 root, uint32 leafCount,
+        uint256 earned, uint256 returned, uint8 phase);
+
+    function emitAllocation(WorkTypes.Allocation memory a) external returns (uint256 used) {
+        uint256 beforeGas = gasleft();
+        emit AllocationCreated(a.epochId, a.allocationId, a.treeIndex, a.kind, a.orderId, a.milestoneId,
+            a.role, a.asset, a.amount, a.claimOwner, a.destination, a.policyHash, a.evidenceHash);
+        used = beforeGas - gasleft();
+    }
+
+    function emitCheckpoint(WorkTypes.Checkpoint memory c) external returns (uint256 used) {
+        uint256 beforeGas = gasleft();
+        emit CheckpointPublished(c.epochId, c.root, c.leafCount, c.earned, c.returned, c.phase);
+        used = beforeGas - gasleft();
+    }
+}
 
 /// @notice Local EVM measurements. Native verification is measured separately on the real chain;
 ///         target measurements in this file use a clearly identified VM stub at fixed 0x0FD2.
@@ -22,6 +45,49 @@ contract PerformanceTest is Test {
     address internal committee1 = address(0xC01);
     address internal committee2 = address(0xC02);
     address internal committee3 = address(0xC03);
+
+    function test_sourceMarginalCanonicalEventGas() public {
+        SourceEventGasHarness harness = new SourceEventGasHarness();
+        WorkTypes.Allocation memory allocation = WorkTypes.Allocation({
+            epochId: keccak256("event-cost-epoch"),
+            allocationId: 32,
+            treeIndex: 31,
+            kind: WorkTypes.WORK,
+            orderId: keccak256("event-cost-order"),
+            milestoneId: 31,
+            role: 1,
+            asset: address(0),
+            amount: 1 ether,
+            claimOwner: worker,
+            destination: worker,
+            policyHash: WorkTypes.POLICY_HASH,
+            evidenceHash: keccak256("event-cost-evidence")
+        });
+        WorkTypes.Checkpoint memory checkpoint = WorkTypes.Checkpoint({
+            epochId: allocation.epochId,
+            root: keccak256("event-cost-root"),
+            leafCount: 32,
+            earned: 32 ether,
+            returned: 16 ether,
+            phase: WorkTypes.DRAINING
+        });
+
+        vm.recordLogs();
+        uint256 allocationEventGas = harness.emitAllocation(allocation);
+        uint256 checkpointEventGas = harness.emitCheckpoint(checkpoint);
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        assertEq(logs.length, 2);
+        assertEq(logs[0].topics[0], AllocationCodec.ALLOCATION_EVENT);
+        assertEq(logs[0].topics.length, 3);
+        assertEq(logs[0].data.length, 352);
+        assertEq(logs[1].topics[0], AllocationCodec.CHECKPOINT_EVENT);
+        assertEq(logs[1].topics.length, 2);
+        assertEq(logs[1].data.length, 160);
+        assertLe(allocationEventGas, 5_000);
+        assertLe(checkpointEventGas, 3_000);
+        console2.log("PERF source.event.allocation_canonical.memory_payload", allocationEventGas);
+        console2.log("PERF source.event.checkpoint_canonical.memory_payload", checkpointEventGas);
+    }
 
     function test_sourceLargestOrderAndAllocationGas() public {
         SourceCoordinator source = new SourceCoordinator();

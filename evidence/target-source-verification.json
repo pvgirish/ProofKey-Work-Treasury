@@ -1,0 +1,94 @@
+{
+  "checkedAt": "2026-09-09T19:00:48.171Z",
+  "explorer": "https://creditcoin-testnet.blockscout.com",
+  "chainId": "102031",
+  "compiler": "v0.8.28+commit.7893614a",
+  "mode": "check",
+  "targets": [
+    {
+      "name": "WorkTypes",
+      "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+      "sourceCount": 1,
+      "constructorBytes": 0,
+      "libraries": [],
+      "artifactReproduced": true,
+      "deployedRuntimeCorrespondence": true
+    },
+    {
+      "name": "AllocationTree",
+      "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
+      "sourceCount": 3,
+      "constructorBytes": 0,
+      "libraries": [],
+      "artifactReproduced": true,
+      "deployedRuntimeCorrespondence": true
+    },
+    {
+      "name": "WorkTreasury",
+      "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+      "sourceCount": 8,
+      "constructorBytes": 96,
+      "libraries": [
+        {
+          "sourceName": "src/AllocationTree.sol",
+          "name": "AllocationTree",
+          "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
+        },
+        {
+          "sourceName": "src/WorkTypes.sol",
+          "name": "WorkTypes",
+          "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0"
+        }
+      ],
+      "artifactReproduced": true,
+      "deployedRuntimeCorrespondence": true
+    }
+  ],
+  "results": [
+    {
+      "name": "WorkTypes",
+      "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+      "verified": true,
+      "full": true,
+      "explorerName": "WorkTypes",
+      "compiler": "v0.8.28+commit.7893614a",
+      "evmVersion": "cancun",
+      "optimization": true,
+      "runs": 200,
+      "libraries": []
+    },
+    {
+      "name": "AllocationTree",
+      "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
+      "verified": true,
+      "full": true,
+      "explorerName": "AllocationTree",
+      "compiler": "v0.8.28+commit.7893614a",
+      "evmVersion": "cancun",
+      "optimization": true,
+      "runs": 200,
+      "libraries": []
+    },
+    {
+      "name": "WorkTreasury",
+      "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+      "verified": true,
+      "full": true,
+      "explorerName": "WorkTreasury",
+      "compiler": "v0.8.28+commit.7893614a",
+      "evmVersion": "cancun",
+      "optimization": true,
+      "runs": 200,
+      "libraries": [
+        {
+          "name": "src/AllocationTree.sol:AllocationTree",
+          "address_hash": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
+        },
+        {
+          "name": "src/WorkTypes.sol:WorkTypes",
+          "address_hash": "0xCA704A845F34348363abEca935c80fe2f366Cde0"
+        }
+      ]
+    }
+  ]
+}

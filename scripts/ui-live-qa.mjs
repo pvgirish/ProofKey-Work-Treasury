@@ -67,6 +67,7 @@ function check(name, condition, detail) {
 }
 
 await send("Page.enable"); await send("Runtime.enable"); await send("Log.enable"); await send("Network.enable");
+await send("Network.clearBrowserCache");
 await send("Emulation.setDeviceMetricsOverride", { width: 1440, height: 1100, deviceScaleFactor: 1, mobile: false });
 await send("Page.navigate", { url: appUrl });
 await waitFor("document.readyState === 'complete' && document.querySelector('#abi-status')?.textContent.includes('compiled contract interfaces loaded')");
@@ -91,7 +92,9 @@ await click("#load-epoch");
 await waitFor("['Exact epoch funded','Target unavailable'].includes(document.querySelector('#target-main')?.textContent)");
 const targetMain = await text("#target-main"), targetDetail = await text("#target-detail"), targetMetrics = await text("#target-metrics");
 const sourceMain = await text("#source-main"), sourceDetail = await text("#source-detail"), sourceMetrics = await text("#source-metrics");
+const actionMain = await text("#action-main"), actionDetail = await text("#action-detail");
 check("Finalized target funding displayed", targetMain === "Exact epoch funded" && targetDetail.includes("finalized block") && targetMetrics.includes("120.0 CTC") && targetMetrics.includes("Yes"), `${targetMain}; ${targetDetail}; ${targetMetrics}`);
+check("Incomplete readback does not authorize an action", sourceMain !== "Source unavailable" || (actionMain === "Wait for complete readback" && actionDetail.includes("Refresh")), `${actionMain}; ${actionDetail}`);
 await screenshot("live-funded-readback.png");
 
 const selectors = ["epochAccount(bytes32)", "epochConfig(bytes32)", "SOURCE_CHAIN_ID()", "SOURCE_CHAIN_KEY()", "SOURCE_COORDINATOR()"].map(signature => id(signature).slice(0, 10));
@@ -113,7 +116,7 @@ const report = [
   "# Public testnet UI live-readback QA", "", `Run: ${new Date().toISOString()}`, "",
   "Chrome used a fresh isolated profile. The run loaded the public deployment configuration and performed read-only RPC calls only.", "",
   "## Result", "", ...checks.map(item => `- ${item.passed ? "PASS" : "FAIL"} — ${item.name}: ${item.detail}`), "",
-  "## Observed readback", "", `- Epoch: ${publicDemo.epochId}`, `- Source: ${sourceMain} — ${sourceDetail} — ${sourceMetrics}`, `- Target: ${targetMain} — ${targetDetail} — ${targetMetrics}`, `- Same target block tag: ${sameBlock?.[0] ?? "not established"}`, "",
+  "## Observed readback", "", `- Epoch: ${publicDemo.epochId}`, `- Source: ${sourceMain} — ${sourceDetail} — ${sourceMetrics}`, `- Target: ${targetMain} — ${targetDetail} — ${targetMetrics}`, `- Next action: ${actionMain} — ${actionDetail}`, `- Same target block tag: ${sameBlock?.[0] ?? "not established"}`, "",
   "## Evidence", "", "- live-settings-verified.png", "- live-funded-readback.png", "",
   "No wallet provider was injected. The harness did not request accounts, sign data, prepare a broadcast through a wallet, or send a transaction.", "",
 ].join("\n");

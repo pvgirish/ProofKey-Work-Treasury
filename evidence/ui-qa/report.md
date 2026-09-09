@@ -1,6 +1,6 @@
 # Operator UI headless QA
 
-Run: 2026-09-09T18:27:19.277Z
+Run: 2026-09-09T18:40:37.633Z
 
 Chrome ran headlessly with an isolated temporary profile. No existing browser profile, injected wallet, or live RPC transaction was used.
 
@@ -10,14 +10,20 @@ Chrome ran headlessly with an isolated temporary profile. No existing browser pr
 - PASS — No fake live state: Not read yet
 - PASS — Funding action stays hidden before preparation: Fund exact source configuration is not disclosed before an exact epoch exists
 - PASS — Missing wallet is explained: No browser wallet was found. Read-only RPC access remains available.
-- PASS — Exact epoch builder: Exact epoch ID 0x3052eb58b5cfa793279b96548a82b07330a93d2a5b939456c81ab6390173b0e0
-Cap 120 native base units
+- PASS — Exact epoch builder: Exact epoch ID 0xc53f453688f58bd1be9d830c476cb5bbd5c2bd375ed4ff276ec9d09d918e446a
+Cap 120.0 CTC · canonical 120000000000000000000 base units
 No source initialization or target funding has occurred.
-- PASS — Epoch ID is bytes32: 0x3052eb58b5cfa793279b96548a82b07330a93d2a5b939456c81ab6390173b0e0
+- PASS — Epoch ID is bytes32: 0xc53f453688f58bd1be9d830c476cb5bbd5c2bd375ed4ff276ec9d09d918e446a
+- PASS — Epoch CTC becomes canonical base units: 120 CTC stored as 120000000000000000000 base units
+- PASS — CTC precision over 18 decimals is rejected: Worker maximum must be a nonnegative CTC amount with up to 18 decimal places
+- PASS — CTC uint256 overflow is rejected: Worker maximum exceeds the uint256 CTC limit
 - PASS — Draft remains nonbinding: Nonbinding draft saved on this device.
-Order 0x3602225032ba21e4a64ac77d876573285b182eb7b988692dac558a273f0408a6
+Order 0x8ccb3f2b235ba380373ee39f1add2d28cf5fa784c2d15ded6ddb65ec2d99792a
 Terms 0x5c3f25835621103671a624f7dd291a5fc217c626a9a1c1f6b0143e52107067df
+Worker maximum 30.5 CTC · fee 0.0 CTC · timeout 0.0 CTC
+Canonical signed values remain 30500000000000000000, 0, 0 base units.
 No money or admission slot is reserved.
+- PASS — Decimal CTC becomes canonical quote value: 30.5 CTC stored as 30500000000000000000 base units
 - PASS — Funding check is the signing action: The enabled action is labelled Check funding & sign quote
 - PASS — Safe acceptance stays hidden before worker consent: Prepare Safe acceptance remains hidden before a worker signature
 - PASS — Malformed package rejected: Unsupported or malformed claim package
