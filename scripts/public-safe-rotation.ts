@@ -649,6 +649,11 @@ async function main(source: JsonRpcProvider, target: JsonRpcProvider): Promise<v
         treasury.withdrawFor(report.epochId, allocation.allocationId));
     }
   }
+  // A RETURN credit is not a completed refund until the owner withdraws it.
+  if (!report.operations.some((entry: any) => entry.label === "withdraw-disposable-safe-return-1")) {
+    await direct("target", "withdraw-disposable-safe-return-1",
+      treasury.withdrawFreeFor(report.config.refundBeneficiary, WAD));
+  }
   const finalAccount = await treasury.epochAccount(report.epochId);
   if (BigInt(finalAccount.reserve) !== 0n || BigInt(finalAccount.recognized) !== 3n * WAD) {
     throw new Error("Disposable Safe target epoch did not recognize exact 3 CTC");
@@ -677,7 +682,7 @@ async function main(source: JsonRpcProvider, target: JsonRpcProvider): Promise<v
     recognizedFromAuthenticatedFinalCheckpoint: true,
     withdrawn: true,
   };
-  report.finalTarget = { reserve: finalAccount.reserve.toString(), recognized: finalAccount.recognized.toString() };
+  report.finalTarget = { reserve: finalAccount.reserve.toString(), recognized: finalAccount.recognized.toString(), refundWithdrawn: WAD.toString() };
   report.status = "disposable-safe-rotation-complete";
   report.completedAt = new Date().toISOString();
   await persist();

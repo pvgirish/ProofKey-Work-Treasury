@@ -1,0 +1,34 @@
+{
+  "version": "proofkey.work-treasury.claim-package.v1",
+  "route": "checkpoint",
+  "createdAt": "2026-09-09T19:05:47.215Z",
+  "allocation": {
+    "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+    "allocationId": "1",
+    "treeIndex": 0,
+    "kind": 1,
+    "orderId": "0x0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d",
+    "milestoneId": 0,
+    "role": 1,
+    "asset": "0x0000000000000000000000000000000000000000",
+    "amount": "30000000000000000000",
+    "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+    "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+    "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+    "evidenceHash": "0x891b0f77c67d8e54335509fe304ed9900dec100114c62a73dbec895c821f436a"
+  },
+  "siblings": [
+    "0x8b1bfc5a5e0f55abf200945380d50128120e9f02b83241b41334410267d631c3",
+    "0x1dc3ba2868874e6db00455610efe27d654238dea62aa25fd8009b7e4a490d9e8",
+    "0x667e3777923c9505ef83183b1b6045443efecd24e62f8691b94e89057fc55e7a",
+    "0x48842534738f94f442d7212fc3e3bf49cfb559d1eb6ddfb71932ad34d0ad5a7b",
+    "0xbf401c34a40b68e6242cad1a770b13af4e7cb3f881b79bfe05aaf323d5cf87bd",
+    "0x31f8f1b12a89d104f36c25cb58f29e9ecd54e38bbb0cfc1db47cad9afd2aec46",
+    "0xa0b415c96427ae985abb090ab3e234e0edd84677957faca27ef3b9fbf6103287"
+  ],
+  "checkpoint": {
+    "checkpointId": "0xf591e028a00a020acdfd84a957ba53eec3c980947505b5c87be81c85e87a9084",
+    "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+    "leafCount": 4
+  }
+}

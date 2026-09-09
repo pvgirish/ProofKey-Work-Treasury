@@ -1,6 +1,6 @@
 # Public evidence
 
-Generated 2026-09-09T19:01:53.237Z from the checked-in public journals. This page reports the evidence currently present; missing or partial evidence remains pending.
+Generated 2026-09-09T19:14:06.136Z from the checked-in public journals. This page reports the evidence currently present; missing or partial evidence remains pending.
 
 ## Control and release scope
 
@@ -20,10 +20,10 @@ The Creditcoin testnet chain and explorer mapping is documented in the official 
 | Journey | Current evidence status | Evidence |
 |---|---|---|
 | Main journey — source | Source complete — target status is reported separately | [repository file](../evidence/source-demo.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/source-demo.json) |
-| Main journey — target | In progress — final source receipt is waiting for native attestation | [repository file](../evidence/public-demo.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-demo.json) |
+| Main journey — target | Complete — the built-in main journey reports its final target state | [repository file](../evidence/public-demo.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-demo.json) |
 | Policy branches — source | Source complete — target status is reported separately | [repository file](../evidence/source-branches.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/source-branches.json) |
-| Policy branches and successor — target | In progress — Awaiting Expiry Native Attestation | [repository file](../evidence/public-branches.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-branches.json) |
-| Disposable Safe owner rotation | In progress — Awaiting Finalized Disposable Safe Funding | [repository file](../evidence/public-safe-rotation.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-safe-rotation.json) |
+| Policy branches and successor — target | Complete — branch recognition, successor expiry, and recorded withdrawals report completion | [repository file](../evidence/public-branches.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-branches.json) |
+| Disposable Safe owner rotation | In progress — Awaiting Disposable Safe Native Attestation | [repository file](../evidence/public-safe-rotation.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-safe-rotation.json) |
 | Finalized release readback | Pending — finalized release readback has not been generated | [repository file](../evidence/release-readback.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/release-readback.json) |
 
 ## Returned funds: recognition and withdrawal
@@ -32,9 +32,9 @@ A recognized RETURN moves value from an epoch reserve into the refund beneficiar
 
 | Journey | Source RETURN evidence | Recognized target free-balance credit | Actually withdrawn |
 |---|---|---|---|
-| Main | 65.0 CTC in the latest source readback | 50.0 CTC confirmed as target free-balance credit | No returned-funds withdrawal recorded |
-| Policy branches / successor | 11.0 CTC in the primary source epoch | 11.0 CTC confirmed as target free-balance credit; some may have funded the successor epoch | No returned-funds withdrawal recorded |
-| Disposable Safe rotation | 0.0 CTC in the source readback | 0.0 CTC confirmed as target free-balance credit | No returned-funds withdrawal recorded |
+| Main | 65.0 CTC in the latest source readback | 65.0 CTC confirmed as target free-balance credit | 65.0 CTC withdrawal recorded |
+| Policy branches / successor | 11.0 CTC in the primary source epoch | 12.0 CTC confirmed as target free-balance credit; some may have funded the successor epoch | 11.0 CTC withdrawal recorded |
+| Disposable Safe rotation | 1.0 CTC in the source readback | 1.0 CTC confirmed as target free-balance credit | No returned-funds withdrawal recorded |
 
 ## Chain transaction journal
 
@@ -71,6 +71,14 @@ A recognized RETURN moves value from an epoch reserve into the refund beneficiar
 | Creditcoin testnet | fund-exact-120-epoch | [0x2d473ee9b60fbce59ccb95213bf2e135601e68ff74cdd322d0c44823b74bedc8](https://creditcoin-testnet.blockscout.com/tx/0x2d473ee9b60fbce59ccb95213bf2e135601e68ff74cdd322d0c44823b74bedc8) | 5459166 | 435,727 | Success |
 | Creditcoin testnet | native-batch-authenticate-A-and-return50 | [0x803637ce8d1e691d826e64292366fa7e7de6f1d9f0676c82833c8d5a31562542](https://creditcoin-testnet.blockscout.com/tx/0x803637ce8d1e691d826e64292366fa7e7de6f1d9f0676c82833c8d5a31562542) | 5459242 | 435,498 | Success |
 | Creditcoin testnet | receipt-recognize-return50-with-B-unresolved | [0x10a7d1c89661234ccd6f9291b21b0cff99abd359cc1d1a0b80a2c9dd53a36d03](https://creditcoin-testnet.blockscout.com/tx/0x10a7d1c89661234ccd6f9291b21b0cff99abd359cc1d1a0b80a2c9dd53a36d03) | 5459243 | 374,122 | Success |
+| Creditcoin testnet | native-single-import-final-checkpoint | [0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae](https://creditcoin-testnet.blockscout.com/tx/0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae) | 5459336 | 395,958 | Success |
+| Creditcoin testnet | cached-root-recognize-4 | [0x7cd579377a8de8a64e36c0f905b6f5760296512b9765b46b9dee1686fba9cda0](https://creditcoin-testnet.blockscout.com/tx/0x7cd579377a8de8a64e36c0f905b6f5760296512b9765b46b9dee1686fba9cda0) | 5459337 | 384,230 | Success |
+| Creditcoin testnet | cached-root-recognize-1 | [0xe1403b1729049454dc9174050f20205f06c9d97cb471958f4bca58cccfaf9aae](https://creditcoin-testnet.blockscout.com/tx/0xe1403b1729049454dc9174050f20205f06c9d97cb471958f4bca58cccfaf9aae) | 5459338 | 526,327 | Success |
+| Creditcoin testnet | withdraw-work-1 | [0x132f0ae39c2252f6b7ad13773ef191aedeafabee6d5e55e17b5b1491720a16f3](https://creditcoin-testnet.blockscout.com/tx/0x132f0ae39c2252f6b7ad13773ef191aedeafabee6d5e55e17b5b1491720a16f3) | 5459339 | 310,086 | Success |
+| Creditcoin testnet | cached-root-recognize-3 | [0x723fd815d126fc47ae658eb4c08024e5a561a5c01296a5f108b8f1a0f3b669cc](https://creditcoin-testnet.blockscout.com/tx/0x723fd815d126fc47ae658eb4c08024e5a561a5c01296a5f108b8f1a0f3b669cc) | 5459340 | 521,561 | Success |
+| Creditcoin testnet | withdraw-work-3 | [0xd7da3be6fea92054880b4914b3faa9b2603ac7b8c1b1119f62c701ff6193e2bd](https://creditcoin-testnet.blockscout.com/tx/0xd7da3be6fea92054880b4914b3faa9b2603ac7b8c1b1119f62c701ff6193e2bd) | 5459341 | 310,086 | Success |
+| Creditcoin testnet | record-actually-paid-WORK-in-consumer | [0xb5a088f7d258d53a4518a2eaebabc062784face542d4f2deea784df69cb8d116](https://creditcoin-testnet.blockscout.com/tx/0xb5a088f7d258d53a4518a2eaebabc062784face542d4f2deea784df69cb8d116) | 5459344 | 388,752 | Success |
+| Creditcoin testnet | withdraw-returned-65 | [0x93833d3295860b753cc28a8dd66a3aa732ee44506ed25e3792e74006dce6e393](https://creditcoin-testnet.blockscout.com/tx/0x93833d3295860b753cc28a8dd66a3aa732ee44506ed25e3792e74006dce6e393) | 5459345 | 301,966 | Success |
 
 ### Policy branch source journal
 
@@ -134,6 +142,8 @@ A recognized RETURN moves value from an epoch reserve into the refund beneficiar
 | Creditcoin testnet | branch-root-recognize-7 | [0x47066825b89ae8e81d3624646c9198370d0dc3e2b4bd6e29d8893ae3ee211409](https://creditcoin-testnet.blockscout.com/tx/0x47066825b89ae8e81d3624646c9198370d0dc3e2b4bd6e29d8893ae3ee211409) | 5459315 | 384,230 | Success |
 | Creditcoin testnet | fund-successor-from-returned-free-balance | [0x884f68aa4fa3f51d6b065f4dfdc4e79e8b49882ab1666f1d4b932f62fbf8aa1c](https://creditcoin-testnet.blockscout.com/tx/0x884f68aa4fa3f51d6b065f4dfdc4e79e8b49882ab1666f1d4b932f62fbf8aa1c) | 5459316 | 399,443 | Success |
 | Ethereum Sepolia | materialize-uninitialized-source-expiry | [0xa9bf2698a8482bbc783424bffe57e4cb8bb11ad62bb033dc7481b817743a1b6f](https://sepolia.etherscan.io/tx/0xa9bf2698a8482bbc783424bffe57e4cb8bb11ad62bb033dc7481b817743a1b6f) | 11669862 | 782,832 | Success |
+| Creditcoin testnet | native-single-recognize-proven-expiry-return | [0x94a01d978ce67739264978f700bd250fc836d4305660156669f33ac791c8193b](https://creditcoin-testnet.blockscout.com/tx/0x94a01d978ce67739264978f700bd250fc836d4305660156669f33ac791c8193b) | 5459363 | 397,292 | Success |
+| Creditcoin testnet | withdraw-branch-and-successor-return-11 | [0x0e58b7497e063af7404294d1dea72822796c8b74f3be565557592ea3bf7047ac](https://creditcoin-testnet.blockscout.com/tx/0x0e58b7497e063af7404294d1dea72822796c8b74f3be565557592ea3bf7047ac) | 5459364 | 301,966 | Success |
 
 ### Disposable Safe rotation journal
 
@@ -144,10 +154,29 @@ A recognized RETURN moves value from an epoch reserve into the refund beneficiar
 | Ethereum Sepolia | deploy-disposable-safe-factory | [0xd6ee557e8e10a3d6c31ad43508e56866768258df3cbc4518328ed28fc2daba74](https://sepolia.etherscan.io/tx/0xd6ee557e8e10a3d6c31ad43508e56866768258df3cbc4518328ed28fc2daba74) | 11669830 | 711,231 | Mined |
 | Ethereum Sepolia | create-disposable-safe-proxy | [0x2e24e394e11b6aa2c8f09f75207f491cf0a3648f5756b1791c9bbb817370cb06](https://sepolia.etherscan.io/tx/0x2e24e394e11b6aa2c8f09f75207f491cf0a3648f5756b1791c9bbb817370cb06) | 11669831 | 283,476 | Mined |
 | Creditcoin testnet | fund-disposable-safe-epoch-3 | [0x685c7f39c3900da22b4f27f9d51208fda4b594dd20d48847be10a2d5bc793137](https://creditcoin-testnet.blockscout.com/tx/0x685c7f39c3900da22b4f27f9d51208fda4b594dd20d48847be10a2d5bc793137) | 5459296 | 401,515 | Mined |
+| Ethereum Sepolia | initialize-disposable-safe-epoch | [0x2433cd669fbf89484b67fc6e370b7633a82956f8277cee6a6cf3b3ab1d07a27c](https://sepolia.etherscan.io/tx/0x2433cd669fbf89484b67fc6e370b7633a82956f8277cee6a6cf3b3ab1d07a27c) | 11669864 | 483,903 | Mined |
+| Ethereum Sepolia | create-rotation-offer-A | [0x2d3f8d1ffe08e1a445f496621891b7a83517c9d7836ea6025711d4b421c00175](https://sepolia.etherscan.io/tx/0x2d3f8d1ffe08e1a445f496621891b7a83517c9d7836ea6025711d4b421c00175) | 11669865 | 549,252 | Mined |
+| Ethereum Sepolia | accept-rotation-A | [0xa5dd92e2baeb58147c0c3b0cee9380f510a4f28d25c0c0962f4b1515d985d3ab](https://sepolia.etherscan.io/tx/0xa5dd92e2baeb58147c0c3b0cee9380f510a4f28d25c0c0962f4b1515d985d3ab) | 11669866 | 60,178 | Mined |
+| Ethereum Sepolia | deliver-rotation-A | [0x8f6fcfc9ede147dd0791b1825ee20d838d9ac69c248fded8491e87008c09c494](https://sepolia.etherscan.io/tx/0x8f6fcfc9ede147dd0791b1825ee20d838d9ac69c248fded8491e87008c09c494) | 11669867 | 62,000 | Mined |
+| Ethereum Sepolia | approve-pre-rotation-A | [0x8b65e753cd8b6ae72a554b8d03c0604de1845d04a5e1ea97d60f384c67041f4f](https://sepolia.etherscan.io/tx/0x8b65e753cd8b6ae72a554b8d03c0604de1845d04a5e1ea97d60f384c67041f4f) | 11669868 | 620,665 | Mined |
+| Ethereum Sepolia | create-rotation-offer-B | [0x35ccf2a4aaf3f074e0596ff1c5d8b1dc60cb71e903277a654a12c19058b51b78](https://sepolia.etherscan.io/tx/0x35ccf2a4aaf3f074e0596ff1c5d8b1dc60cb71e903277a654a12c19058b51b78) | 11669869 | 549,240 | Mined |
+| Ethereum Sepolia | accept-rotation-B | [0x9f912eee8dcdcff9b87db7f118fa8ffa84d8a6012c4c25e6a33c08ecf0a7a5ec](https://sepolia.etherscan.io/tx/0x9f912eee8dcdcff9b87db7f118fa8ffa84d8a6012c4c25e6a33c08ecf0a7a5ec) | 11669870 | 60,166 | Mined |
+| Ethereum Sepolia | deliver-rotation-B | [0x485e2a93c6c8758f9b3df2be60c1466e655f986eb60470cbc8d364b1f93b9b4c](https://sepolia.etherscan.io/tx/0x485e2a93c6c8758f9b3df2be60c1466e655f986eb60470cbc8d364b1f93b9b4c) | 11669871 | 62,000 | Mined |
+| Ethereum Sepolia | rotate-disposable-safe-Z-to-W | [0xc0ce7699356b8826bdb4c05ddc6092bed256c6731e6b1157b5449e6817cd7b82](https://sepolia.etherscan.io/tx/0xc0ce7699356b8826bdb4c05ddc6092bed256c6731e6b1157b5449e6817cd7b82) | 11669872 | 87,738 | Mined |
+| Ethereum Sepolia | approve-queued-B-with-current-X-W | [0x02859087db32f5299c625adb4fde73e3e20446a48aed9bd13d6bf3d15a093eeb](https://sepolia.etherscan.io/tx/0x02859087db32f5299c625adb4fde73e3e20446a48aed9bd13d6bf3d15a093eeb) | 11669873 | 463,832 | Mined |
+| Ethereum Sepolia | start-disposable-safe-draining | [0x939d35841f1b2e1a9e719acb258d3378ec508887a8b89831a30afb39e0d1ce1c](https://sepolia.etherscan.io/tx/0x939d35841f1b2e1a9e719acb258d3378ec508887a8b89831a30afb39e0d1ce1c) | 11669874 | 82,770 | Mined |
+| Ethereum Sepolia | return-disposable-safe-remainder-1 | [0x075af1965ccb46846ef3254b27453eb8d25ecd221c2c80fcb93396be69560675](https://sepolia.etherscan.io/tx/0x075af1965ccb46846ef3254b27453eb8d25ecd221c2c80fcb93396be69560675) | 11669875 | 289,634 | Mined |
+| Creditcoin testnet | authenticate-disposable-safe-final-checkpoint | [0x9919d84a44839558c576e190da938b482acc8e0b22f0fae87c6ef259ec90c51c](https://creditcoin-testnet.blockscout.com/tx/0x9919d84a44839558c576e190da938b482acc8e0b22f0fae87c6ef259ec90c51c) | 5459368 | 396,330 | Mined |
+| Creditcoin testnet | recognize-disposable-safe-return-receipt | [0xa464d9cea1653bf31ac4aebf1e5b78f15d42753bd70a344fa02b5498f88fbcd8](https://creditcoin-testnet.blockscout.com/tx/0xa464d9cea1653bf31ac4aebf1e5b78f15d42753bd70a344fa02b5498f88fbcd8) | 5459369 | 361,130 | Mined |
+| Creditcoin testnet | recognize-rotation-work-1 | [0xcd3d2d4052a2175a0725fa3c69c39aaef18fcab6a6373630319afc66bac1e830](https://creditcoin-testnet.blockscout.com/tx/0xcd3d2d4052a2175a0725fa3c69c39aaef18fcab6a6373630319afc66bac1e830) | 5459370 | 526,327 | Mined |
 
 ## Pending recorded submissions
 
-None recorded.
+These hashes have a persisted submission marker but are not represented as completed operation receipts.
+
+| Chain | Operation | Transaction | Evidence |
+|---|---|---|---|
+| Creditcoin testnet | withdraw-rotation-work-1 | [0x3535c763a4c44ed515371901107f578dc730a9085a84782503496a1752e8e126](https://creditcoin-testnet.blockscout.com/tx/0x3535c763a4c44ed515371901107f578dc730a9085a84782503496a1752e8e126) | [repository file](../evidence/public-safe-rotation.json) · [raw GitHub evidence](https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-safe-rotation.json) |
 
 ## Other mined failures
 
@@ -155,7 +184,11 @@ None recorded.
 
 ## Mined semantic refusal
 
-Pending — no mined semantic-refusal receipt is recorded in the main target journal.
+The following failed transaction was intentionally mined to show that authenticated checkpoint bytes are refused when presented as an allocation payment fact.
+
+| Transaction | Block | Gas used | Status | Expected selector | Description |
+|---|---:|---:|---|---|---|
+| [0x0d077b52bb15edd32a8bbc3a2be0bd3420e7c657b43804b7128f8efb5785e079](https://creditcoin-testnet.blockscout.com/tx/0x0d077b52bb15edd32a8bbc3a2be0bd3420e7c657b43804b7128f8efb5785e079) | 5459342 | 326,410 | Mined failure (0) | 0xad4d102a | Persisted native authentication and correct source emitter; checkpoint event refused as an allocation payment fact |
 
 ## Read-only refusal checks
 

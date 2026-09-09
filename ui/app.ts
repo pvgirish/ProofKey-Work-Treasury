@@ -77,9 +77,9 @@ function saveJson(key: string, value: any) { localStorage.setItem(key, JSON.stri
 function short(value: unknown, size = 7) { const text = String(value ?? ""); return text.length > size * 2 + 3 ? `${text.slice(0, size + 2)}…${text.slice(-size)}` : text; }
 function plain(value: any): any {
   if (typeof value === "bigint") return value.toString();
-  if (Array.isArray(value)) return value.map(plain);
   if (value && typeof value === "object") {
     if (typeof value.toObject === "function") { try { return plain(value.toObject(true)); } catch {} }
+    if (Array.isArray(value)) return value.map(plain);
     return Object.fromEntries(Object.entries(value).filter(([key]) => !/^\d+$/.test(key)).map(([key, item]) => [key, plain(item)]));
   }
   return value;

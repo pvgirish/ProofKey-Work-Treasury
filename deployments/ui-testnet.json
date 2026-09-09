@@ -20,7 +20,10 @@
       "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
       "AllocationTree": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
     },
-    "treasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA"
+    "treasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+    "invoiceBook": "0xb93d065d7995884ceb8dad26d09B3a1efD9787cf"
   },
-  "scope": "Public testnet; operator and Safe are team controlled"
+  "lastEpochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+  "proofServiceUrl": "https://prover.cc3-testnet.creditcoin.network",
+  "scope": "Public testnet; Safe, worker, sponsor and relayers are team controlled. No independent settlement is claimed."
 }
