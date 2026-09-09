@@ -1,0 +1,28 @@
+{
+  "schema": "proofkey-vendored-safe-artifacts-v1",
+  "package": "@safe-global/safe-contracts",
+  "version": "1.4.1",
+  "tarball": "https://registry.npmjs.org/@safe-global/safe-contracts/-/safe-contracts-1.4.1.tgz",
+  "tarballIntegrity": "sha512-fP1jewywSwsIniM04NsqPyVRFKPMAuirC3ftA/TA4X3Zc5EnwQp/UCJUU2PL/37/z/jMo8UUaJ+pnFNWmMU7dQ==",
+  "tarballSha1": "82605342f3289dc6b99818f599a3409ec2cb3fdc",
+  "license": "LGPL-3.0",
+  "licenseFile": "LICENSE",
+  "licenseSha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+  "artifacts": {
+    "Safe.json": {
+      "packagePath": "build/artifacts/contracts/Safe.sol/Safe.json",
+      "sha256": "c36a5e99bc3f25c2d75ac5f7920b679200b3ce617c0d26e674b1321dbc6b0bdf",
+      "deployedBytecodeKeccak256": "0x1fe2df852ba3299d6534ef416eefa406e56ced995bca886ab7a553e6d0c5e1c4"
+    },
+    "SafeProxy.json": {
+      "packagePath": "build/artifacts/contracts/proxies/SafeProxy.sol/SafeProxy.json",
+      "sha256": "b05eaeaf7278097e52a9e9b38410de2a812c23fa3622373473e73eaa19646ecd",
+      "deployedBytecodeKeccak256": "0xd7d408ebcd99b2b70be43e20253d6d92a8ea8fab29bd3be7f55b10032331fb4c"
+    },
+    "SafeProxyFactory.json": {
+      "packagePath": "build/artifacts/contracts/proxies/SafeProxyFactory.sol/SafeProxyFactory.json",
+      "sha256": "f77ccb60e95345e6583216e82feb5430098679d62aa4aeda7388df3831476997",
+      "deployedBytecodeKeccak256": "0x50c3cdc4074750a7a974204a716c999edd37482f907608d960b2b025ee0b3317"
+    }
+  }
+}

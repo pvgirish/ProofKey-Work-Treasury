@@ -21,6 +21,8 @@
     "proof:refresh": "node scripts/refresh-native-proof.ts",
     "proof:verify-recovery": "node scripts/verify-native-recovery.ts",
     "proof:verify-refusals": "node scripts/verify-refusals.ts",
+    "judge:verify": "node scripts/judge-verify.ts",
+    "test:judge": "node --test scripts/judge-*.test.ts",
     "release:readback": "node scripts/release-readback.ts",
     "evidence:summarize": "node scripts/summarize-public-evidence.ts",
     "release:manifest": "node scripts/release-manifest.ts"

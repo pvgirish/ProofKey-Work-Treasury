@@ -1,0 +1,449 @@
+{
+  "version": 1,
+  "status": "pass",
+  "checkedAt": "2026-09-09T21:31:57.665Z",
+  "readOnly": true,
+  "scope": "Live RPC audit of recorded native receipts, exact source bytes, persisted authentication and global target accounting. All public demo actors are team controlled. This is not fresh native execution, a light-client state proof, work-quality verification or independent adoption.",
+  "source": {
+    "chainId": "11155111",
+    "finalizedBlock": 11670507,
+    "blockHash": "0x10d95f8d5a9a6c8c3b9833ea4fda233f88a39c2fa6d087074947a691f313d2dc",
+    "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138"
+  },
+  "target": {
+    "chainId": "102031",
+    "finalizedBlock": 5459919,
+    "blockHash": "0xaa9c0432a69d16cd44b5647dfaaccd9754a8ca07721b37bcd74b99d4b7f7fa18",
+    "treasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+    "nativeVerifier": "0x0000000000000000000000000000000000000FD2"
+  },
+  "observations": [
+    {
+      "method": "authenticateBatch",
+      "transactionHash": "0x803637ce8d1e691d826e64292366fa7e7de6f1d9f0676c82833c8d5a31562542",
+      "blockNumber": 5459242,
+      "blockHash": "0x62310c0ca69d1fd693985e572b50ac3593dbaf4f5d95b20244dbb1f502550544",
+      "status": 1,
+      "nativeEventCount": 2,
+      "sources": [
+        {
+          "blockHeight": 11669711,
+          "transactionIndex": 57,
+          "authenticationId": "0x3867b2ed40365acd834049b198c0d211809bc70fd37f911f05e4583df8b584b9",
+          "encodedTransactionHash": "0x93a1c3c431e290a1120ec71fc4d0e9edce7d0f770f2578b3c9c500a000837afe",
+          "selectedCheckpointOrdinal": null,
+          "sourceTransactionHash": "0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5",
+          "sourceBlockHash": "0x775354e6590195c32b193df0a303b6c47cd5eb41718b2bee34f95e2faf55a978",
+          "sourceLabel": "approve-A",
+          "sourceBytesMatch": true,
+          "cacheMatches": true,
+          "allocations": [
+            {
+              "ordinal": 0,
+              "allocation": {
+                "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+                "allocationId": "1",
+                "treeIndex": 0,
+                "kind": 1,
+                "orderId": "0x0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d",
+                "milestoneId": 0,
+                "role": 1,
+                "asset": "0x0000000000000000000000000000000000000000",
+                "amount": "30000000000000000000",
+                "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+                "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+                "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+                "evidenceHash": "0x891b0f77c67d8e54335509fe304ed9900dec100114c62a73dbec895c821f436a"
+              }
+            }
+          ],
+          "checkpoints": [
+            {
+              "ordinal": 2,
+              "checkpoint": {
+                "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+                "root": "0x1b25b3d49a73a789a9806a63534e4d79f1288ed4c67f0be77060f04d75149e08",
+                "leafCount": 1,
+                "earned": "30000000000000000000",
+                "returned": "0",
+                "phase": 1
+              }
+            }
+          ],
+          "checkpointImport": null,
+          "safeExecution": {
+            "verified": true,
+            "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+            "outerTransactionTo": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+            "outerCalldataHash": "0xa78a65b29160284df6e22690399d44ea11651500d4ab5285a60dccb7c2908a39",
+            "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+            "to": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+            "value": "0",
+            "data": "0x50f1dcab0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d00000000000000000000000000000000000000000000000000000000000000004d52ed9f36f06883c1c1ec71cc6f4a0a2df5a7477608a9cce6b7e986a313f5a80000000000000000000000000000000000000000000000000000000000000002",
+            "dataHash": "0x212000f52fbcde004de57743a284ac69b556d817516106a644f78505d37994cf",
+            "operation": 0,
+            "safeTxGas": "0",
+            "baseGas": "0",
+            "gasPrice": "0",
+            "gasToken": "0x0000000000000000000000000000000000000000",
+            "refundReceiver": "0x0000000000000000000000000000000000000000",
+            "nonce": "9",
+            "safeTxHash": "0xa8f2ab7437b6b3578339fa77e5d4acf07769474d71df863252a38eeeb9f2bfee",
+            "executionSuccessOrdinal": 3,
+            "gasReimbursement": "0",
+            "claims": {
+              "currentSafeOwnershipVerified": false,
+              "participantIndependenceVerified": false,
+              "workQualityVerified": false,
+              "coordinatorEconomicEffectVerified": false
+            },
+            "runtimeAssumption": "The caller must independently anchor the Safe proxy and singleton runtime/state to the intended implementation. This pure receipt check does not read current ownership or implementation state.",
+            "runtimeSnapshot": {
+              "verified": true,
+              "chainId": "11155111",
+              "blockNumber": 11669711,
+              "blockHash": "0x775354e6590195c32b193df0a303b6c47cd5eb41718b2bee34f95e2faf55a978",
+              "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+              "proxy": {
+                "runtimeBytes": 171,
+                "runtimeHash": "0xd7d408ebcd99b2b70be43e20253d6d92a8ea8fab29bd3be7f55b10032331fb4c",
+                "artifactSha256": "b05eaeaf7278097e52a9e9b38410de2a812c23fa3622373473e73eaa19646ecd",
+                "matchesVendoredSafeProxy": true
+              },
+              "singletonStorage": {
+                "slot": 0,
+                "word": "0x00000000000000000000000041675c099f32341bf84bfc5382af534df5c7461a",
+                "upperTwelveBytesZero": true,
+                "singleton": "0x41675C099F32341bf84BFc5382aF534df5C7461a"
+              },
+              "singleton": {
+                "runtimeBytes": 23579,
+                "runtimeHash": "0x1fe2df852ba3299d6534ef416eefa406e56ced995bca886ab7a553e6d0c5e1c4",
+                "artifactSha256": "c36a5e99bc3f25c2d75ac5f7920b679200b3ce617c0d26e674b1321dbc6b0bdf",
+                "matchesVendoredSafe": true
+              },
+              "snapshot": {
+                "semantics": "end-of-block",
+                "archiveReadRequired": true,
+                "consensusProof": false,
+                "intraBlockExecutionTrace": false,
+                "description": "Historical eth_getCode and eth_getStorageAt observations at the end of the named block, supplied by the selected RPC."
+              }
+            }
+          }
+        },
+        {
+          "blockHeight": 11669713,
+          "transactionIndex": 93,
+          "authenticationId": "0xdc2762895600364863a6c5d4919f4128ac5993dc1dfb4be64f86e564ac31364d",
+          "encodedTransactionHash": "0x977b4f2de87f9a0faaafe87f09ccc9a9ffec1a7ad91ea67b1b072dcc4629c160",
+          "selectedCheckpointOrdinal": null,
+          "sourceTransactionHash": "0xab9be5910aeba1e2cecab1613b35c6709a467cea51f0e1dd2172af0be942c1e3",
+          "sourceBlockHash": "0x457edd91dffd8b1fdf28bc864c514d9a2349330b5b51c3ec7aadf66fe4b884de",
+          "sourceLabel": "release-free-50",
+          "sourceBytesMatch": true,
+          "cacheMatches": true,
+          "allocations": [
+            {
+              "ordinal": 0,
+              "allocation": {
+                "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+                "allocationId": "2",
+                "treeIndex": 1,
+                "kind": 3,
+                "orderId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                "milestoneId": 0,
+                "role": 0,
+                "asset": "0x0000000000000000000000000000000000000000",
+                "amount": "50000000000000000000",
+                "claimOwner": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+                "destination": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+                "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+                "evidenceHash": "0xffe0900e7531229274b88eddee3b42f42976ba357a35dcf0eb1505b6e58ae6aa"
+              }
+            }
+          ],
+          "checkpoints": [
+            {
+              "ordinal": 1,
+              "checkpoint": {
+                "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+                "root": "0xdd58266153624d28514bd349968983ffd1189e3cd7d92cca70bacf6db4a4106c",
+                "leafCount": 2,
+                "earned": "30000000000000000000",
+                "returned": "50000000000000000000",
+                "phase": 1
+              }
+            }
+          ],
+          "checkpointImport": null,
+          "safeExecution": {
+            "verified": true,
+            "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+            "outerTransactionTo": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+            "outerCalldataHash": "0x2d46262d0bd5459a325c58a8223d741c909f266fcd5e8802cc29cfa2b6cea647",
+            "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+            "to": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+            "value": "0",
+            "data": "0x8e101ba96d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7000000000000000000000000000000000000000000000002b5e3af16b18800007bd6299c06c732427b69d6a5999dd199f418c5844b828775f47e2fa184d141e3",
+            "dataHash": "0x0838e8e7aafa127326fa44d46c453358a130cac264c722c433f31d61e16f6119",
+            "operation": 0,
+            "safeTxGas": "0",
+            "baseGas": "0",
+            "gasPrice": "0",
+            "gasToken": "0x0000000000000000000000000000000000000000",
+            "refundReceiver": "0x0000000000000000000000000000000000000000",
+            "nonce": "10",
+            "safeTxHash": "0xee89fe5fe9d2703702fcc364ab1d3073a6d069a5e20f9f95f4b467c3e47fef1e",
+            "executionSuccessOrdinal": 2,
+            "gasReimbursement": "0",
+            "claims": {
+              "currentSafeOwnershipVerified": false,
+              "participantIndependenceVerified": false,
+              "workQualityVerified": false,
+              "coordinatorEconomicEffectVerified": false
+            },
+            "runtimeAssumption": "The caller must independently anchor the Safe proxy and singleton runtime/state to the intended implementation. This pure receipt check does not read current ownership or implementation state.",
+            "runtimeSnapshot": {
+              "verified": true,
+              "chainId": "11155111",
+              "blockNumber": 11669713,
+              "blockHash": "0x457edd91dffd8b1fdf28bc864c514d9a2349330b5b51c3ec7aadf66fe4b884de",
+              "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+              "proxy": {
+                "runtimeBytes": 171,
+                "runtimeHash": "0xd7d408ebcd99b2b70be43e20253d6d92a8ea8fab29bd3be7f55b10032331fb4c",
+                "artifactSha256": "b05eaeaf7278097e52a9e9b38410de2a812c23fa3622373473e73eaa19646ecd",
+                "matchesVendoredSafeProxy": true
+              },
+              "singletonStorage": {
+                "slot": 0,
+                "word": "0x00000000000000000000000041675c099f32341bf84bfc5382af534df5c7461a",
+                "upperTwelveBytesZero": true,
+                "singleton": "0x41675C099F32341bf84BFc5382aF534df5C7461a"
+              },
+              "singleton": {
+                "runtimeBytes": 23579,
+                "runtimeHash": "0x1fe2df852ba3299d6534ef416eefa406e56ced995bca886ab7a553e6d0c5e1c4",
+                "artifactSha256": "c36a5e99bc3f25c2d75ac5f7920b679200b3ce617c0d26e674b1321dbc6b0bdf",
+                "matchesVendoredSafe": true
+              },
+              "snapshot": {
+                "semantics": "end-of-block",
+                "archiveReadRequired": true,
+                "consensusProof": false,
+                "intraBlockExecutionTrace": false,
+                "description": "Historical eth_getCode and eth_getStorageAt observations at the end of the named block, supplied by the selected RPC."
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "method": "authenticateCheckpoint",
+      "transactionHash": "0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae",
+      "blockNumber": 5459336,
+      "blockHash": "0xaaf0cb57e20f8e1aee75d94c0aa461c24d8376f86c28c65623b42e58627fe5da",
+      "status": 1,
+      "nativeEventCount": 1,
+      "sources": [
+        {
+          "blockHeight": 11669825,
+          "transactionIndex": 80,
+          "authenticationId": "0x960c29637be2ac9bdd776be3ebe0e795104b9efb18e40176457e97155b8a5188",
+          "encodedTransactionHash": "0x5043fd018eb5f17eefd5ee8a33166d62247b4076cdabbff0fa73e3234ab1354f",
+          "selectedCheckpointOrdinal": 1,
+          "sourceTransactionHash": "0xdabbf0d3a81dda2f21956222fac3071520fa33999c146c93c6b1cf1e69dc6077",
+          "sourceBlockHash": "0xfbae93e843820040e92a0f4b7f9d3340bec7e335f5207640eae5a8756664000a",
+          "sourceLabel": "sweep-final-15",
+          "sourceBytesMatch": true,
+          "cacheMatches": true,
+          "allocations": [
+            {
+              "ordinal": 0,
+              "allocation": {
+                "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+                "allocationId": "4",
+                "treeIndex": 3,
+                "kind": 3,
+                "orderId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                "milestoneId": 0,
+                "role": 0,
+                "asset": "0x0000000000000000000000000000000000000000",
+                "amount": "15000000000000000000",
+                "claimOwner": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+                "destination": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+                "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+                "evidenceHash": "0x8e467436fea121edb20e3e79181a059b906767c463c696b9d31be24139800825"
+              }
+            }
+          ],
+          "checkpoints": [
+            {
+              "ordinal": 1,
+              "checkpoint": {
+                "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+                "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+                "leafCount": 4,
+                "earned": "55000000000000000000",
+                "returned": "65000000000000000000",
+                "phase": 3
+              }
+            }
+          ],
+          "checkpointImport": {
+            "checkpointId": "0xf591e028a00a020acdfd84a957ba53eec3c980947505b5c87be81c85e87a9084",
+            "sourceLogOrdinal": 1,
+            "authenticationId": "0x960c29637be2ac9bdd776be3ebe0e795104b9efb18e40176457e97155b8a5188",
+            "checkpoint": {
+              "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+              "root": "0x32812168c04e9a025daa3d66d4569aa81999031239719330074e7d651ae713d4",
+              "leafCount": 4,
+              "earned": "55000000000000000000",
+              "returned": "65000000000000000000",
+              "phase": 3
+            }
+          },
+          "safeExecution": null
+        }
+      ]
+    },
+    {
+      "method": "authenticateSegmented",
+      "transactionHash": "0xd65928d72975f15e99d108674b64628ead2f821d626e35322cdd3eb9e9348530",
+      "blockNumber": 5459301,
+      "blockHash": "0x3fef4d50fbc05056d7483b985a540d99935b29b517cdbce741c4861c8c7eb8cf",
+      "status": 1,
+      "nativeEventCount": 2,
+      "sources": [
+        {
+          "blockHeight": 11669747,
+          "transactionIndex": 96,
+          "authenticationId": "0xb0253fc994344bef86f4686b95ba810fa8c37123eb43fd3cc4483cf9f80cd485",
+          "encodedTransactionHash": "0x495b635426fc6ec4bff283a89460a8ef1a834f315b5a60756984edbff95a83a0",
+          "selectedCheckpointOrdinal": null,
+          "sourceTransactionHash": "0xc6c911a23ea07e2b6c92a322f0506da128ee8d52dae9595b3fd24a608a14bab9",
+          "sourceBlockHash": "0x90d7014e3cfcef8b79041bdefd96240402701c3bf48f6fcb2c2ac200ae8a713e",
+          "sourceLabel": "committee-vote-exact-two-finalizes-work-fee",
+          "sourceBytesMatch": true,
+          "cacheMatches": true,
+          "allocations": [
+            {
+              "ordinal": 1,
+              "allocation": {
+                "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+                "allocationId": "2",
+                "treeIndex": 1,
+                "kind": 1,
+                "orderId": "0xaffea1311fb051838aab54c2f507195a45f22ab691d1ec780b833b79b17b0346",
+                "milestoneId": 0,
+                "role": 1,
+                "asset": "0x0000000000000000000000000000000000000000",
+                "amount": "2000000000000000000",
+                "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+                "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+                "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+                "evidenceHash": "0x8305260f5bc09d20b171ba9f59976b044457ff47c9976a9069883b6b9f7d7d90"
+              }
+            },
+            {
+              "ordinal": 2,
+              "allocation": {
+                "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+                "allocationId": "3",
+                "treeIndex": 2,
+                "kind": 2,
+                "orderId": "0xaffea1311fb051838aab54c2f507195a45f22ab691d1ec780b833b79b17b0346",
+                "milestoneId": 0,
+                "role": 2,
+                "asset": "0x0000000000000000000000000000000000000000",
+                "amount": "1000000000000000000",
+                "claimOwner": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+                "destination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+                "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+                "evidenceHash": "0x8305260f5bc09d20b171ba9f59976b044457ff47c9976a9069883b6b9f7d7d90"
+              }
+            }
+          ],
+          "checkpoints": [
+            {
+              "ordinal": 4,
+              "checkpoint": {
+                "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+                "root": "0x394c47f494ba0b1c85bbd94d49230586ec1444903d04565a34f0c541333e45b4",
+                "leafCount": 3,
+                "earned": "5000000000000000000",
+                "returned": "0",
+                "phase": 1
+              }
+            }
+          ],
+          "checkpointImport": null,
+          "safeExecution": null
+        },
+        {
+          "blockHeight": 11669800,
+          "transactionIndex": 60,
+          "authenticationId": "0x90c3126708bc524d78102bcd8ee3cc43f913719f0fcb842844fbdb73657c3fe8",
+          "encodedTransactionHash": "0xd1a45fef865b87913b41a7afc40fe26620c896f6172d72ef8106a1e135488105",
+          "selectedCheckpointOrdinal": null,
+          "sourceTransactionHash": "0xf2ed8beb833fcd3fddab3308106e65bf4939ae13f5a670b259b5c2a1a1fa2e06",
+          "sourceBlockHash": "0xdeba646ab38f0f16ef2ce0ab129b3148fb99c5dd026f290c63d87cc00ead6b15",
+          "sourceLabel": "sweep-branch-remainder-11",
+          "sourceBytesMatch": true,
+          "cacheMatches": true,
+          "allocations": [
+            {
+              "ordinal": 0,
+              "allocation": {
+                "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+                "allocationId": "7",
+                "treeIndex": 6,
+                "kind": 3,
+                "orderId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                "milestoneId": 0,
+                "role": 0,
+                "asset": "0x0000000000000000000000000000000000000000",
+                "amount": "11000000000000000000",
+                "claimOwner": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+                "destination": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+                "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+                "evidenceHash": "0xae93404426ebfc66f201725a0886295cd1a6a3917ef5cbc3af8c8c5764f0f616"
+              }
+            }
+          ],
+          "checkpoints": [
+            {
+              "ordinal": 1,
+              "checkpoint": {
+                "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+                "root": "0xf0e92f446d47e2c794e730d700c778fd8b951cd7c35016c64f0105181355939c",
+                "leafCount": 7,
+                "earned": "9000000000000000000",
+                "returned": "11000000000000000000",
+                "phase": 3
+              }
+            }
+          ],
+          "checkpointImport": null,
+          "safeExecution": null
+        }
+      ]
+    }
+  ],
+  "accounting": {
+    "depositsCTC": "143.0",
+    "withdrawnCTC": "143.0",
+    "liabilitiesCTC": "0.0",
+    "balanceCTC": "0.0",
+    "conserved": true,
+    "solvent": true
+  },
+  "limitations": [
+    "RPCs supply the canonical/finality observations. This command does not independently verify chain consensus.",
+    "The whole authenticated source receipt includes the reported Safe CALL and canonical allocations. Exact Safe calldata/hash/event checks do not authorize a second payout route or prove participant independence.",
+    "Safe gasReimbursement is transaction-cost reimbursement, not the worker payment.",
+    "The recorded native paths are a bounded sample, not all historical calls. Use the separate tree/readback and refusal tools for their stated checks."
+  ]
+}

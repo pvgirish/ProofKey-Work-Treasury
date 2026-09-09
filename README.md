@@ -1,6 +1,8 @@
 # ProofKey Work Treasury
 
-One funded Creditcoin budget can commission many Ethereum Safe work orders. Reuse the unearned part of finished or cancelled reservations while earlier workers still collect, without paying an allocation twice. Return unused funds and collect through either a saved checkpoint or an authenticated allocation receipt.
+Keep one finite work budget on Creditcoin while your organization approves work from its Ethereum Safe. Reuse capacity released by cancelled or partially earned work while preserving payments already earned.
+
+In the public 120-CTC run, 50 CTC returned before the second job resolved; the final result paid workers 55 and refunded 65. The run is team controlled. Each source allocation can be recognized once through a saved checkpoint or its authenticated receipt.
 
 This is the separate Work Treasury implementation. The earlier ProofKey Review Settlement and frozen Review #41 are not migrated or modified.
 
@@ -11,6 +13,17 @@ The implementation and team-controlled public demonstrations are complete: all f
 Open the [public app](https://pvgirish.github.io/ProofKey-Work-Treasury/) in a fresh browser: it automatically verifies the public configuration and reads the completed budget without a wallet. For an existing saved setup, **Networks → Use public demo defaults** explicitly restores the demo. Then select **Evidence → Run independent rebuild** to reconstruct the four source allocations at one stable block and compare their root with storage. **Payments → Read** for allocation 1 shows 30 CTC withdrawn and its recorded invoice.
 
 The [conservation argument](docs/CONSERVATION-AND-REUSE.md) explains why an early refund preserves unseen earned work. The [refusal ledger](docs/REFUSAL-LEDGER.md) separates public native rejection, semantic rejection, economic replay and local rollback tests. Removing native authentication prevents a new source fact from unlocking payment; knowing a transaction hash or controlling its submitter is insufficient.
+
+## Check the mined native evidence yourself
+
+No key, wallet, `.env`, proof service or Solidity compiler is needed for this check:
+
+```sh
+npm ci --ignore-scripts
+npm run judge:verify
+```
+
+The command re-reads three mined native paths, binds five events from `0x0FD2` to the treasury and exact source bytes, checks recorded Safe CALL provenance, and audits current global accounting. It reports failures explicitly. See the [verification scope and 30-second walkthrough](docs/JUDGE-VERIFY.md) and [captured report](evidence/judge-verification.json). This audits historical evidence; it does not broadcast or claim independent adoption.
 
 ## Buyer workflow to validate
 
@@ -47,6 +60,7 @@ The downloadable Safe Transaction Builder JSON is the default Safe route. Direct
 npm run typecheck
 npm run test:sdk
 npm run test:contracts
+npm run test:judge
 bash scripts/forge.sh build --sizes --skip test
 ```
 

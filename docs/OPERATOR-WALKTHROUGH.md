@@ -4,6 +4,8 @@ This walkthrough lets a judge or new operator inspect the public deployment with
 
 Use the [public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/) and the [published repository](https://github.com/pvgirish/ProofKey-Work-Treasury). The current evidence stage can change as public transactions are added, so treat [`evidence/public-demo.json`](../evidence/public-demo.json) and the [release evidence ledger](RELEASE-GATES.md) as the current record rather than relying on screenshots or this walkthrough for live state.
 
+For a terminal-based audit without a wallet or compilation, run `npm ci --ignore-scripts` and `npm run judge:verify`. The [verification guide](JUDGE-VERIFY.md) defines exactly what a pass means.
+
 ## 1. Verify the public setup
 
 A fresh browser automatically verifies the public setup and reads the built-in epoch from both chains without a wallet. Open **Networks** to inspect the pinned defaults and verification result. A saved workspace makes no automatic network request and is preserved; choose **Use public demo defaults** only if you want to replace it explicitly. The defaults are:
@@ -29,7 +31,7 @@ The supplied **PaidInvoiceBook** is pinned to the main demonstration's buyer, or
 
 To repeat verification, select **Verify without saving**. A successful check confirms both RPC chain IDs, contract code, and the target treasury's immutable source chain ID, source key and coordinator. Target values are read together at one target block. The app prefers an RPC's `finalized` block tag; if an RPC does not expose it, the result explicitly says that it used a confirmation-depth fallback and that finality is not asserted. Do not relabel that fallback as finalized.
 
-This check is read only. It does not request an account, sign, or broadcast.
+This check is read only. It does not request an account, sign, or broadcast. Inspection may use the labeled confirmation fallback; guided worker quote signing and delivery preparation require an actual finalized target block and fail closed if it is unavailable.
 
 ## 2. Load the built-in epoch without a wallet
 
