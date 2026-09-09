@@ -1,6 +1,6 @@
 {
   "schema": "proofkey.release-manifest.v1",
-  "generatedAt": "2026-09-09T20:55:58.983Z",
+  "generatedAt": "2026-09-09T21:37:19.907Z",
   "releaseStatus": "pending",
   "releaseBlockingReasons": [
     "Two consented independent settlements and repeat independent operation are not recorded.",
@@ -20,25 +20,15 @@
     "validatedGateCount": 15
   },
   "repository": {
-    "revision": "bab340e7344a148230bef4a9d1e05dcad32c1111",
+    "revision": "e2f434e4abfcfbafa02c6fc9406f124afd7b92cb",
     "dirty": true,
     "dirtyEntries": [
-      "M README.md",
-      " M docs/IMPLEMENTATION-STATUS.md",
+      "M docs/IMPLEMENTATION-STATUS.md",
       " M docs/RELEASE-GATES.md",
       " M evidence/public-ci.json",
-      " M evidence/ui-firstload-qa/fresh-default-failure.png",
-      " M evidence/ui-firstload-qa/fresh-public-demo.png",
-      " M evidence/ui-firstload-qa/report.md",
-      " M scripts/ui-firstload-qa.mjs",
-      "?? evidence/ui-firstload-hosted-qa/fresh-default-failure.png",
-      "?? evidence/ui-firstload-hosted-qa/fresh-default-retry.png",
-      "?? evidence/ui-firstload-hosted-qa/fresh-public-demo.png",
-      "?? evidence/ui-firstload-hosted-qa/independent-tree-rebuild.png",
-      "?? evidence/ui-firstload-hosted-qa/public-demo-recovered.png",
-      "?? evidence/ui-firstload-hosted-qa/report.md",
-      "?? evidence/ui-firstload-hosted-qa/stale-settings-error.png",
-      "?? evidence/ui-firstload-qa/fresh-default-retry.png"
+      "?? evidence/ui-finality-hosted-qa/delivery-finality-required.png",
+      "?? evidence/ui-finality-hosted-qa/quote-finality-required.png",
+      "?? evidence/ui-finality-hosted-qa/report.md"
     ]
   },
   "validation": {
@@ -880,201 +870,209 @@
   "publicCi": {
     "path": "evidence/public-ci.json",
     "present": true,
-    "databaseId": 34403677380,
-    "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34403677380",
-    "headSha": "bab340e7344a148230bef4a9d1e05dcad32c1111",
+    "databaseId": 34407640882,
+    "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34407640882",
+    "headSha": "e2f434e4abfcfbafa02c6fc9406f124afd7b92cb",
     "status": "completed",
     "conclusion": "success",
     "jobs": [
       {
-        "completedAt": "2026-09-09T20:53:45Z",
+        "completedAt": "2026-09-09T21:35:15Z",
         "conclusion": "success",
-        "databaseId": 102641386401,
+        "databaseId": 102654342815,
         "name": "verify",
-        "startedAt": "2026-09-09T20:52:50Z",
+        "startedAt": "2026-09-09T21:34:13Z",
         "status": "completed",
         "steps": [
           {
-            "completedAt": "2026-09-09T20:52:52Z",
+            "completedAt": "2026-09-09T21:34:15Z",
             "conclusion": "success",
             "name": "Set up job",
             "number": 1,
-            "startedAt": "2026-09-09T20:52:51Z",
+            "startedAt": "2026-09-09T21:34:14Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:52:53Z",
+            "completedAt": "2026-09-09T21:34:17Z",
             "conclusion": "success",
             "name": "Run actions/checkout@v4",
             "number": 2,
-            "startedAt": "2026-09-09T20:52:52Z",
+            "startedAt": "2026-09-09T21:34:15Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:52:54Z",
+            "completedAt": "2026-09-09T21:34:19Z",
             "conclusion": "success",
             "name": "Run actions/setup-node@v4",
             "number": 3,
-            "startedAt": "2026-09-09T20:52:53Z",
+            "startedAt": "2026-09-09T21:34:17Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:52:57Z",
+            "completedAt": "2026-09-09T21:34:23Z",
             "conclusion": "success",
             "name": "Run foundry-rs/foundry-toolchain@v1",
             "number": 4,
-            "startedAt": "2026-09-09T20:52:54Z",
+            "startedAt": "2026-09-09T21:34:19Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:52:59Z",
+            "completedAt": "2026-09-09T21:34:25Z",
             "conclusion": "success",
             "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
             "number": 5,
-            "startedAt": "2026-09-09T20:52:57Z",
+            "startedAt": "2026-09-09T21:34:23Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:01Z",
+            "completedAt": "2026-09-09T21:34:27Z",
             "conclusion": "success",
             "name": "Run npm run typecheck",
             "number": 6,
-            "startedAt": "2026-09-09T20:52:59Z",
+            "startedAt": "2026-09-09T21:34:25Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:02Z",
+            "completedAt": "2026-09-09T21:34:28Z",
             "conclusion": "success",
             "name": "Run npm run test:sdk",
             "number": 7,
-            "startedAt": "2026-09-09T20:53:01Z",
+            "startedAt": "2026-09-09T21:34:27Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:41Z",
+            "completedAt": "2026-09-09T21:35:08Z",
             "conclusion": "success",
             "name": "Run npm run test:contracts",
             "number": 8,
-            "startedAt": "2026-09-09T20:53:02Z",
+            "startedAt": "2026-09-09T21:34:28Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:42Z",
+            "completedAt": "2026-09-09T21:35:09Z",
+            "conclusion": "success",
+            "name": "Run npm run test:judge",
+            "number": 9,
+            "startedAt": "2026-09-09T21:35:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-09T21:35:09Z",
             "conclusion": "success",
             "name": "Run bash scripts/forge.sh build --sizes",
-            "number": 9,
-            "startedAt": "2026-09-09T20:53:41Z",
+            "number": 10,
+            "startedAt": "2026-09-09T21:35:09Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:42Z",
+            "completedAt": "2026-09-09T21:35:10Z",
             "conclusion": "success",
             "name": "Run npm run ui:build",
-            "number": 10,
-            "startedAt": "2026-09-09T20:53:42Z",
+            "number": 11,
+            "startedAt": "2026-09-09T21:35:09Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:43Z",
+            "completedAt": "2026-09-09T21:35:11Z",
             "conclusion": "success",
             "name": "Run actions/upload-artifact@v4",
-            "number": 11,
-            "startedAt": "2026-09-09T20:53:42Z",
+            "number": 12,
+            "startedAt": "2026-09-09T21:35:10Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:43Z",
+            "completedAt": "2026-09-09T21:35:12Z",
             "conclusion": "success",
             "name": "Post Run foundry-rs/foundry-toolchain@v1",
-            "number": 20,
-            "startedAt": "2026-09-09T20:53:43Z",
+            "number": 22,
+            "startedAt": "2026-09-09T21:35:11Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:44Z",
+            "completedAt": "2026-09-09T21:35:12Z",
             "conclusion": "success",
             "name": "Post Run actions/setup-node@v4",
-            "number": 21,
-            "startedAt": "2026-09-09T20:53:43Z",
+            "number": 23,
+            "startedAt": "2026-09-09T21:35:12Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:44Z",
+            "completedAt": "2026-09-09T21:35:13Z",
             "conclusion": "success",
             "name": "Post Run actions/checkout@v4",
-            "number": 22,
-            "startedAt": "2026-09-09T20:53:44Z",
+            "number": 24,
+            "startedAt": "2026-09-09T21:35:12Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:44Z",
+            "completedAt": "2026-09-09T21:35:13Z",
             "conclusion": "success",
             "name": "Complete job",
-            "number": 23,
-            "startedAt": "2026-09-09T20:53:44Z",
+            "number": 25,
+            "startedAt": "2026-09-09T21:35:13Z",
             "status": "completed"
           }
         ],
-        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34403677380/job/102641386401"
+        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34407640882/job/102654342815"
       },
       {
-        "completedAt": "2026-09-09T20:53:59Z",
+        "completedAt": "2026-09-09T21:35:35Z",
         "conclusion": "success",
-        "databaseId": 102641694665,
+        "databaseId": 102654667536,
         "name": "publish-wallet-app",
-        "startedAt": "2026-09-09T20:53:49Z",
+        "startedAt": "2026-09-09T21:35:20Z",
         "status": "completed",
         "steps": [
           {
-            "completedAt": "2026-09-09T20:53:51Z",
+            "completedAt": "2026-09-09T21:35:23Z",
             "conclusion": "success",
             "name": "Set up job",
             "number": 1,
-            "startedAt": "2026-09-09T20:53:50Z",
+            "startedAt": "2026-09-09T21:35:21Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:51Z",
+            "completedAt": "2026-09-09T21:35:24Z",
             "conclusion": "success",
             "name": "Run actions/configure-pages@v5",
             "number": 2,
-            "startedAt": "2026-09-09T20:53:51Z",
+            "startedAt": "2026-09-09T21:35:23Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:52Z",
+            "completedAt": "2026-09-09T21:35:25Z",
             "conclusion": "success",
             "name": "Run actions/download-artifact@v4",
             "number": 3,
-            "startedAt": "2026-09-09T20:53:51Z",
+            "startedAt": "2026-09-09T21:35:24Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:53Z",
+            "completedAt": "2026-09-09T21:35:26Z",
             "conclusion": "success",
             "name": "Run actions/upload-pages-artifact@v3",
             "number": 4,
-            "startedAt": "2026-09-09T20:53:52Z",
+            "startedAt": "2026-09-09T21:35:25Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:58Z",
+            "completedAt": "2026-09-09T21:35:33Z",
             "conclusion": "success",
             "name": "Publish verified wallet build",
             "number": 5,
-            "startedAt": "2026-09-09T20:53:53Z",
+            "startedAt": "2026-09-09T21:35:26Z",
             "status": "completed"
           },
           {
-            "completedAt": "2026-09-09T20:53:58Z",
+            "completedAt": "2026-09-09T21:35:33Z",
             "conclusion": "success",
             "name": "Complete job",
             "number": 6,
-            "startedAt": "2026-09-09T20:53:58Z",
+            "startedAt": "2026-09-09T21:35:33Z",
             "status": "completed"
           }
         ],
-        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34403677380/job/102641694665"
+        "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34407640882/job/102654667536"
       }
     ],
     "currentRevisionMatch": true,
