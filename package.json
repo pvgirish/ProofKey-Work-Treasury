@@ -1,0 +1,30 @@
+{
+  "name": "proofkey-work-treasury",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "build": "bash scripts/forge.sh build",
+    "test:contracts": "bash scripts/forge.sh test -vv",
+    "test:sdk": "node --test sdk/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "ui:build": "node scripts/build-ui.mjs",
+    "ui:serve": "node scripts/serve-ui.mjs",
+    "preflight": "node scripts/preflight.ts",
+    "deploy:testnet": "node scripts/deploy.ts",
+    "demo:public": "node scripts/public-demo.ts"
+  },
+  "dependencies": {
+    "@gluwa/asc-contracts": "0.2.1",
+    "@gluwa/usc-sdk": "0.18.0",
+    "@openzeppelin/contracts": "5.4.0",
+    "ethers": "6.17.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "26.1.0"
+  }
+}

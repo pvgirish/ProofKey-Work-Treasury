@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "createdAt": "2026-09-09T18:20:22.186Z",
+  "scope": "Public testnet; operator and Safe are team controlled",
+  "compiler": "0.8.28+commit.7893614a",
+  "optimizerRuns": 200,
+  "viaIR": true,
+  "evmVersion": "cancun",
+  "source": {
+    "chainId": "11155111",
+    "chainKey": "1",
+    "rpcUrl": "https://ethereum-sepolia-rpc.publicnode.com",
+    "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+    "libraries": {
+      "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+      "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+      "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+      "SourcePolicyV1Lib": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+      "SourceAccountingLib": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612"
+    },
+    "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138"
+  },
+  "target": {
+    "chainId": "102031",
+    "rpcUrl": "https://rpc.cc3-testnet.creditcoin.network",
+    "libraries": {
+      "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+      "AllocationTree": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
+    },
+    "treasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA"
+  },
+  "records": [
+    {
+      "chain": "source",
+      "name": "WorkTypes",
+      "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+      "transactionHash": "0xf428a6ebecdf1307fc761bacfb15cb82089c39ac1bccb0e5d5f6c51151c6be7d",
+      "blockNumber": 11669658,
+      "gasUsed": "676323",
+      "runtimeBytes": 2881,
+      "deployedCodeHash": "0x3230dc48110cf70fba253173a09a3aa80bb6a2598afa37d2aae2c6730106e56c",
+      "libraries": {},
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {},
+      "constructorArguments": []
+    },
+    {
+      "chain": "source",
+      "name": "AllocationTree",
+      "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+      "transactionHash": "0x461899215d0c4a8afaacae6eefd359ec387ecb11074cd4a8519f156eeba86531",
+      "blockNumber": 11669659,
+      "gasUsed": "665065",
+      "runtimeBytes": 2832,
+      "deployedCodeHash": "0xef81a712fbb8b2510aa74c6b399a706599be24b91966684de3f9106aac9adeaf",
+      "libraries": {
+        "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+      },
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {
+        "library_deploy_address": [
+          "000000000000000000000000f56c7e00dab6f3fad65e3a85aa6c8fde34e48f43"
+        ]
+      },
+      "constructorArguments": []
+    },
+    {
+      "chain": "source",
+      "name": "SourceSignatureLib",
+      "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+      "transactionHash": "0x7f283ecf2c3ce28289fcbcbb9072787961adc8ebafdec55f18dc4cdf7363286a",
+      "blockNumber": 11669660,
+      "gasUsed": "500093",
+      "runtimeBytes": 2066,
+      "deployedCodeHash": "0xa935987639430e8c1d30b95d78c17a0953259338fe8ee413e5b98fd00cf408ce",
+      "libraries": {
+        "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+        "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43"
+      },
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {},
+      "constructorArguments": []
+    },
+    {
+      "chain": "source",
+      "name": "SourcePolicyV1Lib",
+      "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+      "transactionHash": "0x3e4984e239a567d8c0a9b278891dba897afef73fd095329dec1ea0ce9a46d9dd",
+      "blockNumber": 11669661,
+      "gasUsed": "595165",
+      "runtimeBytes": 2507,
+      "deployedCodeHash": "0xabf92e884eb8a6d6184c2cab11386e46236878125027a621a33a907d0b3d05a9",
+      "libraries": {
+        "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+        "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+        "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1"
+      },
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {},
+      "constructorArguments": []
+    },
+    {
+      "chain": "source",
+      "name": "SourceAccountingLib",
+      "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+      "transactionHash": "0xa45be513e6ce0aa03238a783c87489ac260eeaf1ec5cb03969355b6d4bf3b2db",
+      "blockNumber": 11669662,
+      "gasUsed": "625115",
+      "runtimeBytes": 2646,
+      "deployedCodeHash": "0x19442f0e969a23438d20f158f5a4041f69116802c04c21159ed2ae2c99d51766",
+      "libraries": {
+        "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+        "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+        "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+        "SourcePolicyV1Lib": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3"
+      },
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {
+        "library_deploy_address": [
+          "0000000000000000000000003ac9b3eb94dba253bcc4284a981fb45d35386612"
+        ]
+      },
+      "constructorArguments": []
+    },
+    {
+      "chain": "source",
+      "name": "SourceCoordinator",
+      "address": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+      "transactionHash": "0x3337f8315e172e76ab12a887ae09b784b93b23f62142b06dd5880ad1db9ec738",
+      "blockNumber": 11669663,
+      "gasUsed": "4765255",
+      "runtimeBytes": 21789,
+      "deployedCodeHash": "0xa2b1bb0c4fa144c8791dd3e689726d27bb479c0314641320c557ae1cd8f63bef",
+      "libraries": {
+        "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+        "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+        "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+        "SourcePolicyV1Lib": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+        "SourceAccountingLib": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612"
+      },
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {},
+      "constructorArguments": []
+    },
+    {
+      "chain": "target",
+      "name": "WorkTypes",
+      "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+      "transactionHash": "0x6335fdc7b0968e9a745febc5a986d2cdde956b28b24828beddb4825e5eaff0e9",
+      "blockNumber": 5459162,
+      "gasUsed": "676323",
+      "runtimeBytes": 2881,
+      "deployedCodeHash": "0x3230dc48110cf70fba253173a09a3aa80bb6a2598afa37d2aae2c6730106e56c",
+      "libraries": {},
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {},
+      "constructorArguments": []
+    },
+    {
+      "chain": "target",
+      "name": "AllocationTree",
+      "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
+      "transactionHash": "0xe90f671dc64f0e802a035a386e05be684247d97f567f6c08846ba7295d025637",
+      "blockNumber": 5459163,
+      "gasUsed": "665065",
+      "runtimeBytes": 2832,
+      "deployedCodeHash": "0x92e6ae6318563f25a2d1d5a9e52e9edce7024eb2899b5da2be91c85fe6893ba0",
+      "libraries": {
+        "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0"
+      },
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {
+        "library_deploy_address": [
+          "000000000000000000000000fcd2f8240f9a727d532becc45c7f2d920843958f"
+        ]
+      },
+      "constructorArguments": []
+    },
+    {
+      "chain": "target",
+      "name": "WorkTreasury",
+      "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+      "transactionHash": "0x9e7f33f820df25dd81bb320c6c1a6e97157bfbb637d83f265fb24bdb98054062",
+      "blockNumber": 5459164,
+      "gasUsed": "4404171",
+      "runtimeBytes": 20019,
+      "deployedCodeHash": "0x79e706996c4c2bc24742b90a1d29a22a39afddcf30e1f408a31b7237c52b5689",
+      "libraries": {
+        "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+        "AllocationTree": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
+      },
+      "matchesCompiledRuntimeOutsideImmutableSlots": true,
+      "immutableValues": {
+        "41014": [
+          "0000000000000000000000000000000000000000000000000000000000000fd2",
+          "0000000000000000000000000000000000000000000000000000000000000fd2",
+          "0000000000000000000000000000000000000000000000000000000000000fd2"
+        ],
+        "41016": [
+          "0000000000000000000000000000000000000000000000000000000000000001",
+          "0000000000000000000000000000000000000000000000000000000000000001",
+          "0000000000000000000000000000000000000000000000000000000000000001",
+          "0000000000000000000000000000000000000000000000000000000000000001",
+          "0000000000000000000000000000000000000000000000000000000000000001",
+          "0000000000000000000000000000000000000000000000000000000000000001"
+        ],
+        "41018": [
+          "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+          "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+          "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+          "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+          "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138"
+        ],
+        "46597": [
+          "0000000000000000000000000000000000000000000000000000000000aa36a7",
+          "0000000000000000000000000000000000000000000000000000000000aa36a7",
+          "0000000000000000000000000000000000000000000000000000000000aa36a7"
+        ]
+      },
+      "constructorArguments": [
+        "11155111",
+        "1",
+        "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138"
+      ]
+    }
+  ],
+  "immutableReadback": {
+    "sourceChainId": "11155111",
+    "sourceChainKey": "1",
+    "sourceCoordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+    "nativeVerifier": "0x0000000000000000000000000000000000000FD2",
+    "asset": "0x0000000000000000000000000000000000000000",
+    "checkedAt": "2026-09-09T18:22:17.716Z"
+  }
+}

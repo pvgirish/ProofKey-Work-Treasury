@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Operate a ProofKey Work Treasury across Ethereum and Creditcoin.">
+  <title>ProofKey Work Treasury</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail" aria-label="Main navigation">
+      <a class="brand" href="#overview" aria-label="ProofKey Work Treasury home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span><b>ProofKey</b><small>Work Treasury</small></span>
+      </a>
+      <nav>
+        <button class="nav-item active" data-view="overview"><span>01</span>Budget</button>
+        <button class="nav-item" data-view="orders"><span>02</span>Work orders</button>
+        <button class="nav-item" data-view="evidence"><span>03</span>Evidence</button>
+        <button class="nav-item" data-view="payments"><span>04</span>Payments</button>
+        <button class="nav-item" data-view="settings"><span>05</span>Networks</button>
+      </nav>
+      <div class="rail-note">
+        <span class="signal neutral" id="rail-signal"></span>
+        <p id="rail-status">No networks configured</p>
+        <small>Local or testnet use only until deployments are pinned.</small>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button class="menu" id="menu-button" aria-label="Open navigation" aria-expanded="false">Menu</button>
+        <div>
+          <p class="eyebrow">Operator workspace</p>
+          <p class="context" id="network-context">Read-only until a wallet is connected</p>
+        </div>
+        <button class="button compact" id="connect-wallet"><span class="wallet-dot"></span><span>Connect wallet</span></button>
+      </header>
+
+      <main>
+        <section class="view active" id="view-overview" aria-labelledby="overview-title">
+          <div class="page-head">
+            <div><p class="kicker">Budget epoch</p><h1 id="overview-title">One funded budget, paid by verified outcomes.</h1></div>
+            <span class="environment-tag" id="environment-tag">Configuration required</span>
+          </div>
+
+          <div class="journey card">
+            <div class="card-head"><div><p class="kicker">120-unit planning walkthrough</p><h2>Capacity returns before delayed work is collected</h2></div><span class="honesty">Illustration · no chain activity</span></div>
+            <div class="budget-track" aria-label="Example final allocation: worker A 30, worker B 25, returned 65">
+              <span style="--size:25" class="seg worker-a">30 <small>Worker A</small></span>
+              <span style="--size:41.667" class="seg returned">50 <small>Released</small></span>
+              <span style="--size:20.833" class="seg worker-b">25 <small>Worker B</small></span>
+              <span style="--size:12.5" class="seg restored">15 <small>Reused → released</small></span>
+            </div>
+            <ol class="journey-steps">
+              <li><b>Reserve</b><span>A 30 · B 40</span></li>
+              <li><b>Earn</b><span>A finalizes 30</span></li>
+              <li><b>Release</b><span>50 returns first</span></li>
+              <li><b>Settle</b><span>B earns 25</span></li>
+              <li><b>Reuse</b><span>15 funds C</span></li>
+              <li><b>Expire</b><span>C returns 15</span></li>
+              <li><b>Collect</b><span>55 work · 65 return</span></li>
+            </ol>
+          </div>
+
+          <div class="section-title"><div><p class="kicker">Live readback</p><h2>What each chain can prove now</h2></div><button class="button ghost" id="refresh-readback">Refresh both chains</button></div>
+          <div class="status-grid">
+            <article class="status-card"><div class="status-label"><span class="signal neutral" id="source-signal"></span>Ethereum source</div><h3 id="source-main">Not read yet</h3><p id="source-detail">Configure a source RPC, coordinator and epoch ID.</p><dl id="source-metrics"></dl></article>
+            <article class="status-card"><div class="status-label"><span class="signal neutral" id="target-signal"></span>Creditcoin funding</div><h3 id="target-main">Not read yet</h3><p id="target-detail">Funding is checked independently before consent.</p><dl id="target-metrics"></dl><button class="text-link" id="fund-exact-epoch" hidden>Fund exact source configuration →</button></article>
+            <article class="status-card accent"><div class="status-label"><span class="signal neutral" id="action-signal"></span>Next authorized action</div><h3 id="action-main">Connect the workspace</h3><p id="action-detail">The browser clock never finalizes an outcome. Read the contracts to find the next valid actor and action.</p><button class="text-link" data-go="settings">Configure networks →</button></article>
+          </div>
+          <div class="epoch-entry card slim">
+            <label><span>Epoch ID</span><input id="active-epoch" spellcheck="false" placeholder="0x… 32-byte epoch ID"></label>
+            <button class="button primary" id="load-epoch">Load epoch</button>
+          </div>
+        </section>
+
+        <section class="view" id="view-orders" aria-labelledby="orders-title">
+          <div class="page-head"><div><p class="kicker">Source operations</p><h1 id="orders-title">Draft, consent and resolve work.</h1></div><span class="environment-tag">Ethereum · Safe authority</span></div>
+          <div class="notice"><b>Drafts have no authority.</b> They reserve no money or admission slot. A worker signature creates a binding quote only after this app reads exact target funding again.</div>
+          <div class="two-col">
+            <article class="card">
+              <div class="card-head"><div><p class="kicker">Draft quote</p><h2>One milestone</h2></div><span class="step-chip">Off-chain</span></div>
+              <form id="draft-form" class="form-grid">
+                <label class="wide"><span>Scope or terms</span><textarea name="scope" rows="3" required placeholder="Exact work, acceptance criteria and referenced terms"></textarea></label>
+                <label class="wide"><span>Epoch ID</span><input name="epochId" required placeholder="0x…"></label>
+                <label><span>Worker</span><input name="worker" required placeholder="0x…"></label>
+                <label><span>Claim owner</span><input name="claimOwner" required placeholder="0x…"></label>
+                <label><span>Fixed destination</span><input name="destination" required placeholder="0x…"></label>
+                <label><span>Worker maximum</span><input name="work" inputmode="numeric" required value="30"></label>
+                <label><span>Committee fee</span><input name="fee" inputmode="numeric" required value="0"></label>
+                <label><span>Timeout worker amount</span><input name="timeoutWork" inputmode="numeric" required value="0"></label>
+                <label><span>Fee owner</span><input name="feeOwner" required placeholder="0x…"></label>
+                <label><span>Fee destination</span><input name="feeDestination" required placeholder="0x…"></label>
+                <label><span>Accept before block</span><input name="acceptBefore" inputmode="numeric" required></label>
+                <label><span>Quote nonce</span><input name="nonce" inputmode="numeric" required value="0"></label>
+                <label><span>Deliver before block</span><input name="deliverBefore" inputmode="numeric" required></label>
+                <label><span>Review before block</span><input name="reviewBefore" inputmode="numeric" required></label>
+                <label><span>Rule before block</span><input name="ruleBefore" inputmode="numeric" required></label>
+                <label><span>Committee member 1</span><input name="committee0" required placeholder="0x…"></label>
+                <label><span>Committee member 2</span><input name="committee1" required placeholder="0x…"></label>
+                <label><span>Committee member 3</span><input name="committee2" required placeholder="0x…"></label>
+                <label class="wide check"><input type="checkbox" name="destinationAck"><span>The fixed destination may be paid by anyone before an owner redirection. I checked its current usability and understand successful payment can be irreversible.</span></label>
+                <div class="wide actions"><button class="button primary" type="submit">Create nonbinding draft</button><button class="button" type="button" id="sign-quote" disabled>Check funding & sign quote</button><button class="button" type="button" id="prepare-quote" hidden>Prepare Safe acceptance</button><button class="button ghost" type="button" id="export-draft" disabled>Export</button></div>
+              </form>
+              <div class="result empty" id="draft-result">No draft created on this device.</div>
+            </article>
+            <article class="card policy-card">
+              <div class="card-head"><div><p class="kicker">WorkPolicyV1</p><h2>Who acts next</h2></div><span class="step-chip">Fixed policy</span></div>
+              <div class="policy-list" id="policy-list"></div>
+            </article>
+          </div>
+          <article class="card order-console">
+            <div class="card-head"><div><p class="kicker">Current order</p><h2>Read first, then act on the current state</h2></div><button class="button" id="read-order">Read order & milestone</button></div>
+            <div class="form-grid three">
+              <label><span>Order ID</span><input id="current-order" placeholder="0x…"></label>
+              <label><span>Milestone ID</span><input id="current-milestone" inputmode="numeric" value="0"></label>
+              <label><span>New delivery content</span><input id="delivery-content" placeholder="URI, digest input or delivery description"></label>
+            </div>
+            <div class="result empty" id="order-result">No order selected. Cutoffs below are source block numbers, never browser-clock deadlines.</div>
+            <div class="actions lookup-actions">
+              <button class="button" id="action-deliver" disabled>Deliver / revise</button>
+              <button class="button" id="action-approve" disabled>Approve current delivery</button>
+              <button class="button" id="action-challenge" disabled>Challenge current delivery</button>
+              <button class="button" id="action-no-delivery" disabled>Finalize no delivery</button>
+              <button class="button" id="action-monitoring" disabled>Finalize monitoring default</button>
+              <button class="button" id="action-committee-timeout" disabled>Finalize committee timeout</button>
+            </div>
+          </article>
+          <article class="card action-builder">
+            <div class="card-head"><div><p class="kicker">Safe transaction</p><h2>Prepare a source action</h2></div><span class="actor-chip" id="source-actor">Choose an action</span></div>
+            <div class="action-row"><label><span>Contract action</span><select id="source-function"></select></label><label class="grow"><span>Arguments as JSON array</span><input id="source-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-source">Prepare</button></div>
+            <p class="help" id="source-help">Only write functions from the compiled SourceCoordinator ABI appear here.</p>
+            <div class="prepared" id="source-prepared" hidden><code id="source-calldata"></code><div class="actions"><button class="button" id="download-safe">Download Safe transaction</button><button class="button primary" id="execute-source">Send from connected actor</button></div></div>
+          </article>
+        </section>
+
+        <section class="view" id="view-evidence" aria-labelledby="evidence-title">
+          <div class="page-head"><div><p class="kicker">Proof inspector</p><h1 id="evidence-title">Recover a claim through either evidence route.</h1></div><span class="environment-tag">Independent checks</span></div>
+          <div class="route-grid">
+            <article class="route-card"><span class="route-number">A</span><h2>Cached checkpoint</h2><p>Use a target-authenticated checkpoint plus the full allocation and exactly seven ordered siblings.</p><small>Works without a fresh proof-service call when the checkpoint is already cached.</small></article>
+            <article class="route-card"><span class="route-number">B</span><h2>Canonical receipt</h2><p>Use the exact native encoded transaction containing AllocationCreated and its receipt-local log ordinal.</p><small>No application Merkle siblings required. A log or transaction hash alone is insufficient.</small></article>
+          </div>
+          <div class="two-col evidence-cols">
+            <article class="card">
+              <div class="card-head"><div><p class="kicker">Portable evidence</p><h2>Inspect claim package</h2></div><label class="file-button">Open file<input type="file" id="claim-file" accept="application/json"></label></div>
+              <textarea id="claim-package" rows="13" spellcheck="false" placeholder="Paste a proofkey.work-treasury.claim-package.v1 JSON package"></textarea>
+              <div class="actions"><button class="button primary" id="inspect-package">Inspect package</button><button class="button" id="prepare-claim" disabled>Prepare exact recognition</button><button class="button ghost" id="save-package">Save copy</button></div>
+              <div class="result empty" id="package-result">Application structure has not been checked. Native authenticity is always decided on Creditcoin.</div>
+            </article>
+            <article class="card">
+              <div class="card-head"><div><p class="kicker">Replaceable proof service</p><h2>Fetch exact transaction proof</h2></div><span class="step-chip">Read-only</span></div>
+              <div class="form-grid">
+                <label class="wide"><span>Proof service URL</span><input id="proof-url" placeholder="https://…"></label>
+                <label><span>Native source chain key</span><input id="proof-chain-key" inputmode="numeric"></label>
+                <label><span>Source transaction hash</span><input id="proof-tx" placeholder="0x…"></label>
+                <div class="wide actions"><button class="button primary" id="fetch-proof">Fetch and validate response</button><button class="button ghost" id="export-proof" disabled>Export proof material</button></div>
+              </div>
+              <div class="result empty" id="proof-result">No proof fetched. An outage delays uncached evidence; it does not create a local refund or a trusted shortcut.</div>
+            </article>
+          </div>
+          <article class="card inspector-card">
+            <div class="card-head"><div><p class="kicker">Same finalized block</p><h2>Rebuild the complete ordered tree</h2></div><button class="button primary" id="rebuild-tree">Run independent rebuild</button></div>
+            <p>Reads every full allocation and every stored leaf at one finalized source block, rebuilds the depth-7 ordered tree independently, then compares both results with source storage.</p>
+            <div class="result empty" id="tree-result">No reconstruction performed.</div>
+            <div class="form-grid three package-export">
+              <label><span>Allocation tree index</span><input id="export-tree-index" inputmode="numeric" value="0"></label>
+              <label><span>Allocation receipt-local log ordinal</span><input id="export-receipt-ordinal" inputmode="numeric" value="0"></label>
+              <div class="actions"><button class="button" id="export-checkpoint-package">Export cached-checkpoint claim</button><button class="button" id="export-receipt-package">Export receipt claim from fetched proof</button></div>
+            </div>
+          </article>
+          <article class="card action-builder">
+            <div class="card-head"><div><p class="kicker">Creditcoin transaction</p><h2>Authenticate or recognize evidence</h2></div><span class="actor-chip">Anyone can submit · economic result is fixed</span></div>
+            <div class="action-row"><label><span>Treasury action</span><select id="evidence-function"></select></label><label class="grow"><span>Arguments as JSON array</span><input id="evidence-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-evidence">Prepare</button></div>
+            <p class="help" id="evidence-help">Combined authentication saves a new cache fact only if recognition also succeeds. A previously stored authentication survives a later failed separate recognition.</p>
+          </article>
+        </section>
+
+        <section class="view" id="view-payments" aria-labelledby="payments-title">
+          <div class="page-head"><div><p class="kicker">Target settlement</p><h1 id="payments-title">Recognize first. Withdraw second.</h1></div><span class="environment-tag">Creditcoin · pull payments</span></div>
+          <div class="status-grid compact-grid">
+            <article class="status-card"><div class="status-label">Work or fee claim</div><h3>Fixed amount and owner</h3><p>Anyone can complete payment to the agreed destination. Only the target claim owner can redirect an unpaid claim.</p></article>
+            <article class="status-card"><div class="status-label">Returned budget</div><h3>Free owner balance</h3><p>Returns credit the immutable refund beneficiary. The owner can withdraw or fund a fresh epoch.</p></article>
+            <article class="status-card"><div class="status-label">Paid invoice record</div><h3>Completed WORK only</h3><p>The invoice book rejects pending claims, fees, returns and records outside its pinned buyer/order/asset/policy.</p></article>
+          </div>
+          <article class="card lookup-card">
+            <div class="card-head"><div><p class="kicker">Read payment state</p><h2>Claim and invoice lookup</h2></div><button class="button primary" id="lookup-payment">Read</button></div>
+            <div class="form-grid three"><label><span>Epoch ID</span><input id="payment-epoch" placeholder="0x…"></label><label><span>Allocation ID</span><input id="payment-allocation" inputmode="numeric" value="1"></label><label><span>Free-balance owner</span><input id="payment-owner" placeholder="0x…"></label><label class="wide"><span>Owner-authorized alternate destination</span><input id="payment-destination" placeholder="0x… required only for redirect"></label></div>
+            <div class="result empty" id="payment-result">No claim selected.</div>
+            <div class="actions lookup-actions"><button class="button" id="prepare-fixed-payment" disabled>Prepare fixed-destination payment</button><button class="button" id="prepare-claim-redirect" disabled>Owner redirects unpaid claim</button><button class="button" id="prepare-free-withdrawal" disabled>Prepare free-balance withdrawal</button><button class="button" id="prepare-free-redirect" disabled>Owner redirects free balance</button></div>
+          </article>
+          <div class="two-col">
+            <article class="card action-builder">
+              <div class="card-head"><div><p class="kicker">Treasury action</p><h2>Withdraw or fund</h2></div><span class="actor-chip" id="target-actor">Choose an action</span></div>
+              <div class="stack"><label><span>Contract action</span><select id="target-function"></select></label><label><span>Arguments as JSON array</span><input id="target-args" value="[]" spellcheck="false"></label><label><span>Native value in base units</span><input id="target-value" value="0" inputmode="numeric"></label><button class="button primary" id="execute-target">Review & send from wallet</button></div>
+              <p class="help" id="target-help"></p>
+            </article>
+            <article class="card action-builder">
+              <div class="card-head"><div><p class="kicker">PaidInvoiceBook</p><h2>Record completed work</h2></div><span class="actor-chip">Anyone after withdrawal</span></div>
+              <div class="stack"><label><span>Epoch ID</span><input id="invoice-epoch" placeholder="0x…"></label><label><span>Allocation ID</span><input id="invoice-allocation" value="1" inputmode="numeric"></label><button class="button primary" id="record-invoice">Review & record</button></div>
+              <p class="help">A payment record says funds were paid. It does not certify quality, independence, income or creditworthiness.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-settings" aria-labelledby="settings-title">
+          <div class="page-head"><div><p class="kicker">Workspace setup</p><h1 id="settings-title">Pin the two networks and contracts.</h1></div><span class="environment-tag">Saved on this device</span></div>
+          <div class="notice"><b>No secrets are stored.</b> This workspace saves public RPC URLs, chain IDs, addresses and your last epoch in browser storage. Wallet keys remain in your wallet.</div>
+          <form id="settings-form">
+            <div class="two-col">
+              <article class="card"><div class="card-head"><div><p class="kicker">Source</p><h2>Ethereum network</h2></div><span class="signal neutral" id="source-config-signal"></span></div><div class="form-grid"><label class="wide"><span>Label</span><input name="sourceLabel" value="Ethereum source"></label><label><span>Chain ID</span><input name="sourceChainId" inputmode="numeric"></label><label><span>Finality confirmations</span><input name="sourceConfirmations" inputmode="numeric" value="12"></label><label class="wide"><span>RPC URL</span><input name="sourceRpc" type="url" placeholder="https://…"></label><label class="wide"><span>SourceCoordinator</span><input name="coordinator" placeholder="0x…"></label><label class="wide"><span>Existing Safe</span><input name="safe" placeholder="0x…"></label><label class="wide"><span>Native source chain key</span><input name="sourceChainKey" inputmode="numeric"></label></div></article>
+              <article class="card"><div class="card-head"><div><p class="kicker">Target</p><h2>Creditcoin network</h2></div><span class="signal neutral" id="target-config-signal"></span></div><div class="form-grid"><label class="wide"><span>Label</span><input name="targetLabel" value="Creditcoin target"></label><label><span>Chain ID</span><input name="targetChainId" inputmode="numeric"></label><label><span>Finality confirmations</span><input name="targetConfirmations" inputmode="numeric" value="12"></label><label class="wide"><span>RPC URL</span><input name="targetRpc" type="url" placeholder="https://…"></label><label class="wide"><span>WorkTreasury</span><input name="treasury" placeholder="0x…"></label><label class="wide"><span>PaidInvoiceBook (optional)</span><input name="invoiceBook" placeholder="0x…"></label><label class="wide"><span>Proof service (replaceable)</span><input name="proofService" type="url" placeholder="https://…"></label></div></article>
+            </div>
+            <div class="settings-actions"><button class="button primary" type="submit">Save and verify</button><button class="button" type="button" id="verify-settings">Verify without saving</button><button class="button ghost" type="button" id="load-local-demo" hidden>Use real local fixture</button><button class="button ghost danger" type="button" id="clear-settings">Clear saved setup</button></div>
+          </form>
+          <article class="card epoch-builder">
+            <div class="card-head"><div><p class="kicker">Exact configuration</p><h2>Create a fresh budget epoch</h2></div><span class="step-chip">Native CTC · fixed V1 limits</span></div>
+            <p class="help">The epoch ID binds both chains, both contracts, Safe, sponsor, refund owner, cap, policy, cutoffs and capacity limits. Build it only after saving the network setup.</p>
+            <form id="epoch-form" class="form-grid three">
+              <label><span>Target sponsor</span><input name="sponsor" placeholder="0x…" required></label>
+              <label><span>Refund beneficiary</span><input name="refundBeneficiary" placeholder="0x…" required></label>
+              <label><span>Cap in base units</span><input name="cap" inputmode="numeric" value="120" required></label>
+              <label><span>Initialization cutoff block</span><input name="initializationCutoff" inputmode="numeric" required></label>
+              <label><span>Admission cutoff block</span><input name="admissionCutoff" inputmode="numeric" required></label>
+              <label><span>Sponsor epoch nonce</span><input name="nonce" inputmode="numeric" value="0" required></label>
+              <div class="wide actions"><button class="button primary" type="submit">Build exact epoch ID</button><button class="button" type="button" id="prepare-initialize" disabled>Prepare Safe initialization</button><button class="button" type="button" id="fund-built-epoch" disabled>Fund on Creditcoin</button></div>
+            </form>
+            <div class="result empty" id="epoch-result">No epoch configuration built on this device.</div>
+          </article>
+          <article class="card compiled-card"><div><p class="kicker">Compiled interfaces</p><h2 id="abi-status">Checking build artifacts…</h2><p id="abi-detail">Transactions are enabled only for functions found in this build’s contract ABIs.</p></div><code id="abi-contracts"></code></article>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/vendor/ethers.umd.min.js"></script>
+  <script src="/abi-manifest.js"></script>
+  <script src="/demo-config.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

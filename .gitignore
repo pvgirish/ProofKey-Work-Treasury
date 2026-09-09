@@ -1,0 +1,11 @@
+node_modules/
+out/
+cache/
+.toolchain/
+.env
+.env.*
+!.env.example
+ui/dist/
+evidence/local-*
+!evidence/local-*.example.json
+!evidence/local-performance.json

@@ -1,0 +1,26 @@
+{
+  "source": {
+    "chainId": "11155111",
+    "chainKey": "1",
+    "rpcUrl": "https://ethereum-sepolia-rpc.publicnode.com",
+    "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+    "libraries": {
+      "WorkTypes": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+      "AllocationTree": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+      "SourceSignatureLib": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+      "SourcePolicyV1Lib": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+      "SourceAccountingLib": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612"
+    },
+    "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138"
+  },
+  "target": {
+    "chainId": "102031",
+    "rpcUrl": "https://rpc.cc3-testnet.creditcoin.network",
+    "libraries": {
+      "WorkTypes": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+      "AllocationTree": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f"
+    },
+    "treasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA"
+  },
+  "scope": "Public testnet; operator and Safe are team controlled"
+}

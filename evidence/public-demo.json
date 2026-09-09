@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "startedAt": "2026-09-09T18:22:40.715Z",
+  "scope": "Public testnet; Safe, worker, sponsor and relayers are team controlled. No independent settlement is claimed.",
+  "config": {
+    "sourceChainId": "11155111",
+    "sourceChainKey": "1",
+    "sourceCoordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+    "sourceVersion": "0x4469ea6d813ccd3e1310aa0bdefec73ae002c799871091802b32c16fd408821b",
+    "targetChainId": "102031",
+    "targetTreasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+    "schemaVersion": "0x0c5ce31b6a370ceca484aae15e44ef3236d44f1e5b8ead1692036cacc10329ef",
+    "sourceSafe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+    "sponsor": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+    "refundBeneficiary": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+    "asset": "0x0000000000000000000000000000000000000000",
+    "cap": "120000000000000000000",
+    "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+    "initializationCutoff": "11670388",
+    "admissionCutoff": "11676868",
+    "maxMilestones": 32,
+    "maxActiveReturns": 16,
+    "maxDrainingReturns": 33,
+    "treeDepth": 7,
+    "nonce": "1788978160715"
+  },
+  "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+  "worker": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B",
+  "operations": [
+    {
+      "label": "fund-exact-120-epoch",
+      "transactionHash": "0x2d473ee9b60fbce59ccb95213bf2e135601e68ff74cdd322d0c44823b74bedc8",
+      "blockNumber": 5459166,
+      "gasUsed": "435727",
+      "status": 1,
+      "logs": [
+        {
+          "ordinal": 0,
+          "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+          "topics": [
+            "0x88f0182391104fc0ab93abfd8bb7a146155e6461a98039231b46eada6b6cdb31",
+            "0x000000000000000000000000fa0b7f66474dc6648bcbb008b6f295eb4e5400ae"
+          ],
+          "data": "0x0000000000000000000000000000000000000000000000068155a43676e00000"
+        },
+        {
+          "ordinal": 1,
+          "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+          "topics": [
+            "0xa031d1821abed31e55215916d290e394eeaacca0cf37fee017fb814523987f41",
+            "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+            "0x000000000000000000000000fa0b7f66474dc6648bcbb008b6f295eb4e5400ae"
+          ],
+          "data": "0x0000000000000000000000000000000000000000000000068155a43676e00000"
+        }
+      ]
+    }
+  ],
+  "stage": "awaiting-finalized-target-funding"
+}

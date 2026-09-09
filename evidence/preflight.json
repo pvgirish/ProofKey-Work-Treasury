@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-09-09T18:07:20.876Z",
+  "readOnly": true,
+  "sourceChainId": "11155111",
+  "targetChainId": "102031",
+  "sourceChainKey": "1",
+  "encoding": 1,
+  "frontierHeight": 11669550,
+  "sourceDeployer": {
+    "address": "0xF601E6e8c24b52e2CA97D7A1b173b6e93a73Dcc6",
+    "balance": "0.047433630320086768"
+  },
+  "targetDeployer": {
+    "address": "0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE",
+    "balance": "9988.662281128998277258"
+  },
+  "safe": {
+    "address": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+    "hasCode": true,
+    "version": "1.4.1",
+    "owners": [
+      "0xe1f45Fa814709F7F44849C1bA2FAe72f7E64CEa8",
+      "0x247a5839c7F79115f473856EC8a6495e439096D6",
+      "0xbc5b8819EC137a1a6D51454b31b907d011834332"
+    ],
+    "threshold": "2",
+    "nonce": "6",
+    "control": "Existing user-controlled Safe; not an independent buyer"
+  }
+}

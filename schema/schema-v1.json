@@ -1,0 +1,286 @@
+{
+  "artifact": "ProofKey Work Treasury allocation schema V1",
+  "status": "Frozen proposed application ABI and synthetic vectors; no deployed-contract or native-authentication claim.",
+  "frozenDate": "2026-09-09",
+  "allocation": {
+    "name": "AllocationV1",
+    "fields": [
+      {
+        "name": "epochId",
+        "type": "bytes32"
+      },
+      {
+        "name": "allocationId",
+        "type": "uint64"
+      },
+      {
+        "name": "treeIndex",
+        "type": "uint32"
+      },
+      {
+        "name": "kind",
+        "type": "uint8"
+      },
+      {
+        "name": "orderId",
+        "type": "bytes32"
+      },
+      {
+        "name": "milestoneId",
+        "type": "uint32"
+      },
+      {
+        "name": "role",
+        "type": "uint8"
+      },
+      {
+        "name": "asset",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "claimOwner",
+        "type": "address"
+      },
+      {
+        "name": "destination",
+        "type": "address"
+      },
+      {
+        "name": "policyHash",
+        "type": "bytes32"
+      },
+      {
+        "name": "evidenceHash",
+        "type": "bytes32"
+      }
+    ],
+    "leafEncoding": "abi.encode(allocation.typeHash, every AllocationV1 field in fields order); hash with keccak256",
+    "assignment": "Per epoch: treeIndex = leafCount before append; allocationId = uint64(treeIndex) + 1. One sequence for every kind, never reset or caller-selected.",
+    "kind": {
+      "WORK": 1,
+      "FEE": 2,
+      "RETURN": 3
+    },
+    "role": {
+      "WORK": 1,
+      "FEE": 2,
+      "RETURN": 0
+    },
+    "constraints": [
+      "amount > 0; claimOwner and destination are nonzero; kind/role pair must match the fixed table.",
+      "policyHash is the epoch-fixed policy-version hash. Order-specific policy configuration belongs in the immutable order/terms commitment identified by orderId.",
+      "epochId binds the separately documented immutable source/target configuration. This file does not replace or invent that configuration encoding.",
+      "asset equals the funded epoch asset. address(0) denotes native CTC in the target domain.",
+      "WORK and FEE use nonzero orderId and the authorized terms/policy amounts, owner and destination.",
+      "RETURN has orderId = bytes32(0), milestoneId = 0, role = 0, and epoch refundBeneficiary as both owner and canonical destination.",
+      "Economic consumption key is (epochId, allocationId) across every evidence route and root.",
+      "Only the source canonical append routine emits AllocationCreated. The event includes every field used in its leaf hash."
+    ]
+  },
+  "domains": {
+    "allocation": {
+      "typeString": "ProofKeyAllocationV1(bytes32 epochId,uint64 allocationId,uint32 treeIndex,uint8 kind,bytes32 orderId,uint32 milestoneId,uint8 role,address asset,uint256 amount,address claimOwner,address destination,bytes32 policyHash,bytes32 evidenceHash)",
+      "typeHash": "0x0c0b09698524f69712b08b7d15b0b0905cae44a5014fe49c7d221a343d080a66"
+    },
+    "node": {
+      "typeString": "ProofKeyNodeV1(bytes32 left,bytes32 right)",
+      "typeHash": "0xb8ec434e179bde7da6b36cc81a26875509c52f3e5a4e39c7cbe9d77b7310a88b"
+    },
+    "emptyLeaf": {
+      "typeString": "ProofKeyEmptyLeafV1()",
+      "typeHash": "0x0721dfd2e1d57c54005918c3762eb76dcd3937a850be4d44c46f5da723f237de"
+    },
+    "outcomeEvidence": {
+      "typeString": "ProofKeyOutcomeEvidenceV1(bytes32 epochId,bytes32 orderId,uint32 milestoneId,bytes32 termsHash,bytes32 deliveryHash,bytes32 decisionHash)",
+      "typeHash": "0xf37e0e880399c89751103bb18764bef2946a7b10f632c9fc56b63cbe8cdb98a6"
+    },
+    "releaseEvidence": {
+      "typeString": "ProofKeyReleaseEvidenceV1(bytes32 epochId,uint8 releaseReason,uint256 amount,bytes32 authorizationHash)",
+      "typeHash": "0xba3345f74811740a492fe359c690b9117aa72ddd6b38eff09512150ab2f62c33"
+    }
+  },
+  "tree": {
+    "depth": 7,
+    "capacity": 128,
+    "nodeEncoding": "keccak256(abi.encode(node.typeHash, left, right))",
+    "emptyLeafEncoding": "keccak256(abi.encode(emptyLeaf.typeHash))",
+    "emptySubtree": "zero[0] = empty leaf hash; zero[level+1] = node(zero[level], zero[level])",
+    "order": "Never sort pairs. At proof level i from the leaf, bit i of treeIndex chooses left (0) or right (1).",
+    "proof": "Exactly seven sibling hashes, ordered from leaf level to root level. Index must be below checkpoint leafCount and the epoch capacity."
+  },
+  "events": [
+    {
+      "abi": {
+        "type": "event",
+        "anonymous": false,
+        "name": "AllocationCreated",
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "epochId",
+            "indexed": true
+          },
+          {
+            "type": "uint64",
+            "name": "allocationId",
+            "indexed": true
+          },
+          {
+            "type": "uint32",
+            "name": "treeIndex"
+          },
+          {
+            "type": "uint8",
+            "name": "kind"
+          },
+          {
+            "type": "bytes32",
+            "name": "orderId"
+          },
+          {
+            "type": "uint32",
+            "name": "milestoneId"
+          },
+          {
+            "type": "uint8",
+            "name": "role"
+          },
+          {
+            "type": "address",
+            "name": "asset"
+          },
+          {
+            "type": "uint256",
+            "name": "amount"
+          },
+          {
+            "type": "address",
+            "name": "claimOwner"
+          },
+          {
+            "type": "address",
+            "name": "destination"
+          },
+          {
+            "type": "bytes32",
+            "name": "policyHash"
+          },
+          {
+            "type": "bytes32",
+            "name": "evidenceHash"
+          }
+        ]
+      },
+      "signature": "AllocationCreated(bytes32,uint64,uint32,uint8,bytes32,uint32,uint8,address,uint256,address,address,bytes32,bytes32)",
+      "topic0": "0x49fae38c8740272ece744b0358c59b9e9f438e6c80f1e02463347c5ac9471dc5",
+      "topicCount": 3,
+      "dataBytes": 352,
+      "canonicalRule": "Require exact topic count, exact data length and canonical ABI words; no trailing bytes, truncated data or nonzero high padding."
+    },
+    {
+      "abi": {
+        "type": "event",
+        "anonymous": false,
+        "name": "CheckpointPublished",
+        "inputs": [
+          {
+            "type": "bytes32",
+            "name": "epochId",
+            "indexed": true
+          },
+          {
+            "type": "bytes32",
+            "name": "root"
+          },
+          {
+            "type": "uint32",
+            "name": "leafCount"
+          },
+          {
+            "type": "uint256",
+            "name": "earned"
+          },
+          {
+            "type": "uint256",
+            "name": "returned"
+          },
+          {
+            "type": "uint8",
+            "name": "phase"
+          }
+        ]
+      },
+      "signature": "CheckpointPublished(bytes32,bytes32,uint32,uint256,uint256,uint8)",
+      "topic0": "0xcc4ad7968159f3d07b5b9609f189ec675bcdce2d3d904d0c6e1e40c7ee6ce820",
+      "topicCount": 2,
+      "dataBytes": 160,
+      "canonicalRule": "Require exact topic count, exact data length and canonical ABI words; no trailing bytes, truncated data or nonzero high padding."
+    }
+  ],
+  "checkpoint": {
+    "phase": {
+      "ACTIVE": 1,
+      "DRAINING": 2,
+      "CLOSED": 3
+    },
+    "capConstraint": "earned + returned <= cap; CLOSED requires earned + returned = cap and source available = unresolved = 0.",
+    "publication": "Publish the final stored snapshot for each affected epoch atomically after all allocations/accounting/phase updates in each coordinator call. Checkpoints consume no allocation-tree slots.",
+    "republishAbi": {
+      "type": "function",
+      "name": "republishCheckpoint",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "epochId"
+        }
+      ],
+      "outputs": []
+    },
+    "republishRule": "Accept only an initialized or terminally expired epochId. Emit its current stored root/leafCount/E/R/phase. No caller root, prefix, leaves or counters. No allocation/accounting/state mutation or callback.",
+    "oldRoots": "Previously authenticated roots remain valid; do not require checkpoint arrival order to be monotonic."
+  },
+  "evidenceCommitment": {
+    "purpose": "Typed commitment to immutable outcome or release content. It is not native receipt authentication and is not an additional payment predicate.",
+    "outcomeEncoding": "keccak256(abi.encode(outcomeEvidence.typeHash, epochId, orderId, milestoneId, termsHash, deliveryHash, decisionHash))",
+    "releaseEncoding": "keccak256(abi.encode(releaseEvidence.typeHash, epochId, releaseReason, amount, authorizationHash))",
+    "releaseReason": {
+      "AUTHORIZED_FREE_RELEASE": 1,
+      "DRAINING_SWEEP": 2,
+      "NEVER_INITIALIZED_EXPIRY": 3
+    },
+    "rules": [
+      "WORK/FEE of the same source outcome may share evidenceHash; their kind/role/amount/recipient remain separately committed in their leaves.",
+      "termsHash, deliveryHash and decisionHash commit canonical immutable application content for the source route; an absent delivery uses bytes32(0). Their route-specific payload codecs are separate policy artifacts.",
+      "authorizationHash commits pre-existing bound authorization content for an authorized release; permissionless sweep/expiry uses bytes32(0).",
+      "Never include the current emitting transaction hash, its current log ordinal, the resulting leaf hash or resulting Merkle root in the evidence preimage. This avoids a self-reference."
+    ]
+  },
+  "nativeProfile": {
+    "dependency": "@gluwa/asc-contracts",
+    "packageVersion": "0.2.1",
+    "decoder": "contracts/common/EvmV1Decoder.sol",
+    "installedDecoderSha256": "2de1a8faf7b203c33a08db73e7a79e0523c4a84580c9c75ce209df0d5bf2e692",
+    "input": "Exact encodedTransaction / prover txBytes supplied to the native verifier. The library documents abi.encode(uint8 txType, bytes[] chunks); tx types 0–4 and chunk count/receipt position are determined by the pinned decoder.",
+    "receiptSelection": "Decode successful receipt status and use receipt-local log ordinal. RPC block-global logIndex is not interchangeable.",
+    "encodingNumber": null,
+    "cacheBinding": [
+      "native source-chain key",
+      "native-authenticated block height",
+      "native-derived transaction index",
+      "pinned native profile identity from deployment manifest",
+      "keccak256(exact authenticated encodedTransaction bytes)"
+    ],
+    "limits": "No new native codec number, native profile authorization, receipt proof, runtime behavior or deployment bytecode is asserted here. Deployment manifests must later pin the actual addresses, source/target bytecode and exact dependency/profile identity."
+  },
+  "scopeLimits": [
+    "Synthetic values are not real source events, target deposits, approvals, users, payments or native proofs.",
+    "Golden vectors freeze application ABI/hash/proof conventions; they do not verify Solidity, event authorization, Safe, source accounting, canonical native decoding, capacity safety or hybrid equivalence.",
+    "The epoch-domain and policy-specific content codecs remain separately specified; no vector here proves a source epoch is funded on Creditcoin."
+  ]
+}

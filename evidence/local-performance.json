@@ -1,0 +1,62 @@
+{
+  "schema": "proofkey-local-performance-v1",
+  "measuredAt": "2026-09-09",
+  "compiler": {
+    "solc": "0.8.28",
+    "evmVersion": "cancun",
+    "optimizer": true,
+    "optimizerRuns": 200,
+    "viaIR": true
+  },
+  "environment": {
+    "runner": "Foundry local EVM",
+    "nativeVerifier": "VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address",
+    "nativeVerificationGasIncluded": false,
+    "note": "Target recognition measurements begin after authentication; checkpoint import is also outside the measured recognition interval. Receipt measurements include exact cached-receipt decoding on every selected log. Real native proof costs are pending an on-chain measurement."
+  },
+  "sourceGas": {
+    "createOffer32Milestones": 3525401,
+    "acceptOffer32Milestones": 224994,
+    "approveAllocation0FirstIncludingAllocationAndCheckpointEvents": 610225,
+    "approveAllocation1CarryIncludingAllocationAndCheckpointEvents": 436304,
+    "approveAllocation31LateIncludingAllocationAndCheckpointEvents": 419818,
+    "committeeWorkFeeAllocations31And32IncludingCheckpointEvent": 691937,
+    "maximumApproveIn32AllocationRun": {
+      "gas": 610225,
+      "treeIndex": 0
+    }
+  },
+  "targetRecognitionGas": {
+    "checkpoint": {
+      "1": 535506,
+      "4": 2067961,
+      "16": 8198684,
+      "32": 16379256
+    },
+    "cachedExactReceipt": {
+      "1": 530354,
+      "4": 2141900,
+      "16": 10030013,
+      "32": 24261460
+    }
+  },
+  "runtimeBytes": {
+    "SourceCoordinator": 21789,
+    "WorkTreasury": 20019,
+    "PaidInvoiceBook": 2777,
+    "AllocationTree": 2832,
+    "SourcePolicyV1Lib": 2507,
+    "SourceSignatureLib": 2066,
+    "WorkTypes": 2881
+  },
+  "limits": {
+    "runtimeBytes": 24576,
+    "allProductionRuntimeArtifactsWithinLimit": true,
+    "maximumMeasuredSourceCallGas": 3525401
+  },
+  "reproduction": {
+    "test": "test/Performance.t.sol:PerformanceTest",
+    "command": "bash scripts/forge.sh test --match-contract PerformanceTest -vv",
+    "sizeCommand": "bash scripts/forge.sh build --sizes"
+  }
+}
