@@ -1,0 +1,92 @@
+{
+  "artifact": "ProofKey Work Authorization V1 canonical vector",
+  "authorization": {
+    "commercialTerms": {
+      "scope": "Implement the bounded ProofKey operator handoff.",
+      "acceptanceCriteria": "The buyer accepts when the documented checks pass.",
+      "revisionTerms": "Revisions require a newly reviewed delivery commitment.",
+      "deliveryRequirements": "Supply source, tests, and an operator runbook.",
+      "deliveryCommitmentFormat": "A later delivery uses keccak256 of the canonical delivery artifact bytes; no future delivery hash is committed here."
+    },
+    "epochConfig": {
+      "sourceChainId": "11155111",
+      "sourceChainKey": "1",
+      "sourceCoordinator": "0x1111111111111111111111111111111111111111",
+      "sourceVersion": "0x4469ea6d813ccd3e1310aa0bdefec73ae002c799871091802b32c16fd408821b",
+      "targetChainId": "102031",
+      "targetTreasury": "0x2222222222222222222222222222222222222222",
+      "schemaVersion": "0x0c5ce31b6a370ceca484aae15e44ef3236d44f1e5b8ead1692036cacc10329ef",
+      "sourceSafe": "0x3333333333333333333333333333333333333333",
+      "sponsor": "0x4444444444444444444444444444444444444444",
+      "refundBeneficiary": "0x5555555555555555555555555555555555555555",
+      "asset": "0x0000000000000000000000000000000000000000",
+      "cap": "120000000000000000000",
+      "policyHash": "0x9d13ecce63e11804e7cdf66cdcd407f9bee110324ec70a18c1461d742c41072d",
+      "initializationCutoff": "400",
+      "admissionCutoff": "900",
+      "maxMilestones": 32,
+      "maxActiveReturns": 16,
+      "maxDrainingReturns": 33,
+      "treeDepth": 7,
+      "nonce": "9"
+    },
+    "order": {
+      "worker": "0xDB48edE682410c2661F9cFb5328aaA248074A6c5",
+      "claimOwner": "0x6666666666666666666666666666666666666666",
+      "destination": "0x7777777777777777777777777777777777777777",
+      "feeOwner": "0x8888888888888888888888888888888888888888",
+      "feeDestination": "0x9999999999999999999999999999999999999999",
+      "committee": [
+        "0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa",
+        "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
+        "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+      ],
+      "acceptBefore": "500",
+      "nonce": "12",
+      "milestones": [
+        {
+          "work": "30000000000000000000",
+          "fee": "2000000000000000000",
+          "timeoutWork": "10000000000000000000",
+          "deliverBefore": "600",
+          "reviewBefore": "700",
+          "ruleBefore": "800"
+        },
+        {
+          "work": "40000000000000000000",
+          "fee": "1000000000000000000",
+          "timeoutWork": "15000000000000000000",
+          "deliverBefore": "610",
+          "reviewBefore": "710",
+          "ruleBefore": "810"
+        }
+      ]
+    },
+    "targetFunding": {
+      "targetChainId": "102031",
+      "targetTreasury": "0x2222222222222222222222222222222222222222",
+      "blockNumber": "200",
+      "blockHash": "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "finalityBasis": "rpc-finalized-tag",
+      "epochId": "0x1fd72143d8dee26b70e1560595c5be1fe0a277d462f039c7fc626cad6dfe28df",
+      "cap": "120000000000000000000",
+      "reserve": "120000000000000000000",
+      "requiredMaximum": "73000000000000000000"
+    },
+    "sourceCapacity": {
+      "sourceChainId": "11155111",
+      "sourceCoordinator": "0x1111111111111111111111111111111111111111",
+      "blockNumber": "100",
+      "blockHash": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "finalityBasis": "rpc-finalized-tag",
+      "epochId": "0x1fd72143d8dee26b70e1560595c5be1fe0a277d462f039c7fc626cad6dfe28df",
+      "phase": 1,
+      "available": "120000000000000000000",
+      "reservations": 0,
+      "remainingMilestoneAdmissions": 32,
+      "requiredMaximum": "73000000000000000000"
+    }
+  },
+  "termsHash": "0xbed11b7b387f1f4b25ba98f53024fabaccbb676a23dbc2ac57abe4017f5aabe0",
+  "orderId": "0x11004103bc28745e95b6deb7acd14ff682bbd29481fbb47ec371628135fd7850"
+}

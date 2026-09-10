@@ -1,0 +1,66 @@
+{
+  "checks": [
+    {
+      "name": "GitHub Pages asset paths are relative",
+      "passed": true,
+      "detail": "All five built assets use ./ paths"
+    },
+    {
+      "name": "Public configuration loaded",
+      "passed": true,
+      "detail": "Ethereum Sepolia ↔ Creditcoin Testnet"
+    },
+    {
+      "name": "Funded demo epoch loaded",
+      "passed": true,
+      "detail": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7"
+    },
+    {
+      "name": "No injected wallet or profile",
+      "passed": true,
+      "detail": "window.ethereum is absent in the isolated profile"
+    },
+    {
+      "name": "Safe export is the documented default",
+      "passed": true,
+      "detail": "Transaction Builder JSON is offered without claiming bundled Safe Apps integration"
+    },
+    {
+      "name": "Setup verification checks pinned domain",
+      "passed": true,
+      "detail": "Fresh browser: checking the built-in public demo.\nVerified source chain 11155111 and target chain 102031. WorkTreasury's immutable source domain matches at target finalized block 5463644; source code was present at finalized block 11675043. Runtime hashes match Published ProofKey public testnet V1; write preparation is unlocked for this session.\nNo wallet account, signature or transaction was requested."
+    },
+    {
+      "name": "Finalized target funding displayed",
+      "passed": true,
+      "detail": "Exact epoch funded; Epoch account, configuration and source-domain immutables read together at target finalized block 5463645.; Reserve0.0 CTCRecognized120.0 CTCFundedYes"
+    },
+    {
+      "name": "Incomplete readback does not authorize an action",
+      "passed": true,
+      "detail": "Collect remaining claims; The source is closed. Old earned allocations remain collectible on Creditcoin."
+    },
+    {
+      "name": "Target account, config and immutables use one block",
+      "passed": true,
+      "detail": "All five reads used 0x535e5d"
+    },
+    {
+      "name": "QA remained read-only",
+      "passed": true,
+      "detail": "No signing, account request, or transaction broadcast RPC method was observed"
+    },
+    {
+      "name": "No browser runtime errors",
+      "passed": true,
+      "detail": "none"
+    }
+  ],
+  "sourceMain": "Closed",
+  "sourceDetail": "Read at source finalized block 11675043. Root 0x3281216…ae713d4.",
+  "targetMain": "Exact epoch funded",
+  "targetDetail": "Epoch account, configuration and source-domain immutables read together at target finalized block 5463645.",
+  "sameBlockTag": "0x535e5d",
+  "observedRpcCalls": 52,
+  "browserErrors": []
+}

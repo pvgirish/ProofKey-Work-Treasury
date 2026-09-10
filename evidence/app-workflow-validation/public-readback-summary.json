@@ -1,0 +1,175 @@
+{
+  "schema": "proofkey.app-workflow-public-readback.v1",
+  "recordedAt": "2026-09-10T09:07:07.535915+00:00",
+  "scope": "Fresh read-only reconstruction of four existing team-controlled testnet epochs, at their independently recorded finalized blocks. Main120 was reconstructed from an imported report locator. No new settlement or independent participant is claimed. Epoch caps are not summed as unique deposits.",
+  "programs": [
+    {
+      "path": "evidence/app-workflow-validation/public-main120-reimport.json",
+      "sha256": "bdd9cfe42c100d171efd77537fac9499df237dcd6a491ee20ddc94aa9d8ffe1c",
+      "status": "complete",
+      "epoch": {
+        "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+        "cap": "120000000000000000000",
+        "available": "0",
+        "unresolved": "0",
+        "earned": "55000000000000000000",
+        "returned": "65000000000000000000",
+        "recognized": "120000000000000000000",
+        "reserve": "0",
+        "paid": "55000000000000000000",
+        "outstanding": "0",
+        "conservation": true,
+        "prefixComplete": true
+      },
+      "sourceSnapshot": {
+        "chainId": "11155111",
+        "blockNumber": "11673826",
+        "blockHash": "0x5c7434a5230d10c5cf17ed5de5364bdda092ee220ec63c9a2f13f852699ab625",
+        "finality": "rpc-finalized"
+      },
+      "targetSnapshot": {
+        "chainId": "102031",
+        "blockNumber": "5462644",
+        "blockHash": "0xcaecb9eec0313101ca889e59bdceb683ff362f4e3c83d89a7745546f05a534f2",
+        "finality": "rpc-finalized"
+      },
+      "consent": {
+        "boundOrders": 0,
+        "legacyOrders": [
+          "0x0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d",
+          "0x24adf815e4e6ad485d79895088d71af4488209e2c387c77e6976023997c8fb8f"
+        ]
+      },
+      "nativeClassificationCounts": {
+        "cached": 4,
+        "fresh-atomic": 0
+      }
+    },
+    {
+      "path": "evidence/app-workflow-validation/public-branches20.json",
+      "sha256": "7c96184734c6bc8228de2332ec5cbc161086526a01756fc51edf4aaa1fea6076",
+      "status": "complete",
+      "epoch": {
+        "epochId": "0xb69a02fe267b8cb855f1a6dab0c58e8fffa56788aa32e1ceffa56739a29c518f",
+        "cap": "20000000000000000000",
+        "available": "0",
+        "unresolved": "0",
+        "earned": "9000000000000000000",
+        "returned": "11000000000000000000",
+        "recognized": "20000000000000000000",
+        "reserve": "0",
+        "paid": "9000000000000000000",
+        "outstanding": "0",
+        "conservation": true,
+        "prefixComplete": true
+      },
+      "sourceSnapshot": {
+        "chainId": "11155111",
+        "blockNumber": "11673826",
+        "blockHash": "0x5c7434a5230d10c5cf17ed5de5364bdda092ee220ec63c9a2f13f852699ab625",
+        "finality": "rpc-finalized"
+      },
+      "targetSnapshot": {
+        "chainId": "102031",
+        "blockNumber": "5462639",
+        "blockHash": "0x0ae2caee3a7977c45b5e443ead13c4f0a2a252c1478c99d5c507e83b37637315",
+        "finality": "rpc-finalized"
+      },
+      "consent": {
+        "boundOrders": 0,
+        "legacyOrders": [
+          "0x508fe3b64161400318abbe967f2ef2fffcfacd75fa292849d20a04d322a08d07",
+          "0xaffea1311fb051838aab54c2f507195a45f22ab691d1ec780b833b79b17b0346",
+          "0x8b5050f2dce4c3094837f52a6a3c6d2d2bff971897cb1e54c6cfe28173903f35",
+          "0x68bb75ccb245838126b8223e48796ead8a5fbc5ea40c6331f4bf1aa3816b5563",
+          "0x3cc69cd71597b08f771b71676cbdbfbee6d373dba66e4e827383c280dff2c47e"
+        ]
+      },
+      "nativeClassificationCounts": {
+        "cached": 7,
+        "fresh-atomic": 0
+      }
+    },
+    {
+      "path": "evidence/app-workflow-validation/public-expiry1.json",
+      "sha256": "aff095829e9781b817f0536171025c03f7c50427776e0c4b79565363d6c10370",
+      "status": "complete",
+      "epoch": {
+        "epochId": "0x4bfe922276f1df1b448bc3a4b75fcf1c3c9d1a6a7433f32ee9cfc3039e757f8c",
+        "cap": "1000000000000000000",
+        "available": "0",
+        "unresolved": "0",
+        "earned": "0",
+        "returned": "1000000000000000000",
+        "recognized": "1000000000000000000",
+        "reserve": "0",
+        "paid": "0",
+        "outstanding": "0",
+        "conservation": true,
+        "prefixComplete": true
+      },
+      "sourceSnapshot": {
+        "chainId": "11155111",
+        "blockNumber": "11673826",
+        "blockHash": "0x5c7434a5230d10c5cf17ed5de5364bdda092ee220ec63c9a2f13f852699ab625",
+        "finality": "rpc-finalized"
+      },
+      "targetSnapshot": {
+        "chainId": "102031",
+        "blockNumber": "5462644",
+        "blockHash": "0xcaecb9eec0313101ca889e59bdceb683ff362f4e3c83d89a7745546f05a534f2",
+        "finality": "rpc-finalized"
+      },
+      "consent": {
+        "boundOrders": 0,
+        "legacyOrders": []
+      },
+      "nativeClassificationCounts": {
+        "cached": 0,
+        "fresh-atomic": 1
+      }
+    },
+    {
+      "path": "evidence/app-workflow-validation/public-rotation3.json",
+      "sha256": "56d2b4bb517f231ced2bf8e8b93ca16353f8ab32e5cb30c36828b9de2393de13",
+      "status": "complete",
+      "epoch": {
+        "epochId": "0x40d67e1927cec5bc3a62635077e0ea577b146e40cc699b925a2dde1511156c06",
+        "cap": "3000000000000000000",
+        "available": "0",
+        "unresolved": "0",
+        "earned": "2000000000000000000",
+        "returned": "1000000000000000000",
+        "recognized": "3000000000000000000",
+        "reserve": "0",
+        "paid": "2000000000000000000",
+        "outstanding": "0",
+        "conservation": true,
+        "prefixComplete": true
+      },
+      "sourceSnapshot": {
+        "chainId": "11155111",
+        "blockNumber": "11673826",
+        "blockHash": "0x5c7434a5230d10c5cf17ed5de5364bdda092ee220ec63c9a2f13f852699ab625",
+        "finality": "rpc-finalized"
+      },
+      "targetSnapshot": {
+        "chainId": "102031",
+        "blockNumber": "5462659",
+        "blockHash": "0x3c9e00f38e5f544d9c40dafa6661afa3509b53cfb55808b1764ad2e3da53970e",
+        "finality": "rpc-finalized"
+      },
+      "consent": {
+        "boundOrders": 0,
+        "legacyOrders": [
+          "0x7e6ea729fc51ccfde42ef2d90d764cc4ffd5a3da56fae231b59ee8998fc396bd",
+          "0x83716d1a8fb3e91ee4e40888d3c2ea4446eec63c2a12aba84696d2ca92ecc320"
+        ]
+      },
+      "nativeClassificationCounts": {
+        "cached": 3,
+        "fresh-atomic": 0
+      }
+    }
+  ]
+}

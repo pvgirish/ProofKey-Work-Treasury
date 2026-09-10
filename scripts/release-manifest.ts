@@ -310,6 +310,10 @@ const pinnedInputs=[
   "schema/schema-v1.json",
   "schema/schema-v1-vectors.json",
   "schema/identity-v1-vectors.json",
+  "schema/work-authorization-v1.json",
+  "schema/work-authorization-v1-vectors.json",
+  "schema/work-authorization-conformance-v1.json",
+  "verification/source-compiler-input.json",
   "docs/compiler.json",
   "foundry.toml",
   "package-lock.json",
@@ -405,7 +409,12 @@ async function main(){
   }
   if(gates.length!==15)throw new Error(`Expected 15 final-lock gates, found ${gates.length}`);
 
-  const uniqueTests=[...new Map(gates.flatMap(gate=>gate.tests).map(test=>[`${test.file}\0${test.name}`,test])).values()];
+  const productUpgradeTests=[
+    foundry("test/WorkAuthorizationConformance.t.sol","WorkAuthorizationConformanceTest","testPortableAuthorizationMatchesSolidityAndFrozenQuoteDomain"),
+    nodeTest("sdk/work-authorization.test.ts","fixed cross-language vector covers canonical termsHash and orderId"),
+    nodeTest("sdk/work-authorization.test.ts","parser refuses changes to commercial, observation, order and domain commitments"),
+  ];
+  const uniqueTests=[...new Map([...gates.flatMap(gate=>gate.tests),...productUpgradeTests].map(test=>[`${test.file}\0${test.name}`,test])).values()];
   await Promise.all(uniqueTests.map(validateTest));
   const requiredFiles=[...new Set([...gates.flatMap(gate=>gate.artifacts),...productionSources,...pinnedInputs,DEPLOYMENTS,"evidence/public-refusal-checks.json"])];
   await Promise.all(requiredFiles.map(assertFile));
@@ -432,8 +441,12 @@ async function main(){
 
   const implementationRevision=revision.trim();
   const refusalChecks=await readJson("evidence/public-refusal-checks.json");
+  const ciAdministrativePaths=new Set(["evidence/public-ci.json","evidence/release-manifest.json"]);
+  const dirtyEntries=status.split("\n").filter(Boolean);
+  const dirtyImplementation=dirtyEntries.filter(entry=>!ciAdministrativePaths.has(entry.slice(3)));
   const currentRevisionCiPassed=Boolean(
     publicCi
+    &&dirtyImplementation.length===0
     &&publicCi.status==="completed"
     &&publicCi.conclusion==="success"
     &&String(publicCi.headSha).toLowerCase()===implementationRevision.toLowerCase()
@@ -481,7 +494,7 @@ async function main(){
   const sdkFiles=[...new Set(uniqueTests.filter(test=>test.framework==="node-test").map(test=>test.file))];
   const [allContractFiles,allSdkFiles]=await Promise.all([
     readdir(resolve(ROOT,"test")).then(names=>Promise.all(names.filter(name=>name.endsWith(".t.sol")).map(name=>readFile(resolve(ROOT,"test",name),"utf8")))),
-    Promise.all(["sdk/allocation.test.ts","sdk/conformance.test.ts","sdk/identity.test.ts","sdk/prover-client.test.ts","sdk/safe-events.test.ts"].map(async path=>readFile(resolve(ROOT,path),"utf8"))),
+    readdir(resolve(ROOT,"sdk")).then(names=>Promise.all(names.filter(name=>name.endsWith(".test.ts")).map(name=>readFile(resolve(ROOT,"sdk",name),"utf8")))),
   ]);
 
   const manifest={
@@ -521,7 +534,7 @@ async function main(){
       executionStatus:currentRevisionCiPassed?"passed-current-revision-public-ci":"not-verified-for-current-revision",
       note:currentRevisionCiPassed
         ?"The optional public CI record reports a completed successful run whose headSha exactly matches this implementation revision."
-        :"Presence and exact-name validation is not a passing test result. Use the recorded commands or attach evidence/public-ci.json for this revision.",
+        :"Presence and exact-name validation is not a passing test result. Public CI must match this revision. Only the fetched public-ci.json record and generated release-manifest.json may differ; a prior CI pass cannot validate other uncommitted changes.",
     },
     reproduction:{
       allContracts:"npm run test:contracts",
@@ -546,13 +559,20 @@ async function main(){
       provenance:"Hashes and runtime-match flags are copied from the checked-in deployment manifest; this generator performs no network readback.",
     },
     localExecutableEvidence:{
+      productUpgrade:{
+        tests:productUpgradeTests,
+        scope:"Canonical authorization commitments, order identity and quote domain/digest conformance. The Solidity vector test does not claim cross-language signature acceptance; signature rules are covered separately by SDK and production-source tests.",
+        executionReport:"evidence/product-upgrade-validation/report.json",
+        note:"Named test presence is not execution. The local execution report binds the exact input bytes it checked and does not establish public CI or independent adoption.",
+      },
       verifierBoundary:"Performance and native adapter tests use a clearly labeled local VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address.",
       nativeCostIncluded:false,
       reportedRun:{
+        baselineRevision:"da0495d6475aa8d0ed533f47f369a6e0085f9a83",
         foundryPassed:46,
         nodeTestsPassed:15,
         invariantCampaign:{runs:128,depth:64,handlerCalls:8192,assertionFunctions:4,reverts:0,note:"Handler calls can be guarded no-ops; these are not 8,192 distinct financial state changes."},
-        provenance:"Release-session operator report before final public CI; this generator does not independently execute it and does not use it to elevate gate status.",
+        provenance:"Historical baseline release-session report, not the product upgrade test total. This generator does not execute tests or use this record to elevate gate status.",
       },
       performance:performanceEvidence,
       tests:uniqueTests,
@@ -587,6 +607,11 @@ async function main(){
       limitation:"Continuity was unchanged, so this proves provider-independent regeneration and native acceptance, not an aged or changed-witness recovery.",
     }:{path:"evidence/native-recovery-verification-33642ef4.json",present:false,status:"pending"},
     publicEvidence:{
+      sourceExplorerVerification:{
+        ...await hashPath("evidence/source-explorer-verification.json"),
+        report:await readJson("evidence/source-explorer-verification.json"),
+        scope:"Recorded public explorer readback, including explicit unverified contracts; not a fresh read made by this manifest generator.",
+      },
       journals,
       refusalAndProofReplacement:{path:"evidence/public-refusal-checks.json",readOnly:refusalChecks.readOnly,
         targetBlock:refusalChecks.targetBlock,observations:refusalChecks.observations,

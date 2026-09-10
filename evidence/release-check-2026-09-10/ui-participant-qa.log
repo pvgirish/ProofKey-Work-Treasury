@@ -1,0 +1,113 @@
+{
+  "checks": [
+    {
+      "name": "Participant product DOM and shared functions are wired",
+      "passed": true,
+      "detail": "{\"missing\":[],\"hooks\":{\"importParticipantAuthorization\":\"function\",\"refreshParticipantWork\":\"function\",\"collectPaidWorkFromUi\":\"function\",\"useFollowupTemplate\":\"function\"},\"sdk\":{\"reviewUnsignedParticipantOffer\":\"function\",\"collectSelectedPaymentHistory\":\"function\",\"parsePaymentHistoryLocator\":\"function\"}}"
+    },
+    {
+      "name": "Fresh worker reviews the full unsigned offer before any wallet signature",
+      "passed": true,
+      "detail": "{\"result\":\"Unsigned offer independently rechecked.\\nOrder 0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\\nWorker 0xDB48edE682410c2661F9cFb5328aaA248074A6c5\\nFull terms are visible. Review the payment acknowledgement before signing.\",\"summary\":\"Selected milestone1 of 1Buyer account0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0Worker0xDB48edE682410c2661F9cFb5328aaA248074A6c5Payment owner0xDB48edE682410c2661F9cFb5328aaA248074A6c5Paid destination0x6666666666666666666666666666666666666666ScopeReview one bounded remediation.AcceptanceThe documented checks pass.RevisionsChanged scope requires a new offer.DeliverySupply reviewed files and test evidence.Worker maximum1.0 CTCCommittee fee0.0 CTCTimeout worker amount0.0 CTCAccept by source block18446744073709551000Deliver by source block18446744073709551001Review by source block18446744073709551002Rule by source block18446744073709551003Ethereum domain11155111 · 0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138Creditcoin domain102031 · 0x06c76dFF132e64453cc0eD04a4464648db4322DA\",\"stage\":\"Review the offer\",\"actor\":\"Worker acts next\",\"signDisabled\":false,\"ackHidden\":false}"
+    },
+    {
+      "name": "Worker-owned acknowledgement gates a real deterministic EOA quote signature",
+      "passed": true,
+      "detail": "{\"ackError\":\"The named worker must acknowledge the exact payment owner and destination for this exact offer before signing\",\"recovered\":\"0xDB48edE682410c2661F9cFb5328aaA248074A6c5\",\"result\":\"Signed offer saved for this worker. Return the saved file to the buyer for Safe acceptance. No transaction was sent.\"}"
+    },
+    {
+      "name": "Fresh buyer independently imports the signed work and prepares exact Safe acceptance without sending",
+      "passed": true,
+      "detail": "{\"fixture\":\"synthetic fresh buyer verification adapters\",\"walletRequests\":0,\"exact\":true,\"baseline\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\",\"current\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\",\"prepared\":true,\"failures\":{\"tamper\":\"termsHash does not match the canonical authorization\",\"domain\":\"authorization observations do not identify the derived epoch\"},\"result\":\"Signed authorization imported and independently rechecked.\\nOrder 0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\\nWorker 0xDB48edE682410c2661F9cFb5328aaA248074A6c5\\nCurrent buyer acceptance checks pass.\\nNo wallet was requested.\"}"
+    },
+    {
+      "name": "Tampered terms and wrong-domain work files preserve the current accepted packet",
+      "passed": true,
+      "detail": "{\"tamper\":\"termsHash does not match the canonical authorization\",\"domain\":\"authorization observations do not identify the derived epoch\"}"
+    },
+    {
+      "name": "A persisted signed order reopens read-only and never prepares or sends by itself",
+      "passed": true,
+      "detail": "{\"orderId\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\",\"preparedSource\":false,\"signDisabled\":true,\"mySignDisabled\":true,\"sourceSendDisabled\":true,\"result\":\"Signed consent-bound authorization restored from this device.\\nOrder 0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\\nStored canonical worker maximum 1.0 CTC (1000000000000000000 base units).\\nCurrent-session verification is required before any write preparation.\",\"myWork\":\"Saved work 0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf restored without a network or wallet request. Check live job when ready.\"}"
+    },
+    {
+      "name": "A→B unsigned-offer review discards the stale first result",
+      "passed": true,
+      "detail": "{\"firstResult\":\"Another work file replaced this review; the stale result was discarded\",\"currentScope\":\"Second review\",\"kind\":\"result success\"}"
+    },
+    {
+      "name": "Finalized prior work creates a fresh follow-up identity, nonce and deadlines without copying consent",
+      "passed": true,
+      "detail": "{\"nonce\":\"78\",\"acceptBefore\":\"1120\",\"deliverBefore\":\"1121\",\"reviewBefore\":\"1122\",\"ruleBefore\":\"1123\",\"signatureCleared\":true,\"ackCleared\":true,\"result\":\"Fresh template loaded from finalized order 0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf.\\nUnused nonce 78 selected at source finalized block 900.\\nNew editable block deadlines: accept 1120, deliver 1121, review 1122, rule 1123.\\nReview every term before creating the offer. The old signature was not copied.\"}"
+    },
+    {
+      "name": "Follow-up creation refuses draining, closed and post-cutoff source programs",
+      "passed": true,
+      "detail": "{\"draining\":\"This program is draining and refuses new work\",\"closed\":\"This program is closed or unavailable for new work\",\"cutoff\":\"The source admission cutoff has passed; use a fresh epoch for new work\"}"
+    },
+    {
+      "name": "A stale follow-up read cannot overwrite an edited A→B→A form",
+      "passed": true,
+      "detail": "{\"stale\":\"The workspace, selected template, current offer or form changed while checking follow-up work; the stale result was discarded\",\"after\":\"Human edit kept\"}"
+    },
+    {
+      "name": "Worker delivery locks synchronous double clicks and journals an uncertain-send hash before receipt lookup",
+      "passed": true,
+      "detail": "{\"fixture\":\"synthetic source state and injected worker wallet; no network transaction\",\"duplicate\":\"A worker transaction is already in progress. Its pending result will not be sent again.\",\"sendCalls\":1,\"receiptCalls\":1,\"beforeReceipt\":{\"state\":\"pending\",\"orderId\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\",\"milestoneId\":0,\"deliveryHash\":\"0xd0b93533b8754bc5c5abda0067fd60c24b1150279726f1b611aec0b96e2c80a4\",\"transactionHash\":\"0xabababababababababababababababababababababababababababababababab\",\"submittedAt\":\"2026-09-10T13:02:27.338Z\",\"sourceChainId\":\"11155111\",\"sourceCoordinator\":\"0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138\",\"worker\":\"0xDB48edE682410c2661F9cFb5328aaA248074A6c5\"},\"finalJournal\":{\"state\":\"pending\",\"orderId\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\",\"milestoneId\":0,\"deliveryHash\":\"0xd0b93533b8754bc5c5abda0067fd60c24b1150279726f1b611aec0b96e2c80a4\",\"transactionHash\":\"0xabababababababababababababababababababababababababababababababab\",\"submittedAt\":\"2026-09-10T13:02:27.338Z\",\"sourceChainId\":\"11155111\",\"sourceCoordinator\":\"0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138\",\"worker\":\"0xDB48edE682410c2661F9cFb5328aaA248074A6c5\"},\"selectedAfterHash\":\"0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd\",\"replay\":\"This exact delivery already has a stored pending transaction 0xabababababababababababababababababababababababababababababababab. Check its receipt; it will not be sent again.\",\"journalId\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf:0:0xd0b93533b8754bc5c5abda0067fd60c24b1150279726f1b611aec0b96e2c80a4\"}"
+    },
+    {
+      "name": "A pending-wallet selection change preserves the original delivery journal and blocks replay",
+      "passed": true,
+      "detail": "{\"fixture\":\"synthetic source state and injected worker wallet; no network transaction\",\"duplicate\":\"A worker transaction is already in progress. Its pending result will not be sent again.\",\"sendCalls\":1,\"receiptCalls\":1,\"beforeReceipt\":{\"state\":\"pending\",\"orderId\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\",\"milestoneId\":0,\"deliveryHash\":\"0xd0b93533b8754bc5c5abda0067fd60c24b1150279726f1b611aec0b96e2c80a4\",\"transactionHash\":\"0xabababababababababababababababababababababababababababababababab\",\"submittedAt\":\"2026-09-10T13:02:27.338Z\",\"sourceChainId\":\"11155111\",\"sourceCoordinator\":\"0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138\",\"worker\":\"0xDB48edE682410c2661F9cFb5328aaA248074A6c5\"},\"finalJournal\":{\"state\":\"pending\",\"orderId\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf\",\"milestoneId\":0,\"deliveryHash\":\"0xd0b93533b8754bc5c5abda0067fd60c24b1150279726f1b611aec0b96e2c80a4\",\"transactionHash\":\"0xabababababababababababababababababababababababababababababababab\",\"submittedAt\":\"2026-09-10T13:02:27.338Z\",\"sourceChainId\":\"11155111\",\"sourceCoordinator\":\"0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138\",\"worker\":\"0xDB48edE682410c2661F9cFb5328aaA248074A6c5\"},\"selectedAfterHash\":\"0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd\",\"replay\":\"This exact delivery already has a stored pending transaction 0xabababababababababababababababababababababababababababababababab. Check its receipt; it will not be sent again.\",\"journalId\":\"0xe95bd287c08b155c186fae38c2486caaa368c72cd72447bfeee322dd15c537cf:0:0xd0b93533b8754bc5c5abda0067fd60c24b1150279726f1b611aec0b96e2c80a4\"}"
+    },
+    {
+      "name": "Fresh selected history shows 55 WORK and excludes 65 RETURN",
+      "passed": true,
+      "detail": "{\"result\":\"Verified 2 successful WORK/FEE withdrawal(s) in this selected scope from 1 fresh epoch snapshot(s). WORK and FEE are separate; RETURN is excluded.\",\"scope\":\"2 paid claims · selected epochs\",\"work\":\"55.0 CTC\",\"fee\":\"0.0 CTC\",\"records\":\"WORKOrder 0x0ff633b1…5879ec4d · allocation 1Worker not established by supplied authorization · owner 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B · paid 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B via fixed-destinationCheck paymentWithdrawal receipt ↗30.0 CTCWORKOrder 0x24adf815…97c8fb8f · allocation 3Worker not established by supplied authorization · owner 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B · paid 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B via fixed-destinationCheck paymentWithdrawal receipt ↗25.0 CTC\",\"record\":{\"version\":\"proofkey.work-treasury.selected-payment-history.v1\",\"status\":\"verified\",\"label\":\"Verified selected payment record\",\"locator\":{\"version\":\"proofkey.work-treasury.payment-history-locator.v1\",\"subject\":{\"address\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"role\":\"claim-owner\"},\"domain\":{\"sourceChainId\":\"11155111\",\"sourceCoordinator\":\"0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138\",\"sourceRuntimeHash\":\"0xa2b1bb0c4fa144c8791dd3e689726d27bb479c0314641320c557ae1cd8f63bef\",\"targetChainId\":\"102031\",\"targetTreasury\":\"0x06c76dFF132e64453cc0eD04a4464648db4322DA\",\"targetRuntimeHash\":\"0x79e706996c4c2bc24742b90a1d29a22a39afddcf30e1f408a31b7237c52b5689\",\"sourceChainKey\":\"1\"},\"selections\":[{\"epochId\":\"0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7\"}]},\"selectedScope\":\"selected-not-exhaustive\",\"snapshots\":[{\"epochId\":\"0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7\",\"source\":{\"chainId\":\"11155111\",\"blockNumber\":\"11673796\",\"blockHash\":\"0x00cf8cb911654fa0ac72b9558baefbe5c5343608b931dcdd02c2b546aee502f7\"},\"target\":{\"chainId\":\"102031\",\"blockNumber\":\"5462619\",\"blockHash\":\"0x477a8ebe33da5ec8b9d6048f9e1f637bcf1af2bb39d3d7531e1d9b0b297e8d9d\"},\"programAccountingStatus\":\"complete\"}],\"records\":[{\"recordKey\":\"102031:0x06c76dff132e64453cc0ed04a4464648db4322da:0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\",\"economicId\":\"0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\",\"epochId\":\"0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7\",\"allocationId\":\"1\",\"orderId\":\"0x0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d\",\"milestoneId\":0,\"kind\":\"WORK\",\"asset\":\"0x0000000000000000000000000000000000000000\",\"amount\":\"30000000000000000000\",\"subjectMatchedAs\":\"claim-owner\",\"claimOwner\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"committedDestination\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"paidDestination\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"withdrawalRoute\":\"fixed-destination\",\"commercialConsentEvidence\":\"legacy-no-commercial-consent-evidence\",\"sourceOutcome\":{\"code\":4,\"label\":\"approved\",\"transactionHash\":\"0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5\"},\"nativeAuthentication\":{\"authenticationId\":\"0x960c29637be2ac9bdd776be3ebe0e795104b9efb18e40176457e97155b8a5188\",\"sourceBlockHeight\":\"11669825\",\"sourceTransactionIndex\":\"80\",\"classification\":\"cached\",\"verificationTransactionHash\":\"0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae\"},\"recognition\":{\"transactionHash\":\"0xe1403b1729049454dc9174050f20205f06c9d97cb471958f4bca58cccfaf9aae\",\"snapshotBlockNumber\":\"5462619\",\"snapshotBlockHash\":\"0x477a8ebe33da5ec8b9d6048f9e1f637bcf1af2bb39d3d7531e1d9b0b297e8d9d\"},\"withdrawal\":{\"transactionHash\":\"0x132f0ae39c2252f6b7ad13773ef191aedeafabee6d5e55e17b5b1491720a16f3\",\"caller\":\"0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE\",\"snapshotBlockNumber\":\"5462619\",\"snapshotBlockHash\":\"0x477a8ebe33da5ec8b9d6048f9e1f637bcf1af2bb39d3d7531e1d9b0b297e8d9d\"}},{\"recordKey\":\"102031:0x06c76dff132e64453cc0ed04a4464648db4322da:0x24309b5d06648a2b6683edfeb550ae41c33a5ea1affa9dc1c521218d1905c315\",\"economicId\":\"0x24309b5d06648a2b6683edfeb550ae41c33a5ea1affa9dc1c521218d1905c315\",\"epochId\":\"0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7\",\"allocationId\":\"3\",\"orderId\":\"0x24adf815e4e6ad485d79895088d71af4488209e2c387c77e6976023997c8fb8f\",\"milestoneId\":0,\"kind\":\"WORK\",\"asset\":\"0x0000000000000000000000000000000000000000\",\"amount\":\"25000000000000000000\",\"subjectMatchedAs\":\"claim-owner\",\"claimOwner\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"committedDestination\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"paidDestination\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"withdrawalRoute\":\"fixed-destination\",\"commercialConsentEvidence\":\"legacy-no-commercial-consent-evidence\",\"sourceOutcome\":{\"code\":8,\"label\":\"mutual-settlement\",\"transactionHash\":\"0x046b2a05edea39722100178c255c4a9356aa439f0744d118ff321b05075dede9\"},\"nativeAuthentication\":{\"authenticationId\":\"0x960c29637be2ac9bdd776be3ebe0e795104b9efb18e40176457e97155b8a5188\",\"sourceBlockHeight\":\"11669825\",\"sourceTransactionIndex\":\"80\",\"classification\":\"cached\",\"verificationTransactionHash\":\"0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae\"},\"recognition\":{\"transactionHash\":\"0x723fd815d126fc47ae658eb4c08024e5a561a5c01296a5f108b8f1a0f3b669cc\",\"snapshotBlockNumber\":\"5462619\",\"snapshotBlockHash\":\"0x477a8ebe33da5ec8b9d6048f9e1f637bcf1af2bb39d3d7531e1d9b0b297e8d9d\"},\"withdrawal\":{\"transactionHash\":\"0xd7da3be6fea92054880b4914b3faa9b2603ac7b8c1b1119f62c701ff6193e2bd\",\"caller\":\"0xfa0B7F66474Dc6648BCbb008B6F295eB4e5400AE\",\"snapshotBlockNumber\":\"5462619\",\"snapshotBlockHash\":\"0x477a8ebe33da5ec8b9d6048f9e1f637bcf1af2bb39d3d7531e1d9b0b297e8d9d\"}}],\"totals\":[{\"targetChainId\":\"102031\",\"treasury\":\"0x06c76dFF132e64453cc0eD04a4464648db4322DA\",\"asset\":\"0x0000000000000000000000000000000000000000\",\"kind\":\"WORK\",\"amount\":\"55000000000000000000\",\"paymentCount\":2}],\"unresolvedSelections\":[],\"errors\":[],\"limitations\":[\"This is selected wallet-address settlement history, not an exhaustive account history or a claim about a human or organization.\",\"It proves finalized recorded WORK/FEE withdrawals in the selected scope; it does not establish work quality, invoice truth, income, independence, beneficial control, repayment behavior or creditworthiness.\",\"WORK and FEE are totaled separately. RETURN is excluded because it credits fungible owner free balance rather than paying a worker claim.\",\"A source outcome label does not prove there was never a dispute, and an unresolved program amount is not itself evidence of a dispute.\",\"Public transaction visibility does not establish permission to attach a name, contact detail or testimonial.\"],\"artifactDigest\":\"0xe45a116edb3afd97286e4f7e8702e9940aac0d068e68b89270d7013d117a14d8\"}}"
+    },
+    {
+      "name": "Imported stale payment totals and verdict are ignored before fresh reconstruction",
+      "passed": true,
+      "detail": "{\"work\":\"55.0 CTC\",\"fee\":\"0.0 CTC\",\"result\":\"Verified 2 successful WORK/FEE withdrawal(s) in this selected scope from 1 fresh epoch snapshot(s). WORK and FEE are separate; RETURN is excluded.\"}"
+    },
+    {
+      "name": "Imported exact payment filters survive fresh recollection and imported totals stay discarded",
+      "passed": true,
+      "detail": "{\"fixture\":\"same disclosed fixed public main120 closeout report\",\"economicId\":\"0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\",\"imported\":{\"scope\":\"1 retained payment filter\",\"result\":\"Imported 1 selection locator(s) with 1 exact order/payment filter(s). Prior totals, records, snapshots and verdicts were discarded. Rebuild from fresh receipts for a result.\",\"filters\":[\"0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\"]},\"retained\":[\"0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\"],\"recordIds\":[\"0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\"],\"work\":\"30.0 CTC\",\"result\":\"Verified 1 successful WORK/FEE withdrawal(s) in this selected scope from 1 fresh epoch snapshot(s). WORK and FEE are separate; RETURN is excluded.\"}"
+    },
+    {
+      "name": "Program paid amount clears when the active epoch changes or its fresh closeout is invalid",
+      "passed": true,
+      "detail": "{\"collected\":\"55.0 CTC\",\"changedEpoch\":\"Not collected for this epoch\",\"invalidated\":\"Not collected for this epoch\"}"
+    },
+    {
+      "name": "A→B→A payment-history inputs cannot restore a stale green result",
+      "passed": true,
+      "detail": "{\"error\":\"The payment-history selection or workspace changed; the stale result was discarded\",\"current\":false,\"kind\":\"result empty\",\"text\":\"Rebuilding selected epochs from fresh finalized source, native, recognition and withdrawal evidence…\"}"
+    },
+    {
+      "name": "Desktop and 390×844 participant views have no horizontal overflow",
+      "passed": true,
+      "detail": "[{\"viewport\":\"desktop\",\"view\":\"program\",\"innerWidth\":1440,\"innerHeight\":1000,\"documentWidth\":1440,\"bodyWidth\":1440,\"viewWidth\":1081},{\"viewport\":\"desktop\",\"view\":\"my-work\",\"innerWidth\":1440,\"innerHeight\":1000,\"documentWidth\":1440,\"bodyWidth\":1440,\"viewWidth\":1081},{\"viewport\":\"desktop\",\"view\":\"paid-work\",\"innerWidth\":1440,\"innerHeight\":1000,\"documentWidth\":1440,\"bodyWidth\":1440,\"viewWidth\":1081},{\"viewport\":\"phone-390x844\",\"view\":\"program\",\"innerWidth\":390,\"innerHeight\":844,\"documentWidth\":390,\"bodyWidth\":390,\"viewWidth\":358},{\"viewport\":\"phone-390x844\",\"view\":\"my-work\",\"innerWidth\":390,\"innerHeight\":844,\"documentWidth\":390,\"bodyWidth\":390,\"viewWidth\":358},{\"viewport\":\"phone-390x844\",\"view\":\"paid-work\",\"innerWidth\":390,\"innerHeight\":844,\"documentWidth\":390,\"bodyWidth\":390,\"viewWidth\":358}]"
+    },
+    {
+      "name": "Participant QA made no real wallet or broadcast request",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No browser runtime exception escaped",
+      "passed": true,
+      "detail": "none"
+    }
+  ],
+  "screenshots": [
+    "program-desktop.png",
+    "my-work-desktop.png",
+    "paid-work-desktop.png",
+    "program-phone-390x844.png",
+    "my-work-phone-390x844.png",
+    "paid-work-phone-390x844.png"
+  ],
+  "fixtureDisclosure": "Synthetic finalized offer/source state and deterministic EOA signature; separately collected public finalized main120 payment report; no independent participant, real wallet signature, deployment or broadcast is claimed."
+}

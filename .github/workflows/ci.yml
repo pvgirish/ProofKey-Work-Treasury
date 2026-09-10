@@ -21,6 +21,7 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm run typecheck
       - run: npm run test:sdk
+      - run: npm run test:participant
       - run: npm run test:contracts
       - run: npm run test:judge
       - run: bash scripts/forge.sh build --sizes

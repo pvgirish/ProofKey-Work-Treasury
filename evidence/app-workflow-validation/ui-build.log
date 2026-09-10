@@ -1,0 +1,5 @@
+
+> proofkey-work-treasury@1.0.0 ui:build
+> node scripts/build-ui.mjs
+
+Built operator UI with 3 compiled interfaces.

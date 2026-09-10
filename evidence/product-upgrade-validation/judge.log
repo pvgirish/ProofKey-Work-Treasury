@@ -1,0 +1,33 @@
+
+> proofkey-work-treasury@1.0.0 test:judge
+> node --test scripts/judge-*.test.ts
+
+✔ anchors exact proxy, slot-zero singleton and singleton runtime at block end (7.9385ms)
+✔ rejects a proxy or singleton runtime byte substitution (2.30775ms)
+✔ rejects malformed or zero slot-zero singleton state (1.400084ms)
+✔ fails closed when the provider cannot serve historical state (1.023916ms)
+✔ rejects a changed block hash between the historical reads (0.8235ms)
+✔ verifies one canonical Safe CALL and reports only bounded provenance (8.755416ms)
+✔ rejects a matching-looking Safe event emitted through a delegatecall execution (1.759958ms)
+✔ rejects a mined outer transaction whose Safe inner call failed (2.063625ms)
+✔ rejects coordinator calldata that does not match the committed Safe preimage (2.447959ms)
+✔ rejects a supplied nonce that differs from the committed Safe nonce (3.444917ms)
+✔ rejects an outer transaction addressed somewhere other than the pinned Safe (0.707584ms)
+✔ rejects duplicate Safe success logs even when one matches the committed hash (2.14ms)
+✔ judge checker binds both real batch native events to their exact treasury authentications (3.313917ms)
+✔ judge checker rejects reverted and wrongly addressed receipts even with copied genuine logs (0.278708ms)
+✔ judge checker rejects look-alike native or treasury events from a different emitter (1.138666ms)
+✔ judge checker rejects source-domain and source-position substitution (1.287292ms)
+✔ judge checker rejects a substituted encoded hash even when source position is unchanged (1.235958ms)
+✔ judge checker rejects calldata from a different native path or substituted proof bytes (2.438541ms)
+✔ judge ABI functions and treasury event match the compiled immutable implementation (6.398583ms)
+✔ judge checkpoint audit binds the selected source log and rejects a substituted target root (2.78425ms)
+✔ judge checker never aliases a uint64 position into an unsafe JavaScript number (0.799417ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 311.4895

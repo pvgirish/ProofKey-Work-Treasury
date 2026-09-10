@@ -1,0 +1,160 @@
+Compiling 42 files with Solc 0.8.28
+Solc 0.8.28 finished in 31.29s
+Compiler run successful with warnings:
+Warning (2018): Function state mutability can be restricted to view
+   --> test/AllocationTree.t.sol:107:5:
+    |
+107 |     function testFuzz_treeRejectsProofWrongLength(uint8 length) public {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+   --> test/SourceCoordinator.t.sol:605:5:
+    |
+605 |     function _sign(uint256 key, bytes32 digest) internal returns (bytes memory) {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> test/WorkAuthorizationConformance.t.sol:88:5:
+   |
+88 |     function _decimal(string memory json, string memory path) private view returns (uint256) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning (2018): Function state mutability can be restricted to pure
+  --> test/WorkAuthorizationConformance.t.sol:92:5:
+   |
+92 |     function _textHash(string memory json, string memory path) private view returns (bytes32) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+
+Ran 1 test for test/WorkAuthorizationConformance.t.sol:WorkAuthorizationConformanceTest
+[PASS] testPortableAuthorizationMatchesSolidityAndFrozenQuoteDomain() (gas: 132154)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 18.32ms (11.20ms CPU time)
+
+Ran 1 test for test/IdentityConformance.t.sol:IdentityConformanceTest
+[PASS] testSdkEncodedEpochAndOrderedMilestonesMatchSolidity() (gas: 72814)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 19.34ms (12.21ms CPU time)
+
+Ran 13 tests for test/WorkTreasuryTarget.t.sol:WorkTreasuryTargetTest
+[PASS] test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier() (gas: 2088796)
+[PASS] test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs() (gas: 2218364)
+[PASS] test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache() (gas: 1893552)
+[PASS] test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy() (gas: 2678294)
+[PASS] test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination() (gas: 2639110)
+[PASS] test_fundingUsesOwnDepositAndFree_andSuccessorUsesReturnedFree() (gas: 1416010)
+[PASS] test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication() (gas: 66929)
+[PASS] test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState() (gas: 526341)
+[PASS] test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication() (gas: 168790)
+[PASS] test_oldCheckpointImportedLaterDoesNotRewindLatest() (gas: 1116185)
+[PASS] test_rejectingFixedDestinationLeavesClaim_thenOwnerRedirects() (gas: 1421060)
+[PASS] test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails() (gas: 1876969)
+[PASS] test_unauthorizedClaimRedirectAndRejectingFreeWithdrawalPreserveBalances() (gas: 3485706)
+Suite result: ok. 13 passed; 0 failed; 0 skipped; finished in 22.99ms (13.71ms CPU time)
+
+Ran 2 tests for test/EndToEnd.t.sol:EndToEndTest
+[PASS] test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails() (gas: 4783857)
+[PASS] test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay() (gas: 9753831)
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 28.85ms (16.09ms CPU time)
+
+Ran 4 tests for test/Performance.t.sol:PerformanceTest
+[PASS] test_sourceLargestOrderAndAllocationGas() (gas: 21438330)
+[PASS] test_sourceLateCarryBoundaryWorkFeeGas() (gas: 21602802)
+[PASS] test_sourceMarginalCanonicalEventGas() (gas: 336619)
+[PASS] test_targetCheckpointAndReceiptClaimGas_localNativeStubExcluded() (gas: 85765379)
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 136.56ms (77.87ms CPU time)
+
+Ran 2 tests for test/SourceAccountingInvariant.t.sol:SourceCapacityReuseFuzzTest
+[PASS] testFuzz_declineExpiryAndNoDeliveryRestoreCapacityForNewReservations(uint96,uint96,uint96,uint96) (runs: 256, μ: 6596106, ~: 6606510)
+[PASS] testFuzz_returnDoesNotBecomeReusableCapacityInTheSameEpoch(uint96,uint96) (runs: 256, μ: 4626911, ~: 4629038)
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 152.43ms (220.95ms CPU time)
+
+Ran 4 tests for test/AdversarialIntegration.t.sol:AdversarialIntegrationTest
+[PASS] test_exactDeadlinesSelectOnlyTheSpecifiedTerminalTransition() (gas: 4673298)
+[PASS] test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt() (gas: 4876859)
+[PASS] test_zeroAmountFinalityCreatesNoLeaf_thenReturnedCapacityIsRecognizable() (gas: 2678623)
+[PASS] test_zeroSignerAndStaleMutualAuthorizationsAreRejected() (gas: 2118513)
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 188.79ms (16.26ms CPU time)
+
+Ran 14 tests for test/SourceCoordinator.t.sol:SourceCoordinatorTest
+[PASS] testActiveReturnDrainSweepAndNoEmptyLeaf() (gas: 1422961)
+[PASS] testAdmissionCutoffAllowsPermissionlessDrainAndRepublishDoesNotMutate() (gas: 892748)
+[PASS] testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint() (gas: 1811657)
+[PASS] testApprovalCalldataBindsExactCurrentDeliveryAndVersion() (gas: 1478125)
+[PASS] testApprovalNoDeliveryAndMonitoringDefaultAtExactBoundaries() (gas: 3315502)
+[PASS] testCommitteeTimeoutAndMutualDefaultFirstWriterWins() (gas: 3810507)
+[PASS] testCommitteeVotesDoNotPoolAcrossProposalsAndDuplicateFails() (gas: 2194957)
+[PASS] testDeliveryRevisionMakesOldMutualSignaturesStale() (gas: 1603112)
+[PASS] testEIP1271BuyerAndWorkerMutualAuthorization() (gas: 2355486)
+[PASS] testInitializationAndUninitializedExpiryAreExclusive() (gas: 962051)
+[PASS] testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence() (gas: 1947116)
+[PASS] testQuoteSignatureReplayAndRevocationIncluding1271() (gas: 1664325)
+[PASS] testReachable113LeafTraceAndIndependentRootRebuild() (gas: 381183036)
+[PASS] testWorkerRevokesPendingOfferAndReleasesReservation() (gas: 775329)
+Suite result: ok. 14 passed; 0 failed; 0 skipped; finished in 313.57ms (183.64ms CPU time)
+
+Ran 5 tests for test/AllocationTree.t.sol:AllocationTreeTest
+[PASS] testFuzz_treeRejectsProofWrongLength(uint8) (runs: 256, μ: 46842, ~: 34417)
+[PASS] test_codecRejectsTruncationExtraDataAndDirtyStaticPadding() (gas: 54973)
+[PASS] test_failedAppendAndInitializationCannotChangeTree() (gas: 787690)
+[PASS] test_frozenGoldenEventsDecodeToExactHashesAndOrderedProofs() (gas: 2207839)
+[PASS] test_productionTreeAll128AppendsMatchIndependentFullRebuild() (gas: 854518026)
+Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 313.63ms (335.80ms CPU time)
+
+Ran 1 test for test/SourceAccountingInvariant.t.sol:SourceAccountingInvariantTest
+[PASS]
+SourceAccountingInvariantTest invariants:
+[PASS] invariant_closedEpochHasNoReusableCapacityOrCommitment
+[PASS] invariant_irreversibleTotalsEqualCanonicalAllocations
+[PASS] invariant_reservationPartitionAndCapacityRemainBounded
+[PASS] invariant_sourceAccountingMatchesIndependentGhostModel
+ SourceAccountingInvariantTest invariants (runs: 128, calls: 8192, reverts: 0)
+
+╭------------------------+--------------------+-------+---------+----------╮
+| Contract               | Selector           | Calls | Reverts | Discards |
++==========================================================================+
+| SourceLifecycleHandler | accept             | 780   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | decline            | 804   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | deliverAndApprove  | 819   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | expire             | 840   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | finalizeNoDelivery | 842   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | mutuallySettle     | 843   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | releaseFree        | 813   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | reservePending     | 799   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | startDraining      | 830   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | sweepAvailable     | 822   | 0       | 0        |
+╰------------------------+--------------------+-------+---------+----------╯
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 1.85s (1.84s CPU time)
+
+╭----------------------------------+--------+--------+---------╮
+| Test Suite                       | Passed | Failed | Skipped |
++==============================================================+
+| AdversarialIntegrationTest       | 4      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| AllocationTreeTest               | 5      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| EndToEndTest                     | 2      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| IdentityConformanceTest          | 1      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| PerformanceTest                  | 4      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| SourceAccountingInvariantTest    | 1      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| SourceCapacityReuseFuzzTest      | 2      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| SourceCoordinatorTest            | 14     | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| WorkAuthorizationConformanceTest | 1      | 0      | 0       |
+|----------------------------------+--------+--------+---------|
+| WorkTreasuryTargetTest           | 13     | 0      | 0       |
+╰----------------------------------+--------+--------+---------╯
+

@@ -1,0 +1,299 @@
+{
+  "version": 1,
+  "purpose": "Reproduce deployed runtimes from local build artifacts. Read-only. No redeploy, no verification submission.",
+  "generatedAt": "2026-09-10T12:53:01.858Z",
+  "method": "Libraries were linked AFTER compilation by patching linkReferences placeholders (same algorithm as scripts/runtime.ts). Compilation used settings.libraries = {}. Metadata is not stripped. Only compiler-declared immutable slots are masked, and only where they exist.",
+  "compiler": {
+    "version": "0.8.28+commit.7893614a",
+    "optimizerRuns": 200,
+    "viaIR": true,
+    "evmVersion": "cancun"
+  },
+  "chains": {
+    "source": {
+      "rpcUrl": "https://ethereum-sepolia-rpc.publicnode.com",
+      "chainIdDeclared": "11155111",
+      "chainIdObserved": "11155111",
+      "pinnedBlock": {
+        "number": 11675052,
+        "hash": "0x4859c27bc0af636a7774f815baa7915c98fbebf48b971668653f3a8f8cfbc6d7",
+        "timestamp": 1789044684
+      },
+      "contracts": {
+        "WorkTypes": {
+          "kind": "library",
+          "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+          "onchainRuntimeBytes": 2881,
+          "localRuntimeBytes": 2881,
+          "onchainRuntimeSha256": "f2e3856c3e6368845c99a3d6cd5d51bdedc0506ee29a380ddef5f9adfa968dbe",
+          "reproducedRuntimeSha256": "f2e3856c3e6368845c99a3d6cd5d51bdedc0506ee29a380ddef5f9adfa968dbe",
+          "onchainRuntimeKeccakInput": 5764,
+          "librariesApplied": [],
+          "verdict": "FULL_RUNTIME_BYTE_FOR_BYTE_EQUALITY",
+          "exact": true,
+          "maskedEqual": true,
+          "immutableSlotIds": 0,
+          "immutableSlotCount": 0,
+          "immutableValues": {},
+          "firstDiff": null
+        },
+        "AllocationTree": {
+          "kind": "library",
+          "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+          "onchainRuntimeBytes": 2832,
+          "localRuntimeBytes": 2832,
+          "onchainRuntimeSha256": "3c7cd2ffa940c4507f28b8b47c3b20f3006453bac635fd17538c677354c434ce",
+          "reproducedRuntimeSha256": "e93baa69ca113d70a24494c700f9ce70a56c994cb01d29ae84ab73857472ab57",
+          "onchainRuntimeKeccakInput": 5666,
+          "librariesApplied": [],
+          "verdict": "EQUAL_OUTSIDE_DECLARED_IMMUTABLE_SLOTS",
+          "exact": false,
+          "maskedEqual": true,
+          "immutableSlotIds": 1,
+          "immutableSlotCount": 1,
+          "immutableValues": {
+            "library_deploy_address": [
+              "000000000000000000000000f56c7e00dab6f3fad65e3a85aa6c8fde34e48f43"
+            ]
+          },
+          "firstDiff": {
+            "byteOffset": 19,
+            "onchain": "f5",
+            "local": "00"
+          }
+        },
+        "SourceSignatureLib": {
+          "kind": "library",
+          "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+          "onchainRuntimeBytes": 2066,
+          "localRuntimeBytes": 2066,
+          "onchainRuntimeSha256": "d00f3fc4930221bf26821a3b52a9d534daa3cfae7b8b1d252045fbc3f48bdceb",
+          "reproducedRuntimeSha256": "d00f3fc4930221bf26821a3b52a9d534daa3cfae7b8b1d252045fbc3f48bdceb",
+          "onchainRuntimeKeccakInput": 4134,
+          "librariesApplied": [],
+          "verdict": "FULL_RUNTIME_BYTE_FOR_BYTE_EQUALITY",
+          "exact": true,
+          "maskedEqual": true,
+          "immutableSlotIds": 0,
+          "immutableSlotCount": 0,
+          "immutableValues": {},
+          "firstDiff": null
+        },
+        "SourcePolicyV1Lib": {
+          "kind": "library",
+          "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+          "onchainRuntimeBytes": 2507,
+          "localRuntimeBytes": 2507,
+          "onchainRuntimeSha256": "b6ad6e19623ee37c52539737d00c1ef62cd11cc19b5cf1aa87ed65a1ae32c979",
+          "reproducedRuntimeSha256": "b6ad6e19623ee37c52539737d00c1ef62cd11cc19b5cf1aa87ed65a1ae32c979",
+          "onchainRuntimeKeccakInput": 5016,
+          "librariesApplied": [
+            {
+              "library": "src/WorkTypes.sol:WorkTypes",
+              "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+              "occurrences": 1
+            }
+          ],
+          "verdict": "FULL_RUNTIME_BYTE_FOR_BYTE_EQUALITY",
+          "exact": true,
+          "maskedEqual": true,
+          "immutableSlotIds": 0,
+          "immutableSlotCount": 0,
+          "immutableValues": {},
+          "firstDiff": null
+        },
+        "SourceAccountingLib": {
+          "kind": "library",
+          "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+          "onchainRuntimeBytes": 2646,
+          "localRuntimeBytes": 2646,
+          "onchainRuntimeSha256": "1d77a36997cca40b6d7989c891f361087eea8405f2289470c5a8ef403320e09b",
+          "reproducedRuntimeSha256": "b6e6f8e2e7ddea29a0ce5a4c7b6175189ae2feb47d3a07c40a7949ba77c06293",
+          "onchainRuntimeKeccakInput": 5294,
+          "librariesApplied": [
+            {
+              "library": "src/AllocationTree.sol:AllocationTree",
+              "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+              "occurrences": 1
+            },
+            {
+              "library": "src/SourcePolicyV1Lib.sol:SourcePolicyV1Lib",
+              "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+              "occurrences": 1
+            }
+          ],
+          "verdict": "EQUAL_OUTSIDE_DECLARED_IMMUTABLE_SLOTS",
+          "exact": false,
+          "maskedEqual": true,
+          "immutableSlotIds": 1,
+          "immutableSlotCount": 1,
+          "immutableValues": {
+            "library_deploy_address": [
+              "0000000000000000000000003ac9b3eb94dba253bcc4284a981fb45d35386612"
+            ]
+          },
+          "firstDiff": {
+            "byteOffset": 51,
+            "onchain": "3a",
+            "local": "00"
+          }
+        },
+        "SourceCoordinator": {
+          "kind": "contract",
+          "address": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+          "onchainRuntimeBytes": 21789,
+          "localRuntimeBytes": 21789,
+          "onchainRuntimeSha256": "987ce5dbee0759374b11fab75013483bff95dd75661bd92ffe60f1aeb90b65c3",
+          "reproducedRuntimeSha256": "987ce5dbee0759374b11fab75013483bff95dd75661bd92ffe60f1aeb90b65c3",
+          "onchainRuntimeKeccakInput": 43580,
+          "librariesApplied": [
+            {
+              "library": "src/AllocationTree.sol:AllocationTree",
+              "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+              "occurrences": 5
+            },
+            {
+              "library": "src/SourceAccountingLib.sol:SourceAccountingLib",
+              "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+              "occurrences": 6
+            },
+            {
+              "library": "src/SourcePolicyV1Lib.sol:SourcePolicyV1Lib",
+              "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+              "occurrences": 2
+            },
+            {
+              "library": "src/SourceSignatureLib.sol:SourceSignatureLib",
+              "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+              "occurrences": 6
+            },
+            {
+              "library": "src/WorkTypes.sol:WorkTypes",
+              "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+              "occurrences": 6
+            }
+          ],
+          "verdict": "FULL_RUNTIME_BYTE_FOR_BYTE_EQUALITY",
+          "exact": true,
+          "maskedEqual": true,
+          "immutableSlotIds": 0,
+          "immutableSlotCount": 0,
+          "immutableValues": {},
+          "firstDiff": null
+        }
+      }
+    },
+    "target": {
+      "rpcUrl": "https://rpc.cc3-testnet.creditcoin.network",
+      "chainIdDeclared": "102031",
+      "chainIdObserved": "102031",
+      "pinnedBlock": {
+        "number": 5463592,
+        "hash": "0x9d19c23598ba0e27307371101cce4919da71f17a3aedb330957aabd4cdc49131",
+        "timestamp": 1789044660
+      },
+      "contracts": {
+        "WorkTypes": {
+          "kind": "library",
+          "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+          "onchainRuntimeBytes": 2881,
+          "localRuntimeBytes": 2881,
+          "onchainRuntimeSha256": "f2e3856c3e6368845c99a3d6cd5d51bdedc0506ee29a380ddef5f9adfa968dbe",
+          "reproducedRuntimeSha256": "f2e3856c3e6368845c99a3d6cd5d51bdedc0506ee29a380ddef5f9adfa968dbe",
+          "onchainRuntimeKeccakInput": 5764,
+          "librariesApplied": [],
+          "verdict": "FULL_RUNTIME_BYTE_FOR_BYTE_EQUALITY",
+          "exact": true,
+          "maskedEqual": true,
+          "immutableSlotIds": 0,
+          "immutableSlotCount": 0,
+          "immutableValues": {},
+          "firstDiff": null
+        },
+        "AllocationTree": {
+          "kind": "library",
+          "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
+          "onchainRuntimeBytes": 2832,
+          "localRuntimeBytes": 2832,
+          "onchainRuntimeSha256": "511b340c82cc086a646d45b9e17e44aa920956d0656968870c355493f097ed95",
+          "reproducedRuntimeSha256": "e93baa69ca113d70a24494c700f9ce70a56c994cb01d29ae84ab73857472ab57",
+          "onchainRuntimeKeccakInput": 5666,
+          "librariesApplied": [],
+          "verdict": "EQUAL_OUTSIDE_DECLARED_IMMUTABLE_SLOTS",
+          "exact": false,
+          "maskedEqual": true,
+          "immutableSlotIds": 1,
+          "immutableSlotCount": 1,
+          "immutableValues": {
+            "library_deploy_address": [
+              "000000000000000000000000fcd2f8240f9a727d532becc45c7f2d920843958f"
+            ]
+          },
+          "firstDiff": {
+            "byteOffset": 19,
+            "onchain": "fc",
+            "local": "00"
+          }
+        },
+        "WorkTreasury": {
+          "kind": "contract",
+          "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+          "onchainRuntimeBytes": 20019,
+          "localRuntimeBytes": 20019,
+          "onchainRuntimeSha256": "06bf2856466a9c0d663cbaca167e0f9fbdbd4cec6cdc79ecad5631e828dfbed8",
+          "reproducedRuntimeSha256": "a518f5326dcac83b6bcb297ed510216feb0cf6674037dae294efe35c89699a70",
+          "onchainRuntimeKeccakInput": 40040,
+          "librariesApplied": [
+            {
+              "library": "src/AllocationTree.sol:AllocationTree",
+              "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
+              "occurrences": 1
+            },
+            {
+              "library": "src/WorkTypes.sol:WorkTypes",
+              "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
+              "occurrences": 2
+            }
+          ],
+          "verdict": "EQUAL_OUTSIDE_DECLARED_IMMUTABLE_SLOTS",
+          "exact": false,
+          "maskedEqual": true,
+          "immutableSlotIds": 4,
+          "immutableSlotCount": 17,
+          "immutableValues": {
+            "41014": [
+              "0000000000000000000000000000000000000000000000000000000000000fd2",
+              "0000000000000000000000000000000000000000000000000000000000000fd2",
+              "0000000000000000000000000000000000000000000000000000000000000fd2"
+            ],
+            "41016": [
+              "0000000000000000000000000000000000000000000000000000000000000001",
+              "0000000000000000000000000000000000000000000000000000000000000001",
+              "0000000000000000000000000000000000000000000000000000000000000001",
+              "0000000000000000000000000000000000000000000000000000000000000001",
+              "0000000000000000000000000000000000000000000000000000000000000001",
+              "0000000000000000000000000000000000000000000000000000000000000001"
+            ],
+            "41018": [
+              "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+              "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+              "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+              "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+              "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138"
+            ],
+            "46597": [
+              "0000000000000000000000000000000000000000000000000000000000aa36a7",
+              "0000000000000000000000000000000000000000000000000000000000aa36a7",
+              "0000000000000000000000000000000000000000000000000000000000aa36a7"
+            ]
+          },
+          "firstDiff": {
+            "byteOffset": 861,
+            "onchain": "aa",
+            "local": "00"
+          }
+        }
+      }
+    }
+  }
+}

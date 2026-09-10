@@ -1,0 +1,13 @@
+No files changed, compilation skipped
+
+Ran 7 tests for test/G0CapFunding.t.sol:G0CapFundingTest
+[PASS] test_G0A_sourceAcceptsAndEarnsWithZeroTargetFunding() (gas: 1946197)
+[PASS] test_G0B2_fundingReservesExactlyCapAndNothingElse() (gas: 535546)
+[PASS] test_G0B_insufficientTargetFundingRejected() (gas: 176068)
+[PASS] test_G0C2_foreignTargetTreasuryBindingRejected() (gas: 65471)
+[PASS] test_G0C_allocationCannotDrawOnAnotherEpochsFunding() (gas: 575266)
+[PASS] test_G0D_capExceededAndDuplicateRecognitionRejected() (gas: 1312023)
+[PASS] test_G0E_recognisedClaimIsBackedByEscrowedValueThroughWithdrawal() (gas: 1228172)
+Suite result: ok. 7 passed; 0 failed; 0 skipped; finished in 13.74ms (14.74ms CPU time)
+
+Ran 1 test suite in 19.62ms (13.74ms CPU time): 7 tests passed, 0 failed, 0 skipped (7 total tests)

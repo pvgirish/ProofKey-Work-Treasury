@@ -1,6 +1,7 @@
 {
-  "checkedAt": "2026-09-09T19:00:48.171Z",
+  "checkedAt": "2026-09-10T07:45:37.246Z",
   "explorer": "https://creditcoin-testnet.blockscout.com",
+  "chainSide": "target",
   "chainId": "102031",
   "compiler": "v0.8.28+commit.7893614a",
   "mode": "check",
@@ -8,25 +9,27 @@
     {
       "name": "WorkTypes",
       "address": "0xCA704A845F34348363abEca935c80fe2f366Cde0",
-      "sourceCount": 1,
+      "sourceCount": 43,
       "constructorBytes": 0,
       "libraries": [],
       "artifactReproduced": true,
-      "deployedRuntimeCorrespondence": true
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-deployment-input"
     },
     {
       "name": "AllocationTree",
       "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
-      "sourceCount": 3,
+      "sourceCount": 43,
       "constructorBytes": 0,
       "libraries": [],
       "artifactReproduced": true,
-      "deployedRuntimeCorrespondence": true
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-deployment-input"
     },
     {
       "name": "WorkTreasury",
       "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
-      "sourceCount": 8,
+      "sourceCount": 43,
       "constructorBytes": 96,
       "libraries": [
         {
@@ -41,7 +44,8 @@
         }
       ],
       "artifactReproduced": true,
-      "deployedRuntimeCorrespondence": true
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-deployment-input"
     }
   ],
   "results": [
@@ -55,7 +59,9 @@
       "evmVersion": "cancun",
       "optimization": true,
       "runs": 200,
-      "libraries": []
+      "libraries": [],
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
     },
     {
       "name": "AllocationTree",
@@ -67,7 +73,9 @@
       "evmVersion": "cancun",
       "optimization": true,
       "runs": 200,
-      "libraries": []
+      "libraries": [],
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
     },
     {
       "name": "WorkTreasury",
@@ -88,7 +96,9 @@
           "name": "src/WorkTypes.sol:WorkTypes",
           "address_hash": "0xCA704A845F34348363abEca935c80fe2f366Cde0"
         }
-      ]
+      ],
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
     }
   ]
 }

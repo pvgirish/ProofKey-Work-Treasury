@@ -1,10 +1,11 @@
 {
   "schema": "proofkey.release-manifest.v1",
-  "generatedAt": "2026-09-09T21:37:19.907Z",
+  "generatedAt": "2026-09-10T08:06:51.382Z",
   "releaseStatus": "pending",
   "releaseBlockingReasons": [
     "Two consented independent settlements and repeat independent operation are not recorded.",
-    "A real buyer reason is not recorded."
+    "A real buyer reason is not recorded.",
+    "No successful public CI evidence matches the current implementation revision."
   ],
   "reportedLimitations": [
     "The public traces are smaller than the local production-policy 113-leaf and production-tree 128-leaf tests.",
@@ -20,23 +21,77 @@
     "validatedGateCount": 15
   },
   "repository": {
-    "revision": "e2f434e4abfcfbafa02c6fc9406f124afd7b92cb",
+    "revision": "da0495d6475aa8d0ed533f47f369a6e0085f9a83",
     "dirty": true,
     "dirtyEntries": [
-      "M docs/IMPLEMENTATION-STATUS.md",
+      "M README.md",
+      " M docs/IMPLEMENTATION-STATUS.md",
+      " M docs/OPERATOR-WALKTHROUGH.md",
       " M docs/RELEASE-GATES.md",
-      " M evidence/public-ci.json",
-      "?? evidence/ui-finality-hosted-qa/delivery-finality-required.png",
-      "?? evidence/ui-finality-hosted-qa/quote-finality-required.png",
-      "?? evidence/ui-finality-hosted-qa/report.md"
+      " M docs/TARGET-SOURCE-VERIFICATION.md",
+      " M evidence/release-manifest.json",
+      " M evidence/target-source-verification.json",
+      " M package.json",
+      " M scripts/build-ui.mjs",
+      " M scripts/release-manifest.ts",
+      " M scripts/verify-target-blockscout.ts",
+      " M sdk/README.md",
+      " M sdk/index.ts",
+      " M ui/app.ts",
+      " M ui/index.html",
+      " M ui/styles.css",
+      "?? docs/PRODUCT-UPGRADE-PROGRESS.md",
+      "?? docs/PRODUCT-UPGRADE-RELEASE.md",
+      "?? docs/REPLACEMENT-SETTLEMENT-AND-CLOSEOUT.md",
+      "?? docs/TECHNICAL-WORK-PILOT.md",
+      "?? docs/WORK-AUTHORIZATION.md",
+      "?? evidence/product-upgrade-browser/public-readback/completed-budget.png",
+      "?? evidence/product-upgrade-browser/public-readback/completed-payment-claim-1.png",
+      "?? evidence/product-upgrade-browser/public-readback/imported-claim-1.png",
+      "?? evidence/product-upgrade-browser/public-readback/report.md",
+      "?? evidence/product-upgrade-browser/visual/README.md",
+      "?? evidence/product-upgrade-browser/visual/consent-desktop.png",
+      "?? evidence/product-upgrade-browser/visual/consent-mobile.png",
+      "?? evidence/product-upgrade-closeouts/README.md",
+      "?? evidence/product-upgrade-closeouts/branch20.json",
+      "?? evidence/product-upgrade-closeouts/expiry1.json",
+      "?? evidence/product-upgrade-closeouts/main120-fresh-reimport.json",
+      "?? evidence/product-upgrade-closeouts/main120.json",
+      "?? evidence/product-upgrade-closeouts/safe-rotation3.json",
+      "?? evidence/product-upgrade-validation/consent-browser.log",
+      "?? evidence/product-upgrade-validation/contracts.log",
+      "?? evidence/product-upgrade-validation/judge.log",
+      "?? evidence/product-upgrade-validation/report.json",
+      "?? evidence/product-upgrade-validation/sdk.log",
+      "?? evidence/product-upgrade-validation/typecheck.log",
+      "?? evidence/product-upgrade-validation/ui-build.log",
+      "?? evidence/source-explorer-verification.json",
+      "?? schema/work-authorization-conformance-v1.json",
+      "?? schema/work-authorization-v1-vectors.json",
+      "?? schema/work-authorization-v1.json",
+      "?? scripts/generate-authorization-conformance.ts",
+      "?? scripts/program-closeout.ts",
+      "?? scripts/settlement-runner.ts",
+      "?? scripts/ui-consent-qa.mjs",
+      "?? scripts/verify-product-upgrade.mjs",
+      "?? sdk/program-closeout.test.ts",
+      "?? sdk/program-closeout.ts",
+      "?? sdk/receipt-evidence.test.ts",
+      "?? sdk/receipt-evidence.ts",
+      "?? sdk/settlement-runner.test.ts",
+      "?? sdk/settlement-runner.ts",
+      "?? sdk/work-authorization.test.ts",
+      "?? sdk/work-authorization.ts",
+      "?? test/WorkAuthorizationConformance.t.sol",
+      "?? verification/source-compiler-input.json"
     ]
   },
   "validation": {
-    "testReferencesValidated": 51,
-    "artifactAndInputFilesValidated": 30,
+    "testReferencesValidated": 54,
+    "artifactAndInputFilesValidated": 34,
     "discoveredTests": {
-      "foundry": 49,
-      "nodeTest": 15,
+      "foundry": 50,
+      "nodeTest": 38,
       "counting": "Named test and invariant assertion functions; Foundry groups the four source invariants into one campaign in its execution total."
     },
     "mappedFiles": {
@@ -48,18 +103,20 @@
         "test/SourceAccountingInvariant.t.sol",
         "test/WorkTreasuryTarget.t.sol",
         "test/EndToEnd.t.sol",
-        "test/Performance.t.sol"
+        "test/Performance.t.sol",
+        "test/WorkAuthorizationConformance.t.sol"
       ],
       "nodeTest": [
         "sdk/allocation.test.ts",
         "sdk/identity.test.ts",
         "sdk/conformance.test.ts",
         "sdk/prover-client.test.ts",
-        "sdk/safe-events.test.ts"
+        "sdk/safe-events.test.ts",
+        "sdk/work-authorization.test.ts"
       ]
     },
-    "executionStatus": "passed-current-revision-public-ci",
-    "note": "The optional public CI record reports a completed successful run whose headSha exactly matches this implementation revision."
+    "executionStatus": "not-verified-for-current-revision",
+    "note": "Presence and exact-name validation is not a passing test result. Public CI must match this revision. Only the fetched public-ci.json record and generated release-manifest.json may differ; a prior CI pass cannot validate other uncommitted changes."
   },
   "reproduction": {
     "allContracts": "npm run test:contracts",
@@ -154,6 +211,30 @@
       "bytes": 5710,
       "sha256": "0x95925c9185a2aca9d3a4971d107073dc25055269e8e708e13bc2569f9b7445fe",
       "keccak256": "0x44160db501b09ec68d3e5401aa3893bf55473449c68512118fab057055d3d031"
+    },
+    {
+      "path": "schema/work-authorization-v1.json",
+      "bytes": 8999,
+      "sha256": "0x06c43de66e37fb876577fd96340281178d78a55c33cfbf97bf81da7abfea9681",
+      "keccak256": "0x7480231036963e359cfd42839e734e90a394ec7beac732214fb6f869acfded2d"
+    },
+    {
+      "path": "schema/work-authorization-v1-vectors.json",
+      "bytes": 3993,
+      "sha256": "0x29671aaf925b4a6914d8ad054a7dde770a2ef878144bd5a3f325b2cc03392739",
+      "keccak256": "0x2c4c65dcbf04303a9e12e9cb8bc9263177d16baee2604f317a852bcf06ca6a1b"
+    },
+    {
+      "path": "schema/work-authorization-conformance-v1.json",
+      "bytes": 3298,
+      "sha256": "0xab0b6c66c6e7e86be3aed3da365c396f5affbfbdb790eea5db325d6538a22dee",
+      "keccak256": "0x0358d0e867ededbe8f7bba8c20aa05640c7c47fb6eaa31c63228b80ccb7eefe3"
+    },
+    {
+      "path": "verification/source-compiler-input.json",
+      "bytes": 1055515,
+      "sha256": "0xf3c1ae9167254dc88f0266bbe989bfc80e5a97d15344bac37c46bb2ad830dc11",
+      "keccak256": "0x81e7811987a4803d71b71040f3476eb0e1ea86d5784a39727bee1457bc4b912c"
     },
     {
       "path": "docs/compiler.json",
@@ -426,9 +507,36 @@
     "provenance": "Hashes and runtime-match flags are copied from the checked-in deployment manifest; this generator performs no network readback."
   },
   "localExecutableEvidence": {
+    "productUpgrade": {
+      "tests": [
+        {
+          "framework": "foundry",
+          "file": "test/WorkAuthorizationConformance.t.sol",
+          "contract": "WorkAuthorizationConformanceTest",
+          "name": "testPortableAuthorizationMatchesSolidityAndFrozenQuoteDomain",
+          "command": "bash scripts/forge.sh test --match-contract WorkAuthorizationConformanceTest --match-test testPortableAuthorizationMatchesSolidityAndFrozenQuoteDomain -vv"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/work-authorization.test.ts",
+          "name": "fixed cross-language vector covers canonical termsHash and orderId",
+          "command": "node --test --test-name-pattern \"^fixed cross-language vector covers canonical termsHash and orderId$\" sdk/work-authorization.test.ts"
+        },
+        {
+          "framework": "node-test",
+          "file": "sdk/work-authorization.test.ts",
+          "name": "parser refuses changes to commercial, observation, order and domain commitments",
+          "command": "node --test --test-name-pattern \"^parser refuses changes to commercial, observation, order and domain commitments$\" sdk/work-authorization.test.ts"
+        }
+      ],
+      "scope": "Canonical authorization commitments, order identity and quote domain/digest conformance. The Solidity vector test does not claim cross-language signature acceptance; signature rules are covered separately by SDK and production-source tests.",
+      "executionReport": "evidence/product-upgrade-validation/report.json",
+      "note": "Named test presence is not execution. The local execution report binds the exact input bytes it checked and does not establish public CI or independent adoption."
+    },
     "verifierBoundary": "Performance and native adapter tests use a clearly labeled local VM stub at the production-fixed 0x0000000000000000000000000000000000000FD2 address.",
     "nativeCostIncluded": false,
     "reportedRun": {
+      "baselineRevision": "da0495d6475aa8d0ed533f47f369a6e0085f9a83",
       "foundryPassed": 46,
       "nodeTestsPassed": 15,
       "invariantCampaign": {
@@ -439,7 +547,7 @@
         "reverts": 0,
         "note": "Handler calls can be guarded no-ops; these are not 8,192 distinct financial state changes."
       },
-      "provenance": "Release-session operator report before final public CI; this generator does not independently execute it and does not use it to elevate gate status."
+      "provenance": "Historical baseline release-session report, not the product upgrade test total. This generator does not execute tests or use this record to elevate gate status."
     },
     "performance": {
       "schema": "proofkey-local-performance-v1",
@@ -864,6 +972,25 @@
         "contract": "WorkTreasuryTargetTest",
         "name": "test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy",
         "command": "bash scripts/forge.sh test --match-contract WorkTreasuryTargetTest --match-test test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy -vv"
+      },
+      {
+        "framework": "foundry",
+        "file": "test/WorkAuthorizationConformance.t.sol",
+        "contract": "WorkAuthorizationConformanceTest",
+        "name": "testPortableAuthorizationMatchesSolidityAndFrozenQuoteDomain",
+        "command": "bash scripts/forge.sh test --match-contract WorkAuthorizationConformanceTest --match-test testPortableAuthorizationMatchesSolidityAndFrozenQuoteDomain -vv"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/work-authorization.test.ts",
+        "name": "fixed cross-language vector covers canonical termsHash and orderId",
+        "command": "node --test --test-name-pattern \"^fixed cross-language vector covers canonical termsHash and orderId$\" sdk/work-authorization.test.ts"
+      },
+      {
+        "framework": "node-test",
+        "file": "sdk/work-authorization.test.ts",
+        "name": "parser refuses changes to commercial, observation, order and domain commitments",
+        "command": "node --test --test-name-pattern \"^parser refuses changes to commercial, observation, order and domain commitments$\" sdk/work-authorization.test.ts"
       }
     ]
   },
@@ -1075,8 +1202,8 @@
         "url": "https://github.com/pvgirish/ProofKey-Work-Treasury/actions/runs/34407640882/job/102654667536"
       }
     ],
-    "currentRevisionMatch": true,
-    "acceptedAsCurrentRevisionPass": true
+    "currentRevisionMatch": false,
+    "acceptedAsCurrentRevisionPass": false
   },
   "realNativeEvidence": {
     "path": "evidence/native-recovery-verification-33642ef4.json",
@@ -1111,6 +1238,205 @@
     "limitation": "Continuity was unchanged, so this proves provider-independent regeneration and native acceptance, not an aged or changed-witness recovery."
   },
   "publicEvidence": {
+    "sourceExplorerVerification": {
+      "path": "evidence/source-explorer-verification.json",
+      "bytes": 6165,
+      "sha256": "0x9a23e2c94353117abff0c7083cd61c15e3256d0715d6f4afdd1798adc39e716b",
+      "keccak256": "0xa29cc3d17e89e888ff85e9b136984267f1eda539228670132f0fa260ea9cce8f",
+      "report": {
+        "checkedAt": "2026-09-10T07:36:51.364Z",
+        "explorer": "https://eth-sepolia.blockscout.com",
+        "chainSide": "source",
+        "chainId": "11155111",
+        "compiler": "v0.8.28+commit.7893614a",
+        "mode": "check",
+        "targets": [
+          {
+            "name": "WorkTypes",
+            "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+            "sourceCount": 43,
+            "constructorBytes": 0,
+            "libraries": [],
+            "artifactReproduced": true,
+            "deploymentManifestRecordsRuntimeCorrespondence": true,
+            "compilationAuthority": "frozen-source-input"
+          },
+          {
+            "name": "AllocationTree",
+            "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+            "sourceCount": 43,
+            "constructorBytes": 0,
+            "libraries": [],
+            "artifactReproduced": true,
+            "deploymentManifestRecordsRuntimeCorrespondence": true,
+            "compilationAuthority": "frozen-source-input"
+          },
+          {
+            "name": "SourceSignatureLib",
+            "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+            "sourceCount": 43,
+            "constructorBytes": 0,
+            "libraries": [],
+            "artifactReproduced": true,
+            "deploymentManifestRecordsRuntimeCorrespondence": true,
+            "compilationAuthority": "frozen-source-input"
+          },
+          {
+            "name": "SourcePolicyV1Lib",
+            "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+            "sourceCount": 43,
+            "constructorBytes": 0,
+            "libraries": [
+              {
+                "sourceName": "src/WorkTypes.sol",
+                "name": "WorkTypes",
+                "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+              }
+            ],
+            "artifactReproduced": true,
+            "deploymentManifestRecordsRuntimeCorrespondence": true,
+            "compilationAuthority": "frozen-source-input"
+          },
+          {
+            "name": "SourceAccountingLib",
+            "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+            "sourceCount": 43,
+            "constructorBytes": 0,
+            "libraries": [
+              {
+                "sourceName": "src/AllocationTree.sol",
+                "name": "AllocationTree",
+                "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43"
+              },
+              {
+                "sourceName": "src/SourcePolicyV1Lib.sol",
+                "name": "SourcePolicyV1Lib",
+                "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3"
+              }
+            ],
+            "artifactReproduced": true,
+            "deploymentManifestRecordsRuntimeCorrespondence": true,
+            "compilationAuthority": "frozen-source-input"
+          },
+          {
+            "name": "SourceCoordinator",
+            "address": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+            "sourceCount": 43,
+            "constructorBytes": 0,
+            "libraries": [
+              {
+                "sourceName": "src/AllocationTree.sol",
+                "name": "AllocationTree",
+                "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43"
+              },
+              {
+                "sourceName": "src/SourceAccountingLib.sol",
+                "name": "SourceAccountingLib",
+                "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612"
+              },
+              {
+                "sourceName": "src/SourcePolicyV1Lib.sol",
+                "name": "SourcePolicyV1Lib",
+                "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3"
+              },
+              {
+                "sourceName": "src/SourceSignatureLib.sol",
+                "name": "SourceSignatureLib",
+                "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1"
+              },
+              {
+                "sourceName": "src/WorkTypes.sol",
+                "name": "WorkTypes",
+                "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+              }
+            ],
+            "artifactReproduced": true,
+            "deploymentManifestRecordsRuntimeCorrespondence": true,
+            "compilationAuthority": "frozen-source-input"
+          }
+        ],
+        "results": [
+          {
+            "name": "WorkTypes",
+            "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+            "verified": true,
+            "full": true,
+            "explorerName": "WorkTypes",
+            "compiler": "v0.8.28+commit.7893614a",
+            "evmVersion": "cancun",
+            "optimization": true,
+            "runs": 200,
+            "libraries": [],
+            "explorerCreationMatchesReproducedArtifact": true,
+            "explorerRuntimeMatchesPinnedDeploymentHash": true
+          },
+          {
+            "name": "AllocationTree",
+            "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+            "verified": true,
+            "full": true,
+            "explorerName": "AllocationTree",
+            "compiler": "v0.8.28+commit.7893614a",
+            "evmVersion": "cancun",
+            "optimization": true,
+            "runs": 200,
+            "libraries": [],
+            "explorerCreationMatchesReproducedArtifact": true,
+            "explorerRuntimeMatchesPinnedDeploymentHash": true
+          },
+          {
+            "name": "SourceSignatureLib",
+            "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+            "verified": true,
+            "full": true,
+            "explorerName": "SourceSignatureLib",
+            "compiler": "v0.8.28+commit.7893614a",
+            "evmVersion": "cancun",
+            "optimization": true,
+            "runs": 200,
+            "libraries": [],
+            "explorerCreationMatchesReproducedArtifact": true,
+            "explorerRuntimeMatchesPinnedDeploymentHash": true
+          },
+          {
+            "name": "SourcePolicyV1Lib",
+            "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+            "verified": true,
+            "full": true,
+            "explorerName": "SourcePolicyV1Lib",
+            "compiler": "v0.8.28+commit.7893614a",
+            "evmVersion": "cancun",
+            "optimization": true,
+            "runs": 200,
+            "libraries": [
+              {
+                "name": "src/WorkTypes.sol:WorkTypes",
+                "address_hash": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+              }
+            ],
+            "explorerCreationMatchesReproducedArtifact": true,
+            "explorerRuntimeMatchesPinnedDeploymentHash": true
+          },
+          {
+            "name": "SourceAccountingLib",
+            "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+            "verified": false,
+            "full": false,
+            "explorerCreationMatchesReproducedArtifact": true,
+            "explorerRuntimeMatchesPinnedDeploymentHash": true
+          },
+          {
+            "name": "SourceCoordinator",
+            "address": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+            "verified": false,
+            "full": false,
+            "explorerCreationMatchesReproducedArtifact": true,
+            "explorerRuntimeMatchesPinnedDeploymentHash": true
+          }
+        ]
+      },
+      "scope": "Recorded public explorer readback, including explicit unverified contracts; not a fresh read made by this manifest generator."
+    },
     "journals": [
       {
         "path": "evidence/source-demo.json",
@@ -2966,8 +3292,10 @@
         }
       ],
       "observedStatus": "Exact test names, frozen vectors, schema and compiled artifacts are present and validated; this generator does not claim a current-revision test execution.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision CI or local execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 2,
@@ -3083,8 +3411,10 @@
         }
       ],
       "observedStatus": "The public source journals record the main policy path and branch terminals, including stale, duplicate and both first-writer refusal observations; target follow-through is reported by separate gates.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 3,
@@ -3138,8 +3468,10 @@
         }
       ],
       "observedStatus": "The actual 113-leaf production-policy test and 128-leaf production-tree harness are reference-validated; the public branch journal separately records smaller live traces.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 4,
@@ -3190,8 +3522,10 @@
         }
       ],
       "observedStatus": "Independent rebuild and event-roundtrip test references are validated; the public journals contain allocation/checkpoint receipt ordinals but do not record a maximum-size same-block rebuild.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 5,
@@ -3242,8 +3576,10 @@
         }
       ],
       "observedStatus": "Public source receipts retain allocation and checkpoint ordinals from the same operations; atomic rollback remains locally executable evidence.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 6,
@@ -3275,8 +3611,10 @@
         }
       ],
       "observedStatus": "The main source journal records its republish observation; exact equality, phase transition and no-mutation assertions remain mapped to the named tests.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 7,
@@ -3341,8 +3679,10 @@
         }
       ],
       "observedStatus": "A real fixed-0xFD2 read-only verification returned true and a public batch authentication is mined; negative authentication cases are local executable tests.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision negative-path test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 8,
@@ -3385,8 +3725,10 @@
         }
       ],
       "observedStatus": "The public main journal records an authenticated receipt cache and an exact receipt recognition; the two-epoch, parser, wrong-emitter and failure-preservation matrix remains local executable evidence.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 9,
@@ -3437,8 +3779,10 @@
         }
       ],
       "observedStatus": "The public journal states and receipt identifiers are captured below; both replay directions, mixed kinds and substitution refusals are mapped to exact executable tests.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 10,
@@ -3496,8 +3840,10 @@
         }
       ],
       "observedStatus": "The public main journal records RETURN 50 recognized before B settled; its current state below determines whether final worker collection, total RETURN recognition and withdrawal are complete.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 11,
@@ -3541,8 +3887,10 @@
         }
       ],
       "observedStatus": "Combined and separate operation behavior is mapped to exact executable tests; the public journals do not by themselves establish the full comparison.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 12,
@@ -3605,8 +3953,10 @@
         }
       ],
       "observedStatus": "The first raw recovery report used unchanged continuity. The later public refusal/replacement report separately records older and regenerated witness outcomes at one target block; only its observed result supports changed-witness recovery.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 13,
@@ -3658,8 +4008,10 @@
         }
       ],
       "observedStatus": "The local performance matrix records all required sizes and source positions. Its target figures explicitly exclude native verification; the public journal records actual batch and receipt-recognition gas only.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision performance test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 14,
@@ -3738,8 +4090,10 @@
         }
       ],
       "observedStatus": "The source main and branch journals and the real read-only proof replacement are recorded; the current target and Safe-rotation journal states below determine the remaining product evidence.",
-      "pending": [],
-      "releaseGateStatus": "observed"
+      "pending": [
+        "Attach the current-revision test execution result."
+      ],
+      "releaseGateStatus": "pending"
     },
     {
       "id": 15,
@@ -3783,7 +4137,8 @@
       "pending": [
         "Two consented independent settlements are not recorded.",
         "Repeat independent operation without a target reservation operator is not recorded.",
-        "A real buyer reason is not recorded."
+        "A real buyer reason is not recorded.",
+        "Attach the current-revision test execution result."
       ],
       "releaseGateStatus": "pending"
     }

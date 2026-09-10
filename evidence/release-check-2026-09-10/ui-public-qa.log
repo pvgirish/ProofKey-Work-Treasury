@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "name": "Published app URL loaded",
+      "passed": true,
+      "detail": "https://pvgirish.github.io/ProofKey-Work-Treasury/"
+    },
+    {
+      "name": "Published assets resolve under the project subpath",
+      "passed": true,
+      "detail": "https://pvgirish.github.io/ProofKey-Work-Treasury/styles.css\nhttps://pvgirish.github.io/ProofKey-Work-Treasury/vendor/ethers.umd.min.js\nhttps://pvgirish.github.io/ProofKey-Work-Treasury/abi-manifest.js\nhttps://pvgirish.github.io/ProofKey-Work-Treasury/demo-config.js\nhttps://pvgirish.github.io/ProofKey-Work-Treasury/app.js"
+    },
+    {
+      "name": "Three compiled interfaces loaded",
+      "passed": true,
+      "detail": "3 compiled contract interfaces loaded"
+    },
+    {
+      "name": "Published SourceCoordinator address matches deployment",
+      "passed": true,
+      "detail": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138"
+    },
+    {
+      "name": "Published Safe address matches deployment",
+      "passed": true,
+      "detail": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0"
+    },
+    {
+      "name": "Published WorkTreasury address matches deployment",
+      "passed": true,
+      "detail": "0x06c76dFF132e64453cc0eD04a4464648db4322DA"
+    },
+    {
+      "name": "No JavaScript or critical asset errors",
+      "passed": true,
+      "detail": "none"
+    }
+  ],
+  "assets": [
+    "https://pvgirish.github.io/ProofKey-Work-Treasury/styles.css",
+    "https://pvgirish.github.io/ProofKey-Work-Treasury/vendor/ethers.umd.min.js",
+    "https://pvgirish.github.io/ProofKey-Work-Treasury/abi-manifest.js",
+    "https://pvgirish.github.io/ProofKey-Work-Treasury/demo-config.js",
+    "https://pvgirish.github.io/ProofKey-Work-Treasury/app.js"
+  ],
+  "displayed": {
+    "coordinator": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+    "safe": "0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0",
+    "treasury": "0x06c76dFF132e64453cc0eD04a4464648db4322DA"
+  },
+  "runtimeErrors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 ()"
+  ],
+  "failedRequests": [],
+  "badResponses": [
+    "404 https://pvgirish.github.io/favicon.ico"
+  ]
+}

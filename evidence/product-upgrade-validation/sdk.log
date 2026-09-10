@@ -1,0 +1,50 @@
+
+> proofkey-work-treasury@1.0.0 test:sdk
+> node --test sdk/*.test.ts
+
+✔ matches every frozen AllocationV1 encoding, event and hash (15.215375ms)
+✔ rebuilds the frozen ordered tree and all seven-level witnesses (52.550958ms)
+✔ rejects reordered leaves, changed amounts and noncanonical events (9.681208ms)
+✔ decodes the frozen checkpoint event (0.366833ms)
+✔ validates a portable checkpoint package and detects a modified witness (11.26025ms)
+✔ receipt package contains a directly usable SingleProof and exact transaction bytes (2.013208ms)
+✔ runs the independent reconstruction through all 128 leaves (53.872375ms)
+✔ released SDK preserves the committed Solidity-conformance vectors (9.333542ms)
+✔ domain constants are the literal WorkTypes domains (0.789542ms)
+✔ hashes the exact EpochConfig tuple used by WorkTypes (4.071833ms)
+✔ order hash commits the ordered milestone list and committee (9.182625ms)
+✔ complete closeout proves source partition, recognition, payment and labels legacy consent (62.07025ms)
+✔ rejects conservation failures, duplicate identities and omitted leaves (58.502375ms)
+✔ incomplete prefixes and unpaid claims remain explicit (39.382833ms)
+✔ receipt status and missing exact logs invalidate payment evidence (39.472ms)
+✔ trusted manifest mismatch is invalid (19.250875ms)
+✔ empty and duplicate epoch sets cannot report a complete program (37.609875ms)
+✔ proof client binds and validates the requested chain and transaction (26.2075ms)
+✔ proof client uses the pinned endpoint and returns directly usable fields (2.125167ms)
+✔ receipt selection follows all five native ABI-v1 chunk layouts (27.395917ms)
+✔ receipt selection refuses failed, wrong-emitter, wrong-event and malformed source evidence (11.205ms)
+✔ native receipt helper decodes the captured public allocation and checkpoint at exact ordinals (31.491125ms)
+✔ Safe helper ABI remains a canonical subset of the pinned Safe 1.4.1 artifact (6.649792ms)
+✔ decodes pinned indexed Safe success and failure transaction hashes (2.3005ms)
+✔ rejects a packet whose domain is outside the trusted manifest (4.158375ms)
+✔ rejects stale native proof metadata using authoritative target calculation (7.603292ms)
+✔ rejects a portable authentication from another native profile (3.961708ms)
+✔ recognized claim with rejecting receiver reports owner-only redirection (6.73925ms)
+✔ execution persists pending hash before wait and replay skips completed actions (13.460583ms)
+✔ resumes a pending transaction without resubmitting (1.944167ms)
+✔ executor refuses an edited destination before sending (1.650375ms)
+✔ fixed cross-language vector covers canonical termsHash and orderId (45.034625ms)
+✔ parser refuses changes to commercial, observation, order and domain commitments (37.77025ms)
+✔ parser rejects extra fields, noncanonical decimals, malformed text and signature metadata (32.837667ms)
+✔ offline EOA verification matches SourceSignatureLib low-s and v rules (55.649459ms)
+✔ source-block signature verification distinguishes EOA and ERC-1271 (91.308166ms)
+✔ committed observations require exact historical state inside both finalized prefixes (20.896959ms)
+✔ fresh chain verification checks exact epoch, total reserve, nonce and deadlines separately (28.0385ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 635.010875

@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-10T12:53:55.697Z",
+  "purpose": "Every masked immutable slot resolved to a documented value read independently from chain state.",
+  "results": {
+    "source": {
+      "pinnedBlock": 11675052,
+      "contracts": {
+        "AllocationTree": {
+          "kind": "library",
+          "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+          "interpretation": "solc embeds a deployed library's own address as an immutable reference",
+          "distinctSlotValues": 1,
+          "slotValue": "000000000000000000000000f56c7e00dab6f3fad65e3a85aa6c8fde34e48f43",
+          "expectedSelfAddressWord": "000000000000000000000000f56c7e00dab6f3fad65e3a85aa6c8fde34e48f43",
+          "resolved": true
+        },
+        "SourceAccountingLib": {
+          "kind": "library",
+          "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+          "interpretation": "solc embeds a deployed library's own address as an immutable reference",
+          "distinctSlotValues": 1,
+          "slotValue": "0000000000000000000000003ac9b3eb94dba253bcc4284a981fb45d35386612",
+          "expectedSelfAddressWord": "0000000000000000000000003ac9b3eb94dba253bcc4284a981fb45d35386612",
+          "resolved": true
+        }
+      }
+    },
+    "target": {
+      "pinnedBlock": 5463592,
+      "contracts": {
+        "AllocationTree": {
+          "kind": "library",
+          "address": "0xfcD2F8240F9a727D532BEcc45c7f2d920843958f",
+          "interpretation": "solc embeds a deployed library's own address as an immutable reference",
+          "distinctSlotValues": 1,
+          "slotValue": "000000000000000000000000fcd2f8240f9a727d532becc45c7f2d920843958f",
+          "expectedSelfAddressWord": "000000000000000000000000fcd2f8240f9a727d532becc45c7f2d920843958f",
+          "resolved": true
+        },
+        "WorkTreasury": {
+          "kind": "contract",
+          "address": "0x06c76dFF132e64453cc0eD04a4464648db4322DA",
+          "readImmutables": {
+            "SOURCE_CHAIN_ID": "11155111",
+            "SOURCE_CHAIN_KEY": "1",
+            "SOURCE_COORDINATOR": "0xcf50a18ff9021f328cc89fb37b9a2c872bb70138",
+            "VERIFIER": "0x0000000000000000000000000000000000000fd2"
+          },
+          "expectedImmutables": {
+            "SOURCE_CHAIN_ID": "11155111",
+            "SOURCE_CHAIN_KEY": "1",
+            "SOURCE_COORDINATOR": "0xcf50a18ff9021f328cc89fb37b9a2c872bb70138",
+            "VERIFIER": "0x0000000000000000000000000000000000000fd2"
+          },
+          "immutablesMatchDeploymentManifest": true,
+          "slotMapping": [
+            {
+              "immutableId": "41014",
+              "slotValue": "0000000000000000000000000000000000000000000000000000000000000fd2",
+              "resolvesTo": "VERIFIER"
+            },
+            {
+              "immutableId": "41016",
+              "slotValue": "0000000000000000000000000000000000000000000000000000000000000001",
+              "resolvesTo": "SOURCE_CHAIN_KEY"
+            },
+            {
+              "immutableId": "41018",
+              "slotValue": "000000000000000000000000cf50a18ff9021f328cc89fb37b9a2c872bb70138",
+              "resolvesTo": "SOURCE_COORDINATOR"
+            },
+            {
+              "immutableId": "46597",
+              "slotValue": "0000000000000000000000000000000000000000000000000000000000aa36a7",
+              "resolvesTo": "SOURCE_CHAIN_ID"
+            }
+          ],
+          "everySlotResolved": true
+        }
+      }
+    }
+  }
+}

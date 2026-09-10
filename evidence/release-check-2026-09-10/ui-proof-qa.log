@@ -1,0 +1,9 @@
+file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-proof-qa.mjs:41
+function check(name, condition, detail) { checks.push({ name, passed: Boolean(condition), detail }); if (!condition) throw new Error(`${name}: ${detail}`); }
+                                                                                                                           ^
+
+Error: Validated proof material downloaded: proofkey-native-proof-33642ef4.json
+    at check (file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-proof-qa.mjs:41:124)
+    at file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-proof-qa.mjs:73:1
+
+Node.js v24.20.0

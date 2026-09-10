@@ -1,5 +1,11 @@
 # Work Treasury implementation status
 
+**Latest participant iteration:** buyer-prepared offers, continuing saved work, fresh follow-up jobs and selected payment history are implemented locally. [Participant progress](PARTICIPANT-PRODUCT-PROGRESS.md) and [release notes](PARTICIPANT-PRODUCT-RELEASE.md) describe acceptance and current limitations. No new financial contract, public settlement, deployment or customer adoption is asserted by this iteration.
+
+**Latest local app workflow release:** payment provenance, replacement settlement and fresh program closeout are complete. [Release notes](APP-WORKFLOW-RELEASE.md) record 47 contract, 49 SDK, 21 checker, 12 consent-browser and 16 workflow-browser checks, with financial source unchanged. This build remains unpublished.
+
+**Current product upgrade:** implemented and verified locally on 10 September. [Release notes](PRODUCT-UPGRADE-RELEASE.md) describe the funding/capacity-bound authorization, separate participant sessions, replacement settlement and generic closeout. Its current totals are 47 contract results, 38 SDK tests and 21 checker tests. The hosted app and public CI references below are historical baseline observations; this upgrade has not been published.
+
 Implementation began on 9 September 2026 from the final architecture lock. This is a separate repository; frozen V1 code and Review #41 remain unchanged.
 
 Model allocation: GPT-5.6 Sol at high reasoning handles the bounded source, target and application implementation tasks. GPT-6 Astra coordinates the shared commitments and reviews financial/security boundaries. This records the actual coding workflow, not a claim that a ChatGPT UI setting was changed.

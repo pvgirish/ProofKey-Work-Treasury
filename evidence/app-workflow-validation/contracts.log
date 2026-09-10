@@ -1,0 +1,158 @@
+
+> proofkey-work-treasury@1.0.0 test:contracts
+> bash scripts/forge.sh test -vv
+
+No files changed, compilation skipped
+
+Ran 1 test for test/IdentityConformance.t.sol:IdentityConformanceTest
+[PASS] testSdkEncodedEpochAndOrderedMilestonesMatchSolidity() (gas: 72814)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 11.72ms (4.76ms CPU time)
+
+Ran 1 test for test/WorkAuthorizationConformance.t.sol:WorkAuthorizationConformanceTest
+[PASS] testPortableAuthorizationMatchesSolidityAndFrozenQuoteDomain() (gas: 132154)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 12.51ms (5.26ms CPU time)
+
+Ran 2 tests for test/EndToEnd.t.sol:EndToEndTest
+[PASS] test_actualSourceWorkFeeReceiptNeedsNoSiblings_andReceiptToRootReplayFails() (gas: 4783857)
+[PASS] test_locked120Journey_realSourceSafeRotation_cachedRootAndCrossRouteReplay() (gas: 9753831)
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 32.27ms (20.32ms CPU time)
+
+Ran 2 tests for test/SourceAccountingInvariant.t.sol:SourceCapacityReuseFuzzTest
+[PASS] testFuzz_declineExpiryAndNoDeliveryRestoreCapacityForNewReservations(uint96,uint96,uint96,uint96) (runs: 256, μ: 6594466, ~: 6606534)
+Logs:
+  Bound result 15837868766939056741
+  Bound result 7742
+  Bound result 2253
+  Bound result 2094
+
+[PASS] testFuzz_returnDoesNotBecomeReusableCapacityInTheSameEpoch(uint96,uint96) (runs: 256, μ: 4625985, ~: 4629050)
+Logs:
+  Bound result 2796553362960047229
+  Bound result 18654185229
+
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 120.02ms (203.06ms CPU time)
+
+Ran 4 tests for test/AdversarialIntegration.t.sol:AdversarialIntegrationTest
+[PASS] test_exactDeadlinesSelectOnlyTheSpecifiedTerminalTransition() (gas: 4673298)
+[PASS] test_sourceAmountCannotBeSubstitutedInCheckpointOrAuthenticatedReceipt() (gas: 4876859)
+[PASS] test_zeroAmountFinalityCreatesNoLeaf_thenReturnedCapacityIsRecognizable() (gas: 2678623)
+[PASS] test_zeroSignerAndStaleMutualAuthorizationsAreRejected() (gas: 2118513)
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 201.22ms (9.81ms CPU time)
+
+Ran 14 tests for test/SourceCoordinator.t.sol:SourceCoordinatorTest
+[PASS] testActiveReturnDrainSweepAndNoEmptyLeaf() (gas: 1422961)
+[PASS] testAdmissionCutoffAllowsPermissionlessDrainAndRepublishDoesNotMutate() (gas: 892748)
+[PASS] testAllocationEventRoundTripAndAtomicWorkFeeCheckpoint() (gas: 1811657)
+[PASS] testApprovalCalldataBindsExactCurrentDeliveryAndVersion() (gas: 1478125)
+[PASS] testApprovalNoDeliveryAndMonitoringDefaultAtExactBoundaries() (gas: 3315502)
+[PASS] testCommitteeTimeoutAndMutualDefaultFirstWriterWins() (gas: 3810507)
+[PASS] testCommitteeVotesDoNotPoolAcrossProposalsAndDuplicateFails() (gas: 2194957)
+[PASS] testDeliveryRevisionMakesOldMutualSignaturesStale() (gas: 1603112)
+[PASS] testEIP1271BuyerAndWorkerMutualAuthorization() (gas: 2355486)
+[PASS] testInitializationAndUninitializedExpiryAreExclusive() (gas: 962051)
+[PASS] testPendingOfferAcceptDeclineExpiryAndReservationCapPersistence() (gas: 1947116)
+[PASS] testQuoteSignatureReplayAndRevocationIncluding1271() (gas: 1664325)
+[PASS] testReachable113LeafTraceAndIndependentRootRebuild() (gas: 381183036)
+[PASS] testWorkerRevokesPendingOfferAndReleasesReservation() (gas: 775329)
+Suite result: ok. 14 passed; 0 failed; 0 skipped; finished in 201.24ms (198.32ms CPU time)
+
+Ran 4 tests for test/Performance.t.sol:PerformanceTest
+[PASS] test_sourceLargestOrderAndAllocationGas() (gas: 21438330)
+Logs:
+  PERF source.createOffer.32_milestones.local_evm 3525407
+  PERF source.acceptOffer.32_milestones.local_evm 224996
+  PERF source.approve.allocation_index_0.first_plus_checkpoint 610239
+  PERF source.approve.allocation_index_1.carry_plus_checkpoint 436318
+  PERF source.approve.allocation_index_31.late_plus_checkpoint 419832
+  PERF source.approve.maximum_32_run.local_evm 610239
+  PERF source.approve.maximum_tree_index 0
+  SIZE SourceCoordinator.runtime_bytes 21789
+  SIZE WorkTreasury.runtime_bytes 20019
+
+[PASS] test_sourceLateCarryBoundaryWorkFeeGas() (gas: 21602802)
+Logs:
+  PERF source.committee_work_fee.indices_31_32_plus_checkpoint 691956
+
+[PASS] test_sourceMarginalCanonicalEventGas() (gas: 336619)
+Logs:
+  PERF source.event.allocation_canonical.memory_payload 4496
+  PERF source.event.checkpoint_canonical.memory_payload 2491
+
+[PASS] test_targetCheckpointAndReceiptClaimGas_localNativeStubExcluded() (gas: 85765379)
+Logs:
+  PERF target.checkpoint.recognize_1.local_evm 535538
+  PERF target.receipt.recognize_1.cached.local_evm 530349
+  PERF target.checkpoint.recognize_4.local_evm 2068060
+  PERF target.receipt.recognize_4.cached.local_evm 2141850
+  PERF target.checkpoint.recognize_16.local_evm 8199047
+  PERF target.receipt.recognize_16.cached.local_evm 10029783
+  PERF target.checkpoint.recognize_32.local_evm 16379971
+  PERF target.receipt.recognize_32.cached.local_evm 24260991
+
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 342.67ms (69.33ms CPU time)
+
+Ran 5 tests for test/AllocationTree.t.sol:AllocationTreeTest
+[PASS] testFuzz_treeRejectsProofWrongLength(uint8) (runs: 256, μ: 44684, ~: 33306)
+[PASS] test_codecRejectsTruncationExtraDataAndDirtyStaticPadding() (gas: 54973)
+[PASS] test_failedAppendAndInitializationCannotChangeTree() (gas: 787690)
+[PASS] test_frozenGoldenEventsDecodeToExactHashesAndOrderedProofs() (gas: 2207839)
+[PASS] test_productionTreeAll128AppendsMatchIndependentFullRebuild() (gas: 854518026)
+Suite result: ok. 5 passed; 0 failed; 0 skipped; finished in 342.65ms (447.47ms CPU time)
+
+Ran 13 tests for test/WorkTreasuryTarget.t.sol:WorkTreasuryTargetTest
+[PASS] test_batchAndSegmentedAuthenticate_thenCachedClaimsNeedNoVerifier() (gas: 2088796)
+[PASS] test_cachedReceiptChecksExactBytesEmitterOrdinalAndSupportsTwoEpochs() (gas: 2218364)
+[PASS] test_checkpointThenReceiptReplayFails_andBadCombinedClaimRollsBackNewCache() (gas: 1893552)
+[PASS] test_consumerRejectsPendingFeeReturnAndWrongBuyerOrderAssetPolicy() (gas: 2678294)
+[PASS] test_firstSuccessfulWithdrawalWinsBothOrderings_andConsumerRecordsActualDestination() (gas: 2639110)
+[PASS] test_fundingUsesOwnDepositAndFree_andSuccessorUsesReturnedFree() (gas: 1416010)
+[PASS] test_nativeBatchVerifierFalseFailsClosedWithoutAuthentication() (gas: 66929)
+[PASS] test_nativeVerifierFalseRejectsForgedMatchingReceiptAndLeavesNoState() (gas: 526341)
+[PASS] test_nativeVerifierRevertRollsBackEarlierSegmentedAuthentication() (gas: 168790)
+[PASS] test_oldCheckpointImportedLaterDoesNotRewindLatest() (gas: 1116185)
+[PASS] test_rejectingFixedDestinationLeavesClaim_thenOwnerRedirects() (gas: 1421060)
+[PASS] test_returnBeforeUnseenWorkPreservesBothAndCrossRouteReplayFails() (gas: 1876969)
+[PASS] test_unauthorizedClaimRedirectAndRejectingFreeWithdrawalPreserveBalances() (gas: 3485706)
+Suite result: ok. 13 passed; 0 failed; 0 skipped; finished in 342.71ms (8.83ms CPU time)
+
+Ran 1 test for test/SourceAccountingInvariant.t.sol:SourceAccountingInvariantTest
+[PASS]
+SourceAccountingInvariantTest invariants:
+[PASS] invariant_closedEpochHasNoReusableCapacityOrCommitment
+[PASS] invariant_irreversibleTotalsEqualCanonicalAllocations
+[PASS] invariant_reservationPartitionAndCapacityRemainBounded
+[PASS] invariant_sourceAccountingMatchesIndependentGhostModel
+ SourceAccountingInvariantTest invariants (runs: 128, calls: 8192, reverts: 0)
+
+╭------------------------+--------------------+-------+---------+----------╮
+| Contract               | Selector           | Calls | Reverts | Discards |
++==========================================================================+
+| SourceLifecycleHandler | accept             | 869   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | decline            | 812   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | deliverAndApprove  | 818   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | expire             | 817   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | finalizeNoDelivery | 822   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | mutuallySettle     | 816   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | releaseFree        | 811   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | reservePending     | 815   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | startDraining      | 794   | 0       | 0        |
+|------------------------+--------------------+-------+---------+----------|
+| SourceLifecycleHandler | sweepAvailable     | 818   | 0       | 0        |
+╰------------------------+--------------------+-------+---------+----------╯
+
+Logs:
+  Bound result 191
+  Bound result 64882082
+  Bound result 2773445838966435352
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 1.89s (1.88s CPU time)
+
+Ran 10 test suites in 1.90s (3.50s CPU time): 47 tests passed, 0 failed, 0 skipped (47 total tests)

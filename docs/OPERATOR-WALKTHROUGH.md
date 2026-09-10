@@ -6,6 +6,8 @@ Use the [public operator app](https://pvgirish.github.io/ProofKey-Work-Treasury/
 
 For a terminal-based audit without a wallet or compilation, run `npm ci --ignore-scripts` and `npm run judge:verify`. The [verification guide](JUDGE-VERIFY.md) defines exactly what a pass means.
 
+The local build adds **Payments → Check payment**, **Payments → Continue verified payments**, and **Budget → Verify program**. Follow the [app workflow guide](APP-WORKFLOWS.md) for payment provenance, durable replacement settlement and locator-only closeout reimport. These additions are separate from the historical hosted checks linked below.
+
 ## 1. Verify the public setup
 
 A fresh browser automatically verifies the public setup and reads the built-in epoch from both chains without a wallet. Open **Networks** to inspect the pinned defaults and verification result. A saved workspace makes no automatic network request and is preserved; choose **Use public demo defaults** only if you want to replace it explicitly. The defaults are:
@@ -29,7 +31,7 @@ A fresh browser automatically verifies the public setup and reads the built-in e
 
 The supplied **PaidInvoiceBook** is pinned to the main demonstration's buyer, order, asset and policy. Its completed claim 1 record can be inspected in **Payments**. For a different order, configure a separately deployed book with the intended expectations or leave the optional field empty.
 
-To repeat verification, select **Verify without saving**. A successful check confirms both RPC chain IDs, contract code, and the target treasury's immutable source chain ID, source key and coordinator. Target values are read together at one target block. The app prefers an RPC's `finalized` block tag; if an RPC does not expose it, the result explicitly says that it used a confirmation-depth fallback and that finality is not asserted. Do not relabel that fallback as finalized.
+To repeat verification, select **Verify without saving**. A successful check confirms both RPC chain IDs, contract code, and the target treasury's immutable source chain ID, source key and coordinator. The upgraded build additionally requires the source and target runtime hashes to match its trusted release registry before write preparation is unlocked. An imported unknown deployment remains inspection-only. Target values are read together at one target block. The app prefers an RPC's `finalized` block tag; if an RPC does not expose it, the result explicitly says that it used a confirmation-depth fallback and that finality is not asserted. Do not relabel that fallback as finalized.
 
 This check is read only. It does not request an account, sign, or broadcast. Inspection may use the labeled confirmation fallback; guided worker quote signing and delivery preparation require an actual finalized target block and fail closed if it is unavailable.
 
@@ -125,6 +127,8 @@ Source Safe actions appear under **Work orders**. Read the current order and mil
 
 The downloadable file is the default Safe route. The operator app does not bundle the Safe Apps SDK and does not install a module or guard. **Send with injected wallet** is usable only when an injected Safe-compatible wallet is already present and its active account is the configured Safe. Worker, committee and permissionless source actions still require the actor shown by the app and contract.
 
+For a new worker quote in the upgraded build, first follow [portable work authorization](WORK-AUTHORIZATION.md). The worker reviews and signs a packet whose terms hash commits to commercial terms and finalized funding/capacity observations. A separate buyer browser imports the signed JSON, independently checks it and prepares the exact acceptance file. Creating the packet, inspecting an import and preparing a Safe file do not request a wallet. Signing and sending are separate explicit actions. Current upgrade/build status is recorded in [product upgrade progress](PRODUCT-UPGRADE-PROGRESS.md); historical hosted QA reports describe their recorded baseline bundles.
+
 ## 8. Resume a wallet workspace safely
 
 The browser stores public RPC URLs, addresses, the last epoch, exact epoch drafts and work-order drafts in local storage. It does not store private keys or seed phrases.
@@ -136,7 +140,7 @@ On return in the same browser profile:
 3. Read the selected order/milestone or payment claim again before preparing a transaction.
 4. Connect the wallet only for the final action, check the wallet chain and active account, then review what it will sign.
 
-Restored device state is a convenience, not chain evidence. **Clear saved setup** removes the saved workspace. Old drafts retain their canonical base-unit amounts; the guided UI also displays their CTC conversion. Do not silently reinterpret or rewrite an old signed draft.
+Restored device state is a convenience, not chain evidence. The upgraded build requires verification again in the current session. Changing inputs, RPC/domain settings or the active wallet invalidates prepared actions and stale asynchronous results. **Clear saved setup** removes the saved workspace. Old drafts retain their canonical base-unit amounts and remain inspectable/exportable; create a new consent-bound packet before signing new work. Existing on-chain orders are not rewritten.
 
 ## 9. Evidence and independent-run checklist
 
@@ -157,7 +161,7 @@ No independent participant settlement is recorded at the time of this walkthroug
 ## Known limits
 
 - This is a public testnet operator app. The displayed public actors and Safe are team controlled.
-- There is no reverse proof of Creditcoin funding on Ethereum. Binding worker consent depends on the app's separate exact finalized-target funding check.
+- There is no reverse proof of Creditcoin funding on Ethereum. New portable consent commits to funding/capacity observations that each participant checks independently; it does not make those observations source-enforced guarantees.
 - Proof unavailability can delay an uncached claim indefinitely. The target has no unilateral timeout refund for a source allocation it has not seen.
 - The public UI imports complete claim packages, not standalone raw proof files.
 - Source policy deadlines are block heights. Network congestion and RPC lag can affect when the app observes them.

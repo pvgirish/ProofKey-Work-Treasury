@@ -1,0 +1,10 @@
+[ui-finality-qa] loading public read-only state
+file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-finality-qa.mjs:32
+async function waitFor(expression, timeoutMs = 90_000) { const started = Date.now(); while (Date.now() - started < timeoutMs) { if (await evaluate(`Boolean(${expression})`)) return; await new Promise(resolve => setTimeout(resolve, 150)); } throw new Error(`Timed out waiting for ${expression}`); }
+                                                                                                                                                                                                                                                      ^
+
+Error: Timed out waiting for document.readyState === 'complete' && document.querySelector('#settings-result')?.classList.contains('success') && document.querySelector('#target-main')?.textContent === 'Exact epoch funded'
+    at waitFor (file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-finality-qa.mjs:32:247)
+    at async file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-finality-qa.mjs:44:1
+
+Node.js v24.20.0

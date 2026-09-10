@@ -44,6 +44,9 @@ Keep private keys, seed phrases, personal contact details and unapproved names o
 
 ## Run an actual settlement in the app
 
+For the local participant and app-workflow upgrades, use the [app workflow guide](APP-WORKFLOWS.md); the hosted app may still be the earlier published build. In the upgraded browser, **Payments → Continue verified payments** prepares a fresh plan from imported claim files, and **Budget → Verify program** reconstructs and exports the final closeout.
+
+
 1. Open the [public wallet app](https://pvgirish.github.io/ProofKey-Work-Treasury/), or build and serve it locally with `npm run build`, `npm run ui:build` and `npm run ui:serve`.
 2. In **Networks**, compare the public defaults with `deployments/ui-testnet.json`, or enter the verified Sepolia SourceCoordinator, participant's Ethereum Safe and Creditcoin WorkTreasury addresses. Confirm source chain key `1`, Sepolia chain ID `11155111` and Creditcoin testnet chain ID `102031`, then select **Save and verify**.
 3. In **Networks → Create a fresh budget epoch**, create a new exact configuration. Have the named sponsor use **Fund on Creditcoin** to fund its full cap. Wait for the app to confirm that exact epoch from a finalized target block.

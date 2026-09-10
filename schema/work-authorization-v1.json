@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://proofkey.dev/schema/work-authorization-v1.json",
+  "title": "ProofKey Work Treasury Work Authorization V1",
+  "description": "Portable worker authorization. The termsHash commits the complete authorization object; imported packages carry no trusted verification verdict.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "createdAt", "authorization", "termsHash", "orderId", "orderTerms"],
+  "dependentRequired": {
+    "workerSignature": ["signatureValidation"],
+    "signatureValidation": ["workerSignature"]
+  },
+  "properties": {
+    "version": { "const": "proofkey.work-treasury.work-authorization.v1" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "authorization": { "$ref": "#/$defs/authorization" },
+    "termsHash": { "$ref": "#/$defs/bytes32" },
+    "orderId": { "$ref": "#/$defs/bytes32" },
+    "orderTerms": { "$ref": "#/$defs/orderTerms" },
+    "workerSignature": { "$ref": "#/$defs/hexBytes" },
+    "signatureValidation": { "$ref": "#/$defs/signatureValidation" }
+  },
+  "$defs": {
+    "decimal": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "positiveDecimal": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+    "address": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" },
+    "bytes32": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "hexBytes": { "type": "string", "pattern": "^0x(?:[0-9a-fA-F]{2})+$" },
+    "reviewText": { "type": "string", "minLength": 1, "maxLength": 16384 },
+    "commercialTerms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "acceptanceCriteria", "revisionTerms", "deliveryRequirements", "deliveryCommitmentFormat"],
+      "properties": {
+        "scope": { "$ref": "#/$defs/reviewText" },
+        "acceptanceCriteria": { "$ref": "#/$defs/reviewText" },
+        "revisionTerms": { "$ref": "#/$defs/reviewText" },
+        "deliveryRequirements": { "$ref": "#/$defs/reviewText" },
+        "deliveryCommitmentFormat": {
+          "allOf": [
+            { "$ref": "#/$defs/reviewText" },
+            { "description": "Describes the later delivery commitment format. V1 does not commit an unknown future delivery hash." }
+          ]
+        }
+      }
+    },
+    "epochConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceChainId", "sourceChainKey", "sourceCoordinator", "sourceVersion", "targetChainId", "targetTreasury", "schemaVersion", "sourceSafe", "sponsor", "refundBeneficiary", "asset", "cap", "policyHash", "initializationCutoff", "admissionCutoff", "maxMilestones", "maxActiveReturns", "maxDrainingReturns", "treeDepth", "nonce"],
+      "properties": {
+        "sourceChainId": { "$ref": "#/$defs/positiveDecimal" },
+        "sourceChainKey": { "$ref": "#/$defs/positiveDecimal" },
+        "sourceCoordinator": { "$ref": "#/$defs/address" },
+        "sourceVersion": { "$ref": "#/$defs/bytes32" },
+        "targetChainId": { "$ref": "#/$defs/positiveDecimal" },
+        "targetTreasury": { "$ref": "#/$defs/address" },
+        "schemaVersion": { "$ref": "#/$defs/bytes32" },
+        "sourceSafe": { "$ref": "#/$defs/address" },
+        "sponsor": { "$ref": "#/$defs/address" },
+        "refundBeneficiary": { "$ref": "#/$defs/address" },
+        "asset": { "$ref": "#/$defs/address" },
+        "cap": { "$ref": "#/$defs/positiveDecimal" },
+        "policyHash": { "$ref": "#/$defs/bytes32" },
+        "initializationCutoff": { "$ref": "#/$defs/positiveDecimal" },
+        "admissionCutoff": { "$ref": "#/$defs/positiveDecimal" },
+        "maxMilestones": { "const": 32 },
+        "maxActiveReturns": { "const": 16 },
+        "maxDrainingReturns": { "const": 33 },
+        "treeDepth": { "const": 7 },
+        "nonce": { "$ref": "#/$defs/decimal" }
+      }
+    },
+    "milestone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work", "fee", "timeoutWork", "deliverBefore", "reviewBefore", "ruleBefore"],
+      "properties": {
+        "work": { "$ref": "#/$defs/positiveDecimal" },
+        "fee": { "$ref": "#/$defs/decimal" },
+        "timeoutWork": { "$ref": "#/$defs/decimal" },
+        "deliverBefore": { "$ref": "#/$defs/positiveDecimal" },
+        "reviewBefore": { "$ref": "#/$defs/positiveDecimal" },
+        "ruleBefore": { "$ref": "#/$defs/positiveDecimal" }
+      }
+    },
+    "orderPreimage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["worker", "claimOwner", "destination", "feeOwner", "feeDestination", "committee", "acceptBefore", "nonce", "milestones"],
+      "properties": {
+        "worker": { "$ref": "#/$defs/address" },
+        "claimOwner": { "$ref": "#/$defs/address" },
+        "destination": { "$ref": "#/$defs/address" },
+        "feeOwner": { "$ref": "#/$defs/address" },
+        "feeDestination": { "$ref": "#/$defs/address" },
+        "committee": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/address" } },
+        "acceptBefore": { "$ref": "#/$defs/positiveDecimal" },
+        "nonce": { "$ref": "#/$defs/decimal" },
+        "milestones": { "type": "array", "minItems": 1, "maxItems": 32, "items": { "$ref": "#/$defs/milestone" } }
+      }
+    },
+    "targetFunding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetChainId", "targetTreasury", "blockNumber", "blockHash", "finalityBasis", "epochId", "cap", "reserve", "requiredMaximum"],
+      "properties": {
+        "targetChainId": { "$ref": "#/$defs/positiveDecimal" },
+        "targetTreasury": { "$ref": "#/$defs/address" },
+        "blockNumber": { "$ref": "#/$defs/decimal" },
+        "blockHash": { "$ref": "#/$defs/bytes32" },
+        "finalityBasis": { "const": "rpc-finalized-tag" },
+        "epochId": { "$ref": "#/$defs/bytes32" },
+        "cap": { "$ref": "#/$defs/positiveDecimal" },
+        "reserve": { "$ref": "#/$defs/decimal" },
+        "requiredMaximum": { "$ref": "#/$defs/positiveDecimal" }
+      }
+    },
+    "sourceCapacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceChainId", "sourceCoordinator", "blockNumber", "blockHash", "finalityBasis", "epochId", "phase", "available", "reservations", "remainingMilestoneAdmissions", "requiredMaximum"],
+      "properties": {
+        "sourceChainId": { "$ref": "#/$defs/positiveDecimal" },
+        "sourceCoordinator": { "$ref": "#/$defs/address" },
+        "blockNumber": { "$ref": "#/$defs/decimal" },
+        "blockHash": { "$ref": "#/$defs/bytes32" },
+        "finalityBasis": { "const": "rpc-finalized-tag" },
+        "epochId": { "$ref": "#/$defs/bytes32" },
+        "phase": { "const": 1 },
+        "available": { "$ref": "#/$defs/decimal" },
+        "reservations": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "remainingMilestoneAdmissions": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "requiredMaximum": { "$ref": "#/$defs/positiveDecimal" }
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commercialTerms", "epochConfig", "order", "targetFunding", "sourceCapacity"],
+      "properties": {
+        "commercialTerms": { "$ref": "#/$defs/commercialTerms" },
+        "epochConfig": { "$ref": "#/$defs/epochConfig" },
+        "order": { "$ref": "#/$defs/orderPreimage" },
+        "targetFunding": { "$ref": "#/$defs/targetFunding" },
+        "sourceCapacity": { "$ref": "#/$defs/sourceCapacity" }
+      }
+    },
+    "orderTerms": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["epochId", "termsHash", "worker", "claimOwner", "destination", "feeOwner", "feeDestination", "committee", "acceptBefore", "nonce", "milestones"],
+      "properties": {
+        "epochId": { "$ref": "#/$defs/bytes32" },
+        "termsHash": { "$ref": "#/$defs/bytes32" },
+        "worker": { "$ref": "#/$defs/address" },
+        "claimOwner": { "$ref": "#/$defs/address" },
+        "destination": { "$ref": "#/$defs/address" },
+        "feeOwner": { "$ref": "#/$defs/address" },
+        "feeDestination": { "$ref": "#/$defs/address" },
+        "committee": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/address" } },
+        "acceptBefore": { "$ref": "#/$defs/positiveDecimal" },
+        "nonce": { "$ref": "#/$defs/decimal" },
+        "milestones": { "type": "array", "minItems": 1, "maxItems": 32, "items": { "$ref": "#/$defs/milestone" } }
+      }
+    },
+    "signatureValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceChainId", "sourceCoordinator", "blockNumber", "blockHash"],
+      "properties": {
+        "sourceChainId": { "$ref": "#/$defs/positiveDecimal" },
+        "sourceCoordinator": { "$ref": "#/$defs/address" },
+        "blockNumber": { "$ref": "#/$defs/decimal" },
+        "blockHash": { "$ref": "#/$defs/bytes32" }
+      }
+    }
+  }
+}

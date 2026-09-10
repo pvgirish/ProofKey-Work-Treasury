@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "name": "Completed public configuration loaded",
+      "passed": true,
+      "detail": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7"
+    },
+    {
+      "name": "PaidInvoiceBook default loaded",
+      "passed": true,
+      "detail": "0xb93d065d7995884ceb8dad26d09B3a1efD9787cf"
+    },
+    {
+      "name": "No injected wallet",
+      "passed": true,
+      "detail": "window.ethereum is absent in the isolated profile"
+    },
+    {
+      "name": "Configured domains verify",
+      "passed": true,
+      "detail": "Fresh browser: checking the built-in public demo.\nVerified source chain 11155111 and target chain 102031. WorkTreasury's immutable source domain matches at target finalized block 5463638; source code was present at finalized block 11675043. Runtime hashes match Published ProofKey public testnet V1; write preparation is unlocked for this session.\nNo wallet account, signature or transaction was requested."
+    },
+    {
+      "name": "One finalized target block has zero reserve and 120 recognized",
+      "passed": true,
+      "detail": "block 5463638; reserve 0; recognized 120000000000000000000"
+    },
+    {
+      "name": "Worker A claim 1 is paid",
+      "passed": true,
+      "detail": "30000000000000000000; 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    },
+    {
+      "name": "Worker B claim 3 is paid",
+      "passed": true,
+      "detail": "25000000000000000000; 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    },
+    {
+      "name": "Completed WORK invoice is recorded",
+      "passed": true,
+      "detail": "30000000000000000000; 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    },
+    {
+      "name": "Completed target totals render in Budget",
+      "passed": true,
+      "detail": "Exact epoch funded; Epoch account, configuration and source-domain immutables read together at target finalized block 5463638.; Reserve0.0 CTCRecognized120.0 CTCFundedYes"
+    },
+    {
+      "name": "Source lag cannot authorize a guessed action",
+      "passed": true,
+      "detail": "Closed; Read at source finalized block 11675043. Root 0x3281216…ae713d4.; Collect remaining claims; The source is closed. Old earned allocations remain collectible on Creditcoin."
+    },
+    {
+      "name": "Payment UI renders paid worker A",
+      "passed": true,
+      "detail": "Claim 1\nAmount 30.0 CTC\nClaim owner 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nFixed destination 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nWithdrawn Yes · paid to 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nInvoice recorded · 30.0 CTC"
+    },
+    {
+      "name": "Payment UI renders paid worker B",
+      "passed": true,
+      "detail": "Claim 3\nAmount 25.0 CTC\nClaim owner 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nFixed destination 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nWithdrawn Yes · paid to 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nInvoice not recorded"
+    },
+    {
+      "name": "Claim 1 file imports and validates",
+      "passed": true,
+      "detail": "Application package is internally consistent.\nRoute checkpoint\nAllocation 1 · tree index 0\nAmount 30.0 CTC\nLeaf 0x487250c4f3016cdc10cae1e8f11cde2a3daedd3a23d248e2b3319f5ac2bef281\nRequires the cached checkpoint reference and these seven siblings.\n\nThis check does not claim native authenticity or payment."
+    },
+    {
+      "name": "Imported package prepares no broadcast",
+      "passed": true,
+      "detail": "Prepare is available, but was not selected"
+    },
+    {
+      "name": "QA remained read only",
+      "passed": true,
+      "detail": "No account request, signing, or broadcast RPC method was observed"
+    },
+    {
+      "name": "No browser runtime or critical request errors",
+      "passed": true,
+      "detail": "none"
+    }
+  ],
+  "finalized": {
+    "blockNumber": 5463638,
+    "blockHash": "0x1fead7700625173ffe3f7bee7f9c4642bfe1091e43dd2af7eb308488fe7080e1",
+    "account": {
+      "reserve": "0",
+      "recognized": "120000000000000000000",
+      "funded": true
+    },
+    "claim1": {
+      "amount": "30000000000000000000",
+      "withdrawn": true,
+      "paidDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    },
+    "complete1": {
+      "amount": "30000000000000000000",
+      "withdrawn": true,
+      "paidDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    },
+    "claim3": {
+      "amount": "25000000000000000000",
+      "withdrawn": true,
+      "paidDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    },
+    "complete3": {
+      "amount": "25000000000000000000",
+      "withdrawn": true,
+      "paidDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    },
+    "invoice1": {
+      "amount": "30000000000000000000",
+      "recorded": true,
+      "paidDestination": "0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B"
+    }
+  },
+  "targetMain": "Exact epoch funded",
+  "targetDetail": "Epoch account, configuration and source-domain immutables read together at target finalized block 5463638.",
+  "sourceMain": "Closed",
+  "sourceDetail": "Read at source finalized block 11675043. Root 0x3281216…ae713d4.",
+  "payment1": "Claim 1\nAmount 30.0 CTC\nClaim owner 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nFixed destination 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nWithdrawn Yes · paid to 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nInvoice recorded · 30.0 CTC",
+  "payment3": "Claim 3\nAmount 25.0 CTC\nClaim owner 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nFixed destination 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nWithdrawn Yes · paid to 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\nInvoice not recorded",
+  "imported": "Application package is internally consistent.\nRoute checkpoint\nAllocation 1 · tree index 0\nAmount 30.0 CTC\nLeaf 0x487250c4f3016cdc10cae1e8f11cde2a3daedd3a23d248e2b3319f5ac2bef281\nRequires the cached checkpoint reference and these seven siblings.\n\nThis check does not claim native authenticity or payment.",
+  "observedRpcCalls": 71,
+  "browserErrors": [],
+  "failedRequests": [],
+  "nonCriticalResponses": []
+}

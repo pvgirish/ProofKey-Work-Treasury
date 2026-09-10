@@ -1,0 +1,9 @@
+file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-qa.mjs:44
+  throw new Error(`Timed out waiting for ${expression}`);
+        ^
+
+Error: Timed out waiting for document.querySelector('#epoch-result').textContent.includes('Exact epoch ID')
+    at waitFor (file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-qa.mjs:44:9)
+    at async file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-qa.mjs:103:1
+
+Node.js v24.20.0

@@ -1,0 +1,7 @@
+# Opening-state manifest captured 2026-09-10 (this session)
+HEAD da0495d6475aa8d0ed533f47f369a6e0085f9a83
+branch main
+opening_total_entries 64
+opening_modified_entries 18
+opening_untracked_entries 46
+note: no evidence/ui-* path appeared in the opening modified list

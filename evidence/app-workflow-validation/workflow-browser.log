@@ -1,0 +1,90 @@
+{
+  "checks": [
+    {
+      "name": "Browser build exposes shared collector, planner, executor, Safe runtime proof, and complete deployment pins",
+      "passed": true,
+      "detail": "{\"collector\":\"function\",\"planner\":\"function\",\"executor\":\"function\",\"safe\":\"function\",\"profile\":{\"id\":\"proofkey-public-testnet-v1\",\"label\":\"Published ProofKey public testnet V1\",\"source\":{\"chainId\":\"11155111\",\"chainKey\":\"1\",\"coordinator\":\"0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138\",\"deployedCodeHash\":\"0xa2b1bb0c4fa144c8791dd3e689726d27bb479c0314641320c557ae1cd8f63bef\",\"deploymentBlock\":\"11669663\",\"explorerUrl\":\"https://sepolia.etherscan.io\"},\"target\":{\"chainId\":\"102031\",\"treasury\":\"0x06c76dFF132e64453cc0eD04a4464648db4322DA\",\"deployedCodeHash\":\"0x79e706996c4c2bc24742b90a1d29a22a39afddcf30e1f408a31b7237c52b5689\",\"deploymentBlock\":\"5459164\",\"explorerUrl\":\"https://creditcoin-testnet.blockscout.com\"}}}"
+    },
+    {
+      "name": "Browser renders separately collected public finalized evidence for one exact payment",
+      "passed": true,
+      "detail": "{\"status\":\"complete\",\"accountingStatus\":\"complete\",\"row\":{\"allocationId\":\"1\",\"kind\":1,\"amount\":\"30000000000000000000\",\"status\":\"paid\",\"legacyConsent\":true,\"policyOutcome\":{\"type\":\"milestone\",\"label\":\"approved\",\"outcomeCode\":4,\"approval\":true},\"source\":{\"errors\":[],\"transactionHash\":\"0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5\",\"blockNumber\":\"11669711\",\"transactionIndex\":\"57\",\"executionKind\":\"safe-call\",\"safeCall\":{\"verified\":true,\"safe\":\"0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0\",\"coordinator\":\"0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138\",\"value\":\"0\",\"innerData\":\"0x50f1dcab0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d00000000000000000000000000000000000000000000000000000000000000004d52ed9f36f06883c1c1ec71cc6f4a0a2df5a7477608a9cce6b7e986a313f5a80000000000000000000000000000000000000000000000000000000000000002\",\"innerDataHash\":\"0x212000f52fbcde004de57743a284ac69b556d817516106a644f78505d37994cf\",\"nonce\":\"9\",\"safeTxHash\":\"0xa8f2ab7437b6b3578339fa77e5d4acf07769474d71df863252a38eeeb9f2bfee\",\"runtimeVerified\":false,\"runtimeAssumption\":\"Safe-format calldata and terminal event verified; canonical proxy, singleton and threshold policy require a separate historical runtime/state check.\"},\"safeRuntime\":{\"verified\":true,\"version\":\"safe-1.4.1\",\"chainId\":\"11155111\",\"safe\":\"0x6Ed0f13C6f502F2a0790D2653B67791F3B5dBDE0\",\"blockNumber\":11669711,\"blockHash\":\"0x775354e6590195c32b193df0a303b6c47cd5eb41718b2bee34f95e2faf55a978\",\"proxyRuntimeHash\":\"0xd7d408ebcd99b2b70be43e20253d6d92a8ea8fab29bd3be7f55b10032331fb4c\",\"singleton\":\"0x41675C099F32341bf84BFc5382aF534df5C7461a\",\"singletonRuntimeHash\":\"0x1fe2df852ba3299d6534ef416eefa406e56ced995bca886ab7a553e6d0c5e1c4\",\"semantics\":\"historical-end-of-block-rpc-observation\",\"consensusProof\":false,\"intraBlockExecutionTrace\":false,\"currentOwnersVerified\":false},\"function\":\"approve\"},\"nativeAuthentication\":{\"authenticationId\":\"0x960c29637be2ac9bdd776be3ebe0e795104b9efb18e40176457e97155b8a5188\",\"blockHeight\":\"11669825\",\"transactionIndex\":\"80\",\"transactionHash\":\"0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae\",\"classification\":\"cached\",\"errors\":[]},\"recognition\":{\"transactionHash\":\"0xe1403b1729049454dc9174050f20205f06c9d97cb471958f4bca58cccfaf9aae\",\"economicId\":\"0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\",\"amount\":\"30000000000000000000\",\"successful\":true,\"errors\":[]},\"withdrawal\":{\"transactionHash\":\"0x132f0ae39c2252f6b7ad13773ef191aedeafabee6d5e55e17b5b1491720a16f3\",\"destination\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"successful\":true,\"errors\":[]},\"errors\":[]},\"text\":\"Program collection: complete · accounting complete\\npaid · 30.0 CTC\\nPolicy outcome: approved · approval\\nSource: safe-call · approve · Safe safe-1.4.1 runtime checked at source block 11669711\\nNative authentication: cached · source block 11669825\\nRecognition: 30.0 CTC · economic ID 0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\\nWithdrawal: successful · 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\\nLegacy order: no independently collected consent-bound authorization.\",\"links\":[\"https://sepolia.etherscan.io/tx/0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5\",\"https://creditcoin-testnet.blockscout.com/tx/0x688bbeb7a148c9eb7e5eed5c665cdc0d008f95bc14d49968e7e952b741e679ae\",\"https://creditcoin-testnet.blockscout.com/tx/0xe1403b1729049454dc9174050f20205f06c9d97cb471958f4bca58cccfaf9aae\",\"https://creditcoin-testnet.blockscout.com/tx/0x132f0ae39c2252f6b7ad13773ef191aedeafabee6d5e55e17b5b1491720a16f3\"]}"
+    },
+    {
+      "name": "Public program view states scoped totals, legacy consent, and owner-level RETURN limitation",
+      "passed": true,
+      "detail": "Complete paid program closeout\nFinalized source 11673796 · target 5462619\nCap 120.0 CTC · earned 55.0 CTC · returned 65.0 CTC\nRecognized 120.0 CTC · paid 55.0 CTC · outstanding 0.0 CTC\nConservation passes · complete source prefix yes\nConsent-bound orders 0 · legacy orders 2\nThis proves recorded treasury transfers, not work quality, recipient independence, adoption, or later beneficial control.\nSafe CALL provenance includes a historical canonical Safe 1.4.1 proxy and singleton runtime check; it does not prove current owners or participant independence.\nTotals cover this selected epoch and are not global treasury in/out accounting.\nRETURN recognition is epoch-specific; any later withdrawal comes from the refund owner's fungible freeBalance and cannot be attributed to one epoch.\n"
+    },
+    {
+      "name": "Imported closeout verdict fields reduce to locators and unsupported verdict fields fail",
+      "passed": true,
+      "detail": "{\"original\":\"complete\",\"epochId\":\"0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7\",\"hasStatus\":false,\"extra\":\"closeout export contains unsupported field verdict\"}"
+    },
+    {
+      "name": "Missing source RPC remains an explicit collection error",
+      "passed": true,
+      "detail": "{\"error\":\"Complete the Ethereum source setup first\",\"current\":false}"
+    },
+    {
+      "name": "A→B→A closeout input changes discard the stale async result without a green status",
+      "passed": true,
+      "detail": "{\"error\":\"Closeout epoch, workspace or inputs changed during collection; the stale result was discarded\",\"current\":false,\"kind\":\"result empty\",\"text\":\"Fresh report cleared: epoch or allocation input changed. Imported data remains a locator only.\"}"
+    },
+    {
+      "name": "Changing lifecycle inputs clears old green evidence and public links",
+      "passed": true,
+      "detail": "{\"kind\":\"result empty\",\"text\":\"Payment evidence cleared: epoch or allocation input changed. Check the payment again for fresh evidence.\",\"links\":0}"
+    },
+    {
+      "name": "A paid row cannot turn green when full-program accounting is incomplete",
+      "passed": true,
+      "detail": "{\"kind\":\"result error\",\"text\":\"Program collection: incomplete · accounting incomplete\\npaid · 30.0 CTC\\nPolicy outcome: approved · approval\\nSource: safe-call · approve · Safe safe-1.4.1 runtime checked at source block 11669711\\nNative authentication: cached · source block 11669825\\nRecognition: 30.0 CTC · economic ID 0x64ec2c4dd81b427df01417aa4c31d66d60d400123f4bc536e97b2c1964b50751\\nWithdrawal: successful · 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\\nLegacy order: no independently collected consent-bound authorization.\\ncompletedClaim readback mismatch\"}"
+    },
+    {
+      "name": "RETURN rows state that work-order consent does not apply",
+      "passed": true,
+      "detail": "Program collection: complete · accounting complete\nreturned-credit · 50.0 CTC\nPolicy outcome: authorized-free-return\nSource: safe-call · releaseFree · Safe safe-1.4.1 runtime checked at source block 11669713\nNative authentication: cached · source block 11669713\nRecognition: 50.0 CTC · economic ID 0xac6ad6702307b56f9650653802b7e63e446cdda6589a7af55e285bb62b9590d7\nWithdrawal: RETURN becomes owner-level fungible free balance; no epoch-specific withdrawal is claimed\nReturn allocation; work-order consent does not apply."
+    },
+    {
+      "name": "Changed payment-claim financial content fails shared structural proof validation",
+      "passed": true,
+      "detail": "Payment claim 1: allocation does not belong to the supplied ordered checkpoint"
+    },
+    {
+      "name": "Live public payment claim builds a fresh keyless trusted plan without a wallet",
+      "passed": true,
+      "detail": "{\"planId\":\"0xe571c906244886e5cacd1c4c67753676944209a57e19554649470681dbcc88bd\",\"actions\":0,\"complete\":1,\"text\":\"Fresh plan 0xe571c906244886e5cacd1c4c67753676944209a57e19554649470681dbcc88bd\\nFinalized source 11673918 · target 5462727\\n0 exact action(s) · 1 already complete · 0 owner issue(s)\\nExecution digest 0x36a98e7296821994ac8a935087b104baab34765022ac0e2fe04a52102249deb8\\nNo key or wallet was requested.\",\"preview\":\"\",\"destination\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\"}"
+    },
+    {
+      "name": "A repeated click is locked and the raw wallet hash persists under the original plan before waiting through wallet ABA",
+      "passed": true,
+      "detail": "{\"planId\":\"0x4c02e0e9083a4b7472ae8621d03a1aa890b57018f87c3ea577295dda936b3f7a\",\"sendCount\":1,\"request\":{\"from\":\"0x6666666666666666666666666666666666666666\",\"to\":\"0x06c76dFF132e64453cc0eD04a4464648db4322DA\",\"data\":\"0xb19ef09a6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c70000000000000000000000000000000000000000000000000000000000000001\",\"value\":\"0x0\",\"chainId\":\"0x18e8f\"},\"pending\":{\"version\":\"proofkey.work-treasury.settlement-journal.v1\",\"planId\":\"0x4c02e0e9083a4b7472ae8621d03a1aa890b57018f87c3ea577295dda936b3f7a\",\"entries\":{\"withdraw:0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7:1\":{\"state\":\"pending\",\"transactionHash\":\"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}},\"complete\":{\"version\":\"proofkey.work-treasury.settlement-journal.v1\",\"planId\":\"0x4c02e0e9083a4b7472ae8621d03a1aa890b57018f87c3ea577295dda936b3f7a\",\"entries\":{\"withdraw:0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7:1\":{\"state\":\"complete\",\"transactionHash\":\"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"blockNumber\":\"77\"}}},\"error\":\"\",\"secondError\":\"A settlement action is already in progress. Wait for its wallet result before continuing.\",\"preview\":\"Withdrawwithdraw:0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7:1Exact zero-value call to 0x06c76dFF132e64453cc0eD04a4464648db4322DA · fixed allocation 1 · committed destination 0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B30.0 CTC\",\"destination\":\"0x323ae3c8e87E7813480Fc2c37F1e4d45fbc7e54B\",\"result\":\"The current view changed after wallet interaction. Any known transaction hash remains stored under original plan 0x4c02e0e9083a4b7472ae8621d03a1aa890b57018f87c3ea577295dda936b3f7a; build a fresh plan before another action.\",\"journal\":\"Durable journal for 0x4c02e0e9083a4b7472ae8621d03a1aa890b57018f87c3ea577295dda936b3f7a\\nwithdraw:0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7:1\\ncomplete · 0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa · block 77\"}"
+    },
+    {
+      "name": "A receipt RPC on the wrong raw chain fails before any wallet submission",
+      "passed": true,
+      "detail": "{\"error\":\"Target receipt RPC chain ID differs from the trusted settlement plan\",\"walletSends\":0,\"busy\":false}"
+    },
+    {
+      "name": "Unknown pending transaction never resends and an explicit later receipt resumes to completion",
+      "passed": true,
+      "detail": "{\"sendCount\":0,\"stillPending\":\"pending\",\"completed\":\"complete\",\"verifyCount\":1}"
+    },
+    {
+      "name": "Workflow QA made no real wallet, signing, or broadcast request",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No browser runtime exception escaped",
+      "passed": true,
+      "detail": "none"
+    }
+  ],
+  "observedRpcCalls": 69,
+  "fixtureDisclosure": "Live public read-only setup and settlement planning; separately collected public finalized lifecycle/closeout fixture; synthetic collector deferral, missing/wrong RPC, and wallet journal adapters; no broadcast."
+}
+
+STDERR
+workflow QA: rendering a separately collected public finalized report
+workflow QA: building one live public keyless payment plan

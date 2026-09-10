@@ -1,0 +1,18 @@
+
+> proofkey-work-treasury@1.0.0 test:participant
+> node --test ui/*.test.ts
+
+✔ fresh profile reviews a canonical unsigned offer without a wallet and refuses stale or wrong domains (138.360125ms)
+✔ signing rechecks the offer, requests exact QuoteV1 typed data and rejects stale wallet return (186.307125ms)
+✔ My work store reparses packets, replaces unsigned with signed and rejects imported verdicts (63.181375ms)
+✔ My work binds the complete accepted order and preserves historical acceptance after wallet-policy change (93.182292ms)
+✔ signed-work import pins historical runtimes and does not apply current signature policy to accepted work (227.62975ms)
+✔ My work exposes exact worker, buyer, committee, finalization and payment stages (180.118625ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1077.526542

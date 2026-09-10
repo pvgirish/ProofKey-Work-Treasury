@@ -1,0 +1,31 @@
+{
+  "outputPath": "/Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/evidence/closeout-refresh-2026-09-10/public-main120-refresh.json",
+  "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+  "status": "complete",
+  "accountingStatus": "complete",
+  "label": "Complete program closeout",
+  "epoch": {
+    "epochId": "0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7",
+    "cap": "120000000000000000000",
+    "available": "0",
+    "unresolved": "0",
+    "earned": "55000000000000000000",
+    "returned": "65000000000000000000",
+    "recognized": "120000000000000000000",
+    "reserve": "0",
+    "paid": "55000000000000000000",
+    "outstanding": "0",
+    "conservation": true,
+    "prefixComplete": true
+  },
+  "errors": [],
+  "incomplete": [],
+  "consent": {
+    "boundOrders": 0,
+    "legacyOrders": [
+      "0x0ff633b16b35da3fba8a0f8a1d4eea42efc4dd464b547d570fcb4db85879ec4d",
+      "0x24adf815e4e6ad485d79895088d71af4488209e2c387c77e6976023997c8fb8f"
+    ]
+  },
+  "returnAccounting": "RETURN recognition is epoch-specific; any later withdrawal comes from the refund owner's fungible freeBalance and cannot be attributed to one epoch."
+}

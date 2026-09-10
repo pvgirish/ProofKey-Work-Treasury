@@ -1,0 +1,61 @@
+
+> proofkey-work-treasury@1.0.0 test:sdk
+> node --test sdk/*.test.ts
+
+✔ matches every frozen AllocationV1 encoding, event and hash (63.966416ms)
+✔ rebuilds the frozen ordered tree and all seven-level witnesses (89.15525ms)
+✔ rejects reordered leaves, changed amounts and noncanonical events (12.481458ms)
+✔ decodes the frozen checkpoint event (0.67125ms)
+✔ validates a portable checkpoint package and detects a modified witness (13.711833ms)
+✔ receipt package contains a directly usable SingleProof and exact transaction bytes (1.838792ms)
+✔ runs the independent reconstruction through all 128 leaves (58.135833ms)
+✔ released SDK preserves the committed Solidity-conformance vectors (25.860625ms)
+✔ domain constants are the literal WorkTypes domains (0.843584ms)
+✔ hashes the exact EpochConfig tuple used by WorkTypes (66.516375ms)
+✔ order hash commits the ordered milestone list and committee (21.328834ms)
+✔ complete closeout proves source partition, recognition, payment and labels legacy consent (62.979125ms)
+✔ rejects conservation failures, duplicate identities and omitted leaves (67.473083ms)
+✔ incomplete prefixes and unpaid claims remain explicit (42.873334ms)
+✔ receipt status and missing exact logs invalidate payment evidence (39.500416ms)
+✔ trusted manifest mismatch is invalid (20.69ms)
+✔ empty and duplicate epoch sets cannot report a complete program (40.842625ms)
+✔ locator parser accepts raw or collected exports and discards report verdict fields (16.406875ms)
+✔ locator parser preserves domain tampering for comparison with a trusted deployment (0.45425ms)
+✔ native route classification depends only on recorded authentication and recognition transaction identities (0.200791ms)
+✔ collected export serialization is JSON safe (0.131ms)
+✔ native authentication requires the exact treasury and 0xFD2 verifier events (4.632417ms)
+✔ withdrawal requires successful canonical calldata and the exact treasury event (9.879542ms)
+✔ authenticated checkpoint is bound to the coordinator emitter and exact identity (11.814208ms)
+✔ snapshot changes and provenance errors cannot produce a complete collected verdict (0.263292ms)
+✔ proof client binds and validates the requested chain and transaction (11.066ms)
+✔ proof client uses the pinned endpoint and returns directly usable fields (1.155875ms)
+✔ receipt selection follows all five native ABI-v1 chunk layouts (54.655208ms)
+✔ receipt selection refuses failed, wrong-emitter, wrong-event and malformed source evidence (18.592917ms)
+✔ native receipt helper decodes the captured public allocation and checkpoint at exact ordinals (22.571917ms)
+✔ Safe helper ABI remains a canonical subset of the pinned Safe 1.4.1 artifact (10.114375ms)
+✔ decodes pinned indexed Safe success and failure transaction hashes (10.440875ms)
+✔ browser Safe runtime pins match attributed 1.4.1 artifacts and bound historical reads (20.506292ms)
+✔ Safe-shaped custom contracts and changed implementations cannot earn a canonical runtime result (1.011291ms)
+✔ Safe runtime check refuses chain, finality and historical hash changes (2.804875ms)
+✔ rejects a packet whose domain is outside the trusted manifest (2.937666ms)
+✔ rejects stale native proof metadata using authoritative target calculation (12.201708ms)
+✔ rejects a portable authentication from another native profile (13.593833ms)
+✔ recognized claim with rejecting receiver reports owner-only redirection (13.360125ms)
+✔ execution persists pending hash before wait and replay skips completed actions (18.845834ms)
+✔ resumes a pending transaction without resubmitting (1.998333ms)
+✔ executor refuses an edited destination before sending (1.675875ms)
+✔ fixed cross-language vector covers canonical termsHash and orderId (48.803833ms)
+✔ parser refuses changes to commercial, observation, order and domain commitments (43.552709ms)
+✔ parser rejects extra fields, noncanonical decimals, malformed text and signature metadata (37.657167ms)
+✔ offline EOA verification matches SourceSignatureLib low-s and v rules (56.854916ms)
+✔ source-block signature verification distinguishes EOA and ERC-1271 (97.764875ms)
+✔ committed observations require exact historical state inside both finalized prefixes (20.570709ms)
+✔ fresh chain verification checks exact epoch, total reserve, nonce and deadlines separately (28.765375ms)
+ℹ tests 49
+ℹ suites 0
+ℹ pass 49
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 783.835875

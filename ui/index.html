@@ -15,11 +15,13 @@
         <span><b>ProofKey</b><small>Work Treasury</small></span>
       </a>
       <nav>
-        <button class="nav-item active" data-view="overview"><span>01</span>Budget</button>
-        <button class="nav-item" data-view="orders"><span>02</span>Work orders</button>
-        <button class="nav-item" data-view="evidence"><span>03</span>Evidence</button>
-        <button class="nav-item" data-view="payments"><span>04</span>Payments</button>
-        <button class="nav-item" data-view="settings"><span>05</span>Networks</button>
+        <button class="nav-item active" data-view="overview"><span>01</span>Program</button>
+        <button class="nav-item" data-view="orders"><span>02</span>Invite worker</button>
+        <button class="nav-item" data-view="my-work"><span>03</span>My work</button>
+        <button class="nav-item" data-view="paid-work"><span>04</span>Paid work</button>
+        <button class="nav-item" data-view="evidence"><span>05</span>Evidence</button>
+        <button class="nav-item" data-view="payments"><span>06</span>Payments</button>
+        <button class="nav-item" data-view="settings"><span>07</span>Networks</button>
       </nav>
       <div class="rail-note">
         <span class="signal neutral" id="rail-signal"></span>
@@ -32,7 +34,7 @@
       <header class="topbar">
         <button class="menu" id="menu-button" aria-label="Open navigation" aria-expanded="false">Menu</button>
         <div>
-          <p class="eyebrow">Operator workspace</p>
+          <p class="eyebrow">Participant workspace</p>
           <p class="context" id="network-context">Read-only until a wallet is connected</p>
         </div>
         <button class="button compact" id="connect-wallet"><span class="wallet-dot"></span><span>Connect wallet</span></button>
@@ -41,28 +43,23 @@
       <main>
         <section class="view active" id="view-overview" aria-labelledby="overview-title">
           <div class="page-head">
-            <div><p class="kicker">Budget epoch</p><h1 id="overview-title">One funded budget, paid by verified outcomes.</h1></div>
+            <div><p class="kicker">Work program</p><h1 id="overview-title">See what the budget can do next.</h1></div>
             <span class="environment-tag" id="environment-tag">Configuration required</span>
           </div>
           <div class="notice" id="startup-status" role="alert" hidden><b>Public demo could not be verified.</b> <span id="startup-status-detail"></span> <button class="text-link" data-go="settings">Review network setup →</button></div>
 
-          <div class="journey card">
-            <div class="card-head"><div><p class="kicker">120-unit planning walkthrough</p><h2>Capacity returns before delayed work is collected</h2></div><span class="honesty">Illustration · no chain activity</span></div>
-            <div class="budget-track" aria-label="Example final allocation: worker A 30, worker B 25, returned 65">
-              <span style="--size:25" class="seg worker-a">30 <small>Worker A</small></span>
-              <span style="--size:41.667" class="seg returned">50 <small>Released</small></span>
-              <span style="--size:20.833" class="seg worker-b">25 <small>Worker B</small></span>
-              <span style="--size:12.5" class="seg restored">15 <small>Reused → released</small></span>
+          <div class="journey card program-board">
+            <div class="card-head"><div><p class="kicker">Buyer budget board</p><h2 id="program-board-title">Select an epoch to reconcile its capacity</h2></div><span class="honesty" id="program-phase">Fresh chain read required</span></div>
+            <div class="budget-track" id="program-budget-track" aria-label="Program capacity categories">
+              <span style="--size:25" class="seg available"><strong id="program-available">—</strong><small>Available · A</small></span>
+              <span style="--size:25" class="seg unresolved"><strong id="program-unresolved">—</strong><small>Reserved · U</small></span>
+              <span style="--size:25" class="seg earned"><strong id="program-earned">—</strong><small>Earned · E</small></span>
+              <span style="--size:25" class="seg returned"><strong id="program-returned">—</strong><small>Returned · R</small></span>
             </div>
-            <ol class="journey-steps">
-              <li><b>Reserve</b><span>A 30 · B 40</span></li>
-              <li><b>Earn</b><span>A finalizes 30</span></li>
-              <li><b>Release</b><span>50 returns first</span></li>
-              <li><b>Settle</b><span>B earns 25</span></li>
-              <li><b>Reuse</b><span>15 funds C</span></li>
-              <li><b>Expire</b><span>C returns 15</span></li>
-              <li><b>Collect</b><span>55 work · 65 return</span></li>
-            </ol>
+            <div class="program-legend"><p><b>Available</b><span>Can fund useful follow-up work while the source remains active.</span></p><p><b>Reserved</b><span>Promised to unresolved jobs; it is not available or paid.</span></p><p><b>Earned</b><span>Final work and fee allocations; payment still needs recognition and withdrawal.</span></p><p><b>Returned</b><span>Capacity retired from this epoch. Native-verified target recognition later credits the refund owner's free balance.</span></p></div>
+            <div class="program-paid-row"><span>Successfully withdrawn WORK/FEE in the latest full program check</span><strong id="program-paid">Not collected</strong></div>
+            <div class="actions program-actions"><button class="button primary" data-go="orders" id="create-followup">Create follow-up work</button><button class="button" data-go="payments">Continue a payment</button><button class="button ghost" data-go="paid-work">Build a paid-work record</button></div>
+            <p class="help" id="program-next-action">Refresh the selected epoch to see its next useful action. New work is refused after the program starts draining or closes.</p>
           </div>
 
           <div class="section-title"><div><p class="kicker">Live readback</p><h2>What each chain can prove now</h2></div><button class="button ghost" id="refresh-readback">Refresh both chains</button></div>
@@ -75,16 +72,50 @@
             <label><span>Epoch ID</span><input id="active-epoch" spellcheck="false" placeholder="0x… 32-byte epoch ID"></label>
             <button class="button primary" id="load-epoch">Load epoch</button>
           </div>
+          <article class="card closeout-card">
+            <div class="card-head"><div><p class="kicker">Program closeout</p><h2>Check this program</h2></div><span class="step-chip">Read-only · exportable</span></div>
+            <p class="help">Choose an epoch directly or import a prior report only as a locator. Fresh finalized reads rebuild the result; an imported verdict is never trusted.</p>
+            <div class="form-grid three">
+              <label><span>Epoch ID</span><input id="closeout-epoch" placeholder="0x…"></label>
+              <label class="file-button">Import report locator<input type="file" id="closeout-file" accept="application/json"></label>
+              <label class="file-button">Add signed authorizations<input type="file" id="closeout-authorizations" accept="application/json" multiple></label>
+              <div class="wide actions"><button class="button primary" id="collect-closeout" disabled>Verify program</button><button class="button ghost" id="export-closeout" disabled>Export fresh report</button></div>
+            </div>
+            <div class="result empty" id="closeout-result">No report collected. Program totals are scoped to selected epochs and must not be equated with global deposits.</div>
+            <div class="lifecycle-list" id="closeout-allocations"></div>
+          </article>
+          <details class="card pilot-notes">
+            <summary><b>Record an optional pilot observation</b><span>Local notes · no identity or user-count inference</span></summary>
+            <form id="pilot-form" class="form-grid">
+              <label><span>Organization alias, optional</span><input name="organizationAlias" placeholder="Buyer A"></label><label><span>Participant alias, optional</span><input name="participantAlias" placeholder="Worker A"></label>
+              <label><span>Order ID</span><input name="orderId" placeholder="0x…"></label><label><span>Who controlled the wallet?</span><input name="walletControl" placeholder="Participant, buyer Safe, facilitator…"></label>
+              <label><span>Assistance needed</span><textarea name="assistance" rows="3" placeholder="Setup, source gas, proof waiting, recovery…"></textarea></label><label><span>Fees observed</span><textarea name="fees" rows="3" placeholder="Record actual fees and network"></textarea></label>
+              <label class="wide"><span>Would the buyer choose another useful job, and why?</span><textarea name="repeatDecision" rows="3"></textarea></label><label class="wide"><span>Other observation</span><textarea name="notes" rows="3"></textarea></label>
+              <div class="wide actions"><button class="button" type="submit">Save observation file</button></div>
+            </form>
+            <p class="help">Aliases are optional labels. One wallet is not automatically one person, and a test address is not evidence of adoption.</p>
+          </details>
         </section>
 
         <section class="view" id="view-orders" aria-labelledby="orders-title">
-          <div class="page-head"><div><p class="kicker">Source operations</p><h1 id="orders-title">Draft, consent and resolve work.</h1></div><span class="environment-tag">Ethereum · Safe authority</span></div>
-          <div class="notice"><b>Drafts have no authority.</b> They reserve no money or admission slot. A worker signature creates a binding quote only after this app reads exact target funding again.</div>
+          <div class="page-head"><div><p class="kicker">Invite a worker</p><h1 id="orders-title">Prepare the work, then hand over one file.</h1></div><span class="environment-tag">Buyer prepares · worker consents</span></div>
+          <div class="notice"><b>An offer file has no authority by itself.</b> It reserves no money or admission slot. The worker sees the full terms before a wallet request, signs explicitly, and returns the signed file to the buyer.</div>
+          <article class="card followup-card">
+            <div class="card-head"><div><p class="kicker">Repeat program</p><h2>Use finished work as an editable starting point</h2></div><span class="step-chip">Fresh terms and consent</span></div>
+            <p class="help">This copies the useful wording and addresses into the form below. It clears every signature and requires a fresh unused nonce and later block deadlines. Only an active program before its admission cutoff can accept follow-up work.</p>
+            <div class="actions"><label class="file-button">Choose previous work file<input type="file" id="followup-template-file" accept="application/json"></label><button class="button" id="use-followup-template" disabled>Start fresh follow-up</button></div>
+            <div class="result empty" id="followup-result">No previous work selected. Closed, draining, pending or unfinished work cannot be reopened as a new job.</div>
+          </article>
           <div class="two-col">
             <article class="card">
-              <div class="card-head"><div><p class="kicker">Draft quote</p><h2>One milestone</h2></div><span class="step-chip">Off-chain</span></div>
+              <div class="card-head"><div><p class="kicker">Buyer-prepared offer</p><h2>One clear milestone</h2></div><span class="step-chip">File handoff first</span></div>
               <form id="draft-form" class="form-grid">
-                <label class="wide"><span>Scope or terms</span><textarea name="scope" rows="3" required placeholder="Exact work, acceptance criteria and referenced terms"></textarea></label>
+                <label class="wide"><span>Buyer or program label</span><input name="buyerLabel" placeholder="A display label only; this does not verify an identity"></label>
+                <label class="wide"><span>Scope</span><textarea name="scope" rows="3" required placeholder="Exact work included in this authorization"></textarea></label>
+                <label class="wide"><span>Acceptance criteria</span><textarea name="acceptanceCriteria" rows="2" required placeholder="What the buyer will check before approval"></textarea></label>
+                <label class="wide"><span>Revision terms</span><textarea name="revisionTerms" rows="2" required placeholder="How revisions are requested and reviewed"></textarea></label>
+                <label class="wide"><span>Delivery requirements</span><textarea name="deliveryRequirements" rows="2" required placeholder="Required files, records, tests or handoff material"></textarea></label>
+                <label class="wide"><span>Delivery commitment format</span><textarea name="deliveryCommitmentFormat" required rows="3">A later delivery uses keccak256 of the canonical delivery artifact bytes; no future delivery hash is committed here.</textarea></label>
                 <label class="wide"><span>Epoch ID</span><input name="epochId" required placeholder="0x…"></label>
                 <label><span>Worker</span><input name="worker" required placeholder="0x…"></label>
                 <label><span>Claim owner</span><input name="claimOwner" required placeholder="0x…"></label>
@@ -103,9 +134,15 @@
                 <label><span>Committee member 2</span><input name="committee1" required placeholder="0x…"></label>
                 <label><span>Committee member 3</span><input name="committee2" required placeholder="0x…"></label>
                 <label class="wide check"><input type="checkbox" name="destinationAck"><span>The fixed destination may be paid by anyone before an owner redirection. I checked its current usability and understand successful payment can be irreversible.</span></label>
-                <div class="wide actions"><button class="button primary" type="submit">Create nonbinding draft</button><button class="button" type="button" id="sign-quote" disabled>Check funding & sign quote</button><button class="button" type="button" id="prepare-quote" hidden>Prepare Safe acceptance</button><button class="button ghost" type="button" id="export-draft" disabled>Export</button></div>
+                <div class="wide actions"><button class="button primary" type="submit">Create offer file</button><button class="button" type="button" id="sign-quote" disabled>Review & sign as worker</button><button class="button" type="button" id="prepare-quote" hidden>Prepare buyer acceptance</button><button class="button ghost" type="button" id="export-draft" disabled>Save offer file</button><label class="file-button">Open offer file<input type="file" id="authorization-file" accept="application/json"></label></div>
               </form>
               <div class="result empty" id="draft-result">No draft created on this device.</div>
+              <div class="offer-review" id="offer-review" hidden>
+                <div class="review-heading"><div><p class="kicker">Review before wallet</p><h3 id="offer-review-title">Offer details</h3></div><span class="step-chip" id="offer-review-state">Unsigned</span></div>
+                <dl class="review-grid" id="offer-review-grid"></dl>
+                <label class="check"><input type="checkbox" id="offer-worker-destination-ack"><span>I am the named worker. I checked the claim owner and fixed destination, understand anyone may pay that destination, and understand only the claim owner may redirect before a successful payment.</span></label>
+                <p class="help">The program label is supplied by the buyer and does not prove a legal identity. Changing the worker, destination, scope, amount or dates requires a new offer and fresh consent.</p>
+              </div>
             </article>
             <article class="card policy-card">
               <div class="card-head"><div><p class="kicker">WorkPolicyV1</p><h2>Who acts next</h2></div><span class="step-chip">Fixed policy</span></div>
@@ -131,10 +168,68 @@
           </article>
           <article class="card action-builder">
             <div class="card-head"><div><p class="kicker">Safe transaction</p><h2>Prepare a source action</h2></div><span class="actor-chip" id="source-actor">Choose an action</span></div>
-            <div class="action-row"><label><span>Contract action</span><select id="source-function"></select></label><label class="grow"><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="source-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-source">Prepare</button></div>
+            <div class="action-row"><label><span>Contract action</span><select id="source-function"></select></label><label class="grow"><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="source-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-source" disabled>Prepare</button></div>
             <p class="help" id="source-help">Only write functions from the compiled SourceCoordinator ABI appear here.</p>
-            <div class="prepared" id="source-prepared" hidden><code id="source-calldata"></code><div class="actions"><button class="button" id="download-safe">Download Safe Transaction Builder JSON</button><button class="button primary" id="execute-source">Send with injected wallet</button></div><p class="help">The downloadable Transaction Builder JSON is the default Safe route. Direct sending requires an injected Safe-compatible wallet whose active account is the configured Safe; this app does not bundle the Safe Apps SDK.</p></div>
+            <div class="prepared" id="source-prepared" hidden><code id="source-calldata"></code><div class="actions"><button class="button" id="download-safe" disabled>Download Safe Transaction Builder JSON</button><button class="button primary" id="execute-source" disabled>Send with injected wallet</button></div><p class="help">The downloadable Transaction Builder JSON is the default Safe route. Direct sending requires an injected Safe-compatible wallet whose active account is the configured Safe; this app does not bundle the Safe Apps SDK.</p></div>
           </article>
+        </section>
+
+        <section class="view" id="view-my-work" aria-labelledby="my-work-title">
+          <div class="page-head"><div><p class="kicker">Worker journey</p><h1 id="my-work-title">My work, from offer to payment.</h1></div><span class="environment-tag">One job · exact next actor</span></div>
+          <div class="notice"><b>Opening a file or checking status never sends a transaction.</b> Source actions need source-chain gas. A fixed-destination target withdrawal may be sent by another account, but payment is complete only after a successful withdrawal receipt.</div>
+          <div class="two-col participant-layout">
+            <article class="card">
+              <div class="card-head"><div><p class="kicker">Open an offer or saved job</p><h2>Review the exact agreement</h2></div><label class="file-button">Open work file<input type="file" id="my-work-file" accept="application/json"></label></div>
+              <div class="form-grid saved-work-picker"><label><span>Saved work on this device</span><select id="my-work-saved"><option value="">No saved work</option></select></label><label><span>Milestone</span><select id="my-work-milestone" disabled><option value="0">Milestone 1</option></select></label></div>
+              <div class="result empty" id="my-work-result">Open an offer file. Its terms, domain and funding are independently checked before any wallet request.</div>
+              <div class="participant-journal" id="my-work-journal"><p class="help">No saved source submissions for this work.</p></div>
+              <dl class="review-grid" id="my-work-summary"></dl>
+              <label class="check" id="my-work-destination-ack-wrap" hidden><input type="checkbox" id="my-work-destination-ack"><span>I am the named worker. I checked the claim owner and fixed destination, understand anyone may pay that destination, and understand only the claim owner may redirect before a successful payment.</span></label>
+              <div class="actions" id="my-work-primary-actions">
+                <button class="button primary" id="my-work-sign" disabled>Review & sign offer</button>
+                <button class="button" id="my-work-refresh" disabled>Check live job</button>
+                <button class="button ghost" id="my-work-save" disabled>Save current work file</button>
+              </div>
+            </article>
+            <article class="card next-step-card">
+              <div class="card-head"><div><p class="kicker">Next useful step</p><h2 id="my-work-stage">Open a work file</h2></div><span class="actor-chip" id="my-work-actor">No actor yet</span></div>
+              <p id="my-work-guidance">The app will name who acts next and why.</p>
+              <label id="my-work-delivery-wrap" hidden><span>Delivery content, location or handoff description</span><textarea id="my-work-delivery" rows="4" placeholder="The app commits a hash of these exact bytes"></textarea></label>
+              <div class="actions"><button class="button primary" id="my-work-continue" disabled>Prepare next step</button><button class="button primary" id="my-work-send" disabled hidden>Review & send from worker wallet</button><button class="button" id="my-work-track-payment" disabled>Track payment</button></div>
+              <p class="help" id="my-work-gas">No wallet will open until you click an enabled action.</p>
+            </article>
+          </div>
+          <article class="card work-explainer">
+            <div class="card-head"><div><p class="kicker">What payment progress means</p><h2>Five separate checks</h2></div></div>
+            <ol class="progress-explainer"><li><b>Outcome final</b><span>The source records the work result.</span></li><li><b>Proof ready</b><span>Exact source evidence is available.</span></li><li><b>Native authentication</b><span>Creditcoin authenticates the source fact.</span></li><li><b>Recognized</b><span>The treasury creates the fixed claim.</span></li><li><b>Paid</b><span>A successful withdrawal reaches the recorded destination.</span></li></ol>
+          </article>
+        </section>
+
+        <section class="view" id="view-paid-work" aria-labelledby="paid-work-title">
+          <div class="page-head"><div><p class="kicker">Selected payment history</p><h1 id="paid-work-title">Build a verified record of paid work.</h1></div><span class="environment-tag">Fresh reconstruction · optional sharing</span></div>
+          <div class="notice"><b>This is a selected payment record.</b> It does not establish identity, work quality, income, independence, repayment history or creditworthiness. Public names and testimonials require separate permission.</div>
+          <div class="two-col participant-layout">
+            <article class="card">
+              <div class="card-head"><div><p class="kicker">Choose the record</p><h2>Subject and program</h2></div><label class="file-button">Open record locator<input type="file" id="paid-work-locator-file" accept="application/json"></label></div>
+              <form id="paid-work-form" class="form-grid">
+                <label class="wide"><span>Subject address</span><input name="subject" id="paid-work-subject" required placeholder="0x…"></label>
+                <label><span>Role in the selected payments</span><select name="role" id="paid-work-role"><option value="source-worker">Source worker</option><option value="claim-owner">Claim owner</option><option value="paid-destination">Paid destination</option></select></label>
+                <label><span>Epoch IDs, one per line</span><textarea name="epochs" id="paid-work-epochs" rows="4" required placeholder="0x…"></textarea></label>
+                <label class="wide file-button">Add signed work authorizations<input type="file" id="paid-work-authorizations" accept="application/json" multiple></label>
+                <div class="wide actions"><button class="button primary" type="submit" id="collect-paid-work" disabled>Rebuild from fresh receipts</button><button class="button ghost" type="button" id="export-paid-work" disabled>Save verified record</button></div>
+              </form>
+              <div class="result empty" id="paid-work-result">Imported totals and verdicts are ignored. The selected epochs will be collected again from the pinned deployment.</div>
+              <div class="actions"><button class="button" type="button" id="paid-work-fix-rpc" hidden>Choose an archive-capable source RPC</button></div>
+              <details class="advanced" id="paid-work-technical" hidden><summary>Technical details</summary><pre id="paid-work-technical-detail"></pre></details>
+            </article>
+            <article class="card receipt-totals">
+              <div class="card-head"><div><p class="kicker">Verified totals</p><h2>Paid means withdrawn</h2></div><span class="step-chip" id="paid-work-scope">No selection</span></div>
+              <div class="total-row work"><span>WORK paid</span><strong id="paid-work-total-work">—</strong></div>
+              <div class="total-row fee"><span>FEE paid</span><strong id="paid-work-total-fee">—</strong></div>
+              <div class="total-row return"><span>RETURN</span><strong>Excluded from pay</strong></div>
+              <div class="lifecycle-list" id="paid-work-records"></div>
+            </article>
+          </div>
         </section>
 
         <section class="view" id="view-evidence" aria-labelledby="evidence-title">
@@ -173,7 +268,7 @@
           </article>
           <article class="card action-builder">
             <div class="card-head"><div><p class="kicker">Creditcoin transaction</p><h2>Authenticate or recognize evidence</h2></div><span class="actor-chip">Anyone can submit · economic result is fixed</span></div>
-            <div class="action-row"><label><span>Treasury action</span><select id="evidence-function"></select></label><label class="grow"><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="evidence-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-evidence">Prepare</button></div>
+            <div class="action-row"><label><span>Treasury action</span><select id="evidence-function"></select></label><label class="grow"><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="evidence-args" value="[]" spellcheck="false"></label><button class="button primary" id="prepare-evidence" disabled>Prepare</button></div>
             <p class="help" id="evidence-help">Combined authentication saves a new cache fact only if recognition also succeeds. A previously stored authentication survives a later failed separate recognition.</p>
           </article>
         </section>
@@ -186,6 +281,25 @@
             <article class="status-card"><div class="status-label">Paid invoice record</div><h3>Completed WORK only</h3><p>The invoice book rejects pending claims, fees, returns and records outside its pinned buyer/order/asset/policy.</p></article>
           </div>
           <article class="card lookup-card">
+            <div class="card-head"><div><p class="kicker">One allocation</p><h2>Check one payment from outcome to withdrawal</h2></div><button class="button primary" id="inspect-lifecycle" disabled>Check payment</button></div>
+            <div class="form-grid three"><label><span>Epoch ID</span><input id="lifecycle-epoch" placeholder="0x…"></label><label><span>Allocation ID</span><input id="lifecycle-allocation" inputmode="numeric" value="1"></label><div></div></div>
+            <div class="result empty" id="lifecycle-result">No lifecycle inspected. Missing receipts, RPC errors and unknown policy outcomes remain explicit.</div>
+            <div class="public-links" id="lifecycle-links"></div>
+          </article>
+          <article class="card settlement-card">
+            <div class="card-head"><div><p class="kicker">Replacement operator</p><h2>Continue verified payments</h2></div><span class="step-chip">Fresh plan · one action per click</span></div>
+            <p class="help">Import one or more payment claim files. Planning uses fresh finalized reads and the pinned deployment. Previewing is keyless; execution never selects an alternate destination.</p>
+            <div class="form-grid">
+              <label class="wide file-button">Import payment claims<input type="file" id="settlement-files" accept="application/json" multiple></label>
+              <details class="wide advanced"><summary>Advanced: paste or review claim JSON</summary><label><span>Imported payment claims</span><textarea id="settlement-packages" rows="7" spellcheck="false" placeholder="A JSON array of payment claim objects"></textarea></label></details>
+              <div class="wide actions"><button class="button primary" id="build-settlement-plan" disabled>Check payment claims</button><button class="button" id="execute-settlement" disabled>Continue settlement</button></div>
+            </div>
+            <p class="help">Continue settlement considers one wallet transaction per explicit click. Known transaction hashes are saved before receipt waiting.</p>
+            <div class="result empty" id="settlement-result">No plan built. Importing payment claims does not make their native evidence authentic.</div>
+            <div class="lifecycle-list" id="settlement-actions"></div>
+            <div class="result empty journal-result" id="settlement-journal">No journal for the current plan.</div>
+          </article>
+          <article class="card lookup-card">
             <div class="card-head"><div><p class="kicker">Read payment state</p><h2>Claim and invoice lookup</h2></div><button class="button primary" id="lookup-payment">Read</button></div>
             <div class="form-grid three"><label><span>Epoch ID</span><input id="payment-epoch" placeholder="0x…"></label><label><span>Allocation ID</span><input id="payment-allocation" inputmode="numeric" value="1"></label><label><span>Free-balance owner</span><input id="payment-owner" placeholder="0x…"></label><label class="wide"><span>Owner-authorized alternate destination</span><input id="payment-destination" placeholder="0x… required only for redirect"></label></div>
             <div class="result empty" id="payment-result">No claim selected.</div>
@@ -194,12 +308,12 @@
           <div class="two-col">
             <article class="card action-builder">
               <div class="card-head"><div><p class="kicker">Treasury action</p><h2>Withdraw or fund</h2></div><span class="actor-chip" id="target-actor">Choose an action</span></div>
-              <div class="stack"><label><span>Contract action</span><select id="target-function"></select></label><label><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="target-args" value="[]" spellcheck="false"></label><label><span>Raw native value in base units</span><input id="target-value" value="0" inputmode="numeric"></label><button class="button primary" id="execute-target">Review & send from wallet</button></div>
+              <div class="stack"><label><span>Contract action</span><select id="target-function"></select></label><label><span>Raw ABI arguments as JSON (amounts in base units)</span><input id="target-args" value="[]" spellcheck="false"></label><label><span>Raw native value in base units</span><input id="target-value" value="0" inputmode="numeric"></label><button class="button primary" id="execute-target" disabled>Review & send from wallet</button></div>
               <p class="help" id="target-help"></p>
             </article>
             <article class="card action-builder">
               <div class="card-head"><div><p class="kicker">PaidInvoiceBook</p><h2>Record completed work</h2></div><span class="actor-chip">Anyone after withdrawal</span></div>
-              <div class="stack"><label><span>Epoch ID</span><input id="invoice-epoch" placeholder="0x…"></label><label><span>Allocation ID</span><input id="invoice-allocation" value="1" inputmode="numeric"></label><button class="button primary" id="record-invoice">Review & record</button></div>
+              <div class="stack"><label><span>Epoch ID</span><input id="invoice-epoch" placeholder="0x…"></label><label><span>Allocation ID</span><input id="invoice-allocation" value="1" inputmode="numeric"></label><button class="button primary" id="record-invoice" disabled>Review & record</button></div>
               <p class="help">A payment record says funds were paid. It does not certify quality, independence, income or creditworthiness.</p>
             </article>
           </div>
@@ -226,9 +340,10 @@
               <label><span>Initialization cutoff block</span><input name="initializationCutoff" inputmode="numeric" required></label>
               <label><span>Admission cutoff block</span><input name="admissionCutoff" inputmode="numeric" required></label>
               <label><span>Sponsor epoch nonce</span><input name="nonce" inputmode="numeric" value="0" required></label>
-              <div class="wide actions"><button class="button primary" type="submit">Build exact epoch ID</button><button class="button" type="button" id="prepare-initialize" disabled>Prepare Safe initialization</button><button class="button" type="button" id="fund-built-epoch" disabled>Fund on Creditcoin</button></div>
+              <div class="wide actions"><button class="button primary" type="submit">Build exact epoch ID</button><button class="button" type="button" id="prepare-initialize" disabled>Prepare Safe initialization</button><button class="button" type="button" id="fund-built-epoch" disabled>Prepare Creditcoin funding</button></div>
             </form>
             <div class="result empty" id="epoch-result">No epoch configuration built on this device.</div>
+            <div class="prepared" id="funding-prepared" hidden><code id="funding-calldata"></code><div class="actions"><button class="button primary" id="send-funding" disabled>Send prepared funding with sponsor wallet</button></div><p class="help">Preparation makes no wallet request. Sending rechecks the active sponsor, chain, epoch configuration and this session's trusted deployment.</p></div>
           </article>
           <article class="card compiled-card"><div><p class="kicker">Compiled interfaces</p><h2 id="abi-status">Checking build artifacts…</h2><p id="abi-detail">Transactions are enabled only for functions found in this build’s contract ABIs.</p></div><code id="abi-contracts"></code></article>
         </section>
@@ -239,6 +354,8 @@
   <script src="./vendor/ethers.umd.min.js"></script>
   <script src="./abi-manifest.js"></script>
   <script src="./demo-config.js"></script>
+  <script src="./trusted-deployments.js"></script>
+  <script type="module" src="./consent-bridge.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

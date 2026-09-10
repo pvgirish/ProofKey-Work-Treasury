@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "name": "Restored signed work remains locked without current-session verification",
+      "passed": true,
+      "detail": "{\"rpcDelta\":0,\"sign\":true,\"initialize\":true,\"fund\":true,\"sourcePrepare\":true,\"targetSend\":true,\"evidencePrepare\":true,\"invoiceSend\":true,\"prepared\":true,\"text\":\"Signed consent-bound authorization restored from this device.\\nOrder 0x11004103bc28745e95b6deb7acd14ff682bbd29481fbb47ec371628135fd7850\\nStored canonical worker maximum 30.0 CTC (30000000000000000000 base units).\\nCurrent-session verification is required before any write preparation.\"}"
+    },
+    {
+      "name": "Published runtime hashes unlock the current session",
+      "passed": true,
+      "detail": "{\"trusted\":true,\"sourcePrepare\":true,\"targetSend\":true,\"evidencePrepare\":true,\"invoiceSend\":true}"
+    },
+    {
+      "name": "Editing source inputs destroys the previous executable and download",
+      "passed": true,
+      "detail": "{\"cleared\":true,\"hidden\":true,\"download\":true,\"execute\":true}"
+    },
+    {
+      "name": "Funding preview makes no wallet call and encodes the exact epoch cap",
+      "passed": true,
+      "detail": "{\"value\":\"120000000000000000000\",\"cap\":\"120000000000000000000\",\"epoch\":\"0x6d6a255499b76bd960e9c9bf7d649584d39dbe0192e4e2daa0fe3143c54227c7\",\"hidden\":false,\"sendDisabled\":false}"
+    },
+    {
+      "name": "Worker context exports a real EOA QuoteV1 signature validated by the shared SDK",
+      "passed": true,
+      "detail": "{\"worker\":\"0xDB48edE682410c2661F9cFb5328aaA248074A6c5\",\"recovered\":\"0xDB48edE682410c2661F9cFb5328aaA248074A6c5\",\"storageKeys\":[\"worker-export.json\"]}"
+    },
+    {
+      "name": "Fresh buyer context imports the EOA packet under explicit synthetic active-chain state and prepares ABI-exact Safe calldata without a wallet",
+      "passed": true,
+      "detail": "{\"chainState\":\"synthetic-active-fixture\",\"walletRequests\":0,\"acceptedOrder\":\"0xf078efcdfcf8f2e58440221b3d719edced00ea90c7fb619c23a27cd328c6e2f3\",\"currentOrder\":\"0xf078efcdfcf8f2e58440221b3d719edced00ea90c7fb619c23a27cd328c6e2f3\",\"exact\":true,\"prepared\":true,\"failures\":{\"terms\":\"termsHash does not match the canonical authorization\",\"signature\":\"EOA signature does not recover the named worker\",\"domain\":\"Imported authorization domain does not match the verified workspace\"},\"storageKeys\":[\"proofkey-work-treasury.workspace.v1\",\"proofkey-work-treasury.draft.v1\",\"proofkey-work-treasury.my-work.v1\"],\"baseline\":\"0xf078efcdfcf8f2e58440221b3d719edced00ea90c7fb619c23a27cd328c6e2f3\"}"
+    },
+    {
+      "name": "Fresh buyer context refuses terms, signature, and domain changes before replacing the accepted packet",
+      "passed": true,
+      "detail": "{\"terms\":\"termsHash does not match the canonical authorization\",\"signature\":\"EOA signature does not recover the named worker\",\"domain\":\"Imported authorization domain does not match the verified workspace\"}"
+    },
+    {
+      "name": "Wallet lifecycle invalidates pending work without deleting storage",
+      "passed": true,
+      "detail": "{\"generation\":1,\"cleared\":true,\"hidden\":true,\"workspaceStored\":true,\"draftStored\":true}"
+    },
+    {
+      "name": "A signature returned after draft replacement cannot attach to draft B",
+      "passed": true,
+      "detail": "{\"draft\":{\"id\":\"draft-b\"},\"stored\":{\"id\":\"draft-b\"},\"prepared\":null,\"error\":\"The draft or verified workspace changed while the request was pending; the returned result was discarded\"}"
+    },
+    {
+      "name": "A held wallet connection cannot send after A→B→A state changes",
+      "passed": true,
+      "detail": "{\"sent\":0,\"done\":true,\"error\":\"Workspace or prepared action changed while connecting; nothing was sent\",\"final\":\"same-draft\"}"
+    },
+    {
+      "name": "The QA made no real wallet or broadcast request",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No browser runtime exception escaped",
+      "passed": true,
+      "detail": "none"
+    }
+  ],
+  "observedRpcCalls": 34
+}

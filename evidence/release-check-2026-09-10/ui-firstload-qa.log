@@ -1,0 +1,11 @@
+file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-firstload-qa.mjs:69
+  if (!condition) throw new Error(`${name}: ${detail}`);
+                        ^
+
+Error: Stale setup error remains visible: Checking without changing saved settings.
+Verification failed: Stale reviewer setup RPC reports another chain, not 1
+These settings were not treated as verified. Choose Use public demo defaults to recover without connecting a wallet.
+    at check (file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-firstload-qa.mjs:69:25)
+    at file:///Users/girish/Documents/ProofKey/ProofKey-Work-Treasury/scripts/ui-firstload-qa.mjs:116:1
+
+Node.js v24.20.0

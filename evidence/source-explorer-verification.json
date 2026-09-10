@@ -1,0 +1,192 @@
+{
+  "checkedAt": "2026-09-10T07:36:51.364Z",
+  "explorer": "https://eth-sepolia.blockscout.com",
+  "chainSide": "source",
+  "chainId": "11155111",
+  "compiler": "v0.8.28+commit.7893614a",
+  "mode": "check",
+  "targets": [
+    {
+      "name": "WorkTypes",
+      "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+      "sourceCount": 43,
+      "constructorBytes": 0,
+      "libraries": [],
+      "artifactReproduced": true,
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-source-input"
+    },
+    {
+      "name": "AllocationTree",
+      "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+      "sourceCount": 43,
+      "constructorBytes": 0,
+      "libraries": [],
+      "artifactReproduced": true,
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-source-input"
+    },
+    {
+      "name": "SourceSignatureLib",
+      "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+      "sourceCount": 43,
+      "constructorBytes": 0,
+      "libraries": [],
+      "artifactReproduced": true,
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-source-input"
+    },
+    {
+      "name": "SourcePolicyV1Lib",
+      "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+      "sourceCount": 43,
+      "constructorBytes": 0,
+      "libraries": [
+        {
+          "sourceName": "src/WorkTypes.sol",
+          "name": "WorkTypes",
+          "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+        }
+      ],
+      "artifactReproduced": true,
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-source-input"
+    },
+    {
+      "name": "SourceAccountingLib",
+      "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+      "sourceCount": 43,
+      "constructorBytes": 0,
+      "libraries": [
+        {
+          "sourceName": "src/AllocationTree.sol",
+          "name": "AllocationTree",
+          "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43"
+        },
+        {
+          "sourceName": "src/SourcePolicyV1Lib.sol",
+          "name": "SourcePolicyV1Lib",
+          "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3"
+        }
+      ],
+      "artifactReproduced": true,
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-source-input"
+    },
+    {
+      "name": "SourceCoordinator",
+      "address": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+      "sourceCount": 43,
+      "constructorBytes": 0,
+      "libraries": [
+        {
+          "sourceName": "src/AllocationTree.sol",
+          "name": "AllocationTree",
+          "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43"
+        },
+        {
+          "sourceName": "src/SourceAccountingLib.sol",
+          "name": "SourceAccountingLib",
+          "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612"
+        },
+        {
+          "sourceName": "src/SourcePolicyV1Lib.sol",
+          "name": "SourcePolicyV1Lib",
+          "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3"
+        },
+        {
+          "sourceName": "src/SourceSignatureLib.sol",
+          "name": "SourceSignatureLib",
+          "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1"
+        },
+        {
+          "sourceName": "src/WorkTypes.sol",
+          "name": "WorkTypes",
+          "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+        }
+      ],
+      "artifactReproduced": true,
+      "deploymentManifestRecordsRuntimeCorrespondence": true,
+      "compilationAuthority": "frozen-source-input"
+    }
+  ],
+  "results": [
+    {
+      "name": "WorkTypes",
+      "address": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8",
+      "verified": true,
+      "full": true,
+      "explorerName": "WorkTypes",
+      "compiler": "v0.8.28+commit.7893614a",
+      "evmVersion": "cancun",
+      "optimization": true,
+      "runs": 200,
+      "libraries": [],
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
+    },
+    {
+      "name": "AllocationTree",
+      "address": "0xF56c7e00daB6f3FAd65E3A85Aa6c8FDE34e48f43",
+      "verified": true,
+      "full": true,
+      "explorerName": "AllocationTree",
+      "compiler": "v0.8.28+commit.7893614a",
+      "evmVersion": "cancun",
+      "optimization": true,
+      "runs": 200,
+      "libraries": [],
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
+    },
+    {
+      "name": "SourceSignatureLib",
+      "address": "0x481935Eb6D4e55B8664cd3B88CD1233D5BdCa1a1",
+      "verified": true,
+      "full": true,
+      "explorerName": "SourceSignatureLib",
+      "compiler": "v0.8.28+commit.7893614a",
+      "evmVersion": "cancun",
+      "optimization": true,
+      "runs": 200,
+      "libraries": [],
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
+    },
+    {
+      "name": "SourcePolicyV1Lib",
+      "address": "0xc9b230f18bD16955D302f9Bf3BDB522186Be46B3",
+      "verified": true,
+      "full": true,
+      "explorerName": "SourcePolicyV1Lib",
+      "compiler": "v0.8.28+commit.7893614a",
+      "evmVersion": "cancun",
+      "optimization": true,
+      "runs": 200,
+      "libraries": [
+        {
+          "name": "src/WorkTypes.sol:WorkTypes",
+          "address_hash": "0xeA13543Ca73703cd65C6CFb98AE0b6d429BE85F8"
+        }
+      ],
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
+    },
+    {
+      "name": "SourceAccountingLib",
+      "address": "0x3AC9B3eb94DBA253bCC4284a981fB45d35386612",
+      "verified": false,
+      "full": false,
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
+    },
+    {
+      "name": "SourceCoordinator",
+      "address": "0xcF50a18ff9021f328Cc89fb37b9a2C872BB70138",
+      "verified": false,
+      "full": false,
+      "explorerCreationMatchesReproducedArtifact": true,
+      "explorerRuntimeMatchesPinnedDeploymentHash": true
+    }
+  ]
+}
