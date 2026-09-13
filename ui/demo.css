@@ -82,6 +82,8 @@ main { max-width: 1160px; margin: 0 auto; padding: 18px 24px 46px; }
 .facts dt, .results dt { margin-bottom: 4px; color: var(--muted); font-size: .67rem; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
 .facts dd, .results dd { margin: 0; color: #33433d; font-size: .88rem; line-height: 1.42; }
 .status { padding: 13px 15px; border: 1px solid #d6c18b; border-radius: 11px; background: #fff8e6; color: #5c440a; }
+.dispute-link-row { margin: 14px 0 0; }
+.dispute-link { display: inline-flex; max-width: 100%; flex-wrap: wrap; align-items: center; padding: 11px 16px; border: 1px solid #a9bab2; border-radius: 999px; background: #fff; color: var(--green); font-size: .83rem; font-weight: 800; text-decoration: none; }
 .results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .results dd { display: grid; gap: 4px; }
 .results dd span { color: var(--muted); font-size: .76rem; }
@@ -101,6 +103,7 @@ button:disabled { cursor: not-allowed; opacity: .42; }
 
 .dispute-panel { display: grid; grid-template-columns: minmax(260px, .38fr) minmax(0, 1fr); gap: 12px 24px; margin-top: 15px; padding: 17px 26px 18px; border: 1px dashed #a9bab2; border-radius: 18px; background: #fbfcfa; }
 .dispute-panel h3 { margin: 4px 0 0; font-size: 1.16rem; }
+.dispute-panel h3 { scroll-margin-top: 64px; }
 .panel-tag { margin: 0; color: #a63d00; font-size: .68rem; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
 .committee-answer { margin: 9px 0 0; padding: 9px 10px; border-left: 3px solid var(--accent); border-radius: 8px; background: #fff; color: #33433d; font-size: .79rem; line-height: 1.45; }
 .dispute-explanation { min-width: 0; }

@@ -19,8 +19,8 @@ function sha256(value) {
 }
 
 const expectedHashes = new Map([
-  ["ui/demo.html", "cab78d13775d8277abf931a23c42a1aca2da10de971b433fb9616163048707cc"],
-  ["ui/demo.css", "7caa0c222a22fa238b9c2f975b1e483ed48947ae9177695181b2f41bd8eaf77b"],
+  ["ui/demo.html", "edb88e67ca62706ab952ccbf0de2db439820410c13209f869403cc822c036302"],
+  ["ui/demo.css", "6571ce85395ca117866a5f9f8b6fc3a4a96ffb5d351438a8aa8d90a8757c735f"],
   ["ui/demo.js", "c2abb491f024900b7fc100d8ed01b645c6882d955bd39d5858ff5ae23932dbd9"],
 ]);
 
@@ -49,6 +49,11 @@ check(demoHtml.includes("test-network records, not customer adoption or proof of
 check(demoHtml.includes("Historical records, not re-verified in this walkthrough"), "the historical-record boundary is missing");
 check(demoHtml.includes("Proof or operator availability can delay collection"), "the proof and operator availability boundary is missing");
 check(demoHtml.includes("no bank payout or INR conversion"), "the payout boundary is missing");
+check(demoHtml.includes("Recorded testnet demo · Copy v4 · 14 September 2026"), "the reviewed demo version is missing");
+
+const disputeLinks = demoHtml.match(/<a class="dispute-link" href="#dispute-title">Disagreement\? See who decides\.<\/a>/g) ?? [];
+check(disputeLinks.length === 2, `expected two dispute-navigation links, found ${disputeLinks.length}`);
+check(demoHtml.includes('<h3 id="dispute-title" tabindex="-1">'), "the dispute heading is not keyboard-focusable");
 
 const evidenceMatch = demoHtml.match(/<details class="evidence" id="demo-evidence">[\s\S]*?<\/details>/);
 check(Boolean(evidenceMatch), "the evidence section is missing");
@@ -68,6 +73,7 @@ const evidenceStart = demoHtml.indexOf('id="demo-evidence"');
 const illustrationEnd = evidenceStart === -1 ? -1 : demoHtml.lastIndexOf("<details ", evidenceStart);
 check(illustrationStart !== -1 && illustrationEnd > illustrationStart, "the dispute-rule illustration is missing");
 const illustration = illustrationStart === -1 || illustrationEnd === -1 ? "" : demoHtml.slice(illustrationStart, illustrationEnd);
+check(illustration.includes('id="dispute-title"') && illustration.includes("Three committee members are named in the accepted terms"), "the dispute target must retain its committee introduction");
 check(illustration.includes("Illustration of existing rules—not another recorded transaction"), "the dispute section does not identify itself as an illustration");
 check(illustration.includes("These are example terms, not another recorded payment"), "the dispute section does not separate its example from recorded payments");
 check(illustration.includes("One illustrative job reserves 10 test CTC"), "the separate ten-token example is missing");
