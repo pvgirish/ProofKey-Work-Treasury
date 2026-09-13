@@ -11,7 +11,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(join(dist, "vendor"), { recursive: true });
 await mkdir(join(dist, "sdk"), { recursive: true });
 
-for (const file of ["index.html", "styles.css"]) await copyFile(join(ui, file), join(dist, file));
+for (const file of ["index.html", "styles.css", "demo.html", "demo.css", "demo.js"]) await copyFile(join(ui, file), join(dist, file));
 await copyFile(join(root, "node_modules", "ethers", "dist", "ethers.umd.min.js"), join(dist, "vendor", "ethers.umd.min.js"));
 await copyFile(join(root, "node_modules", "ethers", "dist", "ethers.min.js"), join(dist, "vendor", "ethers.esm.min.js"));
 

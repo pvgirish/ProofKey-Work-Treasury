@@ -2,6 +2,8 @@
 
 Keep one finite work budget on Creditcoin while your organization approves work from its Ethereum Safe. Unused parts of a job reservation can fund a later job while earlier earned payments stay protected. **Attestcoin authenticates the Ethereum outcome before Creditcoin recognizes the payment entitlement.**
 
+[Start the recorded demo](https://pvgirish.github.io/ProofKey-Work-Treasury/demo.html) for the standalone testnet walkthrough: it needs no wallet, uses practice tokens, and links historical records without re-verifying them. The [live workspace](https://pvgirish.github.io/ProofKey-Work-Treasury/) remains the separate interactive application for configuration and checks. The existing code, contract artifacts and evidence media remain the published baseline; this walkthrough adds presentation-only files without changing the contracts or their behavior.
+
 [Trace the Attestcoin payment path](docs/ATTESTCOIN-INTEGRATION.md): source policy outcome → native `0x0FD2` verification → one-time entitlement → withdrawal. The guide links mined single, batch and segmented transactions and explains why later cached collection remains proof-gated.
 
 The local [app workflow upgrade](docs/APP-WORKFLOWS.md) brings payment provenance, replacement settlement and freshly reconstructed program closeouts into the browser. Its [completed acceptance checklist](docs/APP-WORKFLOW-PROGRESS.md) and [verified release notes](docs/APP-WORKFLOW-RELEASE.md) distinguish this work from the earlier hosted build.

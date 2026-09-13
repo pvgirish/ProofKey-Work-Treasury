@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A compact recorded ProofKey testnet walkthrough for judges.">
+  <title>ProofKey recorded work-budget walkthrough</title>
+  <link rel="stylesheet" href="./demo.css">
+</head>
+<body>
+  <a class="skip-link" href="#step-1-title">Skip to the recorded story</a>
+  <header class="demo-header">
+    <div class="copy-banner" role="note">
+      <p><strong>Recorded testnet demo · Copy v3 · 14 September 2026</strong></p>
+      <p><strong>Practice tokens, not real earnings.</strong> Test CTC is used on Creditcoin's test network—not rupees or dollars.</p>
+    </div>
+    <div class="header-top">
+      <div>
+        <h1>ProofKey: a work budget you can follow through to payment.</h1>
+        <p class="lede">ProofKey helps teams set aside a contractor budget, agree payment rules, and track each job from approval to money received.</p>
+        <p class="meta-line"><strong>For teams with an existing Ethereum Safe,</strong> a shared approval wallet, and a work budget on Creditcoin.</p>
+        <p class="meta-line problem">An approval alone does not tell either side whether payment has arrived.</p>
+        <div class="opening-actions">
+          <button type="button" class="primary" id="demo-start">Start the recorded demo</button>
+          <a class="workspace-link" href="./index.html">Open the workspace<span>Wallet actions belong there.</span></a>
+        </div>
+      </div>
+      <p class="mode"><strong>Recorded testnet walkthrough</strong><span>September 9, 2026 · team-controlled accounts · no wallet needed</span></p>
+    </div>
+
+    <section class="role-section" aria-labelledby="how-proofkey-title">
+      <h2 id="how-proofkey-title">How ProofKey does it</h2>
+      <p class="role-intro">ProofKey is the application you use. Its screen tracks the work; its contracts are on-chain rules that enforce the agreed payments. It uses Ethereum and Creditcoin rather than operating either network.</p>
+      <div class="role-grid">
+        <article><span>1</span><h3>Ethereum</h3><p>A shared computer network that records transactions and runs rules (a blockchain), not a bank. It records the outcome under the agreed work rules.</p></article>
+        <article><span>2</span><h3>Attestcoin</h3><p>Creditcoin's verification system checks evidence of the outcome recorded on Ethereum. It does not judge the work. This is network infrastructure, not a service operated by ProofKey.</p></article>
+        <article><span>3</span><h3>Creditcoin</h3><p>A shared computer network that records transactions and runs rules (a blockchain), not a bank. It holds the existing budget and sends allocated tokens from that budget to the agreed payment wallet (withdrawal)—not cash or a bank payout.</p></article>
+      </div>
+    </section>
+    <div class="context-foot">
+      <p class="unit-line"><strong>Test CTC is used on Creditcoin's test network—not rupees or dollars.</strong> The transactions recorded here occurred on test networks; the budget and payments use test CTC.</p>
+      <p class="crossing">The approval evidence crosses networks. The work budget does not: it stays on Creditcoin.</p>
+      <p class="use-fit">This fits an existing setup: keep your Ethereum Safe approval process while using a budget already on Creditcoin.</p>
+    </div>
+
+    <details class="long-explainer">
+      <summary>Read the longer design explanation</summary>
+      <div>
+        <p><strong>Why two networks are used here.</strong> A team can keep its existing Ethereum approval process while using a budget already on Creditcoin. Evidence crosses networks; the budget does not.</p>
+        <p><strong>How the outcome is recognized.</strong> Attestcoin supplies authenticated cross-network evidence. The route recognizes the outcome only after native verification and target recognition. People and their job policy still assess the work.</p>
+        <p><strong>What the currency is.</strong> CTC is Creditcoin's native token; this demonstration uses only test-network practice tokens.</p>
+        <p><strong>What the infrastructure is not.</strong> Attestcoin is part of Creditcoin's network infrastructure, not a ProofKey-operated work-review service. Creditcoin describes its attestor network in its official explanation.</p>
+        <p>Proof or operator availability can delay collection. Outcomes include review, dispute and timeout rules; they are not automatic satisfaction guarantees. This testnet prototype does not provide a production payment guarantee.</p>
+        <p>Withdrawn means sent from the work budget to the recipient's payment wallet—not converted into cash or transferred to a bank. This prototype has no bank payout or INR conversion.</p>
+        <p><a href="https://creditcoin.org/Deploy" target="_blank" rel="noreferrer">Open Creditcoin's official attestor explanation</a></p>
+        <p><a href="https://docs.creditcoin.org/what-is-creditcoin/ctc-token-101" target="_blank" rel="noreferrer">Open the external CTC explanation</a></p>
+      </div>
+    </details>
+  </header>
+
+  <main>
+    <section class="story-shell" aria-labelledby="story-title">
+      <div class="story-heading">
+        <div>
+          <p class="kicker">Follow one recorded work budget</p>
+          <h2 id="story-title">The recorded story</h2>
+        </div>
+        <p class="boundary">This walkthrough moves no money. These are test-network records, not customer adoption or proof of work quality.</p>
+      </div>
+
+      <ol class="progress" id="story-progress" aria-label="Recorded story position">
+        <li aria-current="step"><span>Agreement</span></li>
+        <li><span>First outcome</span></li>
+        <li><span>Changes</span></li>
+        <li><span>Payments</span></li>
+      </ol>
+
+      <div class="story-stage">
+        <section class="story-step active" id="story-step-1" aria-labelledby="step-1-title">
+          <p class="step-label">Recorded testnet · Story step 1 of 4 · The agreement</p>
+          <h3 id="step-1-title" tabindex="-1">Agree the jobs. Set aside their payments.</h3>
+          <p class="unit-reminder"><strong>Test CTC.</strong> This example uses test CTC, a practice token used on Creditcoin's test network—not rupees or dollars. Network fees are separate.</p>
+          <p>In this recorded test, the team funded a work budget of 120 test CTC. The first job reserved 30 and the second reserved 40. The remaining 50 was not assigned to a job.</p>
+          <dl class="facts">
+            <div><dt>Meaning</dt><dd>Reserved means committed to an unresolved job. It does not mean the worker has been paid.</dd></div>
+            <div><dt>Roles</dt><dd>Team: agrees the terms and funds the program. Worker: agrees the work and payment rules.</dd></div>
+            <div><dt>Limit</dt><dd>The rules include review, dispute and timeout outcomes. ProofKey does not promise payment only when the buyer is satisfied.</dd></div>
+          </dl>
+        </section>
+
+        <section class="story-step" id="story-step-2" hidden aria-labelledby="step-2-title">
+          <p class="step-label">Recorded testnet · Story step 2 of 4 · Approval is not payment</p>
+          <h3 id="step-2-title" tabindex="-1">The first job was approved. Payment still had to be collected.</h3>
+          <p class="status"><strong>30 test CTC owed for the first job — not yet withdrawn at this stage.</strong></p>
+          <p>The recorded outcome allocated 30 test CTC for the first job. Attestcoin authentication and Creditcoin recognition came before withdrawal. <strong>Withdrawn means sent from the work budget to the recipient's payment wallet—not converted into cash or transferred to a bank.</strong> This prototype has no bank payout or INR conversion. An approved amount is not a payment receipt.</p>
+          <div class="collection-panel">
+            <h4>Who submits, pays gas, and collects</h4>
+            <p><strong>Who can submit:</strong> the team, the worker, or another submitter. They need usable evidence and network gas. Services responding and someone acting are not guaranteed.</p>
+            <p><strong>Where withdrawal goes:</strong> once an allocation is recognized, anyone can send its public withdrawal to the agreed payment wallet. A submitter cannot replace that destination through the public withdrawal. Only the claim owner has a separate redirect path.</p>
+            <p class="fee-note"><strong>Who pays each network fee:</strong> the account sending each transaction pays its network fee. If the worker sends the withdrawal, the worker pays; if the team or another submitter sends it, that sender pays. There is no automatic team subsidy, and receiving alone does not incur the sender's gas charge.</p>
+          </div>
+          <dl class="facts">
+            <div><dt>Related budget action</dt><dd>The 50 not assigned to a job was released from the program and credited to the funding account after verification. It had not yet been withdrawn to that account's wallet.</dd></div>
+          </dl>
+        </section>
+
+        <section class="story-step" id="story-step-3" hidden aria-labelledby="step-3-title">
+          <p class="step-label">Recorded testnet · Story step 3 of 4 · Agreed changes and follow-up</p>
+          <h3 id="step-3-title" tabindex="-1">Both sides agreed 25 for the second job. The unused 15 supported another job.</h3>
+          <p>The second job had reserved 40 test CTC. A mutual settlement allocated 25 and released 15 for further work. This was not a unilateral reduction by the buyer.</p>
+          <dl class="facts">
+            <div><dt>Follow-up</dt><dd>That released 15 funded a follow-up job. Its recorded no-delivery outcome allocated no work payment, making the 15 available again.</dd></div>
+            <div><dt>Meaning</dt><dd>Money released by a job can support later work while the program is open. Money already retired from the program is not reused inside it.</dd></div>
+          </dl>
+        </section>
+
+        <section class="story-step" id="story-step-4" hidden aria-labelledby="step-4-title">
+          <p class="step-label">Recorded testnet · Story step 4 of 4 · The numbers now have meaning</p>
+          <h3 id="step-4-title" tabindex="-1">Two job payments completed. The funding account withdrew the unused balance.</h3>
+          <dl class="results">
+            <div><dt>First job</dt><dd><strong>30 test CTC paid</strong><span>Recorded successful work withdrawal.</span></dd></div>
+            <div><dt>Second job</dt><dd><strong>25 test CTC paid</strong><span>Recorded successful work withdrawal.</span></dd></div>
+            <div><dt>Follow-up job</dt><dd><strong>No work payment</strong><span>Recorded no-delivery outcome.</span></dd></div>
+            <div><dt>Funding account</dt><dd><strong>65 test CTC withdrawn unused</strong><span>Recorded successful free-balance withdrawal.</span></dd></div>
+          </dl>
+          <p class="summary">Of the 120 test CTC funded, 55 was paid for work and 65 was withdrawn by the funding account. Network fees are separate: 120 = 55 + 65 as transferred amounts, not including gas.</p>
+          <p class="final-arithmetic"><strong>The displayed 65 was transferred in full. The account sending the transaction pays a separate network fee. If that same account receives the 65, its net balance increases by less than 65 because it also paid that fee.</strong></p>
+          <p class="final-arithmetic"><strong>65 returned = 50 initially unassigned + 15 left after the follow-up job ended without delivery.</strong> The 15 became available after the 40→25 mutual settlement and was reused by the follow-up job before return.</p>
+        </section>
+      </div>
+
+      <div class="story-controls" id="story-controls">
+        <button type="button" class="secondary" id="demo-back">Back</button>
+        <button type="button" class="primary" id="demo-next">Next</button>
+        <button type="button" class="secondary" id="demo-replay" hidden>Replay the recorded story</button>
+      </div>
+      <p class="live-region" id="demo-position" role="status" aria-live="polite">Step 1 of 4 · Recorded testnet</p>
+      <p class="standing-limits"><strong>Limits.</strong> People and the agreed policy assess work; Attestcoin verifies the resulting cross-chain record. Proof or operator availability can delay collection. This is a testnet prototype, not a production payment guarantee.</p>
+    </section>
+
+    <section class="fee-panel" aria-labelledby="fee-title">
+      <h3 id="fee-title">Network fees are separate</h3>
+      <p>Reminder: the sender of each transaction pays its network fee. Step 2 shows who can submit and collect; Step 4 keeps the separate gross/net explanation for the returned 65.</p>
+    </section>
+
+    <section class="dispute-panel" id="dispute-rules" aria-labelledby="dispute-title">
+      <div>
+        <p class="panel-tag">Illustration of existing rules—not another recorded transaction</p>
+        <h3 id="dispute-title">If the team and worker disagree</h3>
+        <p class="committee-answer">Three committee members are named in the accepted terms. Two must agree on the same award. Naming them does not guarantee impartiality.</p>
+        <details class="illustrated-terms">
+          <summary>Illustrative accepted terms</summary>
+          <div>
+            <p>One illustrative job reserves 10 test CTC. Its job-policy fee is 0 and its pre-agreed challenged-timeout payment is 2. Two distinct named members must submit valid matching votes for the same award.</p>
+            <p>These cutoffs are illustrative and job-specific source-block numbers, not promised wall-clock hours:</p>
+            <dl>
+              <div><dt>Accept</dt><dd>before source block 1,000,050</dd></div>
+              <div><dt>Deliver</dt><dd>before source block 1,000,100</dd></div>
+              <div><dt>Challenge or review</dt><dd>before source block 1,000,200</dd></div>
+              <div><dt>Ruling</dt><dd>before source block 1,000,300</dd></div>
+            </dl>
+          </div>
+        </details>
+      </div>
+      <div class="dispute-explanation">
+        <ol class="dispute-flow">
+          <li><strong>Terms agreed, 10 reserved.</strong> Fee 0 and fallback 2 are disclosed up front.</li>
+          <li><strong>Work delivered and challenged.</strong> The worker delivers before source block 1,000,100 and asks for 10; the team challenges before source block 1,000,200. Verification does not decide who is right.</li>
+        </ol>
+        <p class="branch-label">Ruling cutoff · before source block 1,000,300 — only one branch can occur:</p>
+        <div class="dispute-branches">
+          <article>
+            <p class="branch-tag">Committee outcome</p>
+            <h4>Two matching votes award 6</h4>
+            <p>Before source block 1,000,300, two named committee members' valid matching votes for 6 are submitted. The second vote records the outcome.</p>
+            <p class="illustrative-arithmetic">10 = 6 owed + 4 restored</p>
+            <p>The 4 returns to available program capacity. It is not yet refunded to a bank or wallet.</p>
+          </article>
+          <article>
+            <p class="branch-tag timeout">Timeout outcome</p>
+            <h4>No ruling by the cutoff</h4>
+            <p>If still challenged at or after source block 1,000,300, anyone can submit the timeout transaction.</p>
+            <p class="illustrative-arithmetic">10 = 2 owed + 8 restored</p>
+            <p>No transaction means no automatic outcome or payment. The restored 8 stays in available program capacity.</p>
+          </article>
+        </div>
+        <p class="after-branches">Either owed amount still requires proof, recognition, and withdrawal before it is received. The team and worker may instead mutually settle. The first valid terminal result wins.</p>
+        <p class="simulation-limit">These are example terms, not another recorded payment. Block cutoffs track Ethereum's progress, not promised clock times; reaching a cutoff does not send money.</p>
+      </div>
+    </section>
+
+    <details class="evidence" id="demo-evidence">
+      <summary><span>Inspect the records</span><small>Historical records, not re-verified in this walkthrough.</small></summary>
+      <div class="evidence-body">
+        <p>Opening a link only opens evidence. Navigation alone performs no RPC verification, signing or sending. A viewer may open the existing evidence workspace for current checks.</p>
+        <div class="evidence-grid">
+          <section aria-labelledby="journal-title">
+            <h3 id="journal-title">Journal integrity</h3>
+            <dl>
+              <div><dt>source-demo.json · SHA-256</dt><dd>12b0f654ba1b4bc1cd50207fb755a7ec2445d3690e1f4c9cf696774ce402256b</dd></div>
+              <div><dt>public-demo.json · SHA-256</dt><dd>4b82d03faaeff3a7863d946f6a40af5ac777afb5b436d903a408f13b564650f8</dd></div>
+            </dl>
+            <p><a href="https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/source-demo.json" target="_blank" rel="noreferrer">Open source journal</a></p>
+            <p><a href="https://raw.githubusercontent.com/pvgirish/ProofKey-Work-Treasury/main/evidence/public-demo.json" target="_blank" rel="noreferrer">Open target journal</a></p>
+          </section>
+          <section aria-labelledby="agreement-title">
+            <h3 id="agreement-title">Agreements and outcomes</h3>
+            <ul>
+              <li><a href="https://sepolia.etherscan.io/tx/0xbd7f7b78468d12e9660a821e295e7e76d33f4d8587561529ebf1520b5deced6c" target="_blank" rel="noreferrer">First job created</a></li>
+              <li><a href="https://sepolia.etherscan.io/tx/0x33642ef4a994dd63b5426a3835051f314cf422761d48000fcb1bcc4b4538efc5" target="_blank" rel="noreferrer">First job approved</a></li>
+              <li><a href="https://sepolia.etherscan.io/tx/0x046b2a05edea39722100178c255c4a9356aa439f0744d118ff321b05075dede9" target="_blank" rel="noreferrer">Second job mutually settled</a></li>
+              <li><a href="https://sepolia.etherscan.io/tx/0x49aa4996633ff6e59c6be9488dfeeafc28fcd35dd667d2d37f81a78514a84b93" target="_blank" rel="noreferrer">Follow-up recorded with no delivery</a></li>
+            </ul>
+          </section>
+          <section aria-labelledby="target-title">
+            <h3 id="target-title">Funding, authentication, recognition and withdrawals</h3>
+            <ul>
+              <li><a href="https://creditcoin-testnet.blockscout.com/tx/0x2d473ee9b60fbce59ccb95213bf2e135601e68ff74cdd322d0c44823b74bedc8" target="_blank" rel="noreferrer">Exact 120 test-CTC funding receipt</a></li>
+              <li><a href="https://creditcoin-testnet.blockscout.com/tx/0x803637ce8d1e691d826e64292366fa7e7de6f1d9f0676c82833c8d5a31562542" target="_blank" rel="noreferrer">First outcome and 50 return authenticated</a></li>
+              <li><a href="https://creditcoin-testnet.blockscout.com/tx/0xe1403b1729049454dc9174050f20205f06c9d97cb471958f4bca58cccfaf9aae" target="_blank" rel="noreferrer">First-job entitlement recognized</a></li>
+              <li><a href="https://creditcoin-testnet.blockscout.com/tx/0x132f0ae39c2252f6b7ad13773ef191aedeafabee6d5e55e17b5b1491720a16f3" target="_blank" rel="noreferrer">First job withdrawal</a></li>
+              <li><a href="https://creditcoin-testnet.blockscout.com/tx/0xd7da3be6fea92054880b4914b3faa9b2603ac7b8c1b1119f62c701ff6193e2bd" target="_blank" rel="noreferrer">Second job withdrawal</a></li>
+              <li><a href="https://creditcoin-testnet.blockscout.com/tx/0x93833d3295860b753cc28a8dd66a3aa732ee44506ed25e3792e74006dce6e393" target="_blank" rel="noreferrer">65 unused-balance withdrawal</a></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </details>
+  </main>
+  <footer><p>Recorded September 9, 2026 · Historical records, not re-verified in this walkthrough.</p></footer>
+  <script src="./demo.js" defer></script>
+</body>
+</html>

@@ -26,6 +26,7 @@ jobs:
       - run: npm run test:judge
       - run: bash scripts/forge.sh build --sizes
       - run: npm run ui:build
+      - run: node scripts/demo-release-check.mjs
       - uses: actions/upload-artifact@v4
         with:
           name: wallet-app
