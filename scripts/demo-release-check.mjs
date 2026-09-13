@@ -19,10 +19,19 @@ function sha256(value) {
 }
 
 const expectedHashes = new Map([
-  ["ui/demo.html", "edb88e67ca62706ab952ccbf0de2db439820410c13209f869403cc822c036302"],
+  ["ui/demo.html", "1c4c4553de86137b5b3597a2e48f6e13f8c0b0fe52413f9d9feb0b3f0fc208be"],
   ["ui/demo.css", "6571ce85395ca117866a5f9f8b6fc3a4a96ffb5d351438a8aa8d90a8757c735f"],
   ["ui/demo.js", "c2abb491f024900b7fc100d8ed01b645c6882d955bd39d5858ff5ae23932dbd9"],
 ]);
+const publicMediaFiles = [
+  "ProofKey-Work-Treasury-Final-2026-09-14.mp4",
+  "ProofKey-Work-Treasury-Final-2026-09-14.pdf",
+  "ProofKey-Work-Treasury-Final-2026-09-14.vtt",
+  "ProofKey-Work-Treasury-Final-2026-09-14.srt",
+  "ProofKey-Work-Treasury-Final-2026-09-14.md",
+  "ProofKey-Work-Treasury-Final-2026-09-14.png",
+];
+const expectedPdfHash = "28a8b3dab252a0833fa862d2968cdf8000940e4f5ac624da6380f79cca972162";
 
 const demoFiles = new Map();
 for (const relativePath of expectedHashes.keys()) {
@@ -34,6 +43,8 @@ for (const relativePath of expectedHashes.keys()) {
 const demoHtml = demoFiles.get("ui/demo.html");
 const demoJs = demoFiles.get("ui/demo.js");
 const indexHtml = await read("ui/index.html");
+const readme = await read("README.md");
+const videoHtml = await read("ui/video.html");
 const buildScript = await read("scripts/build-ui.mjs");
 const workflow = await read(".github/workflows/ci.yml");
 
@@ -49,7 +60,10 @@ check(demoHtml.includes("test-network records, not customer adoption or proof of
 check(demoHtml.includes("Historical records, not re-verified in this walkthrough"), "the historical-record boundary is missing");
 check(demoHtml.includes("Proof or operator availability can delay collection"), "the proof and operator availability boundary is missing");
 check(demoHtml.includes("no bank payout or INR conversion"), "the payout boundary is missing");
-check(demoHtml.includes("Recorded testnet demo · Copy v4 · 14 September 2026"), "the reviewed demo version is missing");
+check(demoHtml.includes('<title>ProofKey · Guided Demo</title>'), "the public demo title is missing");
+check(demoHtml.includes("ProofKey · Guided Demo · 14 September 2026"), "the public demo banner is missing");
+check(demoHtml.includes('href="./video.html"') && demoHtml.includes('href="./media/ProofKey-Work-Treasury-Final-2026-09-14.pdf"'), "the demo must link the video player and PDF");
+check(!demoHtml.includes("Copy v4"), "the public demo must not expose the old visible label");
 
 const disputeLinks = demoHtml.match(/<a class="dispute-link" href="#dispute-title">Disagreement\? See who decides\.<\/a>/g) ?? [];
 check(disputeLinks.length === 2, `expected two dispute-navigation links, found ${disputeLinks.length}`);
@@ -101,6 +115,33 @@ check(styles.includes(".demo-entry-link:focus-visible"), "homepage demo entry la
 check(!styles.includes("@import"), "homepage must not import additional stylesheets");
 
 check(buildScript.includes('["index.html", "styles.css", "demo.html", "demo.css", "demo.js"]'), "build script does not include all demo files");
+check(buildScript.includes('await copyFile(join(ui, "video.html"), join(dist, "video.html"));'), "build script does not explicitly publish the video player");
+check(buildScript.includes("const publicMediaFiles = [") && publicMediaFiles.every(file => buildScript.includes(`"${file}"`)), "build script media allowlist is incomplete");
+
+check(videoHtml.includes('<title>ProofKey · Guided Demo</title>') && videoHtml.includes("<h1>ProofKey · Guided Demo</h1>"), "the public video title is missing");
+check(videoHtml.includes("<strong>Recorded 14 September 2026 · Historical testnet evidence</strong>"), "the public video metadata is missing");
+check(videoHtml.includes('poster="./media/ProofKey-Work-Treasury-Final-2026-09-14.png"') && videoHtml.includes('src="./media/ProofKey-Work-Treasury-Final-2026-09-14.mp4"'), "the public video poster/source paths are incorrect");
+check(videoHtml.includes('src="./media/ProofKey-Work-Treasury-Final-2026-09-14.vtt"') && videoHtml.includes('href="./media/ProofKey-Work-Treasury-Final-2026-09-14.srt"') && videoHtml.includes('href="./media/ProofKey-Work-Treasury-Final-2026-09-14.md"'), "the public captions/transcript paths are incorrect");
+check(videoHtml.includes('href="./media/ProofKey-Work-Treasury-Final-2026-09-14.pdf"') && videoHtml.includes('href="./demo.html"'), "the public PDF and guided-demo links are missing");
+check(videoHtml.includes(">Submission PDF</a>"), "the public submission-PDF label is missing");
+check(videoHtml.includes("Edited walkthrough") && videoHtml.includes("Synthetic local narration") && videoHtml.includes("historical testnet records"), "the edited/synthetic/historical video boundaries are missing");
+check(videoHtml.includes("no wallet needed") && !videoHtml.includes("window.ethereum"), "the public video must not require a wallet");
+check(!videoHtml.includes("autoplay"), "the public video must not autoplay");
+check(!/(?:\/Users\/|media-work|MANIFEST\.json)/.test(videoHtml), "the public video contains a non-public path or manifest");
+check(!videoHtml.includes("Copy v4"), "the public video must not expose the old visible label");
+check(readme.includes("(https://pvgirish.github.io/ProofKey-Work-Treasury/demo.html)") && readme.includes("(https://pvgirish.github.io/ProofKey-Work-Treasury/video.html)"), "README review-package pages must use public URLs");
+check(readme.includes("[Submission PDF]("), "README submission-PDF label is missing");
+
+const distVideoHtml = await readFile(join(root, "ui/dist/video.html"), "utf8").catch(() => null);
+check(distVideoHtml === videoHtml, "ui/dist/video.html is missing or differs from its source");
+for (const file of publicMediaFiles) {
+  const docsSource = await readFile(join(root, "docs/media", file)).catch(() => null);
+  check(docsSource !== null && docsSource.length > 0, `docs/media/${file} is missing`);
+  if (file.endsWith(".pdf") && docsSource) check(sha256(docsSource) === expectedPdfHash, `docs/media/${file} does not match the reviewed PDF hash`);
+  const distSource = await readFile(join(root, "ui/dist/media", file)).catch(() => null);
+  check(distSource !== null && distSource.length > 0, `ui/dist/media/${file} is missing from the build`);
+  if (docsSource && distSource) check(sha256(distSource) === sha256(docsSource), `ui/dist/media/${file} differs from its reviewed source`);
+}
 for (const relativePath of expectedHashes.keys()) {
   const distPath = relativePath.replace("ui/", "ui/dist/");
   const distSource = await read(distPath).catch(() => null);

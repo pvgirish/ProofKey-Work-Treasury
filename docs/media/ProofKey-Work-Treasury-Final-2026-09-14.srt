@@ -1,0 +1,163 @@
+1
+00:00:00,000 --> 00:00:02,939
+ProofKey is a work-treasury prototype for contractor teams.
+
+2
+00:00:02,939 --> 00:00:05,878
+It follows agreed outcomes from approval to payment.
+
+3
+00:00:05,878 --> 00:00:10,287
+This Guided Demo uses test CTC, practice tokens on a test network.
+
+4
+00:00:10,287 --> 00:00:13,593
+It is not a bank payout or real earnings.
+
+5
+00:00:14,343 --> 00:00:18,206
+The recorded program starts with one hundred twenty test CTC.
+
+6
+00:00:18,206 --> 00:00:23,615
+Thirty test CTC is reserved for the first job, and forty for the second.
+
+7
+00:00:23,615 --> 00:00:24,774
+Fifty stays unassigned.
+
+8
+00:00:24,774 --> 00:00:27,092
+Reserved means set aside, not paid.
+
+9
+00:00:27,842 --> 00:00:33,971
+When the first outcome is approved, thirty becomes owed, but it is not paid yet.
+
+10
+00:00:33,971 --> 00:00:35,606
+Ethereum records the outcome.
+
+11
+00:00:35,606 --> 00:00:37,649
+Attestcoin authenticates that source record.
+
+12
+00:00:37,649 --> 00:00:40,101
+Creditcoin then recognizes the payment right.
+
+13
+00:00:40,101 --> 00:00:43,371
+Withdrawal sends test tokens to the agreed wallet.
+
+14
+00:00:43,371 --> 00:00:46,640
+Evidence crosses chains; the budget stays on Creditcoin.
+
+15
+00:00:47,390 --> 00:00:51,253
+The program’s authenticateBatch transaction succeeded on Creditcoin’s test network.
+
+16
+00:00:51,253 --> 00:00:55,116
+The captured receipt identifies the transaction and its block.
+
+17
+00:00:55,116 --> 00:00:56,833
+This success authenticates records.
+
+18
+00:00:56,833 --> 00:01:01,555
+It does not judge work quality and does not withdraw funds.
+
+19
+00:01:02,305 --> 00:01:07,471
+The native BlockProver emitted TransactionVerified for the recorded Ethereum position and a second record.
+
+20
+00:01:07,471 --> 00:01:10,423
+The screen shows the source height and index.
+
+21
+00:01:10,423 --> 00:01:12,637
+Authentication proves the records were checked.
+
+22
+00:01:12,637 --> 00:01:15,958
+It does not judge work quality or withdraw funds.
+
+23
+00:01:16,708 --> 00:01:19,694
+Both sides settle the second job at twenty-five.
+
+24
+00:01:19,694 --> 00:01:22,307
+The released fifteen supports a follow-up job.
+
+25
+00:01:22,307 --> 00:01:25,292
+Its recorded no-delivery result frees that fifteen again.
+
+26
+00:01:25,292 --> 00:01:27,905
+This is not a unilateral buyer reduction.
+
+27
+00:01:28,655 --> 00:01:33,932
+The completed records show thirty plus twenty-five, or fifty-five, sent to work.
+
+28
+00:01:33,932 --> 00:01:38,330
+Fifty plus fifteen, or sixty-five, returns to the funding account.
+
+29
+00:01:38,330 --> 00:01:41,408
+One hundred twenty equals fifty-five plus sixty-five.
+
+30
+00:01:41,408 --> 00:01:43,168
+Network gas is separate.
+
+31
+00:01:43,918 --> 00:01:47,261
+This captured withdrawFor receipt is one recorded work-payment transfer.
+
+32
+00:01:47,261 --> 00:01:52,833
+A team member, the worker, or another submitter can send the evidence and pay gas.
+
+33
+00:01:52,833 --> 00:01:55,805
+The public withdrawal cannot redirect the agreed destination.
+
+34
+00:01:56,555 --> 00:02:00,048
+Disputes use illustrated rules, separate from the recorded budget.
+
+35
+00:02:00,048 --> 00:02:04,318
+Three reviewers are named, and two matching votes settle a challenge.
+
+36
+00:02:04,318 --> 00:02:08,976
+If no ruling arrives by the source-block cutoff, someone must submit timeout.
+
+37
+00:02:08,976 --> 00:02:13,246
+The example restores capacity; it does not automatically pay or refund.
+
+38
+00:02:13,996 --> 00:02:17,572
+Inspect the no-wallet demo, repository, and recorded receipts.
+
+39
+00:02:17,572 --> 00:02:21,595
+Next come independent repeat use and external security review.
+
+40
+00:02:21,595 --> 00:02:25,172
+This is not a production or adoption claim.
+
+41
+00:02:25,172 --> 00:02:31,431
+Created by Venkatagirish Pamidigantam, with AI assistance from Codex and Claude, using synthetic narration.

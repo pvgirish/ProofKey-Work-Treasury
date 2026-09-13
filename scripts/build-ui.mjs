@@ -7,11 +7,23 @@ import { keccak256 } from "ethers";
 const root = dirname(dirname(new URL(import.meta.url).pathname));
 const ui = join(root, "ui");
 const dist = join(ui, "dist");
+const uiDemoFiles = ["index.html", "styles.css", "demo.html", "demo.css", "demo.js"];
+const publicMediaFiles = [
+  "ProofKey-Work-Treasury-Final-2026-09-14.mp4",
+  "ProofKey-Work-Treasury-Final-2026-09-14.pdf",
+  "ProofKey-Work-Treasury-Final-2026-09-14.vtt",
+  "ProofKey-Work-Treasury-Final-2026-09-14.srt",
+  "ProofKey-Work-Treasury-Final-2026-09-14.md",
+  "ProofKey-Work-Treasury-Final-2026-09-14.png",
+];
 await rm(dist, { recursive: true, force: true });
 await mkdir(join(dist, "vendor"), { recursive: true });
 await mkdir(join(dist, "sdk"), { recursive: true });
+await mkdir(join(dist, "media"), { recursive: true });
 
-for (const file of ["index.html", "styles.css", "demo.html", "demo.css", "demo.js"]) await copyFile(join(ui, file), join(dist, file));
+for (const file of uiDemoFiles) await copyFile(join(ui, file), join(dist, file));
+await copyFile(join(ui, "video.html"), join(dist, "video.html"));
+for (const file of publicMediaFiles) await copyFile(join(root, "docs", "media", file), join(dist, "media", file));
 await copyFile(join(root, "node_modules", "ethers", "dist", "ethers.umd.min.js"), join(dist, "vendor", "ethers.umd.min.js"));
 await copyFile(join(root, "node_modules", "ethers", "dist", "ethers.min.js"), join(dist, "vendor", "ethers.esm.min.js"));
 
